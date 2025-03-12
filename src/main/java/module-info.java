@@ -3,6 +3,7 @@ module lk.ijse.project.mentalhealththerapycenter {
     requires javafx.fxml;
     requires java.sql;
     requires lombok;
+    requires net.sf.jasperreports.core;
 
     opens lk.ijse.project.mentalhealththerapycenter to javafx.fxml;
     exports lk.ijse.project.mentalhealththerapycenter;
