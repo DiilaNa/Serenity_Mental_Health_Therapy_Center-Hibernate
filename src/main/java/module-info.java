@@ -5,6 +5,7 @@ module lk.ijse.project.mentalhealththerapycenter {
     requires lombok;
     requires net.sf.jasperreports.core;
     requires java.mail;
+    requires mysql.connector.j;
 
     opens lk.ijse.project.mentalhealththerapycenter to javafx.fxml;
     exports lk.ijse.project.mentalhealththerapycenter;
