@@ -87,7 +87,7 @@ public class Login implements Initializable {
     private void refreshPage(){
         passwordPWField.setVisible(true);
         passwordTextField.setVisible(false);
-
+        selectUser.setItems(FXCollections.observableArrayList("admin","user"));
     }
 
 }
