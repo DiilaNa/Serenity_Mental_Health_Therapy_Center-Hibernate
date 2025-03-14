@@ -10,70 +10,72 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalhealththerapycenter.controller.userRegister">
    <children>
-      <Label layoutX="208.0" layoutY="71.0" prefHeight="39.0" prefWidth="245.0" text="REGISTER ACCOUNT" textFill="#4c8c8c">
+      <Label layoutX="238.0" layoutY="73.0" prefHeight="39.0" prefWidth="245.0" text="REGISTER ACCOUNT" textFill="#4c8c8c">
          <font>
             <Font name="Impact" size="31.0" />
          </font>
       </Label>
-      <Label layoutX="117.0" layoutY="242.0" text="E-MAIL">
+      <Label layoutX="137.0" layoutY="244.0" text="E-MAIL">
          <font>
             <Font name="Georgia" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="117.0" layoutY="320.0" text="PASSWORD">
+      <Label layoutX="137.0" layoutY="322.0" text="PASSWORD">
          <font>
             <Font name="Georgia" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="userName" layoutX="269.0" layoutY="200.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <PasswordField fx:id="passwordPWField" layoutX="270.0" layoutY="319.0" prefHeight="26.0" prefWidth="182.0" promptText="Enter Password" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;"/>
-      <TextField fx:id="passwordTextField" layoutX="269.0" layoutY="319.0" prefHeight="26.0" prefWidth="182.0" promptText="Enter Password" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <CheckBox fx:id="showPasswordcheckBox" layoutX="117.0" layoutY="410.0" mnemonicParsing="false" onAction="#showPasswordcheckBox" text="SHOW PASSWORD" />
-      <Label layoutX="167.0" layoutY="539.0" text="Already have an account ?">
+      <TextField fx:id="userName" layoutX="300.0" layoutY="202.0" prefHeight="26.0" prefWidth="218.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <PasswordField fx:id="passwordPWField" layoutX="301.0" layoutY="321.0" prefHeight="26.0" prefWidth="218.0" promptText="Enter Password" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="passwordTextField" layoutX="302.0" layoutY="321.0" prefHeight="26.0" prefWidth="218.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <CheckBox fx:id="showPasswordcheckBox" layoutX="136.0" layoutY="371.0" mnemonicParsing="false" onAction="#showPasswordcheckBox" text="SHOW PASSWORD" />
+      <Label layoutX="210.0" layoutY="539.0" text="Already have an account ?">
          <font>
             <Font name="Gabriola" size="15.0" />
          </font>
       </Label>
-      <Hyperlink fx:id="clickhere" layoutX="301.0" layoutY="537.0" onMouseClicked="#clickhereAction" text="Click here" />
-      <Button fx:id="signup" layoutX="119.0" layoutY="452.0" mnemonicParsing="false" onAction="#signupAction" prefHeight="39.0" prefWidth="338.0" style="-fx-background-color: #4C8C8C;" text="SIGN UP" textFill="WHITE">
+      <Hyperlink fx:id="clickhere" layoutX="340.0" layoutY="537.0" onMouseClicked="#clickhereAction" text="Click here" />
+      <Button fx:id="signup" layoutX="179.0" layoutY="451.0" mnemonicParsing="false" onAction="#signupAction" prefHeight="40.0" prefWidth="303.0" style="-fx-background-color: #4C8C8C;" text="SIGN UP" textFill="WHITE">
          <font>
             <Font name="Georgia Bold" size="21.0" />
          </font>
       </Button>
-      <Label layoutX="116.0" layoutY="201.0" text="NAME">
+      <Label layoutX="137.0" layoutY="203.0" text="NAME">
          <font>
             <Font name="Georgia" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="119.0" layoutY="153.0" text="USER ID">
+      <Label layoutX="138.0" layoutY="167.0" text="USER ID">
          <font>
             <Font name="Georgia" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="119.0" layoutY="280.0" text="ROLE">
+      <Label layoutX="139.0" layoutY="283.0" text="ROLE">
          <font>
             <Font name="Georgia" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="userEmail" layoutX="269.0" layoutY="241.0" prefHeight="26.0" prefWidth="182.0" promptText="abc@gmail.com" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <ComboBox fx:id="userRole" layoutX="269.0" layoutY="280.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;"/>
-      <TextField fx:id="passwordConfirmTextField" layoutX="269.0" layoutY="365.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;"/>
-      <PasswordField fx:id="passwordConfirmPWField" layoutX="269.0" layoutY="365.0" prefHeight="26.0" prefWidth="182.0" promptText="Confirm Password" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;"/>
-      <Label layoutX="301.0" layoutY="153.0" text="USER ID">
+      <TextField fx:id="userEmail" layoutX="300.0" layoutY="243.0" prefHeight="26.0" prefWidth="218.0" promptText="abc@gmail.com" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <ComboBox fx:id="userRole" layoutX="300.0" layoutY="282.0" prefHeight="26.0" prefWidth="218.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="passwordConfirmTextField" layoutX="300.0" layoutY="366.0" prefHeight="26.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <PasswordField fx:id="passwordConfirmPWField" layoutX="300.0" layoutY="366.0" prefHeight="26.0" prefWidth="218.0" promptText="Confirm Password" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <Label layoutX="351.0" layoutY="167.0" text="USER ID">
          <font>
             <Font name="Georgia" size="20.0" />
          </font>
       </Label>
-      <ImageView fitHeight="88.0" fitWidth="82.0" layoutX="112.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="image" fitHeight="88.0" fitWidth="82.0" layoutX="138.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../Pictures/Mental%20Hospital/addUser.png" />
          </image>
       </ImageView>
-      <Line endX="440.0" layoutX="128.0" layoutY="516.0" startX="-100.0" />
+      <Pane prefHeight="600.0" prefWidth="102.0" style="-fx-background-color: #4C8C8C;" />
+      <Line endX="440.0" layoutX="128.0" layoutY="516.0" startX="-16.79998779296875" />
    </children>
 </AnchorPane>

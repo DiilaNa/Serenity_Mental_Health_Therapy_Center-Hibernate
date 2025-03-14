@@ -14,43 +14,43 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalhealththerapycenter.controller.userLogin">
-   <Pane prefHeight="140.0" prefWidth="600.0" style="-fx-background-color: #4C8C8C;" />
+   <Pane prefHeight="600.0" prefWidth="112.0" style="-fx-background-color: #4C8C8C;" />
 
-      <Label layoutX="235.0" layoutY="63.0" prefHeight="39.0" prefWidth="145.0" text="USER LOGIN">
+      <Label layoutX="300.0" layoutY="69.0" prefHeight="39.0" prefWidth="145.0" text="USER LOGIN">
          <font>
             <Font name="Impact" size="31.0" />
          </font>
       </Label>
-      <Label layoutX="111.0" layoutY="189.0" text="USER NAME">
+      <Label layoutX="163.0" layoutY="189.0" text="USER NAME">
          <font>
             <Font name="Georgia" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="111.0" layoutY="249.0" text="PASSWORD">
+      <Label layoutX="163.0" layoutY="249.0" text="PASSWORD">
          <font>
             <Font name="Georgia" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="userName" layoutX="266.0" layoutY="188.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <PasswordField fx:id="passwordPWField" layoutX="266.0" layoutY="247.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <TextField fx:id="passwordTextField" layoutX="266.0" layoutY="247.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <CheckBox fx:id="showPasswordcheckBox" layoutX="111.0" layoutY="324.0" mnemonicParsing="false" onAction="#showPasswordcheckBox" text="SHOW PASSWORD">
+      <TextField fx:id="userName" layoutX="324.0" layoutY="188.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <PasswordField fx:id="passwordPWField" layoutX="324.0" layoutY="248.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="passwordTextField" layoutX="324.0" layoutY="248.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <CheckBox fx:id="showPasswordcheckBox" layoutX="167.0" layoutY="318.0" mnemonicParsing="false" onAction="#showPasswordcheckBox" text="SHOW PASSWORD">
       <font>
          <Font name="System Bold" size="12.0" />
       </font></CheckBox>
-      <Label layoutX="157.0" layoutY="529.0" text="DONT HAVE AN ACCOUNT">
+      <Label layoutX="214.0" layoutY="529.0" text="DONT HAVE AN ACCOUNT">
          <font>
             <Font name="Gabriola" size="15.0" />
          </font>
       </Label>
-      <Hyperlink fx:id="clickhere" layoutX="307.0" layoutY="527.0" onMouseClicked="#clickhereAction" text="Click here" />
-      <Button fx:id="login" layoutX="131.0" layoutY="382.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="39.0" prefWidth="338.0" style="-fx-background-color: #4C8C8C;" text="LOGIN" textFill="#fffefe">
+      <Hyperlink fx:id="clickhere" layoutX="368.0" layoutY="527.0" onMouseClicked="#clickhereAction" text="Click here" />
+      <Button fx:id="login" layoutX="187.0" layoutY="395.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="39.0" prefWidth="338.0" style="-fx-background-color: #4C8C8C;" text="LOGIN" textFill="#fffefe">
          <font>
             <Font name="Georgia Bold" size="21.0" />
          </font>
       </Button>
-   <Line endX="387.4000244140625" layoutX="143.0" layoutY="501.0" startX="-90.69998168945312" />
-   <ImageView fitHeight="70.0" fitWidth="79.0" layoutX="153.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+   <Line endX="387.4000244140625" layoutX="174.0" layoutY="501.0" startX="-22.20001220703125" />
+   <ImageView fx:id="image" fitHeight="81.0" fitWidth="106.0" layoutX="209.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@../../../../../../../Pictures/Mental%20Hospital/user.png" />
       </image>

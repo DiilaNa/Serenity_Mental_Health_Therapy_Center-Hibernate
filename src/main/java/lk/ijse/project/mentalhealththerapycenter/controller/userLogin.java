@@ -8,6 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -21,6 +23,8 @@ import java.util.ResourceBundle;
 public class userLogin implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Image adminIMage = new Image(getClass().getResourceAsStream("/images/user.png"));
+        image.setImage(adminIMage);
         refreshPage();
     }
 
@@ -44,6 +48,9 @@ public class userLogin implements Initializable {
 
     @FXML
     private TextField userName;
+
+    @FXML
+    private ImageView image;
 
     @FXML
     void clickhereAction(MouseEvent event) throws IOException {
