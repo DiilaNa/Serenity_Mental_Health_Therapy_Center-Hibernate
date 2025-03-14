@@ -1,14 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.ijse.project.mentalhealththerapycenter.controller.Login"
-            prefHeight="400.0" prefWidth="600.0">
 
-</AnchorPane>
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="600.0" prefWidth="600.0" visible="false">
+         <children>
+            <Label layoutX="248.0" layoutY="52.0" text="LOGIN">
+               <font>
+                  <Font name="Gabriola" size="47.0" />
+               </font>
+            </Label>
+            <TextField layoutX="213.0" layoutY="152.0" prefHeight="26.0" prefWidth="236.0" />
+            <TextField layoutX="213.0" layoutY="214.0" prefHeight="26.0" prefWidth="236.0" />
+            <Label layoutX="76.0" layoutY="155.0" text="USER NAME">
+               <font>
+                  <Font name="Georgia Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="76.0" layoutY="217.0" text="PASS WORD">
+               <font>
+                  <Font name="Georgia Bold" size="15.0" />
+               </font>
+            </Label>
+            <CheckBox layoutX="78.0" layoutY="274.0" mnemonicParsing="false" text="See Password" />
+            <PasswordField layoutX="213.0" layoutY="214.0" prefHeight="26.0" prefWidth="236.0" />
+            <Button layoutX="78.0" layoutY="366.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="380.0" text="LOG IN">
+               <font>
+                  <Font name="Georgia Bold" size="18.0" />
+               </font>
+            </Button>
+            <Hyperlink layoutX="300.0" layoutY="537.0" text="Click here" />
+            <Label layoutX="173.0" layoutY="532.0" text="Don't have an account">
+               <font>
+                  <Font name="Javanese Text" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="600.0" prefWidth="600.0">
+         <children>
+            <TextField layoutX="227.0" layoutY="259.0" prefHeight="26.0" prefWidth="236.0" />
+            <TextField layoutX="227.0" layoutY="303.0" prefHeight="26.0" prefWidth="236.0" />
+            <Label layoutX="90.0" layoutY="262.0" text="USER NAME">
+               <font>
+                  <Font name="Georgia Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="90.0" layoutY="306.0" text="PASS WORD">
+               <font>
+                  <Font name="Georgia Bold" size="15.0" />
+               </font>
+            </Label>
+            <CheckBox layoutX="92.0" layoutY="362.0" mnemonicParsing="false" text="See Password" />
+            <PasswordField layoutX="227.0" layoutY="303.0" prefHeight="26.0" prefWidth="236.0" />
+            <Button layoutX="86.0" layoutY="428.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="380.0" text="SIGN UP">
+               <font>
+                  <Font name="Georgia Bold" size="18.0" />
+               </font>
+            </Button>
+            <Hyperlink layoutX="300.0" layoutY="537.0" text="Click here" />
+            <Label layoutX="149.0" layoutY="532.0" text="Already have an account">
+               <font>
+                  <Font name="Javanese Text" size="12.0" />
+               </font>
+            </Label>
+            <TextField layoutX="227.0" layoutY="217.0" prefHeight="26.0" prefWidth="236.0" />
+            <Label layoutX="90.0" layoutY="220.0" text="USER NAME">
+               <font>
+                  <Font name="Georgia Bold" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
