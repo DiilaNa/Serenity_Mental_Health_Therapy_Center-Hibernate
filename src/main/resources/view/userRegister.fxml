@@ -30,9 +30,9 @@
             <Font name="Georgia" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="userName" layoutX="269.0" layoutY="200.0" prefHeight="26.0" prefWidth="182.0" />
-      <PasswordField fx:id="passwordPWField" layoutX="270.0" layoutY="319.0" prefHeight="26.0" prefWidth="182.0" promptText="Enter Password" />
-      <TextField fx:id="passwordTextField" layoutX="269.0" layoutY="319.0" prefHeight="26.0" prefWidth="182.0" promptText="Enter Password" />
+      <TextField fx:id="userName" layoutX="269.0" layoutY="200.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <PasswordField fx:id="passwordPWField" layoutX="270.0" layoutY="319.0" prefHeight="26.0" prefWidth="182.0" promptText="Enter Password" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;"/>
+      <TextField fx:id="passwordTextField" layoutX="269.0" layoutY="319.0" prefHeight="26.0" prefWidth="182.0" promptText="Enter Password" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
       <CheckBox fx:id="showPasswordcheckBox" layoutX="117.0" layoutY="410.0" mnemonicParsing="false" onAction="#showPasswordcheckBox" text="SHOW PASSWORD" />
       <Label layoutX="167.0" layoutY="539.0" text="Already have an account ?">
          <font>
@@ -60,10 +60,10 @@
             <Font name="Georgia" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="userEmail" layoutX="269.0" layoutY="241.0" prefHeight="26.0" prefWidth="182.0" promptText="abc@gmail.com" />
-      <ComboBox fx:id="userRole" layoutX="269.0" layoutY="280.0" prefHeight="26.0" prefWidth="182.0" />
-      <TextField fx:id="passwordConfirmTextField" layoutX="269.0" layoutY="365.0" prefHeight="26.0" prefWidth="182.0" />
-      <PasswordField fx:id="passwordConfirmPWField" layoutX="269.0" layoutY="365.0" prefHeight="26.0" prefWidth="182.0" promptText="Confirm Password" />
+      <TextField fx:id="userEmail" layoutX="269.0" layoutY="241.0" prefHeight="26.0" prefWidth="182.0" promptText="abc@gmail.com" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <ComboBox fx:id="userRole" layoutX="269.0" layoutY="280.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;"/>
+      <TextField fx:id="passwordConfirmTextField" layoutX="269.0" layoutY="365.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;"/>
+      <PasswordField fx:id="passwordConfirmPWField" layoutX="269.0" layoutY="365.0" prefHeight="26.0" prefWidth="182.0" promptText="Confirm Password" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;"/>
       <Label layoutX="301.0" layoutY="153.0" text="USER ID">
          <font>
             <Font name="Georgia" size="20.0" />
