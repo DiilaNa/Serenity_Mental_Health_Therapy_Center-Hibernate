@@ -9,13 +9,13 @@
 
 <AnchorPane prefHeight="550.0" prefWidth="600.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalhealththerapycenter.controller.login">
    <children>
-      <Label layoutX="187.0" layoutY="94.0" prefHeight="66.0" prefWidth="378.0" text="Serenity Mental Health Therapy Center" wrapText="true">
+      <Label fx:id="text" layoutX="187.0" layoutY="94.0" prefHeight="66.0" prefWidth="378.0" text="Serenity Mental Health Therapy Center" textFill="#041818" wrapText="true">
          <font>
             <Font name="Georgia Bold" size="25.0" />
          </font>
       </Label>
       <Pane layoutY="-1.0" prefHeight="550.0" prefWidth="102.0" style="-fx-background-color: #4C8C8C;" />
-      <Label layoutX="129.0" layoutY="54.0" prefHeight="40.0" prefWidth="198.0" text="WELCOME TO">
+      <Label layoutX="129.0" layoutY="54.0" prefHeight="40.0" prefWidth="198.0" text="WELCOME TO" textFill="#619191">
          <font>
             <Font name="Impact" size="32.0" />
          </font>
