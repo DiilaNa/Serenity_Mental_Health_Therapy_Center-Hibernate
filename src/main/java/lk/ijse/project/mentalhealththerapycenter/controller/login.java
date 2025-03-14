@@ -39,7 +39,6 @@ public class login implements Initializable {
 
     @FXML
     void userAction(MouseEvent event) throws IOException {
-
         loadPage("/view/userLogin.fxml");
     }
 

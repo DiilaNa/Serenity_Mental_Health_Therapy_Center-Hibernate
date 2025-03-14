@@ -2,56 +2,78 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalhealththerapycenter.controller.userRegister">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalhealththerapycenter.controller.userRegister">
    <children>
-      <Label layoutX="208.0" layoutY="71.0" prefHeight="39.0" prefWidth="245.0" text="REGISTER ACCOUNT">
+      <Label layoutX="208.0" layoutY="71.0" prefHeight="39.0" prefWidth="245.0" text="REGISTER ACCOUNT" textFill="#4c8c8c">
          <font>
             <Font name="Impact" size="31.0" />
          </font>
       </Label>
-      <Label layoutX="119.0" layoutY="204.0" text="USER NAME">
+      <Label layoutX="117.0" layoutY="242.0" text="E-MAIL">
          <font>
             <Font name="Georgia" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="119.0" layoutY="262.0" text="PASSWORD">
+      <Label layoutX="117.0" layoutY="320.0" text="PASSWORD">
          <font>
             <Font name="Georgia" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="userName" layoutX="274.0" layoutY="203.0" prefHeight="26.0" prefWidth="182.0" />
-      <PasswordField fx:id="passwordPWField" layoutX="274.0" layoutY="260.0" prefHeight="26.0" prefWidth="182.0" />
-      <TextField fx:id="passwordTextField" layoutX="274.0" layoutY="260.0" prefHeight="26.0" prefWidth="182.0" />
-      <CheckBox fx:id="showPasswordcheckBox" layoutX="124.0" layoutY="330.0" mnemonicParsing="false" onAction="#showPasswordcheckBox" text="SHOW PASSWORD" />
+      <TextField fx:id="userName" layoutX="269.0" layoutY="200.0" prefHeight="26.0" prefWidth="182.0" />
+      <PasswordField fx:id="passwordPWField" layoutX="270.0" layoutY="319.0" prefHeight="26.0" prefWidth="182.0" promptText="Enter Password" />
+      <TextField fx:id="passwordTextField" layoutX="269.0" layoutY="319.0" prefHeight="26.0" prefWidth="182.0" promptText="Enter Password" />
+      <CheckBox fx:id="showPasswordcheckBox" layoutX="117.0" layoutY="410.0" mnemonicParsing="false" onAction="#showPasswordcheckBox" text="SHOW PASSWORD" />
       <Label layoutX="167.0" layoutY="539.0" text="Already have an account ?">
          <font>
             <Font name="Gabriola" size="15.0" />
          </font>
       </Label>
       <Hyperlink fx:id="clickhere" layoutX="301.0" layoutY="537.0" onMouseClicked="#clickhereAction" text="Click here" />
-      <Button fx:id="signup" layoutX="119.0" layoutY="410.0" mnemonicParsing="false" onAction="#signupAction" prefHeight="39.0" prefWidth="338.0" text="SIGN UP">
+      <Button fx:id="signup" layoutX="119.0" layoutY="452.0" mnemonicParsing="false" onAction="#signupAction" prefHeight="39.0" prefWidth="338.0" style="-fx-background-color: #4C8C8C;" text="SIGN UP" textFill="WHITE">
          <font>
             <Font name="Georgia Bold" size="21.0" />
          </font>
       </Button>
-      <Label layoutX="119.0" layoutY="165.0" text="USER NAME">
+      <Label layoutX="116.0" layoutY="201.0" text="NAME">
          <font>
             <Font name="Georgia" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="119.0" layoutY="132.0" text="USER NAME">
+      <Label layoutX="119.0" layoutY="153.0" text="USER ID">
          <font>
             <Font name="Georgia" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="userName1" layoutX="274.0" layoutY="164.0" prefHeight="26.0" prefWidth="182.0" />
-      <TextField fx:id="userName11" layoutX="269.0" layoutY="132.0" prefHeight="26.0" prefWidth="182.0" />
+      <Label layoutX="119.0" layoutY="280.0" text="ROLE">
+         <font>
+            <Font name="Georgia" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="userEmail" layoutX="269.0" layoutY="241.0" prefHeight="26.0" prefWidth="182.0" promptText="abc@gmail.com" />
+      <ComboBox fx:id="userRole" layoutX="269.0" layoutY="280.0" prefHeight="26.0" prefWidth="182.0" />
+      <TextField fx:id="passwordConfirmTextField" layoutX="269.0" layoutY="365.0" prefHeight="26.0" prefWidth="182.0" />
+      <PasswordField fx:id="passwordConfirmPWField" layoutX="269.0" layoutY="365.0" prefHeight="26.0" prefWidth="182.0" promptText="Confirm Password" />
+      <Label layoutX="301.0" layoutY="153.0" text="USER ID">
+         <font>
+            <Font name="Georgia" size="20.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="88.0" fitWidth="82.0" layoutX="112.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Pictures/Mental%20Hospital/addUser.png" />
+         </image>
+      </ImageView>
+      <Line endX="440.0" layoutX="128.0" layoutY="516.0" startX="-100.0" />
    </children>
 </AnchorPane>

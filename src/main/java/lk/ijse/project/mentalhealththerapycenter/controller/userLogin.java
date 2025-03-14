@@ -43,9 +43,6 @@ public class userLogin implements Initializable {
     private TextField passwordTextField;
 
     @FXML
-    private ComboBox<String> selectUser;
-
-    @FXML
     private TextField userName;
 
     @FXML
@@ -68,14 +65,6 @@ public class userLogin implements Initializable {
     }
 
     @FXML
-    void selectUserAction(ActionEvent event) {
-        if (selectUser.getSelectionModel().getSelectedItem().equals("user")) {
-            System.out.println("user");
-        }else{
-            System.out.println("admin");
-        }
-    }
-    @FXML
     void showPasswordcheckBox(ActionEvent event) {
         if (showPasswordcheckBox.isSelected()) {
             passwordPWField.setVisible(false);
@@ -97,7 +86,6 @@ public class userLogin implements Initializable {
     private void refreshPage(){
         passwordPWField.setVisible(true);
         passwordTextField.setVisible(false);
-        selectUser.setItems(FXCollections.observableArrayList("admin","user"));
     }
 
 }
