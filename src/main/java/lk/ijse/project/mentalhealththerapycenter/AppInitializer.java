@@ -10,7 +10,6 @@ public class AppInitializer extends Application {
     public void start(Stage stage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        /*scene.getStylesheets().add(getClass().getResource("/Css/Login.css").toExternalForm());*/
         stage.setTitle("The Serenity Mental Health Therapy Center");
         stage.setScene(scene);
         stage.setResizable(false);
