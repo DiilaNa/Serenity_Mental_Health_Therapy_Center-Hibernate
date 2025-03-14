@@ -7,12 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -60,6 +55,16 @@ public class Login implements Initializable {
 
     @FXML
     void loginAction(ActionEvent event) throws IOException {
+        if (userName.getText().isEmpty() || passwordPWField.getText().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Please enter your username and password", ButtonType.OK).show();
+        }else if (passwordPWField.getText().equals(passwordTextField.getText())) {
+            new Alert(Alert.AlertType.ERROR, " Username and Passwords can not be same", ButtonType.OK).show();
+        }else{
+            String username = userName.getText();
+            String password = passwordPWField.getText();
+
+            /*send them to see if they exixts already*/
+        }
     }
 
     @FXML
@@ -69,7 +74,6 @@ public class Login implements Initializable {
         }else{
             System.out.println("admin");
         }
-
     }
     @FXML
     void showPasswordcheckBox(ActionEvent event) {
@@ -86,7 +90,6 @@ public class Login implements Initializable {
     private void loadPage(String fxmlPath) throws IOException {
         Stage stage = (Stage) clickhere.getScene().getWindow(); // Get current stage
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
-
         stage.setScene(scene);
         stage.setTitle("Mental Hospital");
         stage.show();
