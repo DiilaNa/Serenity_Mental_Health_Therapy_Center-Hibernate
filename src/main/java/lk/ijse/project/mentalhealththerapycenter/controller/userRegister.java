@@ -1,4 +1,4 @@
 package lk.ijse.project.mentalhealththerapycenter.controller;
 
-public class Register {
+public class userRegister {
 }

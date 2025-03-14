@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Login implements Initializable {
+public class userLogin implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         refreshPage();
@@ -50,7 +50,7 @@ public class Login implements Initializable {
 
     @FXML
     void clickhereAction(MouseEvent event) throws IOException {
-        loadPage("/view/register.fxml");
+        loadPage("/view/userRegister.fxml");
     }
 
     @FXML
@@ -91,7 +91,7 @@ public class Login implements Initializable {
         Stage stage = (Stage) clickhere.getScene().getWindow(); // Get current stage
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
         stage.setScene(scene);
-        stage.setTitle("Mental Hospital");
+        stage.setTitle("The Serenity Mental Health Therapy Center");
         stage.show();
     }
     private void refreshPage(){
