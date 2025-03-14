@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalhealththerapycenter.controller.Login">
-   <children>
+
       <Label layoutX="198.0" layoutY="61.0" prefHeight="39.0" prefWidth="203.0" text="LOGIN ACCOUNT">
          <font>
             <Font name="Impact" size="31.0" />
@@ -28,8 +28,8 @@
          </font>
       </Label>
       <TextField fx:id="userName" layoutX="261.0" layoutY="149.0" prefHeight="26.0" prefWidth="182.0" />
-      <PasswordField fx:id="passwordPWField" layoutX="261.0" layoutY="207.0" prefHeight="26.0" prefWidth="182.0" />
-      <TextField fx:id="passwordTextField" layoutX="261.0" layoutY="207.0" prefHeight="26.0" prefWidth="182.0" />
+      <PasswordField fx:id="passwordPWField" layoutX="261.0" layoutY="206.0" prefHeight="26.0" prefWidth="182.0" />
+      <TextField fx:id="passwordTextField" layoutX="261.0" layoutY="206.0" prefHeight="26.0" prefWidth="182.0" />
       <Label layoutX="141.0" layoutY="448.0" text="SELECT USER">
          <font>
             <Font name="Candara Bold" size="18.0" />
@@ -48,5 +48,4 @@
             <Font name="Georgia Bold" size="21.0" />
          </font>
       </Button>
-   </children>
 </AnchorPane>

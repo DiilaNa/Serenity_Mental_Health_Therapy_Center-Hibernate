@@ -64,6 +64,11 @@ public class Login implements Initializable {
 
     @FXML
     void selectUserAction(ActionEvent event) {
+        if (selectUser.getSelectionModel().getSelectedItem().equals("user")) {
+            System.out.println("user");
+        }else{
+            System.out.println("admin");
+        }
 
     }
     @FXML
@@ -71,9 +76,11 @@ public class Login implements Initializable {
         if (showPasswordcheckBox.isSelected()) {
             passwordPWField.setVisible(false);
             passwordTextField.setVisible(true);
+            passwordTextField.setText(passwordPWField.getText());
         }else {
             passwordPWField.setVisible(true);
             passwordTextField.setVisible(false);
+            passwordPWField.setText(passwordTextField.getText());
         }
     }
     private void loadPage(String fxmlPath) throws IOException {
