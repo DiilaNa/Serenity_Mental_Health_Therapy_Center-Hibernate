@@ -51,6 +51,9 @@ public class userRegister implements Initializable {
     private TextField userEmail;
 
     @FXML
+    private TextField userFUllName;
+
+    @FXML
     private TextField userName;
 
     @FXML

@@ -16,7 +16,7 @@
 <AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalhealththerapycenter.controller.userLogin">
    <Pane prefHeight="600.0" prefWidth="112.0" style="-fx-background-color: #4C8C8C;" />
 
-      <Label layoutX="300.0" layoutY="69.0" prefHeight="39.0" prefWidth="145.0" text="USER LOGIN">
+      <Label layoutX="283.0" layoutY="74.0" prefHeight="39.0" prefWidth="145.0" text="USER LOGIN" textFill="#4c8c8c">
          <font>
             <Font name="Impact" size="31.0" />
          </font>
@@ -49,10 +49,11 @@
             <Font name="Georgia Bold" size="21.0" />
          </font>
       </Button>
-   <Line endX="387.4000244140625" layoutX="174.0" layoutY="501.0" startX="-22.20001220703125" />
-   <ImageView fx:id="image" fitHeight="81.0" fitWidth="106.0" layoutX="209.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+   <Line endX="387.4000244140625" layoutX="174.0" layoutY="501.0" startX="-50.0" />
+   <ImageView fx:id="image" fitHeight="92.0" fitWidth="95.0" layoutX="177.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@../../../../../../../Pictures/Mental%20Hospital/user.png" />
       </image>
    </ImageView>
+   <Line endX="399.199951171875" endY="11.599990844726562" layoutX="168.0" layoutY="118.0" startX="89.5999755859375" startY="11.599990844726562" />
 </AnchorPane>
