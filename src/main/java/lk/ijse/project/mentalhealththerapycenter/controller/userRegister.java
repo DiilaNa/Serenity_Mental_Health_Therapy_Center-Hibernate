@@ -1,5 +1,7 @@
 package lk.ijse.project.mentalhealththerapycenter.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,6 +23,7 @@ public class userRegister implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Image adminIMage = new Image(getClass().getResourceAsStream("/images/addUser.png"));
         image.setImage(adminIMage);
+        refreshPage();
     }
 
     @FXML
@@ -51,7 +54,7 @@ public class userRegister implements Initializable {
     private TextField userName;
 
     @FXML
-    private ComboBox<?> userRole;
+    private ComboBox<String> userRole;
 
     @FXML
     private ImageView image;
@@ -63,11 +66,34 @@ public class userRegister implements Initializable {
 
     @FXML
     void showPasswordcheckBox(ActionEvent event) {
-
+        if (showPasswordcheckBox.isSelected()) {
+            passwordPWField.setVisible(false);
+            passwordConfirmPWField.setVisible(false);
+            passwordTextField.setVisible(true);
+            passwordConfirmTextField.setVisible(true);
+            passwordTextField.setText(passwordPWField.getText());
+            passwordConfirmTextField.setText(passwordConfirmPWField.getText());
+        }else {
+            passwordPWField.setVisible(true);
+            passwordConfirmPWField.setVisible(true);
+            passwordTextField.setVisible(false);
+            passwordConfirmTextField.setVisible(false);
+            passwordPWField.setText(passwordTextField.getText());
+            passwordConfirmPWField.setText(passwordConfirmTextField.getText());
+        }
     }
 
     @FXML
     void signupAction(ActionEvent event) {
+
+    }
+    private void refreshPage() {
+        passwordPWField.setVisible(true);
+        passwordConfirmPWField.setVisible(true);
+        passwordTextField.setVisible(false);
+        passwordConfirmTextField.setVisible(false);
+
+        userRole.setItems(FXCollections.observableArrayList("USER", "ADMIN"));
 
     }
 
