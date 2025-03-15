@@ -6,6 +6,10 @@ module lk.ijse.project.mentalhealththerapycenter {
     requires net.sf.jasperreports.core;
     requires java.mail;
     requires mysql.connector.j;
+    requires jakarta.persistence;
+    requires java.naming;
+
+    opens lk.ijse.project.mentalhealththerapycenter.config to jakarta.persistence;
 
     opens lk.ijse.project.mentalhealththerapycenter to javafx.fxml;
     exports lk.ijse.project.mentalhealththerapycenter;

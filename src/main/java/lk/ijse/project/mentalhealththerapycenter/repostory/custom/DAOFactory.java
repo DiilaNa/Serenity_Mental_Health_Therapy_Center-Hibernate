@@ -1,7 +1,7 @@
 package lk.ijse.project.mentalhealththerapycenter.repostory.custom;
 
 import lk.ijse.project.mentalhealththerapycenter.repostory.SuperDAO;
-import lk.ijse.project.mentalhealththerapycenter.repostory.custom.impl.userDAOImpl;
+import lk.ijse.project.mentalhealththerapycenter.repostory.custom.impl.UserDAOImpl;
 
 public class DAOFactory {
     public static DAOFactory daoFactory;
@@ -16,7 +16,7 @@ public class DAOFactory {
     @SuppressWarnings("unchecked")
     public <T extends SuperDAO>T getSuperDAO(DAOType daoType) {
         return switch (daoType) {
-            case USER ->(T) new userDAOImpl();
+            case USER ->(T) new UserDAOImpl();
         };
     }
 }
