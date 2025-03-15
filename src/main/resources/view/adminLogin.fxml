@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalhealththerapycenter.controller.AdminLogin">
+   <children>
+      <Pane prefHeight="600.0" prefWidth="112.0" style="-fx-background-color: #4C8C8C;" />
+      <Label layoutX="283.0" layoutY="74.0" prefHeight="39.0" prefWidth="167.0" text="ADMIN LOGIN" textFill="#4c8c8c">
+         <font>
+            <Font name="Impact" size="31.0" />
+         </font>
+      </Label>
+      <Label layoutX="163.0" layoutY="189.0" text="USER NAME">
+         <font>
+            <Font name="Georgia" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="163.0" layoutY="249.0" text="PASSWORD">
+         <font>
+            <Font name="Georgia" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="adminUserName" layoutX="324.0" layoutY="188.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <PasswordField fx:id="adminPasswordPwField" layoutX="324.0" layoutY="248.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="adminPasswordTextField" layoutX="324.0" layoutY="248.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <CheckBox fx:id="adminCheckBox" layoutX="167.0" layoutY="318.0" mnemonicParsing="false" onAction="#adminCheckBoxAction" text="SHOW PASSWORD">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </CheckBox>
+      <Label layoutX="214.0" layoutY="529.0" text="DONT HAVE AN ACCOUNT">
+         <font>
+            <Font name="Gabriola" size="15.0" />
+         </font>
+      </Label>
+      <Hyperlink fx:id="adminClickHere" layoutX="368.0" layoutY="527.0" onMouseClicked="#clickHereAction" text="Click here" />
+      <Button fx:id="adminLogin" layoutX="187.0" layoutY="395.0" mnemonicParsing="false" onAction="#adminLoginAction" prefHeight="39.0" prefWidth="338.0" style="-fx-background-color: #4C8C8C;" text="LOGIN" textFill="#fffefe">
+         <font>
+            <Font name="Georgia Bold" size="21.0" />
+         </font>
+      </Button>
+      <Line endX="387.4000244140625" layoutX="174.0" layoutY="501.0" startX="-50.0" />
+      <ImageView fx:id="image" fitHeight="92.0" fitWidth="95.0" layoutX="177.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Pictures/Mental%20Hospital/adminLOGO.png" />
+         </image>
+      </ImageView>
+      <Line endX="399.199951171875" endY="11.599990844726562" layoutX="168.0" layoutY="118.0" startX="89.5999755859375" startY="11.599990844726562" />
+   </children>
+</AnchorPane>

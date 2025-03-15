@@ -33,8 +33,8 @@ public class Login implements Initializable {
     private Label text;
 
     @FXML
-    void adminAction(MouseEvent event) {
-
+    void adminAction(MouseEvent event) throws IOException {
+        loadPage("/view/adminLogin.fxml");
     }
 
     @FXML
