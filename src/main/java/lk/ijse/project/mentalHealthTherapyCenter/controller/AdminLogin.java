@@ -62,14 +62,12 @@ public class AdminLogin implements Initializable {
     void adminLoginAction(ActionEvent event) throws IOException {
         if (adminUserName.getText().isEmpty() || adminPasswordPwField.getText().isEmpty()) {
             new Alert(Alert.AlertType.ERROR, "Please enter your username and password", ButtonType.OK).show();
-        }else if (adminPasswordPwField.getText().equals(adminPasswordTextField.getText())) {
-            new Alert(Alert.AlertType.ERROR, " Username and Passwords can not be same", ButtonType.OK).show();
         }else{
             String username = adminUserName.getText();
             String password = adminPasswordPwField.getText();
 
             /*send them to see if they exixts already*/
-            loadPage("/view/MainLayout.fxml");
+            navigateToMainPage("/view/MainLayout.fxml","admin");
         }
     }
 
@@ -80,9 +78,25 @@ public class AdminLogin implements Initializable {
     private void loadPage(String fxmlPath) throws IOException {
         Stage stage = (Stage) adminClickHere.getScene().getWindow(); // Get current stage
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
+
         stage.setScene(scene);
         stage.setTitle("The Serenity Mental Health Therapy Center");
         stage.show();
+    }
+    private void navigateToMainPage(String fxmlPath,String role) throws IOException {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Scene scene = new Scene(loader.load());
+
+            // Pass the user role to MainController
+            MainController controller = loader.getController();
+            controller.setUserRole(role);
+
+            Stage currentStage = (Stage) adminClickHere.getScene().getWindow();
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("The Serenity Mental Health Therapy Center");
+            currentStage.close();
+            stage.show();
     }
     private void refreshPage(){
         adminPasswordPwField.setVisible(true);

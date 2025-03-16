@@ -60,14 +60,12 @@ public class UserLogin implements Initializable {
     void loginAction(ActionEvent event) throws IOException {
         if (userName.getText().isEmpty() || passwordPWField.getText().isEmpty()) {
             new Alert(Alert.AlertType.ERROR, "Please enter your username and password", ButtonType.OK).show();
-        }else if (passwordPWField.getText().equals(passwordTextField.getText())) {
-            new Alert(Alert.AlertType.ERROR, " Username and Passwords can not be same", ButtonType.OK).show();
         }else{
             String username = userName.getText();
             String password = passwordPWField.getText();
 
             /*send them to see if they exixts already*/
-            loadPage("/view/MainLayout.fxml");
+            navigateToMainPage("/view/MainLayout.fxml","user");
         }
     }
 
@@ -93,6 +91,20 @@ public class UserLogin implements Initializable {
     private void refreshPage(){
         passwordPWField.setVisible(true);
         passwordTextField.setVisible(false);
+    }
+    private void navigateToMainPage(String fxmlPath,String role) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        Scene scene = new Scene(loader.load());
+
+        MainController controller = loader.getController();
+        controller.setUserRole(role);
+
+        Stage currentStage = (Stage) clickhere.getScene().getWindow();
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("The Serenity Mental Health Therapy Center");
+        currentStage.close();
+        stage.show();
     }
 
 }

@@ -63,6 +63,22 @@ public class MainController implements Initializable {
     @FXML
     private VBox vbox;
 
+    private String role;
+
+    public void setUserRole(String role) {
+        this.role = role;
+        configureUI();
+    }
+
+    // Configure UI based on role
+    private void configureUI() {
+        if ("admin".equals(role)) {
+            adminVbox.setVisible(true); // Show admin features
+        } else {
+            adminVbox.setVisible(false); // Hide admin features for regular users
+        }
+    }
+
     @FXML
     void appointmentsAction(MouseEvent event) {
 
