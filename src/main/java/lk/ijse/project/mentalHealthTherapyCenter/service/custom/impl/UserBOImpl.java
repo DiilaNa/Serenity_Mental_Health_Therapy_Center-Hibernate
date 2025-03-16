@@ -14,4 +14,10 @@ public class UserBOImpl implements UserBO {
         System.out.println("User Saved");
         return true;
     }
+
+    @Override
+    public boolean updateUser(String UserName, String UserEmail, String UserNewPassword) {
+        return true;
+    }
+
 }

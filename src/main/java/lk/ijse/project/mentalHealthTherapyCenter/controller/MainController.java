@@ -120,6 +120,7 @@ public class MainController implements Initializable {
         Stage stage = (Stage) image.getScene().getWindow(); // Get current stage
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.setTitle("The Serenity Mental Health Therapy Center");
         stage.show();
     }

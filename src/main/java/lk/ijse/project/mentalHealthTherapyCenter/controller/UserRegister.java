@@ -100,16 +100,8 @@ public class UserRegister implements Initializable {
         String userNAME = userName.getText();
         String passwordText = passwordPWField.getText();
         String passwordConfirmText = passwordConfirmPWField.getText();
-
-        if (userID.isEmpty() ||fullName.isEmpty() || email.isEmpty() || role.isEmpty() || userNAME.isEmpty() || passwordText.isEmpty()) {
-            new Alert(Alert.AlertType.ERROR, "All fields are required!", ButtonType.OK).show();
-            return;
-        }
-
-        if (!passwordText.equals(passwordConfirmText)) {
-            new Alert(Alert.AlertType.ERROR, "Passwords do not match", ButtonType.OK).show();
-            return;
-        }
+        String pwText = passwordTextField.getText();
+        String pwConfirmText = passwordConfirmTextField.getText();
 
         String mailPattern =  "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
         boolean isValidMailPattern = email.matches(mailPattern);
@@ -131,6 +123,15 @@ public class UserRegister implements Initializable {
         if (!isValidMailPattern) {
             userEmail.setStyle(userEmail.getStyle() + "-fx-border-color: red;");
         }
+        if (userID.isEmpty() ||fullName.isEmpty() || email.isEmpty() || role.isEmpty() || userNAME.isEmpty() || passwordText.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "All fields are required!", ButtonType.OK).show();
+            return;
+        }
+
+        if (!passwordText.equals(passwordConfirmText) || !pwText.equals(pwConfirmText)) {
+            new Alert(Alert.AlertType.ERROR, "Passwords do not match", ButtonType.OK).show();
+            return;
+        }
 
         if (isValidMailPattern && isValidPasswordPattern) {
             UserDTO userDTO = new UserDTO(
@@ -141,6 +142,7 @@ public class UserRegister implements Initializable {
                     userNAME,
                     passwordText
             );
+
             boolean isSaved = userBO.saveUser(userDTO);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, " SignUp SuccessFull", ButtonType.OK).show();
@@ -165,6 +167,7 @@ public class UserRegister implements Initializable {
         Stage stage = (Stage) clickhere.getScene().getWindow(); // Get current stage
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.setTitle("The Serenity Mental Health Therapy Center");
         stage.show();
     }

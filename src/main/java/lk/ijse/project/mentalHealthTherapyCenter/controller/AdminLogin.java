@@ -42,8 +42,8 @@ public class AdminLogin implements Initializable {
     private Hyperlink forgetPass;
 
     @FXML
-    void forgetPassAction(MouseEvent event) {
-
+    void forgetPassAction(MouseEvent event) throws IOException {
+        loadNewPage("/view/forgetPassword.fxml");
     }
 
     @Override
@@ -68,15 +68,20 @@ public class AdminLogin implements Initializable {
 
     @FXML
     void adminLoginAction(ActionEvent event) throws IOException {
-        if (adminUserName.getText().isEmpty() || adminPasswordPwField.getText().isEmpty()) {
+        String username = adminUserName.getText();
+        String password = adminPasswordPwField.getText();
+        String passText = adminPasswordTextField.getText();
+        if (username.isEmpty() ||password.isEmpty() || passText.isEmpty()) {
             new Alert(Alert.AlertType.ERROR, "Please enter your username and password", ButtonType.OK).show();
-        }else{
-            String username = adminUserName.getText();
-            String password = adminPasswordPwField.getText();
-
+            return;
+        }
+        if (!password.equals(passText)) {
+            new Alert(Alert.AlertType.ERROR,"Passwords do not match", ButtonType.OK).show();
+            return;
+        }
             /*send them to see if they exixts already*/
             navigateToMainPage("/view/MainLayout.fxml","admin");
-        }
+
     }
 
     @FXML
@@ -88,6 +93,7 @@ public class AdminLogin implements Initializable {
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
 
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.setTitle("The Serenity Mental Health Therapy Center");
         stage.show();
     }
@@ -101,9 +107,21 @@ public class AdminLogin implements Initializable {
             Stage currentStage = (Stage) adminClickHere.getScene().getWindow();
             Stage stage = new Stage();
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.setTitle("The Serenity Mental Health Therapy Center");
             currentStage.close();
             stage.show();
+    }
+    private  void  loadNewPage(String fxmlPath) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        Scene scene = new Scene(loader.load());
+
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle("Change Password - Serenity Mental Health Therapy Center");
+        stage.show();
+
     }
     private void refreshPage(){
         adminPasswordPwField.setVisible(true);
