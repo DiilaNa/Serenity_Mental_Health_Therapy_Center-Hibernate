@@ -65,7 +65,7 @@
       <ComboBox fx:id="userRole" layoutX="295.0" layoutY="271.0" prefHeight="26.0" prefWidth="218.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
       <TextField fx:id="passwordConfirmTextField" layoutX="296.0" layoutY="400.0" prefHeight="26.0" prefWidth="219.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
       <PasswordField fx:id="passwordConfirmPWField" layoutX="296.0" layoutY="400.0" prefHeight="26.0" prefWidth="218.0" promptText="Confirm Password" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <Label layoutX="344.0" layoutY="156.0" text="USER ID">
+      <Label fx:id="userId" layoutX="344.0" layoutY="156.0" text="USER ID">
          <font>
             <Font name="Georgia" size="20.0" />
          </font>

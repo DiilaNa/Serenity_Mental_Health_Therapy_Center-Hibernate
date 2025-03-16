@@ -6,16 +6,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.UserDTO;
+import lk.ijse.project.mentalHealthTherapyCenter.service.custom.BOFactory;
+import lk.ijse.project.mentalHealthTherapyCenter.service.custom.BOType;
+import lk.ijse.project.mentalHealthTherapyCenter.service.custom.UserBO;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,6 +27,8 @@ public class UserRegister implements Initializable {
         image.setImage(adminIMage);
         refreshPage();
     }
+    @FXML
+    private Label userId;
 
     @FXML
     private Hyperlink clickhere;
@@ -65,6 +66,8 @@ public class UserRegister implements Initializable {
     @FXML
     private ImageView image;
 
+    UserBO userBO = BOFactory.getInstance().getBO(BOType.USER);
+
     @FXML
     void clickhereAction(MouseEvent event) throws IOException {
         loadPage("/view/login.fxml");
@@ -88,19 +91,75 @@ public class UserRegister implements Initializable {
             passwordConfirmPWField.setText(passwordConfirmTextField.getText());
         }
     }
-
     @FXML
-    void signupAction(ActionEvent event) {
+    void signupAction(ActionEvent event) throws IOException {
+        String userID = userId.getText();
+        String fullName = userFUllName.getText();
+        String email = userEmail.getText();
+        String role = userRole.getValue();
+        String userNAME = userName.getText();
+        String passwordText = passwordPWField.getText();
+        String passwordConfirmText = passwordConfirmPWField.getText();
 
+        if (userID.isEmpty() ||fullName.isEmpty() || email.isEmpty() || role.isEmpty() || userNAME.isEmpty() || passwordText.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "All fields are required!", ButtonType.OK).show();
+            return;
+        }
+
+        if (!passwordText.equals(passwordConfirmText)) {
+            new Alert(Alert.AlertType.ERROR, "Passwords do not match", ButtonType.OK).show();
+            return;
+        }
+
+        String mailPattern =  "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+        boolean isValidMailPattern = email.matches(mailPattern);
+
+        String passwordPattern =  "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!])[A-Za-z\\d@#$%^&+=!]{8,}$";
+        boolean isValidPasswordPattern = passwordText.matches(passwordPattern);
+
+        if (!isValidPasswordPattern){
+            new Alert(Alert.AlertType.INFORMATION, "Password Requirements:\n" +
+                    "✔ Minimum 8 characters\n" +
+                    "✔ At least one uppercase letter (A-Z)\n" +
+                    "✔ At least one lowercase letter (a-z)\n" +
+                    "✔ At least one digit (0-9)\n" +
+                    "✔ At least one special character (@, #, $, %, etc.)",
+
+                    ButtonType.OK).show();
+        }
+
+        if (!isValidMailPattern) {
+            userEmail.setStyle(userEmail.getStyle() + "-fx-border-color: red;");
+        }
+
+        if (isValidMailPattern && isValidPasswordPattern) {
+            UserDTO userDTO = new UserDTO(
+                    userID,
+                    fullName,
+                    email,
+                    role,
+                    userNAME,
+                    passwordText
+            );
+            boolean isSaved = userBO.saveUser(userDTO);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, " SignUp SuccessFull", ButtonType.OK).show();
+                if (role.equals("USER")) {
+                    loadPage("/view/userLogin.fxml");
+                }else{
+                    loadPage("/view/adminLogin.fxml");
+                }
+            }else {
+                new Alert(Alert.AlertType.ERROR, "SignUp Failed", ButtonType.OK).show();
+            }
+        }
     }
     private void refreshPage() {
         passwordPWField.setVisible(true);
         passwordConfirmPWField.setVisible(true);
         passwordTextField.setVisible(false);
         passwordConfirmTextField.setVisible(false);
-
         userRole.setItems(FXCollections.observableArrayList("USER", "ADMIN"));
-
     }
     private void loadPage(String fxmlPath) throws IOException {
         Stage stage = (Stage) clickhere.getScene().getWindow(); // Get current stage
@@ -109,5 +168,4 @@ public class UserRegister implements Initializable {
         stage.setTitle("The Serenity Mental Health Therapy Center");
         stage.show();
     }
-
 }
