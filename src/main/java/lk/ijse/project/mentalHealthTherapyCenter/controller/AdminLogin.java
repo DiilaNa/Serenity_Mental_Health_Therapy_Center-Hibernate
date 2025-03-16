@@ -87,7 +87,6 @@ public class AdminLogin implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Scene scene = new Scene(loader.load());
 
-            // Pass the user role to MainController
             MainController controller = loader.getController();
             controller.setUserRole(role);
 
