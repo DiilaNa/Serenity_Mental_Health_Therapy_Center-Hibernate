@@ -67,6 +67,7 @@ public class UserLogin implements Initializable {
             String password = passwordPWField.getText();
 
             /*send them to see if they exixts already*/
+            loadPage("/view/MainLayout.fxml");
         }
     }
 

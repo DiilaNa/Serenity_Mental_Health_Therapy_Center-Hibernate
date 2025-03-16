@@ -59,7 +59,7 @@ public class AdminLogin implements Initializable {
     }
 
     @FXML
-    void adminLoginAction(ActionEvent event) {
+    void adminLoginAction(ActionEvent event) throws IOException {
         if (adminUserName.getText().isEmpty() || adminPasswordPwField.getText().isEmpty()) {
             new Alert(Alert.AlertType.ERROR, "Please enter your username and password", ButtonType.OK).show();
         }else if (adminPasswordPwField.getText().equals(adminPasswordTextField.getText())) {
@@ -69,6 +69,7 @@ public class AdminLogin implements Initializable {
             String password = adminPasswordPwField.getText();
 
             /*send them to see if they exixts already*/
+            loadPage("/view/MainLayout.fxml");
         }
     }
 
