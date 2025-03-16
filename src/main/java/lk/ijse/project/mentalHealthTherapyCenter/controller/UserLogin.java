@@ -65,7 +65,7 @@ public class UserLogin implements Initializable {
         String password = passwordPWField.getText();
         String passText = passwordTextField.getText();
 
-        if (username.isEmpty() || password.isEmpty() || passText.isEmpty()) {
+        if (username.isEmpty() || password.isEmpty()){
             new Alert(Alert.AlertType.ERROR, "Please enter your username and password", ButtonType.OK).show();
             return;
         }

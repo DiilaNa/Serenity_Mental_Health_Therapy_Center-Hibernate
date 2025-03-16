@@ -1,18 +1,313 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="appointmentsPage" prefHeight="703.0" prefWidth="1290.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalHealthTherapyCenter.controller.AppointmentsController">
+<AnchorPane fx:id="appointmentPage" prefHeight="703.0" prefWidth="1290.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalHealthTherapyCenter.controller.AppointmentsController">
    <children>
       <Label layoutX="27.0" layoutY="28.0" text="Patient Details">
          <font>
             <Font name="Impact" size="15.0" />
          </font>
       </Label>
-      <Line endX="434.39996337890625" endY="7.62939453125E-6" layoutX="128.0" layoutY="54.0" startX="-100.0" />
+      <Line endX="678.4000244140625" endY="7.62939453125E-6" layoutX="128.0" layoutY="54.0" startX="-100.0" />
+      <Line endX="-93.4000015258789" endY="233.39999389648438" layoutX="115.0" layoutY="54.0" startX="691.4000244140625" startY="233.39999389648438" />
+      <VBox layoutX="27.0" layoutY="58.0" prefHeight="163.0" prefWidth="128.0">
+         <children>
+            <Label prefHeight="28.0" prefWidth="130.0" text="Patient ID">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <padding>
+                  <Insets top="12.0" />
+               </padding>
+            </Label>
+            <Label layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="130.0" text="Name">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+            </Label>
+            <Label prefHeight="30.0" prefWidth="129.0" text="Date of Birth">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+            </Label>
+            <Label layoutX="10.0" layoutY="68.0" prefHeight="30.0" prefWidth="129.0" text="Nic NO">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+            </Label>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+      <VBox layoutX="410.0" layoutY="62.0" prefHeight="157.0" prefWidth="128.0">
+         <children>
+            <Label prefHeight="28.0" prefWidth="130.0" text="Gender">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets top="12.0" />
+               </padding>
+            </Label>
+            <Label layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="130.0" text="Address">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+            </Label>
+            <Label prefHeight="30.0" prefWidth="129.0" text="Tel No">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+            </Label>
+            <Label layoutX="10.0" layoutY="68.0" prefHeight="30.0" prefWidth="129.0" text="E-mail">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+            </Label>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+      <Label fx:id="patientID" layoutX="211.0" layoutY="67.0" prefHeight="28.0" prefWidth="130.0" text="Patient ID">
+         <font>
+            <Font name="Georgia" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="patientName" layoutX="185.0" layoutY="107.0" prefHeight="26.0" prefWidth="182.0" />
+      <TextField fx:id="patientDOB" layoutX="185.0" layoutY="152.0" prefHeight="26.0" prefWidth="182.0" promptText="dd/mm/yyyy" />
+      <TextField fx:id="patientNIC" layoutX="186.0" layoutY="203.0" prefHeight="26.0" prefWidth="182.0" promptText="199921131232" />
+      <TextField fx:id="patientAddress" layoutX="549.0" layoutY="114.0" prefHeight="26.0" prefWidth="206.0" promptText="Home Town" />
+      <TextField fx:id="patientTelNO" layoutX="549.0" layoutY="159.0" prefHeight="26.0" prefWidth="206.0" promptText="077-0000000" />
+      <TextField fx:id="patientEMAIL" layoutX="549.0" layoutY="203.0" prefHeight="26.0" prefWidth="206.0" promptText="example@gmail.com" />
+      <ComboBox fx:id="patientGender" layoutX="549.0" layoutY="68.0" prefHeight="26.0" prefWidth="206.0" promptText="select your Gender" />
+      <Pane layoutX="971.0" prefHeight="703.0" prefWidth="319.0" style="-fx-background-color: #4C8C8C;">
+         <children>
+            <Button fx:id="addAppointmentBTN" layoutX="68.0" layoutY="99.0" mnemonicParsing="false" onAction="#addAppointmentBTNAction" prefHeight="48.0" prefWidth="206.0" style="-fx-background-radius: 11;" text="Add Appointments">
+               <font>
+                  <Font name="Georgia Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="cancelAppointmentBTN" layoutX="68.0" layoutY="186.0" mnemonicParsing="false" onAction="#cancelAppointmentBTNAction" prefHeight="48.0" prefWidth="206.0" style="-fx-background-radius: 11;" text="Cancel Appointments">
+               <font>
+                  <Font name="Georgia Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button layoutX="68.0" layoutY="282.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="206.0" style="-fx-background-radius: 11;" text="Extra">
+               <font>
+                  <Font name="Georgia Bold" size="15.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="image" fitHeight="191.0" fitWidth="200.0" layoutX="95.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../Pictures/Mental%20Hospital/HospitalNew.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="time1" layoutX="68.0" layoutY="653.0" prefHeight="36.0" prefWidth="245.0" text="serenity Hospital Mangement System" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Impact" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label layoutX="21.0" layoutY="260.0" text="Session Details">
+         <font>
+            <Font name="Impact" size="15.0" />
+         </font>
+      </Label>
+      <VBox layoutX="21.0" layoutY="288.0" prefHeight="163.0" prefWidth="128.0">
+         <children>
+            <Label prefHeight="28.0" prefWidth="130.0" text="Session ID">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+            </Label>
+            <Label prefHeight="28.0" prefWidth="130.0" text="Time">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+            </Label>
+            <Label prefHeight="30.0" prefWidth="129.0" text="Special Notes">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+            </Label>
+            <Label prefHeight="30.0" prefWidth="130.0" text="Date">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+            </Label>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+      <VBox layoutX="400.0" layoutY="287.0" prefHeight="163.0" prefWidth="128.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <children>
+            <Label prefHeight="30.0" prefWidth="129.0" text="Programmes">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+            </Label>
+         </children>
+      </VBox>
+      <Label fx:id="sessionID" layoutX="212.0" layoutY="306.0" prefHeight="28.0" prefWidth="130.0" text="Session ID">
+         <font>
+            <Font name="Georgia" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="sessionTime" layoutX="186.0" layoutY="355.0" prefHeight="26.0" prefWidth="182.0" promptText="00:00:00" />
+      <TextField fx:id="sessionNotes" layoutX="186.0" layoutY="401.0" prefHeight="26.0" prefWidth="182.0" />
+      <DatePicker fx:id="sessionDate" layoutX="186.0" layoutY="444.0" prefHeight="26.0" prefWidth="182.0" />
+      <ListView fx:id="sessionIDProgrammes" layoutX="528.0" layoutY="295.0" prefHeight="212.0" prefWidth="270.0" />
+      <Line endX="-93.4000015258789" endY="233.39999389648438" layoutX="115.0" layoutY="288.0" startX="691.4000244140625" startY="233.39999389648438" />
+      <Label layoutX="24.0" layoutY="496.0" text="Payment Details">
+         <font>
+            <Font name="Impact" size="15.0" />
+         </font>
+      </Label>
+      <VBox layoutX="24.0" layoutY="522.0" prefHeight="137.0" prefWidth="162.0">
+         <children>
+            <Label prefHeight="28.0" prefWidth="130.0" text="Payment ID">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+            </Label>
+            <Label prefHeight="28.0" prefWidth="130.0" text="Amount">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+            </Label>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+      <VBox layoutX="393.0" layoutY="527.0" prefHeight="137.0" prefWidth="162.0">
+         <children>
+            <Label prefHeight="48.0" prefWidth="164.0" text="Payment Method">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+            </Label>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+      <Label fx:id="paymentID" layoutX="212.0" layoutY="522.0" prefHeight="28.0" prefWidth="130.0" text="Payment ID">
+         <font>
+            <Font name="Georgia" size="20.0" />
+         </font>
+         <padding>
+            <Insets top="12.0" />
+         </padding>
+      </Label>
+      <TextField fx:id="payAMOUNT" layoutX="185.0" layoutY="582.0" prefHeight="26.0" prefWidth="182.0" promptText="Rs.0000" />
+      <ComboBox fx:id="paymentMethod" layoutX="589.0" layoutY="540.0" prefHeight="26.0" prefWidth="182.0" promptText="select paymnet " />
+      <Label layoutX="620.0" layoutY="653.0" prefHeight="36.0" prefWidth="50.0" text="Date :">
+         <font>
+            <Font name="Impact" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="date" layoutX="675.0" layoutY="653.0" prefHeight="36.0" prefWidth="71.0" text="dd/mm/yy">
+         <font>
+            <Font name="Impact" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="811.0" layoutY="653.0" prefHeight="36.0" prefWidth="42.0" text="Time:">
+         <font>
+            <Font name="Impact" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="time" layoutX="859.0" layoutY="653.0" prefHeight="36.0" prefWidth="63.0" text="00:00:00">
+         <font>
+            <Font name="Impact" size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
