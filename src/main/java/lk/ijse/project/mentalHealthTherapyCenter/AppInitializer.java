@@ -1,4 +1,4 @@
-package lk.ijse.project.mentalhealththerapycenter;
+package lk.ijse.project.mentalHealthTherapyCenter;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

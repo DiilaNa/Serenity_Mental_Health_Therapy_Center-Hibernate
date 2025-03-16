@@ -1,4 +1,4 @@
-module lk.ijse.project.mentalhealththerapycenter {
+module lk.ijse.project.mentalHealthTherapyCenter {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
@@ -9,11 +9,11 @@ module lk.ijse.project.mentalhealththerapycenter {
     requires jakarta.persistence;
     requires java.naming;
 
-    opens lk.ijse.project.mentalhealththerapycenter.config to jakarta.persistence;
+    opens lk.ijse.project.mentalHealthTherapyCenter.config to jakarta.persistence;
 
-    opens lk.ijse.project.mentalhealththerapycenter to javafx.fxml;
-    exports lk.ijse.project.mentalhealththerapycenter;
-    exports lk.ijse.project.mentalhealththerapycenter.controller;
-    opens lk.ijse.project.mentalhealththerapycenter.controller to javafx.fxml;
+    opens lk.ijse.project.mentalHealthTherapyCenter to javafx.fxml;
+    exports lk.ijse.project.mentalHealthTherapyCenter;
+    exports lk.ijse.project.mentalHealthTherapyCenter.controller;
+    opens lk.ijse.project.mentalHealthTherapyCenter.controller to javafx.fxml;
     /*tm eka javafx base ekata open krnna*/
 }

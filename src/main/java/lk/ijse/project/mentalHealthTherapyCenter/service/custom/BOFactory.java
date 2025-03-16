@@ -1,7 +1,7 @@
-package lk.ijse.project.mentalhealththerapycenter.service.custom;
+package lk.ijse.project.mentalHealthTherapyCenter.service.custom;
 
-import lk.ijse.project.mentalhealththerapycenter.service.SuperBO;
-import lk.ijse.project.mentalhealththerapycenter.service.custom.impl.UserBOImpl;
+import lk.ijse.project.mentalHealthTherapyCenter.service.SuperBO;
+import lk.ijse.project.mentalHealthTherapyCenter.service.custom.impl.UserBOImpl;
 
 public class BOFactory {
     public static BOFactory boFactory;

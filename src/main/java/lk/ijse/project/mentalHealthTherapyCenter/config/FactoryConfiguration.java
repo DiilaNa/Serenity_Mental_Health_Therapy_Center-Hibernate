@@ -1,4 +1,4 @@
-package lk.ijse.project.mentalhealththerapycenter.config;
+package lk.ijse.project.mentalHealthTherapyCenter.config;
 
 
 

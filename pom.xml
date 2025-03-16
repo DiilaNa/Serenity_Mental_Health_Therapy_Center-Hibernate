@@ -108,7 +108,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                lk.ijse.project.mentalhealththerapycenter/lk.ijse.project.mentalhealththerapycenter.HelloApplication
+                                lk.ijse.project.mentalhealththerapycenter/lk.ijse.project.mentalHealthTherapyCenter.HelloApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

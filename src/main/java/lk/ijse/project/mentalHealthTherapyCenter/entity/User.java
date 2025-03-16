@@ -1,15 +1,15 @@
-package lk.ijse.project.mentalhealththerapycenter.dto;
+package lk.ijse.project.mentalHealthTherapyCenter.entity;
 
-
-import lombok.AllArgsConstructor;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class UserDTO {
+@Entity
+public class User {
+    @Id
     private String userID;
+
     private String userFullName;
     private String userEmail;
     private String userRole;

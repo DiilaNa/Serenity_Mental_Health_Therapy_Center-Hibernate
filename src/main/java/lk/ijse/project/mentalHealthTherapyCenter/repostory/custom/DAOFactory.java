@@ -1,7 +1,7 @@
-package lk.ijse.project.mentalhealththerapycenter.repostory.custom;
+package lk.ijse.project.mentalHealthTherapyCenter.repostory.custom;
 
-import lk.ijse.project.mentalhealththerapycenter.repostory.SuperDAO;
-import lk.ijse.project.mentalhealththerapycenter.repostory.custom.impl.UserDAOImpl;
+import lk.ijse.project.mentalHealthTherapyCenter.repostory.SuperDAO;
+import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.impl.UserDAOImpl;
 
 public class DAOFactory {
     public static DAOFactory daoFactory;
