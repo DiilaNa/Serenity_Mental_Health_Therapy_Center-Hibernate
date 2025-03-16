@@ -2,14 +2,19 @@ package lk.ijse.project.mentalHealthTherapyCenter.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.UserBO;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -126,5 +131,9 @@ public class ForgetPassword implements Initializable {
             passwordFieldOne.setText(passWordText.getText());
             passwordFieldTwo.setText(confirmPassword.getText());
         }
+    }
+    @FXML
+    void backIdAction(MouseEvent event) {
+
     }
 }
