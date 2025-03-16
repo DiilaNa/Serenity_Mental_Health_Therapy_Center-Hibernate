@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.ijse.project.mentalHealthTherapyCenter.controller.AppointmentsController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane fx:id="appointmentsPage" prefHeight="703.0" prefWidth="1290.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalHealthTherapyCenter.controller.AppointmentsController">
+   <children>
+      <Label layoutX="27.0" layoutY="28.0" text="Patient Details">
+         <font>
+            <Font name="Impact" size="15.0" />
+         </font>
+      </Label>
+      <Line endX="434.39996337890625" endY="7.62939453125E-6" layoutX="128.0" layoutY="54.0" startX="-100.0" />
+   </children>
 </AnchorPane>

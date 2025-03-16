@@ -75,15 +75,9 @@ public class AdminLogin implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Please enter your username and password", ButtonType.OK).show();
             return;
         }
-        if (!password.equals(passText)) {
-            new Alert(Alert.AlertType.ERROR,"Passwords do not match", ButtonType.OK).show();
-            return;
-        }
             /*send them to see if they exixts already*/
             navigateToMainPage("/view/MainLayout.fxml","admin");
-
     }
-
     @FXML
     void clickHereAction(MouseEvent event) throws IOException {
         loadPage("/view/userRegister.fxml");

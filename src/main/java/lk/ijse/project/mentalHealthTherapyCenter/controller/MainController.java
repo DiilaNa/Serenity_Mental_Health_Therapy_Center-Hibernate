@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -19,7 +20,7 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        navigateTo("/view/appointments.fxml");
     }
 
     @FXML
@@ -76,15 +77,15 @@ public class MainController implements Initializable {
 
     private void configureUI() {
         if ("admin".equals(role)) {
-            adminVbox.setVisible(true); // Show admin features
+            adminVbox.setVisible(true);
         } else {
-            adminVbox.setVisible(false); // Hide admin features for regular users
+            adminVbox.setVisible(false);
         }
     }
 
     @FXML
     void appointmentsAction(MouseEvent event) {
-
+        navigateTo("/view/appointments.fxml");
     }
 
     @FXML
@@ -116,9 +117,23 @@ public class MainController implements Initializable {
     void userAction(MouseEvent event) {
 
     }
+    public void navigateTo(String fxmlPath) {
+        try {
+            loadAnchor.getChildren().clear();
+            AnchorPane load = FXMLLoader.load(getClass().getResource(fxmlPath));
+            load.prefWidthProperty().bind(loadAnchor.widthProperty());
+            load.prefHeightProperty().bind(loadAnchor.heightProperty());
+            loadAnchor.getChildren().add(load);
+        } catch (IOException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Fail to load page!").show();
+        }
+    }
     private void loadPage(String fxmlPath) throws IOException {
-        Stage stage = (Stage) image.getScene().getWindow(); // Get current stage
+        Stage currentStage = (Stage) image.getScene().getWindow(); // Get current stage
+        currentStage.close();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
+        Stage stage = new Stage();
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("The Serenity Mental Health Therapy Center");
