@@ -38,12 +38,12 @@
       <font>
          <Font name="System Bold" size="12.0" />
       </font></CheckBox>
-      <Label layoutX="214.0" layoutY="529.0" text="DONT HAVE AN ACCOUNT">
+      <Label layoutX="223.0" layoutY="529.0" text="DONT HAVE AN ACCOUNT">
          <font>
             <Font name="Gabriola" size="15.0" />
          </font>
       </Label>
-      <Hyperlink fx:id="clickhere" layoutX="368.0" layoutY="527.0" onMouseClicked="#clickhereAction" text="Click here" />
+      <Hyperlink fx:id="clickhere" layoutX="369.0" layoutY="527.0" onMouseClicked="#clickhereAction" text="Click here" underline="true" />
       <Button fx:id="login" layoutX="187.0" layoutY="395.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="39.0" prefWidth="338.0" style="-fx-background-color: #4C8C8C;" text="LOGIN" textFill="#fffefe">
          <font>
             <Font name="Georgia Bold" size="21.0" />
@@ -55,5 +55,6 @@
          <Image url="@../../../../../../../Pictures/Mental%20Hospital/user.png" />
       </image>
    </ImageView>
-   <Line endX="399.199951171875" endY="11.599990844726562" layoutX="168.0" layoutY="118.0" startX="89.5999755859375" startY="11.599990844726562" />
+   <Line endX="372.79998779296875" endY="11.599990844726562" layoutX="168.0" layoutY="118.0" startX="89.5999755859375" startY="11.599990844726562" />
+   <Hyperlink fx:id="forgetPass" layoutX="401.0" layoutY="315.0" onMouseClicked="#forgetPassAction" text="Forget Password ?" underline="true" />
 </AnchorPane>

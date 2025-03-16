@@ -52,6 +52,9 @@ public class UserLogin implements Initializable {
     private ImageView image;
 
     @FXML
+    private Hyperlink forgetPass;
+
+    @FXML
     void clickhereAction(MouseEvent event) throws IOException {
         loadPage("/view/userRegister.fxml");
     }
@@ -80,6 +83,11 @@ public class UserLogin implements Initializable {
             passwordTextField.setVisible(false);
             passwordPWField.setText(passwordTextField.getText());
         }
+    }
+
+    @FXML
+    void forgetPassAction(MouseEvent event) {
+
     }
     private void loadPage(String fxmlPath) throws IOException {
         Stage stage = (Stage) clickhere.getScene().getWindow(); // Get current stage

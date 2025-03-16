@@ -38,6 +38,14 @@ public class AdminLogin implements Initializable {
     @FXML
     private ImageView image;
 
+    @FXML
+    private Hyperlink forgetPass;
+
+    @FXML
+    void forgetPassAction(MouseEvent event) {
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Image adminIMage = new Image(getClass().getResourceAsStream("/images/user.png"));
