@@ -118,13 +118,13 @@
             <Font name="Georgia" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="patientName" layoutX="185.0" layoutY="107.0" prefHeight="26.0" prefWidth="182.0" />
-      <TextField fx:id="patientDOB" layoutX="185.0" layoutY="152.0" prefHeight="26.0" prefWidth="182.0" promptText="dd/mm/yyyy" />
-      <TextField fx:id="patientNIC" layoutX="186.0" layoutY="203.0" prefHeight="26.0" prefWidth="182.0" promptText="199921131232" />
-      <TextField fx:id="patientAddress" layoutX="549.0" layoutY="114.0" prefHeight="26.0" prefWidth="206.0" promptText="Home Town" />
-      <TextField fx:id="patientTelNO" layoutX="549.0" layoutY="159.0" prefHeight="26.0" prefWidth="206.0" promptText="077-0000000" />
-      <TextField fx:id="patientEMAIL" layoutX="549.0" layoutY="203.0" prefHeight="26.0" prefWidth="206.0" promptText="example@gmail.com" />
-      <ComboBox fx:id="patientGender" layoutX="549.0" layoutY="68.0" prefHeight="26.0" prefWidth="206.0" promptText="select your Gender" />
+      <TextField fx:id="patientName" layoutX="185.0" layoutY="107.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="patientDOB" layoutX="185.0" layoutY="152.0" prefHeight="26.0" prefWidth="182.0" promptText="dd/mm/yyyy" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="patientNIC" layoutX="186.0" layoutY="203.0" prefHeight="26.0" prefWidth="182.0" promptText="199921131232" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="patientAddress" layoutX="549.0" layoutY="114.0" prefHeight="26.0" prefWidth="206.0" promptText="Home Town" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="patientTelNO" layoutX="549.0" layoutY="159.0" prefHeight="26.0" prefWidth="206.0" promptText="077-0000000" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="patientEMAIL" layoutX="549.0" layoutY="203.0" prefHeight="26.0" prefWidth="206.0" promptText="example@gmail.com" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <ComboBox fx:id="patientGender" layoutX="549.0" layoutY="68.0" opacity="0.69" prefHeight="26.0" prefWidth="206.0" promptText="select your Gender" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
       <Label layoutX="21.0" layoutY="260.0" text="Session Details">
          <font>
             <Font name="Impact" size="15.0" />
@@ -198,8 +198,8 @@
             <Font name="Georgia" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="sessionTime" layoutX="186.0" layoutY="355.0" prefHeight="26.0" prefWidth="182.0" promptText="00:00:00" />
-      <TextField fx:id="sessionNotes" layoutX="186.0" layoutY="401.0" prefHeight="26.0" prefWidth="182.0" />
+      <TextField fx:id="sessionTime" layoutX="186.0" layoutY="355.0" prefHeight="26.0" prefWidth="182.0" promptText="00:00:00" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="sessionNotes" layoutX="186.0" layoutY="401.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
       <DatePicker fx:id="sessionDate" layoutX="186.0" layoutY="444.0" prefHeight="26.0" prefWidth="182.0" />
       <ListView fx:id="sessionIDProgrammes" layoutX="528.0" layoutY="295.0" prefHeight="212.0" prefWidth="316.0" />
       <Line endX="-93.4000015258789" endY="233.39999389648438" layoutX="115.0" layoutY="288.0" startX="759.3999633789062" startY="233.4000244140625" />
@@ -260,8 +260,8 @@
             <Insets top="12.0" />
          </padding>
       </Label>
-      <TextField fx:id="payAMOUNT" layoutX="185.0" layoutY="582.0" prefHeight="26.0" prefWidth="182.0" promptText="Rs.0000" />
-      <ComboBox fx:id="paymentMethod" layoutX="589.0" layoutY="540.0" prefHeight="26.0" prefWidth="215.0" promptText="select paymnet " />
+      <TextField fx:id="payAMOUNT" layoutX="185.0" layoutY="582.0" prefHeight="26.0" prefWidth="182.0" promptText="Rs.0000" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <ComboBox fx:id="paymentMethod" layoutX="589.0" layoutY="540.0" opacity="0.58" prefHeight="26.0" prefWidth="215.0" promptText="select your payment method" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
       <Label layoutX="578.0" layoutY="648.0" prefHeight="36.0" prefWidth="50.0" text="Date :">
          <font>
             <Font name="Impact" size="16.0" />
