@@ -2,13 +2,15 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="703.0" prefWidth="1290.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalHealthTherapyCenter.controller.PatientController">
    <children>
@@ -24,7 +26,7 @@
             <TableColumn fx:id="tablePEmail" prefWidth="186.400146484375" text="E-mail" />
         </columns>
       </TableView>
-      <Button fx:id="update" layoutX="135.0" layoutY="589.0" mnemonicParsing="false" onAction="#updateAction" prefHeight="48.0" prefWidth="199.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="Update Patient" textFill="WHITE">
+      <Button fx:id="update" layoutX="68.0" layoutY="550.0" mnemonicParsing="false" onAction="#updateAction" prefHeight="48.0" prefWidth="199.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="Update Patient" textFill="WHITE">
          <font>
             <Font name="Impact" size="22.0" />
          </font>
@@ -39,7 +41,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="delete" layoutX="395.0" layoutY="589.0" mnemonicParsing="false" onAction="#deleteAction" prefHeight="48.0" prefWidth="199.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="Delete Patient" textFill="WHITE">
+      <Button fx:id="delete" layoutX="317.0" layoutY="550.0" mnemonicParsing="false" onAction="#deleteAction" prefHeight="48.0" prefWidth="199.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="Delete Patient" textFill="WHITE">
          <font>
             <Font name="Impact" size="22.0" />
          </font>
@@ -54,5 +56,15 @@
             </Glow>
          </effect>
       </Button>
+      <Label layoutX="258.0" layoutY="648.0" text="Patient details of Serinity Mental Health  Theraphy Center" textFill="#489191">
+         <font>
+            <Font name="Georgia Bold" size="20.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="image" fitHeight="54.0" fitWidth="90.0" layoutX="877.0" layoutY="621.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Pictures/Mental%20Hospital/icons8-patient-50.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
