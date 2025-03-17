@@ -1,14 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.ijse.project.mentalHealthTherapyCenter.controller.PatientController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="703.0" prefWidth="1290.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalHealthTherapyCenter.controller.PatientController">
+   <children>
+      <TableView fx:id="table" layoutX="7.0" layoutY="14.0" onMouseClicked="#tableAction" prefHeight="505.0" prefWidth="1278.0">
+        <columns>
+          <TableColumn fx:id="tablePId" prefWidth="114.3999605178833" text="ID" />
+          <TableColumn fx:id="tablePName" minWidth="0.0" prefWidth="172.80006408691406" text="Name" />
+            <TableColumn fx:id="tablePDob" prefWidth="181.60003662109375" text="Date of Birth" />
+            <TableColumn fx:id="tablePNic" prefWidth="177.5999755859375" text="NIC no" />
+            <TableColumn fx:id="tablePGender" prefWidth="132.00006103515625" text="Gender" />
+            <TableColumn fx:id="tablePAddress" prefWidth="149.5999755859375" text="Address" />
+            <TableColumn fx:id="tablePContact" prefWidth="169.59979248046875" text="Contact no" />
+            <TableColumn fx:id="tablePEmail" prefWidth="186.400146484375" text="E-mail" />
+        </columns>
+      </TableView>
+      <Button fx:id="update" layoutX="135.0" layoutY="589.0" mnemonicParsing="false" onAction="#updateAction" prefHeight="48.0" prefWidth="199.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="Update Patient" textFill="WHITE">
+         <font>
+            <Font name="Impact" size="22.0" />
+         </font>
+         <effect>
+            <Glow>
+               <input>
+                  <DropShadow />
+               </input>
+            </Glow>
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="delete" layoutX="395.0" layoutY="589.0" mnemonicParsing="false" onAction="#deleteAction" prefHeight="48.0" prefWidth="199.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="Delete Patient" textFill="WHITE">
+         <font>
+            <Font name="Impact" size="22.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <Glow>
+               <input>
+                  <DropShadow />
+               </input>
+            </Glow>
+         </effect>
+      </Button>
+   </children>
 </AnchorPane>

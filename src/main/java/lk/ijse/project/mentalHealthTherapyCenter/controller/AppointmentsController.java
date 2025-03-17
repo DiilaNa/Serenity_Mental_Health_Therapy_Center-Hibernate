@@ -19,8 +19,8 @@ import java.util.ResourceBundle;
 public class AppointmentsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Image adminIMage = new Image(getClass().getResourceAsStream("/images/HospitalNew.png"));
-        image.setImage(adminIMage);
+        Image image1 = new Image(getClass().getResourceAsStream("/images/appointmentIcon.png"));
+        image.setImage(image1);
     }
 
     @FXML
@@ -72,6 +72,9 @@ public class AppointmentsController implements Initializable {
     private ComboBox<?> paymentMethod;
 
     @FXML
+    private Button reset;
+
+    @FXML
     private DatePicker sessionDate;
 
     @FXML
@@ -90,9 +93,6 @@ public class AppointmentsController implements Initializable {
     private Label time;
 
     @FXML
-    private Label time1;
-
-    @FXML
     void addAppointmentBTNAction(ActionEvent event) {
 
     }
@@ -102,4 +102,23 @@ public class AppointmentsController implements Initializable {
 
     }
 
+    @FXML
+    void resetAction(ActionEvent event) {
+
+    }
+
 }
+
+
+
+
+
+
+
+
+  /*  @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        Image adminIMage = new Image(getClass().getResourceAsStream("/images/HospitalNew.png"));
+        image.setImage(adminIMage);
+    }
+*/

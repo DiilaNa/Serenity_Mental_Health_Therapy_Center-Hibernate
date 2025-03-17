@@ -80,7 +80,7 @@
       </VBox>
       <AnchorPane fx:id="header" layoutX="235.0" prefHeight="74.0" prefWidth="1291.0" style="-fx-background-color: black;">
          <children>
-            <Label fx:id="dashBoardFrom" layoutX="38.0" layoutY="24.0" text="DASH BOARD FORM" textFill="WHITE">
+            <Label fx:id="dashBoardFrom" layoutX="38.0" layoutY="24.0" prefHeight="23.0" prefWidth="258.0" text="DASH BOARD FORM" textFill="WHITE">
                <font>
                   <Font name="Impact" size="19.0" />
                </font>

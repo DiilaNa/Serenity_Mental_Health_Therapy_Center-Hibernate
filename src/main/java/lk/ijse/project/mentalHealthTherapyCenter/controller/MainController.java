@@ -86,6 +86,7 @@ public class MainController implements Initializable {
     @FXML
     void appointmentsAction(MouseEvent event) {
         navigateTo("/view/appointments.fxml");
+        dashBoardFrom.setText("Appointment Details Form");
     }
 
     @FXML
@@ -95,6 +96,8 @@ public class MainController implements Initializable {
 
     @FXML
     void patientsAction(MouseEvent event) {
+        navigateTo("/view/patient.fxml");
+        dashBoardFrom.setText("Patient Details Form");
 
     }
 
