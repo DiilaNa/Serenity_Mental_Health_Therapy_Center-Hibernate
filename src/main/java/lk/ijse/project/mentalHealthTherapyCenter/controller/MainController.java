@@ -128,6 +128,7 @@ public class MainController implements Initializable {
         try {
             loadAnchor.getChildren().clear();
             AnchorPane load = FXMLLoader.load(getClass().getResource(fxmlPath));
+            load.getStylesheets().add(getClass().getResource("/css/h.css").toExternalForm());
             load.prefWidthProperty().bind(loadAnchor.widthProperty());
             load.prefHeightProperty().bind(loadAnchor.heightProperty());
             loadAnchor.getChildren().add(load);

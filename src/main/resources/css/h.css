@@ -1,0 +1,17 @@
+
+.table-view .column-header .text,
+.table-view .table-cell .text {
+    -fx-fill: white;  /* Ensure text is white */
+    -fx-font-weight: bold; /* Optional: Make text bold */
+}
+
+.table-view .column-header,
+.table-view .table-cell {
+    -fx-background-color: #4C8C8C; /* Column color */
+}
+
+
+.button:hover {
+    -fx-effect: innershadow(gaussian, #015c5c, 10, 0.5, 0, 0);
+
+}
