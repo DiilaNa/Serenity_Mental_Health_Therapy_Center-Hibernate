@@ -106,7 +106,8 @@ public class MainController implements Initializable {
 
     @FXML
     void paymentsAction(MouseEvent event) {
-
+        navigateTo("/view/payment.fxml");
+        dashBoardFrom.setText("Payment Details Form");
     }
 
     @FXML
