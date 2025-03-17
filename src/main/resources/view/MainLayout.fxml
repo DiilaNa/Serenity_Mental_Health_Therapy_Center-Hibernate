@@ -70,20 +70,6 @@
                   <Cursor fx:constant="OPEN_HAND" />
                </cursor>
             </Button>
-            <Button fx:id="user" layoutX="10.0" layoutY="388.0" mnemonicParsing="false" onMouseClicked="#userAction" prefHeight="45.0" prefWidth="237.0" style="-fx-background-radius: 12;" text="USER" textAlignment="CENTER">
-               <font>
-                  <Font name="Georgia Bold" size="19.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="12.0" left="11.0" right="11.0" top="12.0" />
-               </VBox.margin>
-               <effect>
-                  <DropShadow />
-               </effect>
-               <cursor>
-                  <Cursor fx:constant="OPEN_HAND" />
-               </cursor>
-            </Button>
             <VBox fx:id="adminVbox" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Label prefHeight="30.0" prefWidth="235.0" text="ADMIN FEATURES" textFill="WHITE">
@@ -121,7 +107,26 @@
                   </Button>
                </children>
             </VBox>
-            <ImageView fitHeight="162.0" fitWidth="234.0" pickOnBounds="true" preserveRatio="true" />
+            <Label prefHeight="30.0" prefWidth="235.0" text="Profile Settings" textFill="WHITE">
+               <font>
+                  <Font name="Georgia" size="17.0" />
+               </font>
+            </Label>
+            <Button fx:id="user" mnemonicParsing="false" onMouseClicked="#userAction" prefHeight="45.0" prefWidth="237.0" style="-fx-background-radius: 12;" text="My Profile" textAlignment="CENTER">
+               <font>
+                  <Font name="Georgia Bold" size="19.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+               <VBox.margin>
+                  <Insets left="11.0" right="11.0" top="11.0" />
+               </VBox.margin>
+            </Button>
+            <ImageView fitHeight="119.0" fitWidth="233.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </VBox>
       <AnchorPane fx:id="header" layoutX="235.0" prefHeight="74.0" prefWidth="1291.0" style="-fx-background-color: black;">
