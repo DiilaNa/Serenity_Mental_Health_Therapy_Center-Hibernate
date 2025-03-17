@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -20,6 +21,8 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Image image1 = new Image(getClass().getResourceAsStream("/images/HospitalIconMain.png"));
+        image.setImage(image1);
         navigateTo("/view/appointments.fxml");
     }
 
