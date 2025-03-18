@@ -112,8 +112,8 @@ public class AppointmentsController implements Initializable {
     }
 
     @FXML
-    void addDoctorsAction(MouseEvent event) {
-
+    void addDoctorsAction(MouseEvent event) throws IOException {
+        loadNewPage("/view/assignDocs.fxml");
     }
 
     @FXML
