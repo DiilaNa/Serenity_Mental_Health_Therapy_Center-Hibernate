@@ -20,7 +20,7 @@
             <Image url="@../../../../../../../Pictures/Mental%20Hospital/icons8-doctor-50.png" />
          </image>
       </ImageView>
-      <Circle fill="#1fff29" layoutX="83.0" layoutY="223.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="circleD" fill="#1fff29" layoutX="83.0" layoutY="223.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
       <Label fx:id="docAvailable" layoutX="108.0" layoutY="212.0" prefHeight="22.0" prefWidth="108.0" text="Available">
          <font>
             <Font name="Impact" size="16.0" />

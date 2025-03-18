@@ -126,7 +126,7 @@ public class MainController implements Initializable {
     @FXML
     void userAction(MouseEvent event) {
        navigateTo("/view/myProfile.fxml");
-       dashBoardFrom.setText("User Details Form");
+       dashBoardFrom.setText("Profile Settings");
 
     }
     public void navigateTo(String fxmlPath) {

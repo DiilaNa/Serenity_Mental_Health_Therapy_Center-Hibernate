@@ -9,6 +9,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,8 +18,11 @@ import java.util.ResourceBundle;
 public class MyProfile implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        Image image1 = new Image(getClass().getResourceAsStream("/images/SettingInMyProfile.png"));
+        image.setImage(image1);
     }
+    @FXML
+    private ImageView image;
 
     @FXML
     private CheckBox checkBox;
