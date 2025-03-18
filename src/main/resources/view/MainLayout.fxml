@@ -77,7 +77,7 @@
                         <Font name="Georgia" size="17.0" />
                      </font>
                   </Label>
-                  <Button fx:id="theraphist" mnemonicParsing="false" onMouseClicked="#doctorDetailsAction" prefHeight="45.0" prefWidth="237.0" style="-fx-background-radius: 12;" text="THERAPHIST" textAlignment="CENTER">
+                  <Button fx:id="therapist" mnemonicParsing="false" onMouseClicked="#doctorDetailsAction" prefHeight="45.0" prefWidth="237.0" style="-fx-background-radius: 12;" text="THERAPIST" textAlignment="CENTER">
                      <font>
                         <Font name="Georgia Bold" size="19.0" />
                      </font>
@@ -91,7 +91,7 @@
                         <Cursor fx:constant="OPEN_HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="theaphy" mnemonicParsing="false" onMouseClicked="#theraphyProgramAction" prefHeight="65.0" prefWidth="235.0" style="-fx-background-radius: 12;" text="THERAPY MANAGEMENT" textAlignment="CENTER" wrapText="true">
+                  <Button fx:id="therapyPrograms" mnemonicParsing="false" onMouseClicked="#therapyProgramAction" prefHeight="65.0" prefWidth="235.0" style="-fx-background-radius: 12;" text="THERAPY MANAGEMENT" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="Georgia Bold" size="19.0" />
                      </font>

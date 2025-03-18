@@ -60,10 +60,10 @@ public class MainController implements Initializable {
     private Button signOutButton;
 
     @FXML
-    private Button theaphy;
+    private Button therapist;
 
     @FXML
-    private Button theraphist;
+    private Button therapyPrograms;
 
     @FXML
     private Button user;
@@ -94,7 +94,8 @@ public class MainController implements Initializable {
 
     @FXML
     void doctorDetailsAction(MouseEvent event) {
-
+        navigateTo("/view/Therapist.fxml");
+        dashBoardFrom.setText("Therapist Details Form");
     }
 
     @FXML
@@ -116,7 +117,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void theraphyProgramAction(MouseEvent event) {
+    void therapyProgramAction(MouseEvent event) {
 
     }
 
