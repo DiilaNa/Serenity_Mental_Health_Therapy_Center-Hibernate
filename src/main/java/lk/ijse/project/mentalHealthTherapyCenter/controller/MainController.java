@@ -24,6 +24,7 @@ public class MainController implements Initializable {
         Image image1 = new Image(getClass().getResourceAsStream("/images/HospitalIconMain.png"));
         image.setImage(image1);
         navigateTo("/view/appointments.fxml");
+        dashBoardFrom.setText("Appointment Details Form");
     }
 
     @FXML
@@ -118,7 +119,8 @@ public class MainController implements Initializable {
 
     @FXML
     void therapyProgramAction(MouseEvent event) {
-
+        navigateTo("/view/TherapyPrograms.fxml");
+        dashBoardFrom.setText("Therapy Programs Form");
     }
 
     @FXML
