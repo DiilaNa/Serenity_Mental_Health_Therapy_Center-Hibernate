@@ -46,7 +46,7 @@ public class TherapistController implements Initializable {
     private TextField docNic;
 
     @FXML
-    private ComboBox<?> docQualifications;
+    private ComboBox<?> docQualificationsCombo;
 
     @FXML
     private ImageView image;

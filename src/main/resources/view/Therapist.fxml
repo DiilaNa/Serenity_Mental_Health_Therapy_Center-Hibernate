@@ -15,7 +15,6 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="703.0" prefWidth="1290.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalHealthTherapyCenter.controller.TherapistController">
    <children>
       <Label layoutX="15.0" layoutY="365.0" text="Details of Doctors ">
@@ -70,11 +69,11 @@
             <Font name="Georgia Bold" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="docName" layoutX="151.0" layoutY="453.0" prefHeight="26.0" prefWidth="207.0" />
-      <TextField fx:id="docNic" layoutX="151.0" layoutY="501.0" prefHeight="26.0" prefWidth="207.0" promptText="19xxxxxxV" />
-      <TextField fx:id="docAddress" layoutX="509.0" layoutY="410.0" prefHeight="26.0" prefWidth="207.0" />
-      <TextField fx:id="docMail" layoutX="509.0" layoutY="453.0" prefHeight="26.0" prefWidth="207.0" promptText="example@gmail.com" />
-      <TextField fx:id="docContact" layoutX="509.0" layoutY="501.0" prefHeight="26.0" prefWidth="207.0" promptText="077-xxxxxxx" />
+      <TextField fx:id="docName" layoutX="151.0" layoutY="453.0" prefHeight="26.0" prefWidth="207.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="docNic" layoutX="151.0" layoutY="501.0" prefHeight="26.0" prefWidth="207.0" promptText="19xxxxxxV" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="docAddress" layoutX="509.0" layoutY="410.0" prefHeight="26.0" prefWidth="207.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="docMail" layoutX="509.0" layoutY="453.0" prefHeight="26.0" prefWidth="207.0" promptText="example@gmail.com" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="docContact" layoutX="509.0" layoutY="501.0" prefHeight="26.0" prefWidth="207.0" promptText="077-xxxxxxx" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
       <Button fx:id="save" layoutX="40.0" layoutY="562.0" mnemonicParsing="false" onAction="#saveBtnAction" prefHeight="41.0" prefWidth="128.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Save" textFill="WHITE">
          <font>
             <Font name="Impact" size="20.0" />
@@ -150,6 +149,6 @@
             <Font name="Georgia Bold" size="16.0" />
          </font>
       </Label>
-      <ComboBox fx:id="docQualifications" layoutX="969.0" layoutY="411.0" prefHeight="26.0" prefWidth="207.0" promptText="bachelores/masters/doctoral degree" />
+      <ComboBox fx:id="docQualificationsCombo" layoutX="969.0" layoutY="411.0" prefHeight="26.0" prefWidth="207.0" promptText="bachelores/masters/doctoral degree" style="-fx-background-color: trasnsparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
    </children>
 </AnchorPane>
