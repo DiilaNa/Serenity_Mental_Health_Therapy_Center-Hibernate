@@ -34,7 +34,7 @@
       </Label>
       <Pane layoutX="675.0" layoutY="160.0" prefHeight="502.0" prefWidth="558.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;">
          <children>
-            <Label layoutY="1.0" prefHeight="34.0" prefWidth="174.0" text="Edit profile" textFill="WHITE">
+            <Label layoutX="14.0" layoutY="8.0" prefHeight="34.0" prefWidth="174.0" text="Edit profile" textFill="WHITE">
                <font>
                   <Font name="Georgia Bold" size="16.0" />
                </font>
@@ -69,14 +69,14 @@
                   <Font name="Georgia" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="userFullName" layoutX="222.0" layoutY="74.0" />
-            <TextField fx:id="userMail" layoutX="222.0" layoutY="123.0" prefHeight="25.0" prefWidth="248.0" />
-            <ComboBox fx:id="userRole" layoutX="221.0" layoutY="182.0" prefWidth="150.0" />
-            <TextField fx:id="userUserName" layoutX="222.0" layoutY="244.0" prefHeight="25.0" prefWidth="248.0" />
-            <TextField fx:id="userPasswordText1" layoutX="222.0" layoutY="307.0" prefHeight="25.0" prefWidth="248.0" />
-            <TextField fx:id="userPasswordText2" layoutX="222.0" layoutY="359.0" prefHeight="25.0" prefWidth="248.0" />
-            <PasswordField fx:id="userPassWordField1" layoutX="222.0" layoutY="307.0" prefHeight="25.0" prefWidth="248.0" />
-            <PasswordField fx:id="userPassWordField2" layoutX="222.0" layoutY="359.0" prefHeight="25.0" prefWidth="248.0" />
+            <TextField fx:id="userFullName" layoutX="222.0" layoutY="74.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+            <TextField fx:id="userMail" layoutX="222.0" layoutY="123.0" prefHeight="25.0" prefWidth="248.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;"/>
+            <ComboBox fx:id="userRole" layoutX="221.0" layoutY="182.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;"/>
+            <TextField fx:id="userUserName" layoutX="222.0" layoutY="244.0" prefHeight="25.0" prefWidth="248.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+            <TextField fx:id="userPasswordText1" layoutX="222.0" layoutY="307.0" prefHeight="25.0" prefWidth="248.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;"/>
+            <TextField fx:id="userPasswordText2" layoutX="222.0" layoutY="359.0" prefHeight="25.0" prefWidth="248.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;"/>
+            <PasswordField fx:id="userPassWordField1" layoutX="222.0" layoutY="307.0" prefHeight="25.0" prefWidth="248.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+            <PasswordField fx:id="userPassWordField2" layoutX="222.0" layoutY="359.0" prefHeight="25.0" prefWidth="248.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;"/>
             <CheckBox fx:id="checkBox" layoutX="222.0" layoutY="404.0" mnemonicParsing="false" text="show Password" textFill="WHITE" />
             <Button fx:id="update" layoutX="400.0" layoutY="421.0" mnemonicParsing="false" onAction="#updateAction" prefHeight="36.0" prefWidth="133.0" style="-fx-background-radius: 12;" text="Update">
                <font>
