@@ -69,9 +69,9 @@
                   <Font name="Georgia" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="userFullName" layoutX="222.0" layoutY="74.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+            <TextField fx:id="userFullName" layoutX="222.0" layoutY="74.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 1px 0;" />
             <TextField fx:id="userMail" layoutX="222.0" layoutY="123.0" prefHeight="25.0" prefWidth="248.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 1px 0;"/>
-            <ComboBox fx:id="userRole" layoutX="221.0" layoutY="182.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;"/>
+            <ComboBox fx:id="userRole" layoutX="221.0" layoutY="182.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 1px 0;"/>
             <TextField fx:id="userUserName" layoutX="222.0" layoutY="244.0" prefHeight="25.0" prefWidth="248.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 1px 0;" />
             <TextField fx:id="userPasswordText1" layoutX="222.0" layoutY="307.0" prefHeight="25.0" prefWidth="248.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 1px 0;"/>
             <TextField fx:id="userPasswordText2" layoutX="222.0" layoutY="359.0" prefHeight="25.0" prefWidth="248.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 1px 0;"/>
