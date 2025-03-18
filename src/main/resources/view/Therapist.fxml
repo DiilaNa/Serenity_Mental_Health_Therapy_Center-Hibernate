@@ -28,9 +28,10 @@
           <TableColumn fx:id="tableName" prefWidth="151.99996185302734" text="Name" />
             <TableColumn fx:id="tableNic" prefWidth="173.60003662109375" text="NIC" />
             <TableColumn fx:id="tableAddress" prefWidth="169.60006713867188" text="Address" />
-            <TableColumn fx:id="tableMail" prefWidth="185.59991455078125" text="E-mail" />
-            <TableColumn fx:id="tableContact" prefWidth="210.4000244140625" text="Contact no" />
-            <TableColumn fx:id="tableQualifications" prefWidth="273.5999755859375" text="Qualifications" />
+            <TableColumn fx:id="tableMail" prefWidth="172.79998779296875" text="E-mail" />
+            <TableColumn fx:id="tableContact" prefWidth="163.20001220703125" text="Contact no" />
+            <TableColumn fx:id="tableQualifications" prefWidth="164.800048828125" text="Qualifications" />
+            <TableColumn fx:id="tableAvailable" prefWidth="164.7999267578125" text="Availability" />
         </columns>
       </TableView>
       <Line endX="1157.800048828125" endY="-3.0517578125E-5" layoutX="116.0" layoutY="392.0" startX="-100.0" />
@@ -150,5 +151,11 @@
          </font>
       </Label>
       <ComboBox fx:id="docQualificationsCombo" layoutX="969.0" layoutY="411.0" prefHeight="26.0" prefWidth="207.0" promptText="bachelores/masters/doctoral degree" style="-fx-background-color: trasnsparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <ComboBox fx:id="docAvailableCombo" layoutX="969.0" layoutY="466.0" prefHeight="26.0" prefWidth="207.0" style="-fx-background-color: trasnsparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <Label layoutX="825.0" layoutY="469.0" text="Availability">
+         <font>
+            <Font name="Georgia Bold" size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

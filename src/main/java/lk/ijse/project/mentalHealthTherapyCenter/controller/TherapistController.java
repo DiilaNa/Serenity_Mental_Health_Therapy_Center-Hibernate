@@ -18,17 +18,14 @@ import java.util.ResourceBundle;
 
 public class TherapistController implements Initializable {
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        Image image1 = new Image(getClass().getResourceAsStream("/images/doctor.png"));
-        image.setImage(image1);
-    }
-
     @FXML
     private Button delete;
 
     @FXML
     private TextField docAddress;
+
+    @FXML
+    private ComboBox<?> docAvailableCombo;
 
     @FXML
     private TextField docContact;
@@ -62,6 +59,9 @@ public class TherapistController implements Initializable {
 
     @FXML
     private TableColumn<?, ?> tableAddress;
+
+    @FXML
+    private TableColumn<?, ?> tableAvailable;
 
     @FXML
     private TableColumn<?, ?> tableContact;
@@ -109,5 +109,11 @@ public class TherapistController implements Initializable {
 
     }
 
-
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        Image image1 = new Image(getClass().getResourceAsStream("/images/doctor.png"));
+        image.setImage(image1);
+    }
 }
+
+
