@@ -11,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
@@ -27,6 +28,12 @@ public class AppointmentsController implements Initializable {
     private Button addAppointmentBTN;
 
     @FXML
+    private Button addDoctors;
+
+    @FXML
+    private Button addPrograms;
+
+    @FXML
     private AnchorPane appointmentPage;
 
     @FXML
@@ -34,6 +41,9 @@ public class AppointmentsController implements Initializable {
 
     @FXML
     private Label date;
+
+    @FXML
+    private ListView<?> doctorListView;
 
     @FXML
     private ImageView image;
@@ -72,6 +82,9 @@ public class AppointmentsController implements Initializable {
     private ComboBox<?> paymentMethod;
 
     @FXML
+    private ListView<?> programmsListView;
+
+    @FXML
     private Button reset;
 
     @FXML
@@ -79,9 +92,6 @@ public class AppointmentsController implements Initializable {
 
     @FXML
     private Label sessionID;
-
-    @FXML
-    private ListView<?> sessionIDProgrammes;
 
     @FXML
     private TextField sessionNotes;
@@ -98,6 +108,16 @@ public class AppointmentsController implements Initializable {
     }
 
     @FXML
+    void addDoctorsAction(MouseEvent event) {
+
+    }
+
+    @FXML
+    void addProgramsAction(MouseEvent event) {
+
+    }
+
+    @FXML
     void cancelAppointmentBTNAction(ActionEvent event) {
 
     }
@@ -106,19 +126,4 @@ public class AppointmentsController implements Initializable {
     void resetAction(ActionEvent event) {
 
     }
-
 }
-
-
-
-
-
-
-
-
-  /*  @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        Image adminIMage = new Image(getClass().getResourceAsStream("/images/HospitalNew.png"));
-        image.setImage(adminIMage);
-    }
-*/

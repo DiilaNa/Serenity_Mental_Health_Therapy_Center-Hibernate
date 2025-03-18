@@ -178,21 +178,6 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <VBox layoutX="400.0" layoutY="287.0" prefHeight="163.0" prefWidth="128.0">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <children>
-            <Label prefHeight="30.0" prefWidth="129.0" text="Programmes">
-               <font>
-                  <Font name="Georgia" size="20.0" />
-               </font>
-               <padding>
-                  <Insets bottom="12.0" top="12.0" />
-               </padding>
-            </Label>
-         </children>
-      </VBox>
       <Label fx:id="sessionID" layoutX="212.0" layoutY="306.0" prefHeight="28.0" prefWidth="130.0" text="Session ID">
          <font>
             <Font name="Georgia" size="18.0" />
@@ -201,7 +186,7 @@
       <TextField fx:id="sessionTime" layoutX="186.0" layoutY="355.0" prefHeight="26.0" prefWidth="182.0" promptText="00:00:00" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
       <TextField fx:id="sessionNotes" layoutX="186.0" layoutY="401.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
       <DatePicker fx:id="sessionDate" layoutX="186.0" layoutY="444.0" prefHeight="26.0" prefWidth="182.0" />
-      <ListView fx:id="sessionIDProgrammes" layoutX="528.0" layoutY="295.0" prefHeight="212.0" prefWidth="316.0" />
+      <ListView fx:id="programmsListView" layoutX="589.0" layoutY="300.0" prefHeight="102.0" prefWidth="215.0" />
       <Line endX="-93.4000015258789" endY="233.39999389648438" layoutX="115.0" layoutY="288.0" startX="759.3999633789062" startY="233.4000244140625" />
       <Label layoutX="24.0" layoutY="496.0" text="Payment Details">
          <font>
@@ -282,7 +267,7 @@
             <Font name="Impact" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="addAppointmentBTN" layoutX="1000.0" layoutY="83.0" mnemonicParsing="false" onAction="#addAppointmentBTNAction" prefHeight="48.0" prefWidth="206.0" style="-fx-background-radius: 11; -fx-background-color: #4C8C8C;" text="Add Appointments" textFill="WHITE">
+      <Button fx:id="addAppointmentBTN" layoutX="1008.0" layoutY="83.0" mnemonicParsing="false" onAction="#addAppointmentBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 11; -fx-background-color: #4C8C8C;" text="Add Appointments" textFill="WHITE">
          <font>
             <Font name="Georgia Bold" size="15.0" />
          </font>
@@ -297,7 +282,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="cancelAppointmentBTN" layoutX="1000.0" layoutY="179.0" mnemonicParsing="false" onAction="#cancelAppointmentBTNAction" prefHeight="48.0" prefWidth="206.0" style="-fx-background-radius: 11; -fx-background-color: #4C8C8C;" text="Cancel Appointments" textFill="WHITE">
+      <Button fx:id="cancelAppointmentBTN" layoutX="1008.0" layoutY="179.0" mnemonicParsing="false" onAction="#cancelAppointmentBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 11; -fx-background-color: #4C8C8C;" text="Cancel Appointments" textFill="WHITE">
          <font>
             <Font name="Georgia Bold" size="15.0" />
          </font>
@@ -312,7 +297,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="reset" layoutX="1000.0" layoutY="282.0" mnemonicParsing="false" onAction="#resetAction" prefHeight="48.0" prefWidth="206.0" style="-fx-background-radius: 11; -fx-background-color: #4C8C8C;" text="Reset Details" textFill="WHITE">
+      <Button fx:id="reset" layoutX="1008.0" layoutY="282.0" mnemonicParsing="false" onAction="#resetAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 11; -fx-background-color: #4C8C8C;" text="Reset Details" textFill="WHITE">
          <font>
             <Font name="Georgia Bold" size="15.0" />
          </font>
@@ -327,10 +312,21 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ImageView fx:id="image" fitHeight="138.0" fitWidth="130.0" layoutX="1047.0" layoutY="462.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="image" fitHeight="138.0" fitWidth="130.0" layoutX="1038.0" layoutY="531.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../Pictures/Mental%20Hospital/apt.png" />
          </image>
       </ImageView>
+      <ListView fx:id="doctorListView" layoutX="589.0" layoutY="413.0" prefHeight="102.0" prefWidth="215.0" />
+      <Button fx:id="addPrograms" layoutX="406.0" layoutY="306.0" mnemonicParsing="false" onMouseClicked="#addProgramsAction" prefHeight="27.0" prefWidth="152.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;" text="Choose the Programs" textFill="WHITE">
+         <font>
+            <Font name="Impact" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="addDoctors" layoutX="441.0" layoutY="413.0" mnemonicParsing="false" onMouseClicked="#addDoctorsAction" prefHeight="27.0" prefWidth="107.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;" text="Assign Doctors" textFill="WHITE">
+         <font>
+            <Font name="Impact" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
