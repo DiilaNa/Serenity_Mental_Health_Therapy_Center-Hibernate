@@ -12,4 +12,5 @@ public class SessionDTO {
     private String time;
     private String notes;
     private String date;
+    private String status;
 }
