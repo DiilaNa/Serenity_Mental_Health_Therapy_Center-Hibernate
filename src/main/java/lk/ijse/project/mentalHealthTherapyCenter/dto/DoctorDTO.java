@@ -15,7 +15,7 @@ public class DoctorDTO {
     private String doctorEmail;
     private String doctorPhone;
     private String doctorQualifications;
-    private String doctorBirthAvailability;
+    private String doctorAvailability;
 
 
 }
