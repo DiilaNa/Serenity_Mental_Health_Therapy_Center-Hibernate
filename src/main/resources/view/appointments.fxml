@@ -316,11 +316,17 @@
             <Image url="@../../../../../../../Pictures/Mental%20Hospital/apt.png" />
          </image>
       </ImageView>
-      <ListView fx:id="doctorListView" layoutX="603.0" layoutY="304.0" prefHeight="192.0" prefWidth="262.0" />
-      <Button fx:id="addDoctors" layoutX="446.0" layoutY="306.0" mnemonicParsing="false" onMouseClicked="#addDoctorsAction" prefHeight="27.0" prefWidth="107.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;" text="Assign Doctors" textFill="WHITE">
+      <ListView fx:id="doctorListView" layoutX="604.0" layoutY="293.0" prefHeight="95.0" prefWidth="238.0" />
+      <Button fx:id="addDoctors" layoutX="442.0" layoutY="316.0" mnemonicParsing="false" onMouseClicked="#addDoctorsAction" prefHeight="27.0" prefWidth="107.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;" text="Assign Doctors" textFill="WHITE">
          <font>
             <Font name="Impact" size="14.0" />
          </font>
       </Button>
+      <Button fx:id="addPrograms" layoutX="432.0" layoutY="427.0" mnemonicParsing="false" onMouseClicked="#addProgramsAction" prefHeight="27.0" prefWidth="128.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;" text="Choose  Programs" textFill="WHITE">
+         <font>
+            <Font name="Impact" size="14.0" />
+         </font>
+      </Button>
+      <ListView fx:id="programmsListView" layoutX="604.0" layoutY="395.0" prefHeight="111.0" prefWidth="238.0" />
    </children>
 </AnchorPane>

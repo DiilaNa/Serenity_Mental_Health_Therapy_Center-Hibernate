@@ -33,7 +33,15 @@ public class AppointmentsController implements Initializable {
         Image image1 = new Image(getClass().getResourceAsStream("/images/appointmentIcon.png"));
         image.setImage(image1);
         updateDateTime();
+
     }
+
+
+    @FXML
+    private Button addPrograms;
+
+    @FXML
+    private ListView<?> programmsListView;
 
     @FXML
     private Button addAppointmentBTN;
@@ -130,6 +138,12 @@ public class AppointmentsController implements Initializable {
     void resetAction(ActionEvent event) {
 
     }
+
+    @FXML
+    void addProgramsAction(MouseEvent event) throws IOException {
+        loadNewPage("/view/SelectPrograms.fxml");
+    }
+
     private  void  loadNewPage(String fxmlPath) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Scene scene = new Scene(loader.load());
@@ -142,13 +156,14 @@ public class AppointmentsController implements Initializable {
     }
     private void updateDateTime() {
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(1), event -> updateDateTime())
+                new KeyFrame(Duration.seconds(1), event -> {
+                    String currentTime = LocalTime.now().format(timeFormatter);
+                    time.setText(currentTime);
+                    String currentDate = LocalDate.now().format(formatter);
+                    date.setText(currentDate);
+                })
         );
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-        String currentTime = LocalTime.now().format(timeFormatter);
-        time.setText(currentTime);
-        String currentDate = LocalDate.now().format(formatter);
-        date.setText(currentDate);
     }
 }
