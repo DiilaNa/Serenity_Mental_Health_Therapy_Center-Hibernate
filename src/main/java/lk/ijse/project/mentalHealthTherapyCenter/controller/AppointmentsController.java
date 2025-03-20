@@ -1,5 +1,7 @@
 package lk.ijse.project.mentalHealthTherapyCenter.controller;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,9 +18,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class AppointmentsController implements Initializable {
@@ -26,6 +32,7 @@ public class AppointmentsController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Image image1 = new Image(getClass().getResourceAsStream("/images/appointmentIcon.png"));
         image.setImage(image1);
+        updateDateTime();
     }
 
     @FXML
@@ -33,9 +40,6 @@ public class AppointmentsController implements Initializable {
 
     @FXML
     private Button addDoctors;
-
-    @FXML
-    private Button addPrograms;
 
     @FXML
     private AnchorPane appointmentPage;
@@ -86,9 +90,6 @@ public class AppointmentsController implements Initializable {
     private ComboBox<?> paymentMethod;
 
     @FXML
-    private ListView<?> programmsListView;
-
-    @FXML
     private Button reset;
 
     @FXML
@@ -106,9 +107,13 @@ public class AppointmentsController implements Initializable {
     @FXML
     private Label time;
 
+    private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy-");
+
     @FXML
     void addAppointmentBTNAction(ActionEvent event) {
-
+        String paymentDate = LocalDate.now().format(formatter);
+        String paymentTime = LocalTime.now().format(timeFormatter);
     }
 
     @FXML
@@ -134,6 +139,16 @@ public class AppointmentsController implements Initializable {
         stage.setResizable(false);
         stage.setTitle("Doctor Details - Serenity Mental Health Therapy Center");
         stage.show();
-
+    }
+    private void updateDateTime() {
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(1), event -> updateDateTime())
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+        String currentTime = LocalTime.now().format(timeFormatter);
+        time.setText(currentTime);
+        String currentDate = LocalDate.now().format(formatter);
+        date.setText(currentDate);
     }
 }

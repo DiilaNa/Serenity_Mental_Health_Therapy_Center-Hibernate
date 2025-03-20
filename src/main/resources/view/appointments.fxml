@@ -251,7 +251,7 @@
             <Font name="Impact" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="date" layoutX="633.0" layoutY="648.0" prefHeight="36.0" prefWidth="71.0" text="dd/mm/yy">
+      <Label fx:id="date" layoutX="633.0" layoutY="648.0" prefHeight="36.0" prefWidth="114.0" text="dd/mm/yy">
          <font>
             <Font name="Impact" size="16.0" />
          </font>
