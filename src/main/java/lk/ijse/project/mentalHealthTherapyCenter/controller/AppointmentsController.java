@@ -117,11 +117,6 @@ public class AppointmentsController implements Initializable {
     }
 
     @FXML
-    void addProgramsAction(MouseEvent event) throws IOException {
-        loadNewPage("/view/SelectPrograms.fxml");
-    }
-
-    @FXML
     void cancelAppointmentBTNAction(ActionEvent event) {
 
     }
@@ -137,7 +132,7 @@ public class AppointmentsController implements Initializable {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.setTitle("Change Password - Serenity Mental Health Therapy Center");
+        stage.setTitle("Doctor Details - Serenity Mental Health Therapy Center");
         stage.show();
 
     }

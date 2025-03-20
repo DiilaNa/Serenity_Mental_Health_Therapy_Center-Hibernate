@@ -186,7 +186,6 @@
       <TextField fx:id="sessionTime" layoutX="186.0" layoutY="355.0" prefHeight="26.0" prefWidth="182.0" promptText="00:00:00" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
       <TextField fx:id="sessionNotes" layoutX="186.0" layoutY="401.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
       <DatePicker fx:id="sessionDate" layoutX="186.0" layoutY="444.0" prefHeight="26.0" prefWidth="182.0" />
-      <ListView fx:id="programmsListView" layoutX="589.0" layoutY="300.0" prefHeight="102.0" prefWidth="215.0" />
       <Line endX="-93.4000015258789" endY="233.39999389648438" layoutX="115.0" layoutY="288.0" startX="759.3999633789062" startY="233.4000244140625" />
       <Label layoutX="24.0" layoutY="496.0" text="Payment Details">
          <font>
@@ -317,13 +316,8 @@
             <Image url="@../../../../../../../Pictures/Mental%20Hospital/apt.png" />
          </image>
       </ImageView>
-      <ListView fx:id="doctorListView" layoutX="589.0" layoutY="413.0" prefHeight="102.0" prefWidth="215.0" />
-      <Button fx:id="addPrograms" layoutX="406.0" layoutY="306.0" mnemonicParsing="false" onMouseClicked="#addProgramsAction" prefHeight="27.0" prefWidth="152.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;" text="Choose the Programs" textFill="WHITE">
-         <font>
-            <Font name="Impact" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="addDoctors" layoutX="441.0" layoutY="413.0" mnemonicParsing="false" onMouseClicked="#addDoctorsAction" prefHeight="27.0" prefWidth="107.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;" text="Assign Doctors" textFill="WHITE">
+      <ListView fx:id="doctorListView" layoutX="603.0" layoutY="304.0" prefHeight="192.0" prefWidth="262.0" />
+      <Button fx:id="addDoctors" layoutX="446.0" layoutY="306.0" mnemonicParsing="false" onMouseClicked="#addDoctorsAction" prefHeight="27.0" prefWidth="107.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;" text="Assign Doctors" textFill="WHITE">
          <font>
             <Font name="Impact" size="14.0" />
          </font>
