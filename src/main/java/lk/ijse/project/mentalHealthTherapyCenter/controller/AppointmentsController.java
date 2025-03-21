@@ -142,21 +142,20 @@ public class AppointmentsController implements Initializable {
         String sessionDATE = sessionDate.getEditor().getText();
 
         String paymentId = paymentID.getText();
-        Double payAmount = Double.parseDouble(payAMOUNT.getText());
+        Double payAmount = Double.valueOf(payAMOUNT.getText());
         String paymentMETHOD = paymentMethod.getSelectionModel().getSelectedItem();
         String paymentDate = LocalDate.now().format(formatter);
         String paymentTime = LocalTime.now().format(timeFormatter);
-
-        String listDoctors = doctorListView.getSelectionModel().getSelectedItem().toString();
-
         String docID = null;
         String programID = null;
 
+        String listDoctors = doctorListView.getSelectionModel().getSelectedItem().toString();
         if (listDoctors != null) {
             docID = listDoctors.split(" - ")[0];
         } else {
            new Alert(Alert.AlertType.WARNING, "Please select doctor", ButtonType.OK).show();
         }
+
         String listPrograms = programmsListView.getSelectionModel().getSelectedItem().toString();
 
         if (listPrograms != null) {
@@ -190,6 +189,7 @@ public class AppointmentsController implements Initializable {
         }
         if (!isValidPhoneNO) {
             patientTelNO.setStyle(patientTelNO.getStyle() + ";-fx-border-color: red;");
+            System.out.println("Invalid Phone Number");
         }
         if (!isValidDate) {
             patientDOB.setStyle(patientDOB.getStyle() + ";-fx-border-color: red;");
@@ -235,6 +235,7 @@ public class AppointmentsController implements Initializable {
             );
             boolean isSaved = appointmentBO.addAppointment(patientDTO, programDetailsDTO,sessionDTO,therapistDetailsDTO,paymentDTO);
             if (isSaved) {
+                refreshPage();
                 new Alert(Alert.AlertType.CONFIRMATION, "Appointment added", ButtonType.OK).show();
             }else {
                 new Alert(Alert.AlertType.ERROR, "Failed! Appointment not added", ButtonType.OK).show();
