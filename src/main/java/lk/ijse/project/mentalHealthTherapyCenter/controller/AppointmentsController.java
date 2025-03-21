@@ -2,6 +2,7 @@ package lk.ijse.project.mentalHealthTherapyCenter.controller;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.*;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.AppointmentBO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.BOType;
@@ -31,7 +33,12 @@ public class AppointmentsController implements Initializable {
         Image image1 = new Image(getClass().getResourceAsStream("/images/appointmentIcon.png"));
         image.setImage(image1);
         updateDateTime();
-
+        try{
+            refreshPage();
+        }catch(Exception e){
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR,"Failed to load the Page",ButtonType.CLOSE).show();
+        }
     }
 
 
@@ -141,7 +148,22 @@ public class AppointmentsController implements Initializable {
         String paymentTime = LocalTime.now().format(timeFormatter);
 
         String listDoctors = doctorListView.getSelectionModel().getSelectedItem().toString();
+
+        String docID = null;
+        String programID = null;
+
+        if (listDoctors != null) {
+            docID = listDoctors.split(" - ")[0];
+        } else {
+           new Alert(Alert.AlertType.WARNING, "Please select doctor", ButtonType.OK).show();
+        }
         String listPrograms = programmsListView.getSelectionModel().getSelectedItem().toString();
+
+        if (listPrograms != null) {
+            programID = listPrograms.split("-")[0];
+        }else {
+            new Alert(Alert.AlertType.WARNING, "Please select program", ButtonType.OK).show();
+        }
 
         String namePattern = "^[a-zA-Z ]+$";
         String addressPattern = "^[a-zA-Z0-9, -]+$";
@@ -177,7 +199,41 @@ public class AppointmentsController implements Initializable {
         }
 
         if (isValidName && isValidAddress && isValidMail && isValidPhoneNO && isValidDate && isValidTime) {
-            boolean isSaved = appointmentBO.addAppointment();
+            PatientDTO patientDTO = new PatientDTO(
+                patientId,
+                patientNAME,
+                birthDate,
+                patientNic,
+                patientGENDER,
+                patientADDRESS,
+                patientPHONE,
+                patientEmail
+            );
+            ProgramDetailsDTO programDetailsDTO = new ProgramDetailsDTO(
+                patientId,
+                programID
+
+            );
+            SessionDTO sessionDTO = new SessionDTO(
+                    sessionId,
+                    patientId,
+                    paymentId,
+                    sessionTIME,
+                    sessionNOTES,
+                    sessionDATE
+            );
+            TherapistDetailsDTO therapistDetailsDTO = new TherapistDetailsDTO(
+                    sessionId,
+                    docID
+            );
+            PaymentDTO paymentDTO = new PaymentDTO(
+                    paymentId,
+                    payAmount,
+                    paymentMETHOD,
+                    paymentDate,
+                    paymentTime
+            );
+            boolean isSaved = appointmentBO.addAppointment(patientDTO, programDetailsDTO,sessionDTO,therapistDetailsDTO,paymentDTO);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Appointment added", ButtonType.OK).show();
             }else {
@@ -198,7 +254,7 @@ public class AppointmentsController implements Initializable {
 
     @FXML
     void resetAction(ActionEvent event) {
-
+        refreshPage();
     }
 
     @FXML
@@ -227,5 +283,35 @@ public class AppointmentsController implements Initializable {
         );
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+    }
+    private void refreshPage(){
+        generateNextAppointmentID();
+        generateNextPatientID();
+        generateNextPaymentID();
+        patientGender.setItems(FXCollections.observableArrayList("Male", "Female"));
+        paymentMethod.setItems(FXCollections.observableArrayList("Card Payment", "Cash Payment"));
+        patientName.clear();
+        patientAddress.clear();
+        patientEMAIL.clear();
+        patientTelNO.clear();
+        patientDOB.clear();
+        sessionTime.clear();
+        sessionNotes.clear();
+        payAMOUNT.clear();
+        doctorListView.refresh();
+        programmsListView.refresh();
+
+    }
+    private void generateNextAppointmentID() {
+        String nextAptID =appointmentBO.getNextSessionID();
+        sessionID.setText(nextAptID);
+    }
+    private void generateNextPatientID() {
+        String nextPatientId = appointmentBO.getNextPatientID();
+        patientID.setText(nextPatientId);
+    }
+    private void generateNextPaymentID() {
+        String nextPaymentID = appointmentBO.getNextPaymentID();
+        paymentID.setText(nextPaymentID);
     }
 }
