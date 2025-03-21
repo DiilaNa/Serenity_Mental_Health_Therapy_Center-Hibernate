@@ -7,18 +7,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.ijse.project.mentalHealthTherapyCenter.service.custom.AppointmentBO;
+import lk.ijse.project.mentalHealthTherapyCenter.service.custom.BOFactory;
+import lk.ijse.project.mentalHealthTherapyCenter.service.custom.BOType;
 
 import java.io.IOException;
 import java.net.URL;
@@ -74,7 +72,7 @@ public class AppointmentsController implements Initializable {
     private TextField patientEMAIL;
 
     @FXML
-    private ComboBox<?> patientGender;
+    private ComboBox<String> patientGender;
 
     @FXML
     private Label patientID;
@@ -95,7 +93,7 @@ public class AppointmentsController implements Initializable {
     private Label paymentID;
 
     @FXML
-    private ComboBox<?> paymentMethod;
+    private ComboBox<String> paymentMethod;
 
     @FXML
     private Button reset;
@@ -118,10 +116,74 @@ public class AppointmentsController implements Initializable {
     private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy-");
 
+    AppointmentBO appointmentBO = BOFactory.getInstance().getBO(BOType.APPOINTMENT);
+
     @FXML
     void addAppointmentBTNAction(ActionEvent event) {
+        String patientId = patientID.getText();
+        String patientNAME = patientName.getText();
+        String birthDate = patientDOB.getText();
+        String patientNic = patientNIC.getText();
+        String patientGENDER = patientGender.getSelectionModel().getSelectedItem();
+        String patientADDRESS = patientAddress.getText();
+        String patientPHONE = patientTelNO.getText();
+        String patientEmail = patientEMAIL.getText();
+
+        String sessionId = sessionID.getText();
+        String sessionTIME =  sessionTime.getText();
+        String sessionNOTES = sessionNotes.getText();
+        String sessionDATE = sessionDate.getEditor().getText();
+
+        String paymentId = paymentID.getText();
+        Double payAmount = Double.parseDouble(payAMOUNT.getText());
+        String paymentMETHOD = paymentMethod.getSelectionModel().getSelectedItem();
         String paymentDate = LocalDate.now().format(formatter);
         String paymentTime = LocalTime.now().format(timeFormatter);
+
+        String listDoctors = doctorListView.getSelectionModel().getSelectedItem().toString();
+        String listPrograms = programmsListView.getSelectionModel().getSelectedItem().toString();
+
+        String namePattern = "^[a-zA-Z ]+$";
+        String addressPattern = "^[a-zA-Z0-9, -]+$";
+        String mailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        String PhoneNoPattern = "^\\+?[1-9]\\d{0,2}[-.\\s]?\\d{1,4}[-.\\s]?\\d{3,4}[-.\\s]?\\d{3,4}$";
+        String datePattern = "^(0[1-9]|[12]\\d|3[01])[-/.](0[1-9]|1[0-2])[-/.](19|20)\\d\\d$";
+        String timePattern = "^(?:[01]\\d|2[0-3]):[0-5]\\d(:[0-5]\\d)?$";
+
+        boolean isValidName = patientNAME.matches(namePattern);
+        boolean isValidAddress = patientADDRESS.matches(addressPattern);
+        boolean isValidMail = patientEmail.matches(mailPattern);
+        boolean isValidPhoneNO = patientPHONE.matches(PhoneNoPattern);
+        boolean isValidDate = birthDate.matches(datePattern);
+        boolean isValidTime = sessionTIME.matches(timePattern);
+
+        if (!isValidName) {
+            patientName.setStyle(patientName.getStyle() + ";-fx-border-color: red;");
+        }
+        if (!isValidAddress) {
+            patientAddress.setStyle(patientAddress.getStyle() + ";-fx-border-color: red;");
+        }
+        if (!isValidMail) {
+            patientEMAIL.setStyle(patientEMAIL.getStyle() + ";-fx-border-color: red;");
+        }
+        if (!isValidPhoneNO) {
+            patientTelNO.setStyle(patientTelNO.getStyle() + ";-fx-border-color: red;");
+        }
+        if (!isValidDate) {
+            patientDOB.setStyle(patientDOB.getStyle() + ";-fx-border-color: red;");
+        }
+        if (!isValidTime) {
+            sessionTime.setStyle(sessionTime.getStyle() + ";-fx-border-color: red;");
+        }
+
+        if (isValidName && isValidAddress && isValidMail && isValidPhoneNO && isValidDate && isValidTime) {
+            boolean isSaved = appointmentBO.addAppointment();
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Appointment added", ButtonType.OK).show();
+            }else {
+                new Alert(Alert.AlertType.ERROR, "Failed! Appointment not added", ButtonType.OK).show();
+            }
+        }
     }
 
     @FXML

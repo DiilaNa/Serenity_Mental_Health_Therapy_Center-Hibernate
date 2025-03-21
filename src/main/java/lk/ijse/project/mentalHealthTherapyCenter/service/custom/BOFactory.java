@@ -1,6 +1,7 @@
 package lk.ijse.project.mentalHealthTherapyCenter.service.custom;
 
 import lk.ijse.project.mentalHealthTherapyCenter.service.SuperBO;
+import lk.ijse.project.mentalHealthTherapyCenter.service.custom.impl.AppointmentBOImpl;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.impl.UserBOImpl;
 
 public class BOFactory {
@@ -17,6 +18,7 @@ public class BOFactory {
     public <T extends SuperBO>T getBO(BOType type) {
         return switch (type) {
             case USER -> (T) new UserBOImpl();
+            case APPOINTMENT -> (T) new AppointmentBOImpl();
         };
     }
 
