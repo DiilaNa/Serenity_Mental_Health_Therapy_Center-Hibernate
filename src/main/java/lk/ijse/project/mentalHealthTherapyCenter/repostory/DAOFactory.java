@@ -1,6 +1,5 @@
-package lk.ijse.project.mentalHealthTherapyCenter.repostory.custom;
+package lk.ijse.project.mentalHealthTherapyCenter.repostory;
 
-import lk.ijse.project.mentalHealthTherapyCenter.repostory.SuperDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.impl.PatientDAOImpl;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.impl.UserDAOImpl;
 

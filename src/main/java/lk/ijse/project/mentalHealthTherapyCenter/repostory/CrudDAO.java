@@ -9,4 +9,5 @@ import java.util.ArrayList;
 public interface CrudDAO<T> extends SuperDAO{
     boolean update(T dto) throws SQLException, ClassNotFoundException;
     ArrayList<T> getAll() throws Exception;
+    boolean delete(String pk) throws SQLException, ClassNotFoundException;
 }

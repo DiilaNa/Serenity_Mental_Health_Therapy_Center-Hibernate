@@ -1,6 +1,5 @@
-package lk.ijse.project.mentalHealthTherapyCenter.service.custom;
+package lk.ijse.project.mentalHealthTherapyCenter.service;
 
-import lk.ijse.project.mentalHealthTherapyCenter.service.SuperBO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.impl.AppointmentBOImpl;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.impl.PatientBOImpl;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.impl.UserBOImpl;

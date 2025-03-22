@@ -11,10 +11,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.PatientDTO;
-import lk.ijse.project.mentalHealthTherapyCenter.dto.PaymentDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.PatientTM;
-import lk.ijse.project.mentalHealthTherapyCenter.service.custom.BOFactory;
-import lk.ijse.project.mentalHealthTherapyCenter.service.custom.BOType;
+import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
+import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.PatientBO;
 
 import java.net.URL;
@@ -107,8 +106,14 @@ public class PatientController implements Initializable {
     PatientBO patientBO = BOFactory.getInstance().getBO(BOType.PATIENT);
 
     @FXML
-    void deleteAction(ActionEvent event) {
-
+    void deleteAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+        String patientID = loadPatientID.getText();
+        boolean isDeleted = patientBO.deletePatient(patientID);
+        if (isDeleted) {
+            new Alert(Alert.AlertType.INFORMATION, "Deleted Successfully").show();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Deletion Failed").show();
+        }
     }
 
     @FXML
@@ -153,7 +158,7 @@ public class PatientController implements Initializable {
 
        boolean isUpdated = patientBO.updatePatient(patientDTO);
             if (isUpdated) {
-                new Alert(Alert.AlertType.CONFIRMATION, "PatientDAOImpl updated successfully").show();
+                new Alert(Alert.AlertType.INFORMATION, "PatientDAOImpl updated successfully").show();
             }else {
                 new Alert(Alert.AlertType.ERROR, "PatientDAOImpl updated Failed").show();
             }

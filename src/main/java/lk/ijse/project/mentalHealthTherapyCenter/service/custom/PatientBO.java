@@ -9,4 +9,5 @@ import java.util.ArrayList;
 public interface PatientBO extends SuperBO {
     boolean updatePatient(PatientDTO patientDTO) throws SQLException, ClassNotFoundException;
     ArrayList<PatientDTO> getALL() throws Exception;
+    boolean deletePatient(String patientID) throws SQLException, ClassNotFoundException;
 }

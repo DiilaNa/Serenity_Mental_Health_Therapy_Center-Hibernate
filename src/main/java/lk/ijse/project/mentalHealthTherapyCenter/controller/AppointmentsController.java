@@ -17,8 +17,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.*;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.AppointmentBO;
-import lk.ijse.project.mentalHealthTherapyCenter.service.custom.BOFactory;
-import lk.ijse.project.mentalHealthTherapyCenter.service.custom.BOType;
+import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
+import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 
 import java.io.IOException;
 import java.net.URL;
@@ -236,7 +236,7 @@ public class AppointmentsController implements Initializable {
             boolean isSaved = appointmentBO.addAppointment(patientDTO, programDetailsDTO,sessionDTO,therapistDetailsDTO,paymentDTO);
             if (isSaved) {
                 refreshPage();
-                new Alert(Alert.AlertType.CONFIRMATION, "Appointment added", ButtonType.OK).show();
+                new Alert(Alert.AlertType.INFORMATION, "Appointment added", ButtonType.OK).show();
             }else {
                 new Alert(Alert.AlertType.ERROR, "Failed! Appointment not added", ButtonType.OK).show();
             }

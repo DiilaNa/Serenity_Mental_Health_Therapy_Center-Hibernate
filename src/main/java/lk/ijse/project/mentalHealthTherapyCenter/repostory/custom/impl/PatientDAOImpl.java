@@ -20,4 +20,9 @@ public class PatientDAOImpl implements PatientDAO {
             return patients;
 
     }
+
+    @Override
+    public boolean delete(String pk) throws SQLException, ClassNotFoundException {
+        return true;
+    }
 }
