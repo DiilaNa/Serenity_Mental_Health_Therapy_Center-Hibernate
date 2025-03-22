@@ -11,7 +11,6 @@ public class UserBOImpl implements UserBO {
     UserDAO userDAO = DAOFactory.getInstance().getDAO(DAOType.USER);
     @Override
     public boolean saveUser(UserDTO userDTO) {
-        System.out.println("User Saved");
         return true;
     }
 

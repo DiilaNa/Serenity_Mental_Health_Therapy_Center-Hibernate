@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
@@ -14,7 +15,7 @@
 
 <AnchorPane prefHeight="703.0" prefWidth="1290.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalHealthTherapyCenter.controller.PatientController">
    <children>
-      <TableView fx:id="table" layoutX="7.0" layoutY="14.0" onMouseClicked="#tableAction" prefHeight="505.0" prefWidth="1278.0">
+      <TableView fx:id="table" layoutX="7.0" layoutY="14.0" onMouseClicked="#tableAction" prefHeight="455.0" prefWidth="1278.0">
         <columns>
           <TableColumn fx:id="tablePId" prefWidth="114.3999605178833" text="ID" />
           <TableColumn fx:id="tablePName" minWidth="0.0" prefWidth="172.80006408691406" text="Name" />
@@ -26,7 +27,7 @@
             <TableColumn fx:id="tablePEmail" prefWidth="186.400146484375" text="E-mail" />
         </columns>
       </TableView>
-      <Button fx:id="update" layoutX="68.0" layoutY="550.0" mnemonicParsing="false" onAction="#updateAction" prefHeight="48.0" prefWidth="199.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="Update Patient" textFill="WHITE">
+      <Button fx:id="update" layoutX="31.0" layoutY="490.0" mnemonicParsing="false" onAction="#updateAction" prefHeight="42.0" prefWidth="187.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="Update Patient" textFill="WHITE">
          <font>
             <Font name="Impact" size="22.0" />
          </font>
@@ -41,7 +42,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="delete" layoutX="317.0" layoutY="550.0" mnemonicParsing="false" onAction="#deleteAction" prefHeight="48.0" prefWidth="199.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="Delete Patient" textFill="WHITE">
+      <Button fx:id="delete" layoutX="31.0" layoutY="569.0" mnemonicParsing="false" onAction="#deleteAction" prefHeight="38.0" prefWidth="187.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="Delete Patient" textFill="WHITE">
          <font>
             <Font name="Impact" size="22.0" />
          </font>
@@ -66,5 +67,17 @@
             <Image url="@../../../../../../../Pictures/Mental%20Hospital/icons8-patient-50.png" />
          </image>
       </ImageView>
+      <Label fx:id="loadPatientID" layoutX="296.0" layoutY="502.0" text="Patient ID">
+         <font>
+            <Font name="Georgia Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="PName" layoutX="296.0" layoutY="556.0" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="PDateOfBirth" layoutX="499.0" layoutY="498.0" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="PatientNic" layoutX="499.0" layoutY="556.0" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="PatientGender" layoutX="710.0" layoutY="498.0" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="PatientAddress" layoutX="717.0" layoutY="556.0" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="PatientContactNO" layoutX="947.0" layoutY="498.0" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="PatientEmail" layoutX="947.0" layoutY="556.0" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
    </children>
 </AnchorPane>

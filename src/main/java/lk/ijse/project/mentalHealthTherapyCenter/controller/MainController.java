@@ -102,7 +102,7 @@ public class MainController implements Initializable {
     @FXML
     void patientsAction(MouseEvent event) {
         navigateTo("/view/patient.fxml");
-        dashBoardFrom.setText("Patient Details Form");
+        dashBoardFrom.setText("PatientDAOImpl Details Form");
 
     }
 
