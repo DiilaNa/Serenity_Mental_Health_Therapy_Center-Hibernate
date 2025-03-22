@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.DoctorDTO;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.PatientTM;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.PaymentTM;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.TherapistTM;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
@@ -57,7 +58,7 @@ public class TherapistController  implements Initializable {
     private ImageView image;
 
     @FXML
-    private ListView<?> programmsListView;
+    private ListView<String> programmsListView;
 
     @FXML
     private Button reset;
@@ -99,7 +100,23 @@ public class TherapistController  implements Initializable {
 
     @FXML
     void TableAction(MouseEvent event) {
+        TherapistTM selectedPatient = table.getSelectionModel().getSelectedItem();
 
+        if (selectedPatient != null) {
+            docIDlabel.setText(selectedPatient.getDoctorID());
+            docName.setText(selectedPatient.getDoctorName());
+            // Load data into ListView
+            ObservableList<String> programDetails = FXCollections.observableArrayList();
+            programDetails.add(selectedPatient.getProgramID() + " - " + selectedPatient.getProgramName());
+
+            programmsListView.setItems(programDetails); // Correct way to load ListView
+
+            docQualificationsCombo.setValue(selectedPatient.getDoctorQualifications());
+            docAvailableCombo.setValue(selectedPatient.getDoctorAvailability());
+            docContact.setText(selectedPatient.getDoctorPhone());
+            docMail.setText(selectedPatient.getDoctorEmail());
+
+        }
     }
 
     @FXML
