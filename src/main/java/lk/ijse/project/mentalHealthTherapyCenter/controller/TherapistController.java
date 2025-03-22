@@ -13,6 +13,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.DoctorDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.TherapistTM;
+import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
+import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
+import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TherapistBO;
 
 import java.io.IOException;
 import java.net.URL;
@@ -86,6 +89,8 @@ public class TherapistController  implements Initializable {
     @FXML
     private Button update;
 
+    TherapistBO therapistBO = BOFactory.getInstance().getBO(BOType.THERAPIST);
+
     @FXML
     void TableAction(MouseEvent event) {
 
@@ -152,6 +157,12 @@ public class TherapistController  implements Initializable {
                     DocPhone,
                     DocMail
             );
+            boolean isSaved = therapistBO.saveTherapist(doctorDTO);
+            if (isSaved) {
+                new Alert(Alert.AlertType.INFORMATION,"Therapist Saved",ButtonType.OK).show();
+            }else{
+                new Alert(Alert.AlertType.ERROR,"Saving Failed",ButtonType.OK).show();
+            }
         }
     }
 
