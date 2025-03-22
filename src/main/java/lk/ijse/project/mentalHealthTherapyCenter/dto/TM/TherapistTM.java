@@ -1,13 +1,15 @@
-package lk.ijse.project.mentalHealthTherapyCenter.dto;
+package lk.ijse.project.mentalHealthTherapyCenter.dto.TM;
 
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class DoctorDTO {
+@AllArgsConstructor
+public class TherapistTM {
+    @Id
     private String doctorID;
     private String doctorName;
     private String programID;
@@ -16,6 +18,4 @@ public class DoctorDTO {
     private String doctorAvailability;
     private String doctorPhone;
     private String doctorEmail;
-
-
 }
