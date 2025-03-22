@@ -228,6 +228,7 @@ public class AppointmentsController implements Initializable {
             );
             PaymentDTO paymentDTO = new PaymentDTO(
                     paymentId,
+                    patientNAME,
                     payAmount,
                     paymentMETHOD,
                     paymentDate,
