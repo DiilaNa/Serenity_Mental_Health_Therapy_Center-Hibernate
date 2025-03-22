@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface CrudDAO<T> extends SuperDAO{
-    boolean update(T dto) throws SQLException, ClassNotFoundException;
+    boolean save(T t) throws SQLException;
+    boolean update(T t) throws SQLException, ClassNotFoundException;
     ArrayList<T> getAll() throws Exception;
     boolean delete(String pk) throws SQLException, ClassNotFoundException;
 }

@@ -10,6 +10,11 @@ import java.util.ArrayList;
 public class PatientDAOImpl implements PatientDAO {
 
     @Override
+    public boolean save(Patient patient) throws SQLException {
+        return false;
+    }
+
+    @Override
     public boolean update(Patient patient) throws SQLException, ClassNotFoundException {
        return true;
     }

@@ -8,6 +8,11 @@ import java.util.ArrayList;
 
 public class PaymentDAOImpl implements PaymentDAO {
     @Override
+    public boolean save(Payment payment) throws SQLException {
+        return false;
+    }
+
+    @Override
     public boolean update(Payment dto) throws SQLException, ClassNotFoundException {
         return false;
     }
