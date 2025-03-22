@@ -168,6 +168,57 @@ public class TherapistController  implements Initializable {
 
     @FXML
     void updateBtnAction(ActionEvent event) {
+        String DoctorID = docIDlabel.getText();
+        String DocName = docName.getText();
+        String PatientId = null;
+        String PatientName = null;
+        String DocQualifications = docQualificationsCombo.getSelectionModel().getSelectedItem().toString();
+        String DocAvailability = docAvailableCombo.getSelectionModel().getSelectedItem().toString();
+        String DocPhone = docContact.getText();
+        String DocMail = docMail.getText();
+
+        String listPrograms = programmsListView.getSelectionModel().getSelectedItem().toString();
+        if (listPrograms != null) {
+            PatientId = listPrograms.split("-")[0];
+            PatientName = listPrograms.split("-")[1];
+        }
+
+        String namePattern = "^[a-zA-Z ]+$";
+        String mailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        String PhoneNoPattern = "^\\+?[1-9]\\d{0,2}[-.\\s]?\\d{1,4}[-.\\s]?\\d{3,4}[-.\\s]?\\d{3,4}$";
+
+
+        boolean isValidName = DocName.matches(namePattern);
+        boolean isValidMail = DocMail.matches(mailPattern);
+        boolean isValidPhoneNO = DocPhone.matches(PhoneNoPattern);
+
+        if (!isValidName) {
+            docName.setStyle(docName.getStyle() + ";-fx-border-color: red;");
+        }
+        if (!isValidMail) {
+            docMail.setStyle(docMail.getStyle() + ";-fx-border-color: red;");
+        }
+        if (!isValidPhoneNO) {
+            docContact.setStyle(docContact.getStyle() + ";-fx-border-color: red;");
+        }
+        if (!isValidName && !isValidMail && !isValidPhoneNO) {
+            DoctorDTO doctorDTO = new DoctorDTO(
+                    DoctorID,
+                    DocName,
+                    PatientId,
+                    PatientName,
+                    DocQualifications,
+                    DocAvailability,
+                    DocPhone,
+                    DocMail
+            );
+            boolean isSaved = therapistBO.updateTherapist(doctorDTO);
+            if (isSaved) {
+                new Alert(Alert.AlertType.INFORMATION,"Therapist Updated",ButtonType.OK).show();
+            }else{
+                new Alert(Alert.AlertType.ERROR,"Updating Failed",ButtonType.OK).show();
+            }
+        }
 
     }
 

@@ -5,4 +5,5 @@ import lk.ijse.project.mentalHealthTherapyCenter.service.SuperBO;
 
 public interface TherapistBO extends SuperBO {
     boolean saveTherapist(DoctorDTO doctorDTO);
+    boolean updateTherapist(DoctorDTO doctorDTO);
 }

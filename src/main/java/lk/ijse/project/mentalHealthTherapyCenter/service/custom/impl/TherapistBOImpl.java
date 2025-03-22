@@ -12,4 +12,9 @@ public class TherapistBOImpl implements TherapistBO {
     public boolean saveTherapist(DoctorDTO doctorDTO) {
         return true;
     }
+
+    @Override
+    public boolean updateTherapist(DoctorDTO doctorDTO) {
+        return true;
+    }
 }
