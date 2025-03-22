@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TherapistTM {
-    @Id
     private String doctorID;
     private String doctorName;
     private String programID;
