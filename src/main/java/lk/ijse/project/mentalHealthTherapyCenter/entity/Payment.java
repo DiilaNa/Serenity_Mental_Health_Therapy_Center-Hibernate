@@ -1,5 +1,6 @@
-package lk.ijse.project.mentalHealthTherapyCenter.dto.TM;
+package lk.ijse.project.mentalHealthTherapyCenter.entity;
 
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,7 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PaymentTM {
+public class Payment {
+    @Id
     private  String paymentID;
     private  String patientName;
     private  Double paymentAmount;

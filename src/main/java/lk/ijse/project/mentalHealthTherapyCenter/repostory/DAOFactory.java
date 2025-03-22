@@ -1,6 +1,7 @@
 package lk.ijse.project.mentalHealthTherapyCenter.repostory;
 
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.impl.PatientDAOImpl;
+import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.impl.PaymentDAOImpl;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.impl.UserDAOImpl;
 
 public class DAOFactory {
@@ -18,6 +19,7 @@ public class DAOFactory {
         return switch (daoType) {
             case USER ->(T) new UserDAOImpl();
             case PATIENT -> (T) new PatientDAOImpl();
+            case PAYMENT -> (T) new PaymentDAOImpl();
         };
     }
 }
