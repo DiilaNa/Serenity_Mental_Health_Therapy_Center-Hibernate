@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -25,6 +26,11 @@ public class TherapyProgramsController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Image adminIMage = new Image(getClass().getResourceAsStream("/images/TherapyPrograms.png"));
         image.setImage(adminIMage);
+
+        tableIID.setCellValueFactory(new PropertyValueFactory<>("therapyID"));
+        tableName.setCellValueFactory(new PropertyValueFactory<>("therapyName"));
+        tableProgramDetails.setCellValueFactory(new PropertyValueFactory<>("therapyDescription"));
+        tableFee.setCellValueFactory(new PropertyValueFactory<>("therapyFee"));
 
         try{
             loadTable();
@@ -83,6 +89,7 @@ public class TherapyProgramsController implements Initializable {
         String programID = labelLoadID.getText();
         boolean isDeleted = tProgramBO.deleteTProgram(programID);
         if (isDeleted) {
+            refreshPage();
             new Alert(Alert.AlertType.INFORMATION, "Programs Deleted").show();
         }else {
             new Alert(Alert.AlertType.ERROR, "Programs Not Deleted").show();
@@ -92,7 +99,7 @@ public class TherapyProgramsController implements Initializable {
 
     @FXML
     void resetBtnAction(ActionEvent event) {
-
+        refreshPage();
     }
 
     @FXML
@@ -112,6 +119,7 @@ public class TherapyProgramsController implements Initializable {
 
         if (isSaved) {
             new Alert(Alert.AlertType.INFORMATION, "Therapy Program Saved").show();
+            refreshPage();
         }else {
             new Alert(Alert.AlertType.ERROR, "Therapy Program Not Saved").show();
         }
@@ -119,6 +127,15 @@ public class TherapyProgramsController implements Initializable {
 
     @FXML
     void tableAction(MouseEvent event) {
+        TProgramTM selectedPatient = Table.getSelectionModel().getSelectedItem();
+
+        if (selectedPatient != null) {
+            tableIID.setText(selectedPatient.getTherapyID());
+            tableName.setText(selectedPatient.getTherapyName());
+            tableProgramDetails.setText(selectedPatient.getTherapyDescription());
+            tableFee.setText(String.valueOf(selectedPatient.getTherapyFee()));
+
+        }
 
     }
 
@@ -139,6 +156,7 @@ public class TherapyProgramsController implements Initializable {
 
         if (isUpdated) {
             new Alert(Alert.AlertType.INFORMATION, "Therapy Programs updated successfully").show();
+            refreshPage();
         }else {
             new Alert(Alert.AlertType.ERROR, "Therapy Programs updating Failed").show();
         }
@@ -156,6 +174,11 @@ public class TherapyProgramsController implements Initializable {
             therapistTMS.add(therapistTM);
         }
         Table.setItems(therapistTMS);
+    }
+    private void refreshPage(){
+        ProgramName.clear();
+        ProgramDetails.clear();
+        ProgramFee.clear();
     }
 }
 
