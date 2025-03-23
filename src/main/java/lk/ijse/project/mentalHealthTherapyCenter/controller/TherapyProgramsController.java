@@ -128,14 +128,12 @@ public class TherapyProgramsController implements Initializable {
     @FXML
     void tableAction(MouseEvent event) {
         TProgramTM selectedPatient = Table.getSelectionModel().getSelectedItem();
-
         if (selectedPatient != null) {
             labelLoadID.setText(selectedPatient.getTherapyID());
             ProgramName.setText(selectedPatient.getTherapyName());
             ProgramDetails.setText(selectedPatient.getTherapyDescription());
             ProgramFee.setText(String.valueOf(selectedPatient.getTherapyFee()));
         }
-
     }
 
     @FXML

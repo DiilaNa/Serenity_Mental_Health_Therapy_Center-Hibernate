@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="524.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalHealthTherapyCenter.controller.SelectProgramsController">
+<AnchorPane prefHeight="524.0" prefWidth="800.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalHealthTherapyCenter.controller.SelectProgramsController">
    <children>
-      <TableView fx:id="Table" layoutX="3.0" onMouseClicked="#tableAction" prefHeight="446.0" prefWidth="794.0">
+      <TableView fx:id="Table" layoutX="3.0" onMouseClicked="#tableAction" prefHeight="446.0" prefWidth="794.0" style="-fx-border-width: 0 0 2px 0;">
          <columns>
             <TableColumn fx:id="tableIID" prefWidth="113.59999656677246" text="ID" />
             <TableColumn fx:id="tableName" prefWidth="240.80001831054688" text="Name" />

@@ -1,17 +1,41 @@
 package lk.ijse.project.mentalHealthTherapyCenter.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.TProgramTM;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.TherapyProgramDTO;
+import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
+import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
+import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TProgramBO;
 
-public class SelectProgramsController {
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+
+public class SelectProgramsController implements Initializable {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        tableIID.setCellValueFactory(new PropertyValueFactory<>("therapyID"));
+        tableName.setCellValueFactory(new PropertyValueFactory<>("therapyName"));
+        tableProgramDetails.setCellValueFactory(new PropertyValueFactory<>("therapyDescription"));
+        tableFee.setCellValueFactory(new PropertyValueFactory<>("therapyFee"));
+
+        try {
+            loadTable();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Failed to Load Page", ButtonType.OK).show();
+        }
+    }
 
     @FXML
-    private TableView<?> Table;
+    private TableView<TProgramTM> Table;
 
     @FXML
     private Label idLabel;
@@ -23,16 +47,18 @@ public class SelectProgramsController {
     private Button select;
 
     @FXML
-    private TableColumn<?, ?> tableFee;
+    private TableColumn<TProgramTM, Double> tableFee;
 
     @FXML
-    private TableColumn<?, ?> tableIID;
+    private TableColumn<TProgramTM, String> tableIID;
 
     @FXML
-    private TableColumn<?, ?> tableName;
+    private TableColumn<TProgramTM, String> tableName;
 
     @FXML
-    private TableColumn<?, ?> tableProgramDetails;
+    private TableColumn<TProgramTM, String> tableProgramDetails;
+
+    TProgramBO tProgramBO = BOFactory.getInstance().getBO(BOType.THERAPY_PROGRAMS);
 
     @FXML
     void selectBtnAction(ActionEvent event) {
@@ -41,7 +67,26 @@ public class SelectProgramsController {
 
     @FXML
     void tableAction(MouseEvent event) {
+        TProgramTM selectedPatient = Table.getSelectionModel().getSelectedItem();
+
+        if (selectedPatient != null) {
+            idLabel.setText(selectedPatient.getTherapyID());
+            nameLabel.setText(selectedPatient.getTherapyName());
+        }
 
     }
-
+    private void loadTable() throws Exception {
+        List<TherapyProgramDTO> therapyProgramDTOS =  tProgramBO.getALLTPrograms();
+        ObservableList<TProgramTM> tProgramTMS = FXCollections.observableArrayList();
+        for (TherapyProgramDTO therapyProgramDTO : therapyProgramDTOS) {
+            TProgramTM tProgramTM = new TProgramTM(
+                    therapyProgramDTO.getTherapyID(),
+                    therapyProgramDTO.getTherapyName(),
+                    therapyProgramDTO.getTherapyDescription(),
+                    therapyProgramDTO.getTherapyFee()
+            );
+            tProgramTMS.add(tProgramTM);
+        }
+        Table.setItems(tProgramTMS);
+    }
 }

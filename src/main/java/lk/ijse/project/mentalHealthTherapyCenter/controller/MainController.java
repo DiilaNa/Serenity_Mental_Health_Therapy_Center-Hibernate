@@ -163,6 +163,7 @@ public class MainController implements Initializable {
         currentStage.close();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
         Stage stage = new Stage();
+        scene.getStylesheets().add(getClass().getResource("/css/h.css").toExternalForm());
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("The Serenity Mental Health Therapy Center");
