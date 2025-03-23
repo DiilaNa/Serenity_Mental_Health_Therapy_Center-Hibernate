@@ -3,6 +3,7 @@ package lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.impl;
 import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.Therapist;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.TherapistDAO;
+import lk.ijse.project.mentalHealthTherapyCenter.service.exeception.NotFoundException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -39,7 +40,6 @@ public class TherapistDAOImpl implements TherapistDAO {
     public boolean update(Therapist therapist)  {
         Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();
-
         try {
             session.merge(therapist);
             transaction.commit();
@@ -60,8 +60,25 @@ public class TherapistDAOImpl implements TherapistDAO {
     }
 
     @Override
-    public boolean deleteByPk(String pk) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean deleteByPk(String pk)  {
+        Session session = factoryConfiguration.getSession();
+        Transaction transaction = session.beginTransaction();
+        try{
+            Therapist therapist = session.get(Therapist.class,pk);
+            if(therapist == null){
+                throw new NotFoundException("Therapist not found");
+            }
+            session.remove(therapist);
+            transaction.commit();
+            return true;
+        } catch (NotFoundException e) {
+            transaction.rollback();
+            return false;
+        }finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
 
     @Override

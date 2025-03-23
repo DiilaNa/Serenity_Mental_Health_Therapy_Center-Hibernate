@@ -62,6 +62,12 @@ public class TherapistBOImpl implements TherapistBO {
 
     @Override
     public boolean deleteTherapist(String DoctorID) {
-        return false;
+        try {
+            return therapistDAO.deleteByPk(DoctorID);
+        } catch (SQLException e) {
+            throw new RuntimeException("SQL error while saving therapist");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Class not found Error");
+        }
     }
 }
