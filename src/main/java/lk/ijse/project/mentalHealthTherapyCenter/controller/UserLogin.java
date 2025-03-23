@@ -70,7 +70,7 @@ public class UserLogin implements Initializable {
             return;
         }
             /*send them to see if they exixts already*/
-            navigateToMainPage("/view/MainLayout.fxml","user");
+            navigateToMainPage("/view/MainLayout.fxml","user",username);
     }
 
     @FXML
@@ -103,8 +103,8 @@ public class UserLogin implements Initializable {
         stage.setResizable(false);
         stage.setTitle("Change Password - Serenity Mental Health Therapy Center");
         stage.show();
-
     }
+
     private void loadPage(String fxmlPath) throws IOException {
         Stage stage = (Stage) clickhere.getScene().getWindow(); // Get current stage
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
@@ -113,12 +113,13 @@ public class UserLogin implements Initializable {
         stage.setTitle("The Serenity Mental Health Therapy Center");
         stage.show();
     }
-    private void navigateToMainPage(String fxmlPath,String role) throws IOException {
+    private void navigateToMainPage(String fxmlPath,String role,String userName) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Scene scene = new Scene(loader.load());
 
         MainController controller = loader.getController();
         controller.setUserRole(role);
+        controller.setUserName(userName);
 
         Stage currentStage = (Stage) clickhere.getScene().getWindow();
         Stage stage = new Stage();

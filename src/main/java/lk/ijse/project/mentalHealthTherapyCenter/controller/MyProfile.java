@@ -11,6 +11,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Circle;
+import lombok.Setter;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,12 +22,15 @@ public class MyProfile implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Image image1 = new Image(getClass().getResourceAsStream("/images/SettingInMyProfile.png"));
         image.setImage(image1);
+
+        if (UserName != null) { // Check if the username is set before accessing it
+            topicUserNameLabel.setText(UserName);
+        } else {
+            System.out.println("UserName is null in MyProfile");
+        }
     }
     @FXML
     private ImageView image;
-
-    @FXML
-    private CheckBox checkBox;
 
     @FXML
     private Label email;
@@ -33,8 +38,6 @@ public class MyProfile implements Initializable {
     @FXML
     private Label fulllNane;
 
-    @FXML
-    private Label gender;
 
     @FXML
     private Label role;
@@ -46,43 +49,28 @@ public class MyProfile implements Initializable {
     private Label topicUserNameLabel;
 
     @FXML
-    private Button update;
+    private Circle picCircle;
 
-    @FXML
-    private TextField userFullName;
+    private String UserName;
 
-    @FXML
-    private TextField userMail;
+    public void setUserName(String userName) {
+        this.UserName = userName;
 
-    @FXML
-    private Label userName;
+        if (topicUserNameLabel != null) {
+            topicUserNameLabel.setText(userName);
+        }else {
+            System.out.println(UserName+" is null");
+        }
+    }
 
-    @FXML
-    private PasswordField userPassWordField1;
+    private void loadText(){
 
-    @FXML
-    private PasswordField userPassWordField2;
-
-    @FXML
-    private TextField userPasswordText1;
-
-    @FXML
-    private TextField userPasswordText2;
-
-    @FXML
-    private ComboBox<?> userRole;
-
-    @FXML
-    private TextField userUserName;
+    }
 
     @FXML
     void setPicAction(ActionEvent event) {
 
     }
 
-    @FXML
-    void updateAction(ActionEvent event) {
-
-    }
 
 }

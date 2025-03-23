@@ -76,27 +76,29 @@ public class AdminLogin implements Initializable {
             return;
         }
             /*send them to see if they exixts already*/
-            navigateToMainPage("/view/MainLayout.fxml","admin");
+            navigateToMainPage("/view/MainLayout.fxml","admin",username);
     }
     @FXML
     void clickHereAction(MouseEvent event) throws IOException {
         loadPage("/view/userRegister.fxml");
     }
+
     private void loadPage(String fxmlPath) throws IOException {
         Stage stage = (Stage) adminClickHere.getScene().getWindow(); // Get current stage
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
-
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("The Serenity Mental Health Therapy Center");
         stage.show();
     }
-    private void navigateToMainPage(String fxmlPath,String role) throws IOException {
+
+    private void navigateToMainPage(String fxmlPath,String role, String userName) throws IOException {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Scene scene = new Scene(loader.load());
 
             MainController controller = loader.getController();
             controller.setUserRole(role);
+            controller.setUserName(userName);
 
             Stage currentStage = (Stage) adminClickHere.getScene().getWindow();
             Stage stage = new Stage();
@@ -106,20 +108,19 @@ public class AdminLogin implements Initializable {
             currentStage.close();
             stage.show();
     }
+
     private  void  loadNewPage(String fxmlPath) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Scene scene = new Scene(loader.load());
-
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Change Password - Serenity Mental Health Therapy Center");
         stage.show();
-
     }
+
     private void refreshPage(){
         adminPasswordPwField.setVisible(true);
         adminPasswordTextField.setVisible(false);
     }
-
 }

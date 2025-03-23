@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.TProgramTM;
-import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.TherapistTM;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TherapyProgramDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
@@ -163,17 +162,17 @@ public class TherapyProgramsController implements Initializable {
     }
     private void loadTable(){
         ArrayList<TherapyProgramDTO> therapyProgramDTOS =  tProgramBO.getALLTPrograms();
-        ObservableList<TProgramTM> therapistTMS = FXCollections.observableArrayList();
+        ObservableList<TProgramTM> tProgramTMS = FXCollections.observableArrayList();
         for (TherapyProgramDTO therapyProgramDTO : therapyProgramDTOS) {
-            TProgramTM therapistTM = new TProgramTM(
+            TProgramTM tProgramTM = new TProgramTM(
                     therapyProgramDTO.getTherapyID(),
                     therapyProgramDTO.getTherapyName(),
                     therapyProgramDTO.getTherapyDescription(),
                     therapyProgramDTO.getTherapyFee()
             );
-            therapistTMS.add(therapistTM);
+            tProgramTMS.add(tProgramTM);
         }
-        Table.setItems(therapistTMS);
+        Table.setItems(tProgramTMS);
     }
     private void refreshPage(){
         ProgramName.clear();

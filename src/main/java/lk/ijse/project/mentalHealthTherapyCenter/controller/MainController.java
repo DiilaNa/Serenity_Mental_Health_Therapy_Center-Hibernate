@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import lombok.Setter;
 
 import java.io.IOException;
 import java.net.URL;
@@ -74,6 +75,9 @@ public class MainController implements Initializable {
 
     private String role;
 
+    @Setter
+    private String userName;
+
     public void setUserRole(String role) {
         this.role = role;
         configureUI();
@@ -125,9 +129,21 @@ public class MainController implements Initializable {
 
     @FXML
     void userAction(MouseEvent event) {
-       navigateTo("/view/myProfile.fxml");
-       dashBoardFrom.setText("Profile Settings");
-
+        try {
+            loadAnchor.getChildren().clear();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/myProfile.fxml"));
+            AnchorPane load = loader.load();
+            MyProfile myProfileController = loader.getController();
+            myProfileController.setUserName(userName);
+            load.getStylesheets().add(getClass().getResource("/css/h.css").toExternalForm());
+            load.prefWidthProperty().bind(loadAnchor.widthProperty());
+            load.prefHeightProperty().bind(loadAnchor.heightProperty());
+            loadAnchor.getChildren().add(load);
+            dashBoardFrom.setText("Profile Settings");
+         } catch (IOException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Fail to load page!").show();
+         }
     }
     public void navigateTo(String fxmlPath) {
         try {

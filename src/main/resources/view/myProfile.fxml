@@ -3,11 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -29,74 +25,15 @@
             <Font name="Georgia" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="477.0" layoutY="84.0" prefHeight="42.0" prefWidth="427.0" text="Welcome to your Profile !">
+      <Label layoutX="521.0" layoutY="84.0" prefHeight="42.0" prefWidth="427.0" text="Welcome to your Profile !">
          <font>
             <Font name="Georgia Bold" size="30.0" />
          </font>
       </Label>
-      <Pane layoutX="675.0" layoutY="160.0" prefHeight="502.0" prefWidth="558.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;">
+      <Pane layoutX="331.0" layoutY="173.0" prefHeight="486.0" prefWidth="525.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;">
          <children>
-            <Label layoutX="14.0" layoutY="8.0" prefHeight="34.0" prefWidth="174.0" text="Edit profile" textFill="WHITE">
-               <font>
-                  <Font name="Georgia Bold" size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="48.0" layoutY="69.0" prefHeight="34.0" prefWidth="174.0" text="Full Name" textFill="WHITE">
-               <font>
-                  <Font name="Georgia" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="48.0" layoutY="118.0" prefHeight="34.0" prefWidth="174.0" text="Email" textFill="WHITE">
-               <font>
-                  <Font name="Georgia" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="48.0" layoutY="177.0" prefHeight="34.0" prefWidth="174.0" text="Role" textFill="WHITE">
-               <font>
-                  <Font name="Georgia" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="48.0" layoutY="239.0" prefHeight="34.0" prefWidth="174.0" text="User-Name" textFill="WHITE">
-               <font>
-                  <Font name="Georgia" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="48.0" layoutY="302.0" prefHeight="34.0" prefWidth="174.0" text="Password" textFill="WHITE">
-               <font>
-                  <Font name="Georgia" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="48.0" layoutY="354.0" prefHeight="34.0" prefWidth="152.0" text="Confirm-Password" textFill="WHITE">
-               <font>
-                  <Font name="Georgia" size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="userFullName" layoutX="222.0" layoutY="74.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 1px 0;" />
-            <TextField fx:id="userMail" layoutX="222.0" layoutY="123.0" prefHeight="25.0" prefWidth="248.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 1px 0;" />
-            <ComboBox fx:id="userRole" layoutX="221.0" layoutY="182.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 1px 0;" />
-            <TextField fx:id="userUserName" layoutX="222.0" layoutY="244.0" prefHeight="25.0" prefWidth="248.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 1px 0;" />
-            <TextField fx:id="userPasswordText1" layoutX="222.0" layoutY="307.0" prefHeight="25.0" prefWidth="248.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 1px 0;" />
-            <TextField fx:id="userPasswordText2" layoutX="222.0" layoutY="359.0" prefHeight="25.0" prefWidth="248.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 1px 0;" />
-            <PasswordField fx:id="userPassWordField1" layoutX="222.0" layoutY="307.0" prefHeight="25.0" prefWidth="248.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 1px 0;" />
-            <PasswordField fx:id="userPassWordField2" layoutX="222.0" layoutY="359.0" prefHeight="25.0" prefWidth="248.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 1px 0;" />
-            <CheckBox fx:id="checkBox" layoutX="222.0" layoutY="404.0" mnemonicParsing="false" text="show Password" textFill="WHITE" />
-            <Button fx:id="update" layoutX="400.0" layoutY="421.0" mnemonicParsing="false" onAction="#updateAction" prefHeight="36.0" prefWidth="133.0" style="-fx-background-radius: 12;" text="Update">
-               <font>
-                  <Font name="Impact" size="19.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Button>
-         </children>
-      </Pane>
-      <Pane layoutX="96.0" layoutY="160.0" prefHeight="501.0" prefWidth="490.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;">
-         <children>
-            <Circle fill="#e5f2ff" layoutX="225.0" layoutY="114.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
-            <VBox layoutX="111.0" layoutY="252.0" prefHeight="212.0" prefWidth="228.0">
+            <Circle fx:id="picCircle" fill="#e5f2ff" layoutX="215.0" layoutY="124.0" radius="90.0" stroke="BLACK" strokeType="INSIDE" />
+            <VBox layoutX="55.0" layoutY="251.0" prefHeight="200.0" prefWidth="402.0">
                <children>
                   <Label fx:id="fulllNane" prefHeight="34.0" prefWidth="439.0" text="Full Name" textFill="WHITE">
                      <font>
@@ -141,17 +78,6 @@
                      <padding>
                         <Insets left="23.0" />
                      </padding>
-                  </Label>
-                  <Label fx:id="gender" layoutX="10.0" layoutY="163.0" prefHeight="36.0" prefWidth="450.0" text="Gender" textFill="WHITE">
-                     <font>
-                        <Font name="Georgia" size="21.0" />
-                     </font>
-                     <padding>
-                        <Insets left="23.0" />
-                     </padding>
-                     <VBox.margin>
-                        <Insets top="12.0" />
-                     </VBox.margin>
                   </Label>
                </children>
             </VBox>
