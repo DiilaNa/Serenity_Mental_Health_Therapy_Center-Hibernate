@@ -1,11 +1,9 @@
 package lk.ijse.project.mentalHealthTherapyCenter.service.custom;
 
-import jakarta.persistence.Id;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.DoctorDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.SuperBO;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public interface TherapistBO extends SuperBO {

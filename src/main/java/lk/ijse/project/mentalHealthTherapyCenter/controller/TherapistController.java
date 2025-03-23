@@ -95,7 +95,6 @@ public class TherapistController  implements Initializable {
     @FXML
     private Button update;
 
-    // Method to add selected program details to ListView
     public void setDetails(String programID, String programName) {
         if (programID != null && programName != null) {
             programmsListView.getItems().add(programID + " - " + programName);
@@ -107,21 +106,17 @@ public class TherapistController  implements Initializable {
     @FXML
     void TableAction(MouseEvent event) {
         TherapistTM selectedPatient = table.getSelectionModel().getSelectedItem();
-
         if (selectedPatient != null) {
             docIDlabel.setText(selectedPatient.getDoctorID());
             docName.setText(selectedPatient.getDoctorName());
             // Load data into ListView
             ObservableList<String> programDetails = FXCollections.observableArrayList();
             programDetails.add(selectedPatient.getProgramID() + " - " + selectedPatient.getProgramName());
-
             programmsListView.setItems(programDetails); // Correct way to load ListView
-
             docQualificationsCombo.setValue(selectedPatient.getDoctorQualifications());
             docAvailableCombo.setValue(selectedPatient.getDoctorAvailability());
             docContact.setText(selectedPatient.getDoctorPhone());
             docMail.setText(selectedPatient.getDoctorEmail());
-
         }
     }
 
@@ -167,11 +162,9 @@ public class TherapistController  implements Initializable {
         String DocPhone = docContact.getText();
         String DocMail = docMail.getText();
 
-        String listPrograms = programmsListView.getSelectionModel().getSelectedItem().toString();
-        if (listPrograms != null) {
-            PatientId = listPrograms.split("-")[0];
-            PatientName = listPrograms.split("-")[1];
-        }
+        String listPrograms = programmsListView.getSelectionModel().getSelectedItem();
+        PatientId = listPrograms.split("-")[0];
+        PatientName = listPrograms.split("-")[1];
 
         String namePattern = "^[a-zA-Z ]+$";
         String mailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";

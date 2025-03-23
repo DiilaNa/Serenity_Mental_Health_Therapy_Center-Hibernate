@@ -1,6 +1,7 @@
 package lk.ijse.project.mentalHealthTherapyCenter.service.custom.impl;
 
 import lk.ijse.project.mentalHealthTherapyCenter.dto.DoctorDTO;
+import lk.ijse.project.mentalHealthTherapyCenter.entity.Therapist;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOType;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.TherapistDAO;
@@ -20,7 +21,22 @@ public class TherapistBOImpl implements TherapistBO {
 
     @Override
     public boolean saveTherapist(DoctorDTO doctorDTO) {
-        return true;
+        try {
+            Therapist therapist = new Therapist();
+            therapist.setDoctorID(doctorDTO.getDoctorID());
+            therapist.setDoctorName(doctorDTO.getDoctorName());
+            therapist.setProgramID(doctorDTO.getProgramID());
+            therapist.setProgramName(doctorDTO.getProgramName());
+            therapist.setDoctorQualifications(doctorDTO.getDoctorQualifications());
+            therapist.setDoctorAvailability(doctorDTO.getDoctorAvailability());
+            therapist.setDoctorPhone(doctorDTO.getDoctorPhone());
+            therapist.setDoctorEmail(doctorDTO.getDoctorEmail());
+
+            return therapistDAO.save(therapist);
+        } catch (SQLException e) {
+            throw new RuntimeException("SQL error while saving therapist");
+        }
+
     }
 
     @Override
