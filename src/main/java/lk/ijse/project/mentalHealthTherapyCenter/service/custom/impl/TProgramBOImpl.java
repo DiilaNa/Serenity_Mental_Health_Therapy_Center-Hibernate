@@ -19,7 +19,7 @@ public class TProgramBOImpl implements TProgramBO {
         try {
             return tProgramDAO.save(new TPrograms());
         } catch (SQLException e) {
-            throw new RuntimeException("Error saving therapy program", e);
+            throw new RuntimeException("Error saving therapy programs", e);
         } catch (DuplicateException e) {
             throw new RuntimeException("Therapy program already exists");
         }
@@ -27,7 +27,13 @@ public class TProgramBOImpl implements TProgramBO {
 
     @Override
     public boolean updateTPrograms(TherapyProgramDTO therapyProgramDTO) {
-        return false;
+        try {
+            return tProgramDAO.update(new TPrograms());
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Class not found Error while saving therapy programs", e);
+        } catch (SQLException e) {
+            throw new RuntimeException("SQL Error while saving therapy programs");
+        }
     }
 
     @Override

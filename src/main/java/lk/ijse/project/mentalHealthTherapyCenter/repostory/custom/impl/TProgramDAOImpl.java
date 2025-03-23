@@ -41,7 +41,24 @@ public class TProgramDAOImpl implements TProgramDAO {
 
     @Override
     public boolean update(TPrograms tPrograms) throws SQLException, ClassNotFoundException {
-        return false;
+        Session session = factoryConfiguration.getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            TPrograms programs = session.get(TPrograms.class,tPrograms.getTherapyID());
+            if (programs !=null) {
+                throw new DuplicateException("Therapy program id already exists");
+            }
+            session.merge(tPrograms);
+            transaction.commit();
+            return true;
+        }catch (Exception e) {
+            transaction.rollback();
+            return false;
+        }finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
 
     @Override
