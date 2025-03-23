@@ -1,5 +1,7 @@
 package lk.ijse.project.mentalHealthTherapyCenter.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,12 +10,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.TProgramTM;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.TherapistTM;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TherapyProgramDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TProgramBO;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class TherapyProgramsController implements Initializable {
@@ -21,6 +25,13 @@ public class TherapyProgramsController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Image adminIMage = new Image(getClass().getResourceAsStream("/images/TherapyPrograms.png"));
         image.setImage(adminIMage);
+
+        try{
+            loadTable();
+        }catch(Exception e){
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Failed to Load the Page", ButtonType.OK).show();
+        }
     }
 
     @FXML
@@ -131,6 +142,20 @@ public class TherapyProgramsController implements Initializable {
         }else {
             new Alert(Alert.AlertType.ERROR, "Therapy Programs updating Failed").show();
         }
+    }
+    private void loadTable(){
+        ArrayList<TherapyProgramDTO> therapyProgramDTOS =  tProgramBO.getALLTPrograms();
+        ObservableList<TProgramTM> therapistTMS = FXCollections.observableArrayList();
+        for (TherapyProgramDTO therapyProgramDTO : therapyProgramDTOS) {
+            TProgramTM therapistTM = new TProgramTM(
+                    therapyProgramDTO.getTherapyID(),
+                    therapyProgramDTO.getTherapyName(),
+                    therapyProgramDTO.getTherapyDescription(),
+                    therapyProgramDTO.getTherapyFee()
+            );
+            therapistTMS.add(therapistTM);
+        }
+        Table.setItems(therapistTMS);
     }
 }
 

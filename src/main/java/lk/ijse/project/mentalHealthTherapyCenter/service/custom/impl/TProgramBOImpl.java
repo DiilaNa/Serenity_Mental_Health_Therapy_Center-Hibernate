@@ -6,6 +6,8 @@ import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOType;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.TProgramDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TProgramBO;
 
+import java.util.ArrayList;
+
 public class TProgramBOImpl implements TProgramBO {
     TProgramDAO tProgramDAO = DAOFactory.getInstance().getDAO(DAOType.THERAPY_PROGRAMS);
     @Override
@@ -21,5 +23,10 @@ public class TProgramBOImpl implements TProgramBO {
     @Override
     public boolean deleteTProgram(String therapyProgramID) {
         return false;
+    }
+
+    @Override
+    public ArrayList<TherapyProgramDTO> getALLTPrograms() {
+        return null;
     }
 }
