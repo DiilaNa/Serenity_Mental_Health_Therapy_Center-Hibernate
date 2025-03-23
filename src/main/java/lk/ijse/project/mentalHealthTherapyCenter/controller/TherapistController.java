@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -16,7 +15,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.DoctorDTO;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.ProgramNDocTM;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.TherapistTM;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.ProgramNDocDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TherapistBO;
@@ -66,31 +67,31 @@ public class TherapistController  implements Initializable {
     private Button save;
 
     @FXML
-    private TableView<TherapistTM> table;
+    private TableView<ProgramNDocTM> table;
 
     @FXML
-    private TableColumn<TherapistTM, String> tableAvailable;
+    private TableColumn<ProgramNDocTM, String> tableAvailable;
 
     @FXML
-    private TableColumn<TherapistTM, String> tableContact;
+    private TableColumn<ProgramNDocTM, String> tableContact;
 
     @FXML
-    private TableColumn<TherapistTM, String> tableId;
+    private TableColumn<ProgramNDocTM, String> tableId;
 
     @FXML
-    private TableColumn<TherapistTM, String> tableMail;
+    private TableColumn<ProgramNDocTM, String> tableMail;
 
     @FXML
-    private TableColumn<TherapistTM, String> tableName;
+    private TableColumn<ProgramNDocTM, String> tableName;
 
     @FXML
-    private TableColumn<TherapistTM, String> tableProgramID;
+    private TableColumn<ProgramNDocTM, String> tableProgramID;
 
     @FXML
-    private TableColumn<TherapistTM, String> tableProgramName;
+    private TableColumn<ProgramNDocTM, String> tableProgramName;
 
     @FXML
-    private TableColumn<TherapistTM, String> tableQualifications;
+    private TableColumn<ProgramNDocTM, String> tableQualifications;
 
     @FXML
     private Button update;
@@ -105,13 +106,13 @@ public class TherapistController  implements Initializable {
 
     @FXML
     void TableAction(MouseEvent event) {
-        TherapistTM selectedPatient = table.getSelectionModel().getSelectedItem();
+        ProgramNDocTM selectedPatient = table.getSelectionModel().getSelectedItem();
         if (selectedPatient != null) {
             docIDlabel.setText(selectedPatient.getDoctorID());
             docName.setText(selectedPatient.getDoctorName());
             // Load data into ListView
             ObservableList<String> programDetails = FXCollections.observableArrayList();
-            programDetails.add(selectedPatient.getProgramID() + " - " + selectedPatient.getProgramName());
+            programDetails.add(selectedPatient.getTherapyID() + " - " + selectedPatient.getTherapyName());
             programmsListView.setItems(programDetails); // Correct way to load ListView
             docQualificationsCombo.setValue(selectedPatient.getDoctorQualifications());
             docAvailableCombo.setValue(selectedPatient.getDoctorAvailability());
@@ -187,8 +188,6 @@ public class TherapistController  implements Initializable {
             DoctorDTO doctorDTO = new DoctorDTO(
                     DoctorID,
                     DocName,
-                    PatientId,
-                    PatientName,
                     DocQualifications,
                     DocAvailability,
                     DocPhone,
@@ -240,8 +239,6 @@ public class TherapistController  implements Initializable {
             DoctorDTO doctorDTO = new DoctorDTO(
                     DoctorID,
                     DocName,
-                    PatientId,
-                    PatientName,
                     DocQualifications,
                     DocAvailability,
                     DocPhone,
@@ -278,22 +275,22 @@ public class TherapistController  implements Initializable {
     }
 
     private void loadTable(){
-        List<DoctorDTO> doctorDTOS =  therapistBO.getALLTherapist();
-        ObservableList<TherapistTM> therapistTMS = FXCollections.observableArrayList();
-        for (DoctorDTO doctorDTO : doctorDTOS) {
-            TherapistTM therapistTM = new TherapistTM(
-                    doctorDTO.getDoctorID(),
-                    doctorDTO.getDoctorName(),
-                    doctorDTO.getProgramID(),
-                    doctorDTO.getProgramName(),
-                    doctorDTO.getDoctorQualifications(),
-                    doctorDTO.getDoctorAvailability(),
-                    doctorDTO.getDoctorPhone(),
-                    doctorDTO.getDoctorEmail()
+        List<ProgramNDocDTO> programNDocDTOS =  therapistBO.getALLTherapist();
+        ObservableList<ProgramNDocTM> programNDocTMS = FXCollections.observableArrayList();
+        for (ProgramNDocDTO programNDocDTO : programNDocDTOS) {
+            ProgramNDocTM programNDocTM = new ProgramNDocTM(
+                    programNDocDTO.getDoctorID(),
+                    programNDocDTO.getDoctorName(),
+                    programNDocDTO.getTherapyID(),
+                    programNDocDTO.getTherapyName(),
+                    programNDocDTO.getDoctorQualifications(),
+                    programNDocDTO.getDoctorAvailability(),
+                    programNDocDTO.getDoctorPhone(),
+                    programNDocDTO.getDoctorEmail()
             );
-            therapistTMS.add(therapistTM);
+            programNDocTMS.add(programNDocTM);
         }
-        table.setItems(therapistTMS);
+        table.setItems(programNDocTMS);
     }
     private void refreshPage(){
         loadTable();

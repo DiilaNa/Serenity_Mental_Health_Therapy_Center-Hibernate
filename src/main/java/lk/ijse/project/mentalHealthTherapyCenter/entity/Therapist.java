@@ -16,10 +16,6 @@ public class Therapist implements SuperEntity {
         @Id
         private String doctorID;
         private String doctorName;
-        private String programID;
-        @Column(length = 100)
-        private String programName;
-        @Column(length = 100)
         private String doctorQualifications;
         private String doctorAvailability;
         private String doctorPhone;
