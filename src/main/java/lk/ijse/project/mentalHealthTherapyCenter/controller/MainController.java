@@ -87,7 +87,7 @@ public class MainController implements Initializable {
         if ("admin".equals(role)) {
             adminVbox.setVisible(true);
         } else {
-            adminVbox.setVisible(false);
+            adminVbox.setDisable(true);
         }
     }
 
