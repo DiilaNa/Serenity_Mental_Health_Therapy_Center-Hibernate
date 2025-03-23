@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class TherapistController  implements Initializable {
@@ -275,7 +276,7 @@ public class TherapistController  implements Initializable {
         stage.show();
     }
     private void loadTable(){
-        ArrayList<DoctorDTO> doctorDTOS =  therapistBO.getALLTherapist();
+        List<DoctorDTO> doctorDTOS =  therapistBO.getALLTherapist();
         ObservableList<TherapistTM> therapistTMS = FXCollections.observableArrayList();
         for (DoctorDTO doctorDTO : doctorDTOS) {
             TherapistTM therapistTM = new TherapistTM(

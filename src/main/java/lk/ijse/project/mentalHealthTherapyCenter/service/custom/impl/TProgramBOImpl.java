@@ -1,12 +1,14 @@
 package lk.ijse.project.mentalHealthTherapyCenter.service.custom.impl;
 
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TherapyProgramDTO;
+import lk.ijse.project.mentalHealthTherapyCenter.entity.TPrograms;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOType;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.TProgramDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TProgramBO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TProgramBOImpl implements TProgramBO {
     TProgramDAO tProgramDAO = DAOFactory.getInstance().getDAO(DAOType.THERAPY_PROGRAMS);
@@ -26,7 +28,18 @@ public class TProgramBOImpl implements TProgramBO {
     }
 
     @Override
-    public ArrayList<TherapyProgramDTO> getALLTPrograms() {
-        return null;
+    public List<TherapyProgramDTO> getALLTPrograms() throws Exception {
+        List<TPrograms> programList = tProgramDAO.getAll();
+        List<TherapyProgramDTO> therapyProgramDTOS = new ArrayList<>();
+        for (TPrograms tPrograms : programList) {
+            therapyProgramDTOS.add(new TherapyProgramDTO(
+                    tPrograms.getTherapyID(),
+                    tPrograms.getTherapyName(),
+                    tPrograms.getTherapyDescription(),
+                    tPrograms.getTherapyFee()
+            ));
+        }
+        return therapyProgramDTOS;
+
     }
 }

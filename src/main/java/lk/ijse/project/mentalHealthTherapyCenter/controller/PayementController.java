@@ -20,6 +20,7 @@ import lk.ijse.project.mentalHealthTherapyCenter.service.custom.PaymentBO;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class PayementController implements Initializable {
@@ -73,7 +74,7 @@ public class PayementController implements Initializable {
 
     }
     private  void  loadTable() throws Exception {
-        ArrayList<PaymentDTO>paymentDTOS =  paymentBO.getALL();
+        List<PaymentDTO> paymentDTOS =  paymentBO.getALL();
         ObservableList<PaymentTM> paymentTMS = FXCollections.observableArrayList();
 
         for (PaymentDTO paymentDTO : paymentDTOS) {

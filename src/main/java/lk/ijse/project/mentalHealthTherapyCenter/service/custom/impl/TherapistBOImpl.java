@@ -8,12 +8,13 @@ import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TherapistBO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TherapistBOImpl implements TherapistBO {
     TherapistDAO therapistDAO = DAOFactory.getInstance().getDAO(DAOType.THERAPIST);
 
     @Override
-    public ArrayList<DoctorDTO> getALLTherapist() {
+    public List<DoctorDTO> getALLTherapist() {
         return null;
     }
 

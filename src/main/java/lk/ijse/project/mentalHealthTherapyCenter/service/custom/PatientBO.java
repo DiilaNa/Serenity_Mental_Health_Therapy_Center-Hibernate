@@ -5,9 +5,10 @@ import lk.ijse.project.mentalHealthTherapyCenter.service.SuperBO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface PatientBO extends SuperBO {
     boolean updatePatient(PatientDTO patientDTO) throws SQLException, ClassNotFoundException;
-    ArrayList<PatientDTO> getALL() throws Exception;
+    List<PatientDTO> getALL() throws Exception;
     boolean deletePatient(String patientID) throws SQLException, ClassNotFoundException;
 }

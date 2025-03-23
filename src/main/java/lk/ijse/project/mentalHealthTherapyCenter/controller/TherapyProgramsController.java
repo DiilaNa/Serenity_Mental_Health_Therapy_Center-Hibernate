@@ -18,6 +18,7 @@ import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TProgramBO;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class TherapyProgramsController implements Initializable {
@@ -160,8 +161,8 @@ public class TherapyProgramsController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Therapy Programs updating Failed").show();
         }
     }
-    private void loadTable(){
-        ArrayList<TherapyProgramDTO> therapyProgramDTOS =  tProgramBO.getALLTPrograms();
+    private void loadTable() throws Exception {
+        List<TherapyProgramDTO> therapyProgramDTOS =  tProgramBO.getALLTPrograms();
         ObservableList<TProgramTM> tProgramTMS = FXCollections.observableArrayList();
         for (TherapyProgramDTO therapyProgramDTO : therapyProgramDTOS) {
             TProgramTM tProgramTM = new TProgramTM(

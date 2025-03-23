@@ -9,6 +9,7 @@ import lk.ijse.project.mentalHealthTherapyCenter.service.custom.PatientBO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PatientBOImpl implements PatientBO {
     PatientDAO patientDAO = DAOFactory.getInstance().getDAO(DAOType.PATIENT);
@@ -17,7 +18,7 @@ public class PatientBOImpl implements PatientBO {
        return true;
     }
     @Override
-    public ArrayList<PatientDTO> getALL() throws Exception {
+    public List<PatientDTO> getALL() throws Exception {
         return null;
     }
 

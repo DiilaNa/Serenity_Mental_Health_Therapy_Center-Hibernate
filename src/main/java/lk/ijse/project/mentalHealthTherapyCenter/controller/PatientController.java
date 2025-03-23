@@ -19,6 +19,7 @@ import lk.ijse.project.mentalHealthTherapyCenter.service.custom.PatientBO;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class PatientController implements Initializable {
@@ -165,7 +166,7 @@ public class PatientController implements Initializable {
     }
     private void loadTableData() throws Exception {
 
-        ArrayList<PatientDTO> patientDTOS = patientBO.getALL();
+        List<PatientDTO> patientDTOS = patientBO.getALL();
         ObservableList<PatientTM> patientTMS = FXCollections.observableArrayList();
 
         for (PatientDTO paymentDTO : patientDTOS) {
