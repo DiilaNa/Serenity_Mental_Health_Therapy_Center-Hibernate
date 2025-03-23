@@ -106,6 +106,25 @@ public class TherapyProgramsController implements Initializable {
 
     @FXML
     void updateBtnAction(ActionEvent event) {
+        String therapyPID = labelLoadID.getText();
+        String therapyProgramName = ProgramName.getText();
+        String therapyProgramDetails = ProgramDetails.getText();
+        Double therapyProgramFee = Double.parseDouble(ProgramFee.getText());
+
+        TherapyProgramDTO therapyProgramDTO = new TherapyProgramDTO(
+                therapyPID,
+                therapyProgramName,
+                therapyProgramDetails,
+                therapyProgramFee
+        );
+        boolean isSaved = tProgramBO.updateTPrograms(therapyProgramDTO);
+
+        if (isSaved) {
+            new Alert(Alert.AlertType.INFORMATION, "Therapy Programs updated successfully").show();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Therapy Programs updating Failed").show();
+        }
+    }
 
     }
 

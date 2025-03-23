@@ -12,4 +12,9 @@ public class TProgramBOImpl implements TProgramBO {
     public boolean saveTPrograms(TherapyProgramDTO therapyProgramDTO) {
         return false;
     }
+
+    @Override
+    public boolean updateTPrograms(TherapyProgramDTO therapyProgramDTO) {
+        return false;
+    }
 }

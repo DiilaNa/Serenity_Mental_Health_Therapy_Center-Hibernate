@@ -5,4 +5,5 @@ import lk.ijse.project.mentalHealthTherapyCenter.service.SuperBO;
 
 public interface TProgramBO extends SuperBO {
     boolean saveTPrograms(TherapyProgramDTO therapyProgramDTO);
+    boolean updateTPrograms(TherapyProgramDTO therapyProgramDTO);
 }
