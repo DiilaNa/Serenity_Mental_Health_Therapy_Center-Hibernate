@@ -8,6 +8,7 @@ module lk.ijse.project.mentalHealthTherapyCenter {
     requires mysql.connector.j;
     requires jakarta.persistence;
     requires java.naming;
+    requires org.hibernate.orm.core;
 
     opens lk.ijse.project.mentalHealthTherapyCenter.config to jakarta.persistence;
 
@@ -16,5 +17,5 @@ module lk.ijse.project.mentalHealthTherapyCenter {
     exports lk.ijse.project.mentalHealthTherapyCenter.controller;
     opens lk.ijse.project.mentalHealthTherapyCenter.controller to javafx.fxml;
     opens lk.ijse.project.mentalHealthTherapyCenter.dto.TM to javafx.base;
-    /*tm eka javafx base ekata open krnna*/
+
 }
