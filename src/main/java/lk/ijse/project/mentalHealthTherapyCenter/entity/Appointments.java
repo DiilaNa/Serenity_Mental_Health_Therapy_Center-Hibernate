@@ -13,10 +13,9 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "appointments")
-public class appointments implements SuperEntity{
+public class Appointments implements SuperEntity{
     @Id
     private String sessionId;
-    private String patient_ID;
     private String pay_ID;
     private String time;
     private String notes;

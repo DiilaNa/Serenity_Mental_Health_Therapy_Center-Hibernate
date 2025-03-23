@@ -29,7 +29,7 @@ public class Patient implements SuperEntity {
     private Payment payment;
 
     @OneToMany(mappedBy = "patient" ,cascade = CascadeType.ALL)
-    private List<appointments> appointments;
+    private List<Appointments> appointments;
 
     @ManyToMany(mappedBy = "patient" ,cascade = CascadeType.ALL)
     private List<TPrograms> tPrograms;

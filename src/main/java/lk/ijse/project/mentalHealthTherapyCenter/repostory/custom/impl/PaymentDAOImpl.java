@@ -1,7 +1,10 @@
 package lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.impl;
 
+import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.Payment;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.PaymentDAO;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,10 +12,27 @@ import java.util.List;
 import java.util.Optional;
 
 public class PaymentDAOImpl implements PaymentDAO {
-
+    FactoryConfiguration factoryConfiguration = FactoryConfiguration.getInstance();
     @Override
     public boolean save(Payment payment) throws SQLException {
-        return false;
+       Session session = factoryConfiguration.getSession();
+       Transaction transaction = session.beginTransaction();
+       try{
+           Payment payment1 =  session.get(Payment.class, payment.getPaymentID());
+           if (payment1 != null) {
+               throw new SQLException("Payment already exists");
+           }
+           session.persist(payment);
+           transaction.commit();
+           return true;
+       } catch (Exception e) {
+           transaction.rollback();
+           return false;
+       }finally{
+           if(session != null){
+               session.close();
+           }
+       }
     }
 
     @Override

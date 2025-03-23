@@ -15,6 +15,7 @@ public class DAOFactory {
     @SuppressWarnings("unchecked")
     public <T extends SuperDAO>T getDAO(DAOType daoType) {
         return switch (daoType) {
+            case APPOINTMENTS -> (T) new AppointmentDAOImpl();
             case USER ->(T) new UserDAOImpl();
             case PATIENT -> (T) new PatientDAOImpl();
             case PAYMENT -> (T) new PaymentDAOImpl();

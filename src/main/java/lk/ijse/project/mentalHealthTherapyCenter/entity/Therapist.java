@@ -31,7 +31,7 @@ public class Therapist implements SuperEntity {
                 joinColumns = @JoinColumn(name = "therapist_id"),
                 inverseJoinColumns = @JoinColumn(name = "session_id")
         )
-        private List<appointments> sessionds;
+        private List<Appointments> sessionds;
 
 
         @ManyToOne

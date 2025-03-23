@@ -13,7 +13,7 @@ public class FactoryConfiguration {
     private FactoryConfiguration() {
         Configuration configuration = new Configuration();
         configuration.configure();
-        configuration.addAnnotatedClass(appointments.class)
+        configuration.addAnnotatedClass(Appointments.class)
                 .addAnnotatedClass(Patient.class)
                 .addAnnotatedClass(Payment.class)
                 .addAnnotatedClass(Therapist.class)
