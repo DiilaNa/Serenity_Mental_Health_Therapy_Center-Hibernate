@@ -6,7 +6,9 @@ import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOType;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.TProgramDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TProgramBO;
+import lk.ijse.project.mentalHealthTherapyCenter.service.exeception.DuplicateException;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,13 @@ public class TProgramBOImpl implements TProgramBO {
     TProgramDAO tProgramDAO = DAOFactory.getInstance().getDAO(DAOType.THERAPY_PROGRAMS);
     @Override
     public boolean saveTPrograms(TherapyProgramDTO therapyProgramDTO) {
-        return false;
+        try {
+            return tProgramDAO.save(new TPrograms());
+        } catch (SQLException e) {
+            throw new RuntimeException("Error saving therapy program", e);
+        } catch (DuplicateException e) {
+            throw new RuntimeException("Therapy program already exists");
+        }
     }
 
     @Override

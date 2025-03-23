@@ -3,7 +3,9 @@ package lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.impl;
 import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.TPrograms;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.TProgramDAO;
+import lk.ijse.project.mentalHealthTherapyCenter.service.exeception.DuplicateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.sql.SQLException;
@@ -17,7 +19,24 @@ public class TProgramDAOImpl implements TProgramDAO {
 
     @Override
     public boolean save(TPrograms tPrograms) throws SQLException {
-        return false;
+        Session session = factoryConfiguration.getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            TPrograms programs = session.get(TPrograms.class,tPrograms.getTherapyID());
+            if (programs !=null) {
+                throw new DuplicateException("Therapy program id already exists");
+            }
+            session.persist(tPrograms);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            transaction.rollback();
+            return false;
+        }finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
 
     @Override
