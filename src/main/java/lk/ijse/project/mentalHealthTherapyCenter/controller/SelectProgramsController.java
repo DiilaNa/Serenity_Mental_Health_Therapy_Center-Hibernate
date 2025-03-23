@@ -13,8 +13,10 @@ import lk.ijse.project.mentalHealthTherapyCenter.dto.TherapyProgramDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TProgramBO;
+import lombok.Setter;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -60,9 +62,14 @@ public class SelectProgramsController implements Initializable {
 
     TProgramBO tProgramBO = BOFactory.getInstance().getBO(BOType.THERAPY_PROGRAMS);
 
-    @FXML
-    void selectBtnAction(ActionEvent event) {
+    @Setter
+    private TherapistController therapistController;
 
+    @FXML
+    void selectBtnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+            String ID = idLabel.getText();
+            String Name = nameLabel.getText();
+            therapistController.setDetails(ID, Name); // Pass data to TherapistController
     }
 
     @FXML

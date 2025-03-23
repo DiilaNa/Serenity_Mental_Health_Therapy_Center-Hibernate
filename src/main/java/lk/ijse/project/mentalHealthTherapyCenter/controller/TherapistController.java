@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -23,7 +24,6 @@ import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TherapistBO;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -95,6 +95,13 @@ public class TherapistController  implements Initializable {
     @FXML
     private Button update;
 
+    // Method to add selected program details to ListView
+    public void setDetails(String programID, String programName) {
+        if (programID != null && programName != null) {
+            programmsListView.getItems().add(programID + " - " + programName);
+        }
+    }
+
     TherapistBO therapistBO = BOFactory.getInstance().getBO(BOType.THERAPIST);
 
     @FXML
@@ -120,7 +127,17 @@ public class TherapistController  implements Initializable {
 
     @FXML
     void addProgramsAction(MouseEvent event) throws IOException {
-        loadNewPage("/view/SelectPrograms.fxml");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SelectPrograms.fxml"));
+        Scene scene = new Scene(loader.load());
+        // Get the controller of SelectPrograms.fxml
+        SelectProgramsController selectProgramsController = loader.getController();
+        // Pass the reference of the current TherapistController
+        selectProgramsController.setTherapistController(this);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle("Therapy Programs - Serenity Mental Health Therapy Center");
+        stage.show();
     }
 
     @FXML
@@ -261,20 +278,12 @@ public class TherapistController  implements Initializable {
         tableMail.setCellValueFactory(new PropertyValueFactory<>("doctorEmail"));
 
         try{
-            loadTable();
+            refreshPage();
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Error Failed to load Page", ButtonType.OK).show();
         }
     }
-    private  void  loadNewPage(String fxmlPath) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-        Scene scene = new Scene(loader.load());
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.setTitle("Therapy Programs - Serenity Mental Health Therapy Center");
-        stage.show();
-    }
+
     private void loadTable(){
         List<DoctorDTO> doctorDTOS =  therapistBO.getALLTherapist();
         ObservableList<TherapistTM> therapistTMS = FXCollections.observableArrayList();
@@ -292,6 +301,10 @@ public class TherapistController  implements Initializable {
             therapistTMS.add(therapistTM);
         }
         table.setItems(therapistTMS);
+    }
+    private void refreshPage(){
+        loadTable();
+
     }
 }
 
