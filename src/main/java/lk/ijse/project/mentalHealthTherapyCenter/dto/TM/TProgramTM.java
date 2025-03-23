@@ -11,5 +11,5 @@ public class TProgramTM {
     private String therapyID;
     private String therapyName;
     private String therapyDescription;
-    private String therapyFee;
+    private Double therapyFee;
 }

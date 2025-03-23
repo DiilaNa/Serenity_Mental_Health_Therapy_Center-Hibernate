@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.TProgramTM;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,7 +33,7 @@ public class TherapyProgramsController implements Initializable {
     private TextField ProgramName;
 
     @FXML
-    private TableView<?> Table;
+    private TableView<TProgramTM> Table;
 
     @FXML
     private Button delete;
@@ -50,16 +51,16 @@ public class TherapyProgramsController implements Initializable {
     private Button save;
 
     @FXML
-    private TableColumn<?, ?> tableFee;
+    private TableColumn<TProgramTM, Double> tableFee;
 
     @FXML
-    private TableColumn<?, ?> tableIID;
+    private TableColumn<TProgramTM, String> tableIID;
 
     @FXML
-    private TableColumn<?, ?> tableName;
+    private TableColumn<TProgramTM, String> tableName;
 
     @FXML
-    private TableColumn<?, ?> tableProgramDetails;
+    private TableColumn<TProgramTM, String> tableProgramDetails;
 
     @FXML
     private Button update;
@@ -76,6 +77,12 @@ public class TherapyProgramsController implements Initializable {
 
     @FXML
     void saveBtnAction(ActionEvent event) {
+        String therapyPID = labelLoadID.getText();
+        String therapyProgramName = ProgramName.getText();
+        String therapyProgramDetails = ProgramDetails.getText();
+        Double therapyProgramFee = Double.parseDouble(ProgramFee.getText());
+
+
 
     }
 
