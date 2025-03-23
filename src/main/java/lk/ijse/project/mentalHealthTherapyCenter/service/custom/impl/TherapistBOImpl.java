@@ -12,6 +12,7 @@ import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TherapistBO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class TherapistBOImpl implements TherapistBO {
     TherapistDAO therapistDAO = DAOFactory.getInstance().getDAO(DAOType.THERAPIST);
@@ -86,6 +87,18 @@ public class TherapistBOImpl implements TherapistBO {
             throw new RuntimeException("SQL error while saving therapist");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Class not found Error");
+        }
+    }
+
+    @Override
+    public String getNextTherapyID() {
+        Optional<String> lastPkOptional = therapistDAO.getLastPK();
+        if (lastPkOptional.isPresent()) {
+            String lastPk = lastPkOptional.get();
+            int nextId = Integer.parseInt(lastPk.replace("P", "")) + 1;  // Extract number and increment
+            return String.format("T%03d", nextId);  // Format as "P001", "P002", etc.
+        } else {
+            return "T001";  // Default if no records exist
         }
     }
 }

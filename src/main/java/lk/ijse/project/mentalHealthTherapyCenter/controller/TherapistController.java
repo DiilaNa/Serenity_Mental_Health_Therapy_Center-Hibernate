@@ -208,16 +208,14 @@ public class TherapistController  implements Initializable {
         String DocName = docName.getText();
         String PatientId = null;
         String PatientName = null;
-        String DocQualifications = docQualificationsCombo.getSelectionModel().getSelectedItem().toString();
-        String DocAvailability = docAvailableCombo.getSelectionModel().getSelectedItem().toString();
+        String DocQualifications = docQualificationsCombo.getSelectionModel().getSelectedItem();
+        String DocAvailability = docAvailableCombo.getSelectionModel().getSelectedItem();
         String DocPhone = docContact.getText();
         String DocMail = docMail.getText();
 
-        String listPrograms = programmsListView.getSelectionModel().getSelectedItem().toString();
-        if (listPrograms != null) {
-            PatientId = listPrograms.split("-")[0];
-            PatientName = listPrograms.split("-")[1];
-        }
+        String listPrograms = programmsListView.getSelectionModel().getSelectedItem();
+        PatientId = listPrograms.split("-")[0];
+        PatientName = listPrograms.split("-")[1];
         String namePattern = "^[a-zA-Z ]+$";
         String mailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
         String PhoneNoPattern = "^\\+?[1-9]\\d{0,2}[-.\\s]?\\d{1,4}[-.\\s]?\\d{3,4}[-.\\s]?\\d{3,4}$";
@@ -293,6 +291,9 @@ public class TherapistController  implements Initializable {
         table.setItems(programNDocTMS);
     }
     private void refreshPage(){
+        docIDlabel.setText(therapistBO.getNextTherapyID());
+        docAvailableCombo.setItems(FXCollections.observableArrayList("Available","Not Available"));
+        docQualificationsCombo.setItems(FXCollections.observableArrayList("Bsc","Msc","Phd"));
         loadTable();
 
     }
