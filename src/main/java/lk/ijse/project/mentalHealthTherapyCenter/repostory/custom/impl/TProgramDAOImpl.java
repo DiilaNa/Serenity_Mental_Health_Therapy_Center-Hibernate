@@ -93,6 +93,15 @@ public class TProgramDAOImpl implements TProgramDAO {
 
     @Override
     public Optional<String> getLastPK() {
-        return Optional.empty();
+        Session session = factoryConfiguration.getSession();
+
+        String lastPk = session
+                .createQuery("SELECT t.id FROM TPrograms t ORDER BY t.id DESC", String.class)
+                .setMaxResults(1)
+                .uniqueResult();
+
+        return Optional.ofNullable(lastPk);
     }
+
 }
+

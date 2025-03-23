@@ -33,7 +33,7 @@ public class TherapyProgramsController implements Initializable {
         tableFee.setCellValueFactory(new PropertyValueFactory<>("therapyFee"));
 
         try{
-            loadTable();
+            refreshPage();
         }catch(Exception e){
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Failed to Load the Page", ButtonType.OK).show();
@@ -85,7 +85,7 @@ public class TherapyProgramsController implements Initializable {
     private Button update;
 
     @FXML
-    void deleteBtnAction(ActionEvent event) {
+    void deleteBtnAction(ActionEvent event) throws Exception {
         String programID = labelLoadID.getText();
         boolean isDeleted = tProgramBO.deleteTProgram(programID);
         if (isDeleted) {
@@ -98,12 +98,12 @@ public class TherapyProgramsController implements Initializable {
     }
 
     @FXML
-    void resetBtnAction(ActionEvent event) {
+    void resetBtnAction(ActionEvent event) throws Exception {
         refreshPage();
     }
 
     @FXML
-    void saveBtnAction(ActionEvent event) {
+    void saveBtnAction(ActionEvent event) throws Exception {
         String therapyPID = labelLoadID.getText();
         String therapyProgramName = ProgramName.getText();
         String therapyProgramDetails = ProgramDetails.getText();
@@ -130,17 +130,16 @@ public class TherapyProgramsController implements Initializable {
         TProgramTM selectedPatient = Table.getSelectionModel().getSelectedItem();
 
         if (selectedPatient != null) {
-            tableIID.setText(selectedPatient.getTherapyID());
-            tableName.setText(selectedPatient.getTherapyName());
-            tableProgramDetails.setText(selectedPatient.getTherapyDescription());
-            tableFee.setText(String.valueOf(selectedPatient.getTherapyFee()));
-
+            labelLoadID.setText(selectedPatient.getTherapyID());
+            ProgramName.setText(selectedPatient.getTherapyName());
+            ProgramDetails.setText(selectedPatient.getTherapyDescription());
+            ProgramFee.setText(String.valueOf(selectedPatient.getTherapyFee()));
         }
 
     }
 
     @FXML
-    void updateBtnAction(ActionEvent event) {
+    void updateBtnAction(ActionEvent event) throws Exception {
         String therapyPID = labelLoadID.getText();
         String therapyProgramName = ProgramName.getText();
         String therapyProgramDetails = ProgramDetails.getText();
@@ -175,7 +174,9 @@ public class TherapyProgramsController implements Initializable {
         }
         Table.setItems(tProgramTMS);
     }
-    private void refreshPage(){
+    private void refreshPage() throws Exception {
+        loadTable();
+        labelLoadID.setText(tProgramBO.getNextProgramID());
         ProgramName.clear();
         ProgramDetails.clear();
         ProgramFee.clear();

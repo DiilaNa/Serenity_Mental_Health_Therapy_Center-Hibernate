@@ -1,11 +1,8 @@
 package lk.ijse.project.mentalHealthTherapyCenter.repostory;
-
-import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.PatientTM;
-import lk.ijse.project.mentalHealthTherapyCenter.entity.Patient;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.SuperEntity;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
