@@ -17,4 +17,9 @@ public class TProgramBOImpl implements TProgramBO {
     public boolean updateTPrograms(TherapyProgramDTO therapyProgramDTO) {
         return false;
     }
+
+    @Override
+    public boolean deleteTProgram(String therapyProgramID) {
+        return false;
+    }
 }

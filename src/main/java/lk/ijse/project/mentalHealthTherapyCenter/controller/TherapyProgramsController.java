@@ -69,6 +69,13 @@ public class TherapyProgramsController implements Initializable {
 
     @FXML
     void deleteBtnAction(ActionEvent event) {
+        String programID = labelLoadID.getText();
+        boolean isDeleted = tProgramBO.deleteTProgram(programID);
+        if (isDeleted) {
+            new Alert(Alert.AlertType.INFORMATION, "Programs Deleted").show();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Programs Not Deleted").show();
+        }
 
     }
 
@@ -117,16 +124,15 @@ public class TherapyProgramsController implements Initializable {
                 therapyProgramDetails,
                 therapyProgramFee
         );
-        boolean isSaved = tProgramBO.updateTPrograms(therapyProgramDTO);
+        boolean isUpdated = tProgramBO.updateTPrograms(therapyProgramDTO);
 
-        if (isSaved) {
+        if (isUpdated) {
             new Alert(Alert.AlertType.INFORMATION, "Therapy Programs updated successfully").show();
         }else {
             new Alert(Alert.AlertType.ERROR, "Therapy Programs updating Failed").show();
         }
     }
-
-    }
+}
 
 
 
