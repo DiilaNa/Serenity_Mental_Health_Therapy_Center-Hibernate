@@ -22,7 +22,7 @@ public class TherapistDAOImpl implements TherapistDAO {
             if(therapist1 != null){
                 throw new SQLException("Therapist already exists");
             }
-            session.save(therapist);
+            session.persist(therapist);
             transaction.commit();
             return true;
         }catch(SQLException e){
@@ -36,8 +36,22 @@ public class TherapistDAOImpl implements TherapistDAO {
     }
 
     @Override
-    public boolean update(Therapist therapist) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean update(Therapist therapist)  {
+        Session session = factoryConfiguration.getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            session.merge(therapist);
+            transaction.commit();
+            return true;
+        }catch (Exception e){
+            transaction.rollback();
+            return false;
+        }finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
 
     @Override

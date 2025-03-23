@@ -41,7 +41,23 @@ public class TherapistBOImpl implements TherapistBO {
 
     @Override
     public boolean updateTherapist(DoctorDTO doctorDTO) {
-        return true;
+        try {
+            Therapist therapist = new Therapist();
+            therapist.setDoctorID(doctorDTO.getDoctorID());
+            therapist.setDoctorName(doctorDTO.getDoctorName());
+            therapist.setProgramID(doctorDTO.getProgramID());
+            therapist.setProgramName(doctorDTO.getProgramName());
+            therapist.setDoctorQualifications(doctorDTO.getDoctorQualifications());
+            therapist.setDoctorAvailability(doctorDTO.getDoctorAvailability());
+            therapist.setDoctorPhone(doctorDTO.getDoctorPhone());
+            therapist.setDoctorEmail(doctorDTO.getDoctorEmail());
+
+            return therapistDAO.update(therapist);
+        } catch (SQLException e) {
+            throw new RuntimeException("SQL error while saving therapist");
+        }catch (ClassNotFoundException e){
+            throw new RuntimeException("Class not found Error");
+        }
     }
 
     @Override
