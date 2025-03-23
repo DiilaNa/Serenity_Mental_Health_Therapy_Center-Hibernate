@@ -3,15 +3,15 @@ package lk.ijse.project.mentalHealthTherapyCenter.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.TProgramTM;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.TherapyProgramDTO;
+import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
+import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
+import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TProgramBO;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -62,6 +62,8 @@ public class TherapyProgramsController implements Initializable {
     @FXML
     private TableColumn<TProgramTM, String> tableProgramDetails;
 
+    TProgramBO tProgramBO = BOFactory.getInstance().getBO(BOType.THERAPY_PROGRAMS);
+
     @FXML
     private Button update;
 
@@ -82,8 +84,19 @@ public class TherapyProgramsController implements Initializable {
         String therapyProgramDetails = ProgramDetails.getText();
         Double therapyProgramFee = Double.parseDouble(ProgramFee.getText());
 
+        TherapyProgramDTO therapyProgramDTO = new TherapyProgramDTO(
+            therapyPID,
+            therapyProgramName,
+            therapyProgramDetails,
+            therapyProgramFee
+        );
+        boolean isSaved = tProgramBO.saveTPrograms(therapyProgramDTO);
 
-
+        if (isSaved) {
+            new Alert(Alert.AlertType.INFORMATION, "Therapy Program Saved").show();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Therapy Program Not Saved").show();
+        }
     }
 
     @FXML
