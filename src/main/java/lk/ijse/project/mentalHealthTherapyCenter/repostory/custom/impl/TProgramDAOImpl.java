@@ -4,12 +4,12 @@ import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.TPrograms;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.TProgramDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.exeception.DuplicateException;
+import lk.ijse.project.mentalHealthTherapyCenter.service.exeception.NotFoundException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,10 +44,6 @@ public class TProgramDAOImpl implements TProgramDAO {
         Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();
         try {
-            TPrograms programs = session.get(TPrograms.class,tPrograms.getTherapyID());
-            if (programs !=null) {
-                throw new DuplicateException("Therapy program id already exists");
-            }
             session.merge(tPrograms);
             transaction.commit();
             return true;
@@ -70,7 +66,24 @@ public class TProgramDAOImpl implements TProgramDAO {
 
     @Override
     public boolean deleteByPk(String pk) throws SQLException, ClassNotFoundException {
-        return false;
+        Session session = factoryConfiguration.getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            TPrograms tPrograms = session.get(TPrograms.class, pk);
+            if (tPrograms == null) {
+                throw new NotFoundException("Program not found");
+            }
+            session.remove(tPrograms);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            transaction.rollback();
+            return false;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
 
     @Override

@@ -38,7 +38,13 @@ public class TProgramBOImpl implements TProgramBO {
 
     @Override
     public boolean deleteTProgram(String therapyProgramID) {
-        return false;
+        try {
+            return tProgramDAO.deleteByPk(therapyProgramID);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Class not found Error while saving therapy programs", e);
+        } catch (SQLException e) {
+            throw new RuntimeException("SQL Error while saving therapy programs");
+        }
     }
 
     @Override
