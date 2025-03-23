@@ -14,35 +14,11 @@ public class PatientBOImpl implements PatientBO {
     PatientDAO patientDAO = DAOFactory.getInstance().getDAO(DAOType.PATIENT);
     @Override
     public boolean updatePatient(PatientDTO patientDTO) throws SQLException, ClassNotFoundException {
-        return patientDAO.update(new Patient(
-                patientDTO.getPatientID(),
-                patientDTO.getPatientName(),
-                patientDTO.getPatientBirthDate(),
-                patientDTO.getPatientNIC(),
-                patientDTO.getPatientGender(),
-                patientDTO.getPatientAddress(),
-                patientDTO.getPatientPhone(),
-                patientDTO.getPatientEmail()
-        ));
+       return true;
     }
     @Override
     public ArrayList<PatientDTO> getALL() throws Exception {
-        ArrayList<PatientDTO> patientDTOS = new ArrayList<>();
-        ArrayList<Patient> patients = patientDAO.getAll();
-
-        for (Patient patient : patients) {
-            patientDTOS.add(new PatientDTO(
-                    patient.getPatientID(),
-                    patient.getPatientName(),
-                    patient.getPatientBirthDate(),
-                    patient.getPatientNIC(),
-                    patient.getPatientGender(),
-                    patient.getPatientAddress(),
-                    patient.getPatientPhone(),
-                    patient.getPatientEmail()
-            ));
-        }
-        return patientDTOS;
+        return null;
     }
 
     @Override
