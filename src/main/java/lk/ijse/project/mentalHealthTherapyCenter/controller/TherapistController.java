@@ -15,8 +15,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.DoctorDTO;
-import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.PatientTM;
-import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.PaymentTM;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.TherapistTM;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
