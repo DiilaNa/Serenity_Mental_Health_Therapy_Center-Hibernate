@@ -6,8 +6,11 @@ import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.PatientDAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class PatientDAOImpl implements PatientDAO {
+
 
     @Override
     public boolean save(Patient patient) throws SQLException {
@@ -16,18 +19,26 @@ public class PatientDAOImpl implements PatientDAO {
 
     @Override
     public boolean update(Patient patient) throws SQLException, ClassNotFoundException {
-       return true;
+        return false;
     }
 
     @Override
-    public ArrayList<Patient> getAll() throws Exception {
-            ArrayList<Patient> patients = new ArrayList<>();
-            return patients;
-
+    public List<Patient> getAll() throws Exception {
+        return List.of();
     }
 
     @Override
-    public boolean delete(String pk) throws SQLException, ClassNotFoundException {
-        return true;
+    public boolean deleteByPk(String pk) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public Optional<Patient> findByPK(String pk) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<String> getLastPK() {
+        return Optional.empty();
     }
 }

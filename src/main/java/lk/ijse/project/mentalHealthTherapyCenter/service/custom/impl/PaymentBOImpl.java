@@ -13,7 +13,6 @@ public class PaymentBOImpl implements PaymentBO {
     PaymentDAO paymentDAO = DAOFactory.getInstance().getDAO(DAOType.PAYMENT);
     @Override
     public ArrayList<PaymentDTO> getALL() throws Exception {
-        ArrayList<Payment>paymentDTOS = paymentDAO.getAll();
         return null;
     }
 }

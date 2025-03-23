@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "appointments")
-public class appointments {
+public class appointments implements SuperEntity{
     @Id
     private String sessionId;
     private String patient_ID;

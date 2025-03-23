@@ -36,7 +36,7 @@ public class PatientController implements Initializable {
         tablePContact.setCellValueFactory(new PropertyValueFactory<>("patientPhone"));
         tablePEmail.setCellValueFactory(new PropertyValueFactory<>("patientEmail"));
         try {
-            loadTableData();
+           /* loadTableData();*/
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, " Failed ").show();
             throw new RuntimeException(e);

@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "payment")
-public class Payment {
+public class Payment implements SuperEntity {
     @Id
     private  String paymentID;
     private  String patientName;

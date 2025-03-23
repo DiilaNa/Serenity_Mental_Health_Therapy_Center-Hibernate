@@ -23,6 +23,6 @@ public class PatientBOImpl implements PatientBO {
 
     @Override
     public boolean deletePatient(String patientID) throws SQLException, ClassNotFoundException {
-        return patientDAO.delete(patientID);
+       return true;
     }
 }

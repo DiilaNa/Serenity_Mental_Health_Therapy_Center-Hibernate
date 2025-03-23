@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "therapist")
-public class Therapist {
+public class Therapist implements SuperEntity {
         @Id
         private String doctorID;
         private String doctorName;

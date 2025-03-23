@@ -5,8 +5,11 @@ import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.UserDAO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class UserDAOImpl implements UserDAO {
+
     @Override
     public boolean save(User user) throws SQLException {
         return false;
@@ -18,12 +21,22 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public ArrayList<User> getAll() throws Exception {
-        return null;
+    public List<User> getAll() throws Exception {
+        return List.of();
     }
 
     @Override
-    public boolean delete(String pk) throws SQLException, ClassNotFoundException {
+    public boolean deleteByPk(String pk) throws SQLException, ClassNotFoundException {
         return false;
+    }
+
+    @Override
+    public Optional<User> findByPK(String pk) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<String> getLastPK() {
+        return Optional.empty();
     }
 }
