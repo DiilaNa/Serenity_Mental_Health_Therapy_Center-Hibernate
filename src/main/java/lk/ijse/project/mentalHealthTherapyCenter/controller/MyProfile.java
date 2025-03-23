@@ -23,6 +23,7 @@ public class MyProfile implements Initializable {
         Image image1 = new Image(getClass().getResourceAsStream("/images/SettingInMyProfile.png"));
         image.setImage(image1);
 
+        loadText();
         if (UserName != null) { // Check if the username is set before accessing it
             topicUserNameLabel.setText(UserName);
         } else {
