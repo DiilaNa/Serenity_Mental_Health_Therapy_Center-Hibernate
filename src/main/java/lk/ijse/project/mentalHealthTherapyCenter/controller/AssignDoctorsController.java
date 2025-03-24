@@ -14,6 +14,7 @@ import lk.ijse.project.mentalHealthTherapyCenter.dto.DoctorDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TherapistBO;
+import lombok.Setter;
 
 import java.net.URL;
 import java.util.List;
@@ -57,6 +58,9 @@ public class AssignDoctorsController implements Initializable {
     @FXML
     private Button select;
 
+    @Setter
+    private AppointmentsController appointmentsController;
+
     TherapistBO therapistBO = BOFactory.getInstance().getBO(BOType.THERAPIST);
 
     private void refreshPage() throws Exception {
@@ -78,14 +82,39 @@ public class AssignDoctorsController implements Initializable {
             if (docComboBox.getItems() == null || !docComboBox.getItems().equals(doctorNames)) {
                 Platform.runLater(() -> docComboBox.setItems(doctorNames));
             }
+            // Add listener to ComboBox to update labels when a doctor is selected
+            docComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    // Find the corresponding DoctorDTO for the selected name
+                    DoctorDTO selectedDoctor = findDoctorByName(doctors, newValue);
+
+                    // Update the labels with the doctor information
+                    docIdFromCombo.setText("Doctor ID: " + selectedDoctor.getDoctorID());
+                    docNameFromCombo.setText("Doctor Name: " + selectedDoctor.getDoctorName());
+                    docQualificationsFromCombo.setText("Qualifications: " + selectedDoctor.getDoctorQualifications());
+                }
+            });
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
+    private DoctorDTO findDoctorByName(List<DoctorDTO> doctors, String name) {
+        for (DoctorDTO doctor : doctors) {
+            if (doctor.getDoctorName().equals(name)) {
+                return doctor;
+            }
+        }
+        return null; // Return null if doctor is not found
+    }
+
     @FXML
     void selectBtnAction(ActionEvent event) {
-
+        if (appointmentsController != null) {
+            String ID = docIdFromCombo.getText();
+            String Name = docNameFromCombo.getText();
+            appointmentsController.setAddDoctors(ID, Name);
+        }
     }
 
     @FXML

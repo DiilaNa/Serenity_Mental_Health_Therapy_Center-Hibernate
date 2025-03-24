@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -121,7 +122,9 @@ public class AppointmentsController implements Initializable {
     @FXML
     private Label time;
 
-    private static String ProgramID;
+    private  String ProgramID;
+
+    private  String DocID;
 
     public void setDetails(String programID, String programName) {
          ProgramID = programID;
@@ -129,7 +132,12 @@ public class AppointmentsController implements Initializable {
             programmsListView.getItems().add(programID + " - " + programName);
         }
     }
-
+    public void setAddDoctors(String docID, String docName) {
+        DocID = docID;
+        if (docID != null && docName != null) {
+            doctorListView.getItems().add(docID + " - " + docName);
+        }
+    }
 
     private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy-");
@@ -160,20 +168,11 @@ public class AppointmentsController implements Initializable {
         String docID = null;
         String programID = null;
 
-        String listDoctors = doctorListView.getSelectionModel().getSelectedItem().toString();
-        if (listDoctors != null) {
-            docID = listDoctors.split(" - ")[0];
-        } else {
-           new Alert(Alert.AlertType.WARNING, "Please select doctor", ButtonType.OK).show();
-        }
+        String listDoctors = doctorListView.getSelectionModel().getSelectedItem();
+        docID = listDoctors.split(" - ")[0];
 
-        String listPrograms = programmsListView.getSelectionModel().getSelectedItem().toString();
-
-        if (listPrograms != null) {
-            programID = listPrograms.split("-")[0];
-        }else {
-            new Alert(Alert.AlertType.WARNING, "Please select program", ButtonType.OK).show();
-        }
+        String listPrograms = programmsListView.getSelectionModel().getSelectedItem();
+        programID = listPrograms.split("-")[0];
 
         String namePattern = "^[a-zA-Z ]+$";
         String addressPattern = "^[a-zA-Z0-9, -]+$";
@@ -272,21 +271,25 @@ public class AppointmentsController implements Initializable {
 
     @FXML
     void addProgramsAction(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SelectPrograms.fxml"));
-        Scene scene = new Scene(loader.load());
-        SelectProgramsController selectProgramsController = loader.getController();
-        selectProgramsController.setAppointmentsController(this);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.setTitle("Therapy Programs - Serenity Mental Health Therapy Center");
-        stage.show();
+       loadNewPage("/view/SelectPrograms.fxml");
     }
 
     private  void  loadNewPage(String fxmlPath) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-        Scene scene = new Scene(loader.load());
+        Parent root = loader.load(); // Load the FXML
 
+        // Now get the controller from the FXMLLoader
+        if (fxmlPath.equals("/view/assignDocs.fxml")) {
+            AssignDoctorsController assignDoctorsController = loader.getController();
+            // Inject data or set additional properties for AssignDoctorsController
+            assignDoctorsController.setAppointmentsController(this);
+        } else if (fxmlPath.equals("/view/SelectPrograms.fxml")) {
+            SelectProgramsController selectProgramsController = loader.getController();
+            // Inject data or set additional properties for SelectProgramsController
+            selectProgramsController.setAppointmentsController(this);
+        }
+
+        Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setResizable(false);
