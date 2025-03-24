@@ -1,11 +1,14 @@
 package lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.impl;
 
 import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
+import lk.ijse.project.mentalHealthTherapyCenter.entity.TPrograms;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.Therapist;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.TherapistDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.exeception.NotFoundException;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -17,18 +20,15 @@ public class TherapistDAOImpl implements TherapistDAO {
     public boolean save(Therapist therapist) throws SQLException {
         Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();
-        try{
-            Therapist therapist1 = session.get(Therapist.class,therapist.getDoctorID());
-            if(therapist1 != null){
-                throw new SQLException("Therapist already exists");
-            }
+        try {
             session.persist(therapist);
             transaction.commit();
             return true;
-        }catch(SQLException e){
+        } catch (Exception e) {
             transaction.rollback();
+            e.printStackTrace();
             return false;
-        }finally {
+        } finally {
             if (session != null) {
                 session.close();
             }
@@ -55,7 +55,9 @@ public class TherapistDAOImpl implements TherapistDAO {
 
     @Override
     public List<Therapist> getAll() throws Exception {
-        return List.of();
+        Session session = factoryConfiguration.getSession();
+        Query<Therapist> query = session.createQuery("from Therapist ", Therapist.class);
+        return query.list();
     }
 
     @Override
@@ -82,7 +84,14 @@ public class TherapistDAOImpl implements TherapistDAO {
 
     @Override
     public Optional<Therapist> findByPK(String pk) {
-        return Optional.empty();
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Therapist therapist = session.get(Therapist.class, pk);
+        session.close();
+        if (therapist == null) {
+            return Optional.empty();
+        }
+        return Optional.of(therapist);
+
     }
 
     @Override
@@ -96,4 +105,6 @@ public class TherapistDAOImpl implements TherapistDAO {
 
         return Optional.ofNullable(lastPk);
     }
+
+
 }

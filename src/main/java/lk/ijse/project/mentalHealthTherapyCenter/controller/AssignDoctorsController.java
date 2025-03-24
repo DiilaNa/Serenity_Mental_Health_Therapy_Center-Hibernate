@@ -1,5 +1,4 @@
 package lk.ijse.project.mentalHealthTherapyCenter.controller;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,8 +9,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.DoctorDTO;
+import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
+import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
+import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TherapistBO;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AssignDoctorsController implements Initializable {
@@ -28,7 +32,7 @@ public class AssignDoctorsController implements Initializable {
     private Circle circleD;
 
     @FXML
-    private ComboBox<?> docComboBox;
+    private ComboBox<String> docComboBox;
 
     @FXML
     private Label docIdFromCombo;
@@ -45,9 +49,25 @@ public class AssignDoctorsController implements Initializable {
     @FXML
     private Button select;
 
-    @FXML
-    void loadComboBoxAction(ActionEvent event) {
+    TherapistBO therapistBO = BOFactory.getInstance().getBO(BOType.THERAPIST);
 
+    @FXML
+    void loadComboBoxAction(ActionEvent event) throws Exception {
+        try {
+            String docName = null;
+            List<DoctorDTO> h = therapistBO.getDocNames();
+            System.out.println(h);
+            for (DoctorDTO d : h) {
+                 docName = d.getDoctorName();
+                String docID = d.getDoctorID();
+                String qualifications = d.getDoctorQualifications();
+                String available = d.getDoctorAvailability().toString();
+            }
+            docComboBox.setValue(docName);
+            docNameFromCombo.setText(docName);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML

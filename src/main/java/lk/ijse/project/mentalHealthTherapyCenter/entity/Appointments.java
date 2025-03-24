@@ -1,17 +1,16 @@
 package lk.ijse.project.mentalHealthTherapyCenter.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
+@Getter
 @Entity
-@Data
 @Table(name = "appointments")
 public class Appointments implements SuperEntity{
     @Id

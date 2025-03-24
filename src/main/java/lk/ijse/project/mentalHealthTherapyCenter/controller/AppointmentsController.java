@@ -19,6 +19,7 @@ import lk.ijse.project.mentalHealthTherapyCenter.dto.*;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.AppointmentBO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
+import lombok.Setter;
 
 import java.io.IOException;
 import java.net.URL;
@@ -46,7 +47,7 @@ public class AppointmentsController implements Initializable {
     private Button addPrograms;
 
     @FXML
-    private ListView<?> programmsListView;
+    private ListView<String> programmsListView;
 
     @FXML
     private Button addAppointmentBTN;
@@ -64,7 +65,7 @@ public class AppointmentsController implements Initializable {
     private Label date;
 
     @FXML
-    private ListView<?> doctorListView;
+    private ListView<String> doctorListView;
 
     @FXML
     private ImageView image;
@@ -119,6 +120,16 @@ public class AppointmentsController implements Initializable {
 
     @FXML
     private Label time;
+
+    private static String ProgramID;
+
+    public void setDetails(String programID, String programName) {
+         ProgramID = programID;
+        if (programID != null && programName != null) {
+            programmsListView.getItems().add(programID + " - " + programName);
+        }
+    }
+
 
     private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy-");
@@ -261,7 +272,15 @@ public class AppointmentsController implements Initializable {
 
     @FXML
     void addProgramsAction(MouseEvent event) throws IOException {
-        loadNewPage("/view/SelectPrograms.fxml");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SelectPrograms.fxml"));
+        Scene scene = new Scene(loader.load());
+        SelectProgramsController selectProgramsController = loader.getController();
+        selectProgramsController.setAppointmentsController(this);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle("Therapy Programs - Serenity Mental Health Therapy Center");
+        stage.show();
     }
 
     private  void  loadNewPage(String fxmlPath) throws IOException {

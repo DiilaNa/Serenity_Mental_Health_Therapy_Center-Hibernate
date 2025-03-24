@@ -16,7 +16,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.DoctorDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.ProgramNDocTM;
-import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.TherapistTM;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.ProgramNDocDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
@@ -96,7 +95,10 @@ public class TherapistController  implements Initializable {
     @FXML
     private Button update;
 
+    private static String ProgramID;
+
     public void setDetails(String programID, String programName) {
+        ProgramID = programID;
         if (programID != null && programName != null) {
             programmsListView.getItems().add(programID + " - " + programName);
         }
@@ -125,9 +127,7 @@ public class TherapistController  implements Initializable {
     void addProgramsAction(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SelectPrograms.fxml"));
         Scene scene = new Scene(loader.load());
-        // Get the controller of SelectPrograms.fxml
         SelectProgramsController selectProgramsController = loader.getController();
-        // Pass the reference of the current TherapistController
         selectProgramsController.setTherapistController(this);
         Stage stage = new Stage();
         stage.setScene(scene);
@@ -156,18 +156,29 @@ public class TherapistController  implements Initializable {
     void saveBtnAction(ActionEvent event) {
         String DoctorID = docIDlabel.getText();
         String DocName = docName.getText();
-        String PatientId = null;
-        String PatientName = null;
         String DocQualifications = docQualificationsCombo.getSelectionModel().getSelectedItem();
         String DocAvailability = docAvailableCombo.getSelectionModel().getSelectedItem();
         String DocPhone = docContact.getText();
         String DocMail = docMail.getText();
 
         String listPrograms = programmsListView.getSelectionModel().getSelectedItem();
-        PatientId = listPrograms.split("-")[0];
-        PatientName = listPrograms.split("-")[1];
 
-        String namePattern = "^[a-zA-Z ]+$";
+        if (listPrograms == null || listPrograms.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Please select a program from the list.", ButtonType.OK).show();
+            return; // Return early if no program is selected
+        }
+
+        if (listPrograms.contains("-")) {
+            ProgramID = listPrograms.split("-")[0];
+            System.out.println("Extracted Program ID: " + ProgramID);
+        } else {
+            System.out.println("Invalid program format: " + listPrograms);
+            new Alert(Alert.AlertType.ERROR, "Invalid program format.", ButtonType.OK).show();
+            return;
+        }
+
+
+    /*    String namePattern = "^[a-zA-Z ]+$";
         String mailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
         String PhoneNoPattern = "^\\+?[1-9]\\d{0,2}[-.\\s]?\\d{1,4}[-.\\s]?\\d{3,4}[-.\\s]?\\d{3,4}$";
 
@@ -183,11 +194,11 @@ public class TherapistController  implements Initializable {
         }
         if (!isValidPhoneNO) {
             docContact.setStyle(docContact.getStyle() + ";-fx-border-color: red;");
-        }
-        if (!isValidName && !isValidMail && !isValidPhoneNO) {
+        }*/
             DoctorDTO doctorDTO = new DoctorDTO(
                     DoctorID,
                     DocName,
+                    ProgramID,
                     DocQualifications,
                     DocAvailability,
                     DocPhone,
@@ -195,27 +206,33 @@ public class TherapistController  implements Initializable {
             );
             boolean isSaved = therapistBO.saveTherapist(doctorDTO);
             if (isSaved) {
+                refreshPage();
+                System.out.println("Saved Successfully");
                 new Alert(Alert.AlertType.INFORMATION,"Therapist Saved",ButtonType.OK).show();
             }else{
                 new Alert(Alert.AlertType.ERROR,"Saving Failed",ButtonType.OK).show();
             }
-        }
     }
 
     @FXML
     void updateBtnAction(ActionEvent event) {
         String DoctorID = docIDlabel.getText();
         String DocName = docName.getText();
-        String PatientId = null;
-        String PatientName = null;
         String DocQualifications = docQualificationsCombo.getSelectionModel().getSelectedItem();
         String DocAvailability = docAvailableCombo.getSelectionModel().getSelectedItem();
         String DocPhone = docContact.getText();
         String DocMail = docMail.getText();
 
         String listPrograms = programmsListView.getSelectionModel().getSelectedItem();
-        PatientId = listPrograms.split("-")[0];
-        PatientName = listPrograms.split("-")[1];
+
+        if (listPrograms == null || listPrograms.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Please select a program from the list.", ButtonType.OK).show();
+            return; // Return early if no program is selected
+        }
+
+        ProgramID = listPrograms.split("-")[0];  // Program ID from selected item
+        String ProgramName = listPrograms.split("-")[1]; // Program Name from selected item
+
         String namePattern = "^[a-zA-Z ]+$";
         String mailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
         String PhoneNoPattern = "^\\+?[1-9]\\d{0,2}[-.\\s]?\\d{1,4}[-.\\s]?\\d{3,4}[-.\\s]?\\d{3,4}$";
@@ -237,6 +254,7 @@ public class TherapistController  implements Initializable {
             DoctorDTO doctorDTO = new DoctorDTO(
                     DoctorID,
                     DocName,
+                    ProgramID,
                     DocQualifications,
                     DocAvailability,
                     DocPhone,
@@ -258,8 +276,8 @@ public class TherapistController  implements Initializable {
 
         tableId.setCellValueFactory(new PropertyValueFactory<>("doctorID"));
         tableName.setCellValueFactory(new PropertyValueFactory<>("doctorName"));
-        tableProgramID.setCellValueFactory(new PropertyValueFactory<>("programID"));
-        tableProgramName.setCellValueFactory(new PropertyValueFactory<>("programName"));
+        tableProgramID.setCellValueFactory(new PropertyValueFactory<>("therapyID"));
+        tableProgramName.setCellValueFactory(new PropertyValueFactory<>("therapyName"));
         tableQualifications.setCellValueFactory(new PropertyValueFactory<>("doctorQualifications"));
         tableAvailable.setCellValueFactory(new PropertyValueFactory<>("doctorAvailability"));
         tableContact.setCellValueFactory(new PropertyValueFactory<>("doctorPhone"));
@@ -274,6 +292,9 @@ public class TherapistController  implements Initializable {
 
     private void loadTable(){
         List<ProgramNDocDTO> programNDocDTOS =  therapistBO.getALLTherapist();
+        if (programNDocDTOS == null || programNDocDTOS.isEmpty()) {
+            System.out.println("No data available");
+        }
         ObservableList<ProgramNDocTM> programNDocTMS = FXCollections.observableArrayList();
         for (ProgramNDocDTO programNDocDTO : programNDocDTOS) {
             ProgramNDocTM programNDocTM = new ProgramNDocTM(
@@ -292,10 +313,13 @@ public class TherapistController  implements Initializable {
     }
     private void refreshPage(){
         docIDlabel.setText(therapistBO.getNextTherapyID());
+
         docAvailableCombo.setItems(FXCollections.observableArrayList("Available","Not Available"));
         docQualificationsCombo.setItems(FXCollections.observableArrayList("Bsc","Msc","Phd"));
         loadTable();
-
+        docName.clear();
+        docContact.clear();
+        docMail.clear();
     }
 }
 

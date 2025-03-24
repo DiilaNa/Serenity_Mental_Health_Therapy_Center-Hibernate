@@ -6,8 +6,10 @@ import lk.ijse.project.mentalHealthTherapyCenter.entity.Therapist;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOType;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.QueryDAO;
+import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.TProgramDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.TherapistDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TherapistBO;
+import org.hibernate.HibernateException;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,11 +18,12 @@ import java.util.Optional;
 
 public class TherapistBOImpl implements TherapistBO {
     TherapistDAO therapistDAO = DAOFactory.getInstance().getDAO(DAOType.THERAPIST);
+    TProgramDAO programDAO = DAOFactory.getInstance().getDAO(DAOType.THERAPY_PROGRAMS);
     QueryDAO queryDAO = DAOFactory.getInstance().getDAO(DAOType.QUERY);
 
     @Override
     public List<ProgramNDocDTO> getALLTherapist() {
-        List<Therapist> therapists = queryDAO.getALLTherapists(); // Fetch employees from DB
+        List<Therapist> therapists = queryDAO.getALLTherapists();
         List<ProgramNDocDTO> dtos = new ArrayList<>();
 
         for (Therapist therapist : therapists) {
@@ -38,7 +41,6 @@ public class TherapistBOImpl implements TherapistBO {
             );
             dtos.add(dto);
         }
-
         return dtos;
     }
 
@@ -53,11 +55,18 @@ public class TherapistBOImpl implements TherapistBO {
             therapist.setDoctorPhone(doctorDTO.getDoctorPhone());
             therapist.setDoctorEmail(doctorDTO.getDoctorEmail());
 
+            String therapyPID = doctorDTO.getTherapyID();
+            System.out.println(therapyPID);
+            Optional<String> optionalID = programDAO.findByiD(therapyPID);
+            if (optionalID.isPresent()){
+                System.out.println("Program already exists");
+                String t = optionalID.get();
+            }
             return therapistDAO.save(therapist);
-        } catch (SQLException e) {
-            throw new RuntimeException("SQL error while saving therapist");
+        } catch (HibernateException | SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("SQL error while saving therapist: " + e.getMessage());
         }
-
     }
 
     @Override
@@ -95,10 +104,29 @@ public class TherapistBOImpl implements TherapistBO {
         Optional<String> lastPkOptional = therapistDAO.getLastPK();
         if (lastPkOptional.isPresent()) {
             String lastPk = lastPkOptional.get();
-            int nextId = Integer.parseInt(lastPk.replace("P", "")) + 1;  // Extract number and increment
-            return String.format("T%03d", nextId);  // Format as "P001", "P002", etc.
+            int nextId = Integer.parseInt(lastPk.replace("T", "")) + 1;
+            return String.format("T%03d", nextId);
         } else {
             return "T001";  // Default if no records exist
         }
+    }
+
+    @Override
+    public List<DoctorDTO> getDocNames() throws Exception {
+        List<Therapist> therapists = therapistDAO.getAll();
+        List<DoctorDTO> docNames = new ArrayList<>();
+        for (Therapist therapist : therapists) {
+            String therapyPID = therapist.getTPrograms().getTherapyID();
+            docNames.add(new DoctorDTO(
+                    therapist.getDoctorID(),
+                    therapist.getDoctorName(),
+                    therapyPID,
+                    therapist.getDoctorQualifications(),
+                    therapist.getDoctorAvailability(),
+                    therapist.getDoctorPhone(),
+                    therapist.getDoctorEmail()
+            ));
+        }
+        return docNames;
     }
 }

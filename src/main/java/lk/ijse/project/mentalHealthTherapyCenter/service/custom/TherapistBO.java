@@ -13,4 +13,5 @@ public interface TherapistBO extends SuperBO {
     boolean updateTherapist(DoctorDTO doctorDTO);
     boolean deleteTherapist(String DoctorID) throws SQLException, ClassNotFoundException;
     String getNextTherapyID();
+    List<DoctorDTO>getDocNames() throws Exception;
 }

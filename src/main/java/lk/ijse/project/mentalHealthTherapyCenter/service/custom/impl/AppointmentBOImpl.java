@@ -5,6 +5,7 @@ import lk.ijse.project.mentalHealthTherapyCenter.dto.*;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.Appointments;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.Patient;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.Payment;
+import lk.ijse.project.mentalHealthTherapyCenter.entity.TPrograms;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOType;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.AppointmentDAO;
@@ -15,11 +16,13 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class AppointmentBOImpl implements AppointmentBO {
     PatientDAO patientDAO = DAOFactory.getInstance().getDAO(DAOType.PATIENT);
     AppointmentDAO appointmentDAO = DAOFactory.getInstance().getDAO(DAOType.APPOINTMENTS);
     PaymentDAO paymentDAO = DAOFactory.getInstance().getDAO(DAOType.PAYMENT);
+
     @Override
     public boolean addAppointment(PatientDTO patientDTO, ProgramDetailsDTO programDetailsDTO, SessionDTO sessionDTO, TherapistDetailsDTO therapistDetailsDTO, PaymentDTO paymentDTO) {
         Session session = FactoryConfiguration.getInstance().getSession();
@@ -72,6 +75,9 @@ public class AppointmentBOImpl implements AppointmentBO {
                 transaction.rollback();
                 return false;
             }
+
+            TPrograms tPrograms = new TPrograms();
+            tPrograms.setTherapyID(programDetailsDTO.getProgramId());
             transaction.commit();
             return true;
 
@@ -88,16 +94,37 @@ public class AppointmentBOImpl implements AppointmentBO {
 
     @Override
     public String getNextPatientID() {
-        return "P001";
+        Optional<String> lastPkOptional = patientDAO.getLastPK();
+        if (lastPkOptional.isPresent()) {
+            String lastPk = lastPkOptional.get();
+            int nextId = Integer.parseInt(lastPk.replace("P", "")) + 1;  // Extract number and increment
+            return String.format("P%03d", nextId);
+        } else {
+            return "P001";
+        }
     }
 
     @Override
     public String getNextSessionID() {
-        return "S001";
+        Optional<String> lastPkOptional = appointmentDAO.getLastPK();
+        if (lastPkOptional.isPresent()) {
+            String lastPk = lastPkOptional.get();
+            int nextId = Integer.parseInt(lastPk.replace("APT", "")) + 1;  // Extract number and increment
+            return String.format("APT%03d", nextId);
+        } else {
+            return "APT001";
+        }
     }
 
     @Override
     public String getNextPaymentID() {
-        return "PAY001";
+        Optional<String> lastPkOptional = paymentDAO.getLastPK();
+        if (lastPkOptional.isPresent()) {
+            String lastPk = lastPkOptional.get();
+            int nextId = Integer.parseInt(lastPk.replace("PAY", "")) + 1;  // Extract number and increment
+            return String.format("PAY%03d", nextId);
+        } else {
+            return "PAY001";
+        }
     }
 }

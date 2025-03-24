@@ -8,7 +8,6 @@ import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.PatientDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.PatientBO;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PatientBOImpl implements PatientBO {

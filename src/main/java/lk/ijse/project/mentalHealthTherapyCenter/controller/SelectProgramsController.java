@@ -65,11 +65,21 @@ public class SelectProgramsController implements Initializable {
     @Setter
     private TherapistController therapistController;
 
+    @Setter
+    private AppointmentsController appointmentsController;
+
     @FXML
     void selectBtnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+        if (therapistController != null) {
             String ID = idLabel.getText();
             String Name = nameLabel.getText();
             therapistController.setDetails(ID, Name); // Pass data to TherapistController
+        }
+        if (appointmentsController != null) {
+            String ID = idLabel.getText();
+            String Name = nameLabel.getText();
+            appointmentsController.setDetails(ID, Name);
+        }
     }
 
     @FXML

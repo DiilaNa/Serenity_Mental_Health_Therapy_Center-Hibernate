@@ -10,6 +10,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.impl.UserDAOImpl;
+import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
+import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
+import lk.ijse.project.mentalHealthTherapyCenter.service.custom.UserBO;
 
 import java.io.IOException;
 import java.net.URL;
@@ -41,10 +45,14 @@ public class AdminLogin implements Initializable {
     @FXML
     private Hyperlink forgetPass;
 
+    UserBO userBO = BOFactory.getInstance().getBO(BOType.USER);
+
     @FXML
     void forgetPassAction(MouseEvent event) throws IOException {
         loadNewPage("/view/forgetPassword.fxml");
     }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -75,8 +83,15 @@ public class AdminLogin implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Please enter your username and password", ButtonType.OK).show();
             return;
         }
-            /*send them to see if they exixts already*/
+
+        boolean isExist =  userBO.findUser(username,password);
+
+        if (isExist) {
+            new Alert(Alert.AlertType.INFORMATION, "Login Success", ButtonType.OK).show();
             navigateToMainPage("/view/MainLayout.fxml","admin",username);
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Login Failed..", ButtonType.OK).show();
+        }
     }
     @FXML
     void clickHereAction(MouseEvent event) throws IOException {

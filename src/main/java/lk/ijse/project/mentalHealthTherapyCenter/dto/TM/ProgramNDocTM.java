@@ -10,10 +10,11 @@ import lombok.NoArgsConstructor;
 public class ProgramNDocTM {
     private String doctorID;
     private String doctorName;
+    private String therapyID;
+    private String therapyName;
     private String doctorQualifications;
     private String doctorAvailability;
     private String doctorPhone;
     private String doctorEmail;
-    private String therapyID;
-    private String therapyName;
+
 }

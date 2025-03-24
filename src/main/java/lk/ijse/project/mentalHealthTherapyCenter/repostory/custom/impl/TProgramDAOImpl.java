@@ -88,8 +88,16 @@ public class TProgramDAOImpl implements TProgramDAO {
 
     @Override
     public Optional<TPrograms> findByPK(String pk) {
-        return Optional.empty();
+        Session session = factoryConfiguration.getSession();
+        TPrograms tPrograms = session.get(TPrograms.class, pk);
+        session.close();
+        if (tPrograms == null) {
+            System.out.println("null no program found");
+            return Optional.empty();
+        }
+        return Optional.of(tPrograms);
     }
+
 
     @Override
     public Optional<String> getLastPK() {
@@ -101,6 +109,16 @@ public class TProgramDAOImpl implements TProgramDAO {
                 .uniqueResult();
 
         return Optional.ofNullable(lastPk);
+    }
+
+    @Override
+    public Optional<String> findByiD(String pk) {
+        Session session = factoryConfiguration.getSession();
+
+        String myPK = session.createQuery("SELECT t.id FROM TPrograms t WHERE t.id ='pk' ",String.class)
+                .setMaxResults(1).uniqueResult();
+
+        return Optional.ofNullable(myPK);
     }
 
 }

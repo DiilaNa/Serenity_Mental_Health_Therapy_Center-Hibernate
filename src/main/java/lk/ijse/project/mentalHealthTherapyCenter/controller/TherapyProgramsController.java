@@ -178,6 +178,7 @@ public class TherapyProgramsController implements Initializable {
         ProgramName.clear();
         ProgramDetails.clear();
         ProgramFee.clear();
+
     }
 }
 

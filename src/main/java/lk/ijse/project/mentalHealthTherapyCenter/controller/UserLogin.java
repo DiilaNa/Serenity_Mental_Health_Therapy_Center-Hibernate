@@ -13,6 +13,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.stage.Stage;
+import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
+import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
+import lk.ijse.project.mentalHealthTherapyCenter.service.custom.UserBO;
 
 
 import java.io.IOException;
@@ -54,6 +57,7 @@ public class UserLogin implements Initializable {
     @FXML
     private Hyperlink forgetPass;
 
+    UserBO userBO = BOFactory.getInstance().getBO(BOType.USER);
     @FXML
     void clickhereAction(MouseEvent event) throws IOException {
         loadPage("/view/userRegister.fxml");
@@ -69,8 +73,14 @@ public class UserLogin implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Please enter your username and password", ButtonType.OK).show();
             return;
         }
-            /*send them to see if they exixts already*/
+
+        boolean isExist =  userBO.findUser(username,password);
+        if (isExist) {
+            new Alert(Alert.AlertType.INFORMATION, "Login Success", ButtonType.OK).show();
             navigateToMainPage("/view/MainLayout.fxml","user",username);
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Login Failed..", ButtonType.OK).show();
+        }
     }
 
     @FXML

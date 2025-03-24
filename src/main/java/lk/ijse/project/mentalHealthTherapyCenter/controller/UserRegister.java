@@ -133,6 +133,7 @@ public class UserRegister implements Initializable {
             return;
         }
 
+
         if (isValidMailPattern && isValidPasswordPattern) {
             UserDTO userDTO = new UserDTO(
                     userID,
@@ -145,7 +146,7 @@ public class UserRegister implements Initializable {
 
             boolean isSaved = userBO.saveUser(userDTO);
             if (isSaved) {
-                new Alert(Alert.AlertType.CONFIRMATION, " SignUp SuccessFull", ButtonType.OK).show();
+                new Alert(Alert.AlertType.INFORMATION, " SignUp SuccessFull", ButtonType.OK).show();
                 if (role.equals("USER")) {
                     loadPage("/view/userLogin.fxml");
                 }else{
@@ -157,6 +158,7 @@ public class UserRegister implements Initializable {
         }
     }
     private void refreshPage() {
+        userId.setText(userBO.getNextID());
         passwordPWField.setVisible(true);
         passwordConfirmPWField.setVisible(true);
         passwordTextField.setVisible(false);
