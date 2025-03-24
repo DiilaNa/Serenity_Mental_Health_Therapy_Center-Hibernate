@@ -116,8 +116,9 @@ public class TherapistBOImpl implements TherapistBO {
         List<Therapist> therapists = therapistDAO.getAll();
         List<DoctorDTO> docNames = new ArrayList<>();
         for (Therapist therapist : therapists) {
-            String therapyPID = therapist.getTPrograms().getTherapyID();
-            docNames.add(new DoctorDTO(
+            String therapyPID = (therapist.getTPrograms() != null) ? therapist.getTPrograms().getTherapyID() : null;
+
+            DoctorDTO doctorDTO = new DoctorDTO(
                     therapist.getDoctorID(),
                     therapist.getDoctorName(),
                     therapyPID,
@@ -125,7 +126,8 @@ public class TherapistBOImpl implements TherapistBO {
                     therapist.getDoctorAvailability(),
                     therapist.getDoctorPhone(),
                     therapist.getDoctorEmail()
-            ));
+            );
+            docNames.add(doctorDTO);
         }
         return docNames;
     }

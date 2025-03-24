@@ -1,10 +1,11 @@
 package lk.ijse.project.mentalHealthTherapyCenter.controller;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -23,6 +24,13 @@ public class AssignDoctorsController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Image adminIMage = new Image(getClass().getResourceAsStream("/images/doctor.png"));
         image.setImage(adminIMage);
+
+        try{
+            refreshPage();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Failed to load", ButtonType.OK).show();
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -51,20 +59,25 @@ public class AssignDoctorsController implements Initializable {
 
     TherapistBO therapistBO = BOFactory.getInstance().getBO(BOType.THERAPIST);
 
+    private void refreshPage() throws Exception {
+        loadComboBoxAction(null);
+    }
+
     @FXML
     void loadComboBoxAction(ActionEvent event) throws Exception {
         try {
-            String docName = null;
-            List<DoctorDTO> h = therapistBO.getDocNames();
-            System.out.println(h);
-            for (DoctorDTO d : h) {
-                 docName = d.getDoctorName();
-                String docID = d.getDoctorID();
-                String qualifications = d.getDoctorQualifications();
-                String available = d.getDoctorAvailability().toString();
+            List<DoctorDTO> doctors = therapistBO.getDocNames();
+
+            if (doctors == null || doctors.isEmpty()) {
+                return;
             }
-            docComboBox.setValue(docName);
-            docNameFromCombo.setText(docName);
+            ObservableList<String> doctorNames = FXCollections.observableArrayList();
+            for (DoctorDTO d : doctors) {
+                doctorNames.add(d.getDoctorName());
+            }
+            if (docComboBox.getItems() == null || !docComboBox.getItems().equals(doctorNames)) {
+                Platform.runLater(() -> docComboBox.setItems(doctorNames));
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

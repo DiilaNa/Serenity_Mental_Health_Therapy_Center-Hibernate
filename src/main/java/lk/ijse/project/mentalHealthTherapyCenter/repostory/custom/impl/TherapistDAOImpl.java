@@ -1,11 +1,10 @@
 package lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.impl;
 
 import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
-import lk.ijse.project.mentalHealthTherapyCenter.entity.TPrograms;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.Therapist;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.TherapistDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.exeception.NotFoundException;
-import org.hibernate.HibernateException;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -57,7 +56,8 @@ public class TherapistDAOImpl implements TherapistDAO {
     public List<Therapist> getAll() throws Exception {
         Session session = factoryConfiguration.getSession();
         Query<Therapist> query = session.createQuery("from Therapist ", Therapist.class);
-        return query.list();
+        List<Therapist> therapists = query.list();
+        return therapists;
     }
 
     @Override
