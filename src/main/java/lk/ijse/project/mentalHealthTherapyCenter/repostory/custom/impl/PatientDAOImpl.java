@@ -83,7 +83,13 @@ public class PatientDAOImpl implements PatientDAO {
 
     @Override
     public Optional<Patient> findByPK(String pk) {
-        return Optional.empty();
+        Session session = factoryConfiguration.getSession();
+        Patient patient = session.get(Patient.class, pk);
+        session.close();
+        if (patient == null) {
+            return Optional.empty();
+        }
+        return Optional.of(patient);
     }
 
     @Override

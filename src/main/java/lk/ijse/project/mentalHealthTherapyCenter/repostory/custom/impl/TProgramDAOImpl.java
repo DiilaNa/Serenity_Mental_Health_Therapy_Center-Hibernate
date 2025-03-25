@@ -5,12 +5,12 @@ import lk.ijse.project.mentalHealthTherapyCenter.entity.TPrograms;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.TProgramDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.exeception.DuplicateException;
 import lk.ijse.project.mentalHealthTherapyCenter.service.exeception.NotFoundException;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -87,20 +87,35 @@ public class TProgramDAOImpl implements TProgramDAO {
         }
     }
 
-    public Optional<TPrograms> findByPK(String therapyID) {
+    @Override
+    public Optional<TPrograms> findByPK(String pk) {
+        System.out.println(pk+ "therapy id from dao");
         Session session = factoryConfiguration.getSession();
-        try {
-            /*TPrograms tPrograms = session.get(TPrograms.class, therapyID);*/
-            TPrograms tPrograms = session.createQuery("FROM TPrograms WHERE id = :id", TPrograms.class)
-                    .setParameter("id", therapyID)
-                    .uniqueResult();
-            return Optional.ofNullable(tPrograms);
-        } catch (HibernateException e) {
-            e.printStackTrace();
-            return Optional.empty();  // Return empty if not found or any error occurs
-        } finally {
-            session.close();
+        TPrograms tPrograms = session.get(TPrograms.class, pk);
+        session.close();
+
+        if (tPrograms == null) {
+            System.out.println("therapy p id not found inside dao");
+            return Optional.empty();
         }
+        return Optional.of(tPrograms);
+
+    }
+
+    @Override
+    public List<TPrograms> findByIds(List<String> therapyProgramIDs) {
+        if (therapyProgramIDs == null || therapyProgramIDs.isEmpty()) {
+            System.out.println("therapyProgramIDs is null or empty inside findByIds dao");
+            return Collections.emptyList();
+        }
+
+        Session session = factoryConfiguration.getSession();
+        List<TPrograms> therapyPrograms = session.createQuery(
+                        "FROM TPrograms WHERE therapyID IN :ids", TPrograms.class)
+                .setParameter("ids", therapyProgramIDs)
+                .getResultList();
+        session.close();
+        return therapyPrograms;
     }
     @Override
     public Optional<String> getLastPK() {

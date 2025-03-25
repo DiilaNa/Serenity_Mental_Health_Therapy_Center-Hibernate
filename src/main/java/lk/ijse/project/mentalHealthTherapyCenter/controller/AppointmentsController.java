@@ -3,6 +3,7 @@ package lk.ijse.project.mentalHealthTherapyCenter.controller;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,13 +21,15 @@ import lk.ijse.project.mentalHealthTherapyCenter.dto.*;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.AppointmentBO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
-import lombok.Setter;
+
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AppointmentsController implements Initializable {
@@ -122,7 +125,7 @@ public class AppointmentsController implements Initializable {
     @FXML
     private Label time;
 
-    private  String ProgramID;
+    private String ProgramID;
 
     private  String DocID;
 
@@ -165,21 +168,28 @@ public class AppointmentsController implements Initializable {
         String paymentMETHOD = paymentMethod.getSelectionModel().getSelectedItem();
         String paymentDate = LocalDate.now().format(formatter);
         String paymentTime = LocalTime.now().format(timeFormatter);
-        String docID = null;
-        String programID = null;
 
-        String listDoctors = doctorListView.getSelectionModel().getSelectedItem();
-        if (listDoctors != null && listDoctors.contains(" - ")) {
-            docID = listDoctors.split(" - ")[0];  // Extract docID safely
-        } else {
-            System.out.println("Error: No doctor selected or incorrect format!");
+        ObservableList<String> selectedDoctors = doctorListView.getSelectionModel().getSelectedItems();
+        List<String> doctorIDs = new ArrayList<>();
+        for (String doctor : selectedDoctors) {
+            if (doctor.contains(" - ")){
+                String docID = doctor.split("-")[0];
+                doctorIDs.add(docID);
+            }else{
+                System.out.println("Error: Invalid doctor selected");
+            }
         }
 
-        String listPrograms = programmsListView.getSelectionModel().getSelectedItem();
-        if (listPrograms != null && listPrograms.contains("-")) {
-            programID = listPrograms.split("-")[0];  // Extract programID safely
-        } else {
-            System.out.println("Error: No program selected or incorrect format!");
+        ObservableList<String> selectedPrograms = programmsListView.getSelectionModel().getSelectedItems();  // Get selected items
+
+        List<String> programIDs = new ArrayList<>();
+        for (String program : selectedPrograms) {
+            if (program.contains(" - ")) {
+                String programID = program.split(" - ")[0];  // Extract programID from the format "ID - ProgramName"
+                programIDs.add(programID);  // Add to the list of program IDs
+            } else {
+                System.out.println("Error: Invalid format for program item!");
+            }
         }
 
      /*   String namePattern = "^[a-zA-Z ]+$";
@@ -229,7 +239,7 @@ public class AppointmentsController implements Initializable {
             );
             ProgramDetailsDTO programDetailsDTO = new ProgramDetailsDTO(
                 patientId,
-                programID
+                programIDs
 
             );
             SessionDTO sessionDTO = new SessionDTO(
@@ -242,7 +252,7 @@ public class AppointmentsController implements Initializable {
             );
             TherapistDetailsDTO therapistDetailsDTO = new TherapistDetailsDTO(
                     sessionId,
-                    docID
+                    doctorIDs
             );
             PaymentDTO paymentDTO = new PaymentDTO(
                     paymentId,

@@ -81,6 +81,16 @@ public class TherapistDAOImpl implements TherapistDAO {
             }
         }
     }
+    @Override
+    public List<Therapist> findByDocID(List<String> docIDs)  {
+        Session session = factoryConfiguration.getSession();
+        List<Therapist> therapists = session.createQuery("FROM Therapist WHERE doctorID IN:ids", Therapist.class)
+                .setParameter("ids",docIDs)
+                .getResultList();
+        session.close();
+        return therapists;
+    }
+
 
     @Override
     public Optional<Therapist> findByPK(String pk) {
@@ -105,6 +115,4 @@ public class TherapistDAOImpl implements TherapistDAO {
 
         return Optional.ofNullable(lastPk);
     }
-
-
 }

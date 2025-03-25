@@ -5,8 +5,7 @@ import lombok.*;
 
 import java.util.List;
 
-@Setter
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -20,13 +19,9 @@ public class Therapist implements SuperEntity {
         private String doctorPhone;
         private String doctorEmail;
 
-        @ManyToMany
-        @JoinTable(
-                name = "session_details",
-                joinColumns = @JoinColumn(name = "therapist_id"),
-                inverseJoinColumns = @JoinColumn(name = "session_id")
-        )
-        private List<Appointments> sessionds;
+
+        @OneToMany(mappedBy = "therapist",cascade = CascadeType.ALL)
+        private List<AppointmentDetails> appointmentDetails;
 
 
         @ManyToOne

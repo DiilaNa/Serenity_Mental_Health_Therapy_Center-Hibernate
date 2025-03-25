@@ -8,10 +8,10 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
+@Data
 @Entity
 @Table(name = "appointments")
+
 public class Appointments implements SuperEntity{
     @Id
     private String sessionId;
@@ -23,8 +23,9 @@ public class Appointments implements SuperEntity{
     @JoinColumn(name = "patient_Id")
     private Patient patient;
 
-    @ManyToMany(mappedBy = "sessionds")
-    private List<Therapist> therapists;
+    @OneToMany(mappedBy = "appointment",cascade = CascadeType.ALL)
+    private List<AppointmentDetails> appointmentDetails;
+
 
 }
 

@@ -9,8 +9,7 @@ import lombok.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
+@Data
 @Table(name = "payment")
 public class Payment implements SuperEntity {
     @Id

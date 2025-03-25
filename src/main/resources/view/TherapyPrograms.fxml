@@ -95,7 +95,7 @@
       <TextField fx:id="ProgramFee" layoutX="289.0" layoutY="636.0" prefHeight="26.0" prefWidth="186.0" promptText="Enter the Fee" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
       <Label fx:id="labelLoadID" layoutX="123.0" layoutY="616.0" text="Load ID">
          <font>
-            <Font name="Georgia Bold" size="16.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Label>
       <Label layoutX="267.0" layoutY="35.0" text=" Therapy Program Details of Serinity Mental Health Therapy Center " textFill="#408181">

@@ -8,8 +8,7 @@ import lombok.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
+@Data
 @Table(name = "user_details")
 public class User implements SuperEntity {
     @Id

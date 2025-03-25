@@ -8,8 +8,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
+@Data
 @Table(name = "therapy_Programs")
 public class TPrograms implements SuperEntity {
     @Id
@@ -22,11 +21,6 @@ public class TPrograms implements SuperEntity {
     @OneToMany(mappedBy = "tPrograms" ,cascade = CascadeType.ALL)
     private List<Therapist> therapists;
 
-    @ManyToMany
-    @JoinTable(
-            name = "program_details",
-            joinColumns = @JoinColumn(name = "therapyProgram_id"),
-            inverseJoinColumns = @JoinColumn(name = "patient_id")
-    )
-    private List<Patient> patient;
+    @OneToMany(mappedBy = "tPrograms",cascade = CascadeType.ALL)
+    private List<ProgramDetails> programDetails;
 }
