@@ -8,21 +8,56 @@ import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.PatientDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.PatientBO;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PatientBOImpl implements PatientBO {
     PatientDAO patientDAO = DAOFactory.getInstance().getDAO(DAOType.PATIENT);
     @Override
     public boolean updatePatient(PatientDTO patientDTO) throws SQLException, ClassNotFoundException {
-       return true;
+        try {
+            Patient patient = new Patient();
+            patient.setPatientID(patientDTO.getPatientID());
+            patient.setPatientName(patientDTO.getPatientName());
+            patient.setPatientBirthDate(patientDTO.getPatientBirthDate());
+            patient.setPatientNIC(patientDTO.getPatientNIC());
+            patient.setPatientGender(patientDTO.getPatientGender());
+            patient.setPatientAddress(patientDTO.getPatientAddress());
+            patient.setPatientPhone(patientDTO.getPatientPhone());
+            patient.setPatientEmail(patientDTO.getPatientEmail());
+
+           return patientDAO.update(patient);
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new RuntimeException("Update failed");
+        }
     }
     @Override
     public List<PatientDTO> getALL() throws Exception {
-        return null;
+        List<Patient> patients = patientDAO.getAll();
+        List<PatientDTO> patientDTOS = new ArrayList<>();
+        for (Patient patient : patients) {
+            patientDTOS.add(new PatientDTO(
+                    patient.getPatientID(),
+                    patient.getPatientName(),
+                    patient.getPatientBirthDate(),
+                    patient.getPatientNIC(),
+                    patient.getPatientGender(),
+                    patient.getPatientAddress(),
+                    patient.getPatientPhone(),
+                    patient.getPatientEmail()
+            ));
+        }
+        return patientDTOS;
     }
 
     @Override
     public boolean deletePatient(String patientID) throws SQLException, ClassNotFoundException {
-       return true;
+        try{
+            return patientDAO.deleteByPk(patientID);
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new SQLException("Delete failed");
+        }
     }
 }

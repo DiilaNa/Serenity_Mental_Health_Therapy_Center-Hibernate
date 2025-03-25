@@ -37,7 +37,7 @@ public class PatientController implements Initializable {
         tablePContact.setCellValueFactory(new PropertyValueFactory<>("patientPhone"));
         tablePEmail.setCellValueFactory(new PropertyValueFactory<>("patientEmail"));
         try {
-           /* loadTableData();*/
+            refreshPage();
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, " Failed ").show();
             throw new RuntimeException(e);
@@ -107,13 +107,19 @@ public class PatientController implements Initializable {
     PatientBO patientBO = BOFactory.getInstance().getBO(BOType.PATIENT);
 
     @FXML
-    void deleteAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+    void deleteAction(ActionEvent event) throws Exception {
         String patientID = loadPatientID.getText();
+
+        if (patientID.isEmpty()) {
+            new Alert(Alert.AlertType.CONFIRMATION, " Please select data from table",ButtonType.CLOSE).show();
+            return;
+        }
         boolean isDeleted = patientBO.deletePatient(patientID);
         if (isDeleted) {
-            new Alert(Alert.AlertType.INFORMATION, "Deleted Successfully").show();
+            refreshPage();
+            new Alert(Alert.AlertType.INFORMATION, "Deleted Successfully",ButtonType.OK).show();
         }else {
-            new Alert(Alert.AlertType.ERROR, "Deletion Failed").show();
+            new Alert(Alert.AlertType.ERROR, "Deletion Failed",ButtonType.OK).show();
         }
     }
 
@@ -136,7 +142,7 @@ public class PatientController implements Initializable {
     }
 
     @FXML
-    void updateAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+    void updateAction(ActionEvent event) throws Exception {
         String patientID = loadPatientID.getText();
         String patientName = PName.getText();
         String patientBirthDate = PDateOfBirth.getText();
@@ -145,6 +151,11 @@ public class PatientController implements Initializable {
         String patientAddress = PatientAddress.getText();
         String patientPhone = PatientContactNO.getText();
         String patientEmail = PatientEmail.getText();
+
+        if (patientID.isEmpty() || patientName.trim().isEmpty() || patientBirthDate.isEmpty() || patientNIC.isEmpty() || patientGender.trim().isEmpty() || patientAddress.trim().isEmpty()) {
+            new Alert(Alert.AlertType.INFORMATION, "Please select data from table",ButtonType.CLOSE).show();
+            return;
+        }
 
        PatientDTO patientDTO = new PatientDTO(
                patientID,
@@ -159,9 +170,10 @@ public class PatientController implements Initializable {
 
        boolean isUpdated = patientBO.updatePatient(patientDTO);
             if (isUpdated) {
-                new Alert(Alert.AlertType.INFORMATION, "PatientDAOImpl updated successfully").show();
+                refreshPage();
+                new Alert(Alert.AlertType.INFORMATION, "PatientDAOImpl updated successfully", ButtonType.OK).show();
             }else {
-                new Alert(Alert.AlertType.ERROR, "PatientDAOImpl updated Failed").show();
+                new Alert(Alert.AlertType.ERROR, "PatientDAOImpl updated Failed",ButtonType.OK).show();
             }
     }
     private void loadTableData() throws Exception {
@@ -169,22 +181,33 @@ public class PatientController implements Initializable {
         List<PatientDTO> patientDTOS = patientBO.getALL();
         ObservableList<PatientTM> patientTMS = FXCollections.observableArrayList();
 
-        for (PatientDTO paymentDTO : patientDTOS) {
+        for (PatientDTO patientDTO : patientDTOS) {
             PatientTM patientTM = new PatientTM(
-                    paymentDTO.getPatientID(),
-                    paymentDTO.getPatientName(),
-                    paymentDTO.getPatientBirthDate(),
-                    paymentDTO.getPatientNIC(),
-                    paymentDTO.getPatientGender(),
-                    paymentDTO.getPatientAddress(),
-                    paymentDTO.getPatientPhone(),
-                    paymentDTO.getPatientEmail()
+                    patientDTO.getPatientID(),
+                    patientDTO.getPatientName(),
+                    patientDTO.getPatientBirthDate(),
+                    patientDTO.getPatientNIC(),
+                    patientDTO.getPatientGender(),
+                    patientDTO.getPatientAddress(),
+                    patientDTO.getPatientPhone(),
+                    patientDTO.getPatientEmail()
 
             );
             patientTMS.add(patientTM);
         }
 
         table.setItems(patientTMS);
+    }
+    private void refreshPage() throws Exception {
+        loadTableData();
+        loadPatientID.setText("");
+        PName.clear();
+        PDateOfBirth.clear();
+        PatientNic.clear();
+        PatientGender.clear();
+        PatientAddress.clear();
+        PatientContactNO.clear();
+        PatientEmail.clear();
     }
 
 }
