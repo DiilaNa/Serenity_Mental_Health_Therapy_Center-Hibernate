@@ -169,12 +169,20 @@ public class AppointmentsController implements Initializable {
         String programID = null;
 
         String listDoctors = doctorListView.getSelectionModel().getSelectedItem();
-        docID = listDoctors.split(" - ")[0];
+        if (listDoctors != null && listDoctors.contains(" - ")) {
+            docID = listDoctors.split(" - ")[0];  // Extract docID safely
+        } else {
+            System.out.println("Error: No doctor selected or incorrect format!");
+        }
 
         String listPrograms = programmsListView.getSelectionModel().getSelectedItem();
-        programID = listPrograms.split("-")[0];
+        if (listPrograms != null && listPrograms.contains("-")) {
+            programID = listPrograms.split("-")[0];  // Extract programID safely
+        } else {
+            System.out.println("Error: No program selected or incorrect format!");
+        }
 
-        String namePattern = "^[a-zA-Z ]+$";
+     /*   String namePattern = "^[a-zA-Z ]+$";
         String addressPattern = "^[a-zA-Z0-9, -]+$";
         String mailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
         String PhoneNoPattern = "^\\+?[1-9]\\d{0,2}[-.\\s]?\\d{1,4}[-.\\s]?\\d{3,4}[-.\\s]?\\d{3,4}$";
@@ -207,8 +215,8 @@ public class AppointmentsController implements Initializable {
         if (!isValidTime) {
             sessionTime.setStyle(sessionTime.getStyle() + ";-fx-border-color: red;");
         }
-
-        if (isValidName && isValidAddress && isValidMail && isValidPhoneNO && isValidDate && isValidTime) {
+*/
+        /*if (*//*isValidName && isValidAddress && isValidMail && isValidPhoneNO && isValidDate && isValidTime*//*) {*/
             PatientDTO patientDTO = new PatientDTO(
                 patientId,
                 patientNAME,
@@ -251,7 +259,7 @@ public class AppointmentsController implements Initializable {
             }else {
                 new Alert(Alert.AlertType.ERROR, "Failed! Appointment not added", ButtonType.OK).show();
             }
-        }
+      /*  }*/
     }
 
     @FXML

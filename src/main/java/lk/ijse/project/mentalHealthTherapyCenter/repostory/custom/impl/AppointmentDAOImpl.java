@@ -16,14 +16,8 @@ public class AppointmentDAOImpl implements AppointmentDAO {
     public boolean save(Appointments appointments) throws SQLException {
         Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();
-
         try {
-            Appointments existApt = session.get(Appointments.class,appointments.getSessionId());
-            if (existApt != null) {
-                throw new SQLException("Appointment already exists");
-            }
             session.persist(appointments);
-
             transaction.commit();
             return true;
         } catch (Exception e) {

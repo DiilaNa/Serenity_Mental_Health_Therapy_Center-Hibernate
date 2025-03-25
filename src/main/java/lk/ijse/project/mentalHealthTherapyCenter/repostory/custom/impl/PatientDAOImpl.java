@@ -21,10 +21,6 @@ public class PatientDAOImpl implements PatientDAO {
        Session session = factoryConfiguration.getSession();
        Transaction transaction = session.beginTransaction();
        try {
-           Patient patient1 = session.get(Patient.class, patient.getPatientID());
-           if (patient1 == null) {
-               throw new SQLException("Patient does not exist");
-           }
            session.persist(patient);
            transaction.commit();
            return true;

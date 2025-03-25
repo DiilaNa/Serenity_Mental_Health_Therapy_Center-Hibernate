@@ -2,6 +2,7 @@ package lk.ijse.project.mentalHealthTherapyCenter.service.custom.impl;
 
 import lk.ijse.project.mentalHealthTherapyCenter.dto.DoctorDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.ProgramNDocDTO;
+import lk.ijse.project.mentalHealthTherapyCenter.entity.TPrograms;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.Therapist;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOType;
@@ -55,13 +56,10 @@ public class TherapistBOImpl implements TherapistBO {
             therapist.setDoctorPhone(doctorDTO.getDoctorPhone());
             therapist.setDoctorEmail(doctorDTO.getDoctorEmail());
 
+            System.out.println(doctorDTO.getTherapyID());
             String therapyPID = doctorDTO.getTherapyID();
-            System.out.println(therapyPID);
-            Optional<String> optionalID = programDAO.findByiD(therapyPID);
-            if (optionalID.isPresent()){
-                System.out.println("Program already exists");
-                String t = optionalID.get();
-            }
+            TPrograms tPrograms = programDAO.findByPK(therapyPID).orElseThrow(() -> new RuntimeException("Program not found"));
+            therapist.setTPrograms(tPrograms);
             return therapistDAO.save(therapist);
         } catch (HibernateException | SQLException e) {
             e.printStackTrace();

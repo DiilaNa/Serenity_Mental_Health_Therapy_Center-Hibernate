@@ -20,10 +20,6 @@ public class PaymentDAOImpl implements PaymentDAO {
        Session session = factoryConfiguration.getSession();
        Transaction transaction = session.beginTransaction();
        try{
-           Payment payment1 =  session.get(Payment.class, payment.getPaymentID());
-           if (payment1 != null) {
-               throw new SQLException("Payment already exists");
-           }
            session.persist(payment);
            transaction.commit();
            return true;

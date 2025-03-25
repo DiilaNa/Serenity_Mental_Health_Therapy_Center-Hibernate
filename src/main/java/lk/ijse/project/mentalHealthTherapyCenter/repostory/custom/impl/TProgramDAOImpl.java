@@ -5,6 +5,7 @@ import lk.ijse.project.mentalHealthTherapyCenter.entity.TPrograms;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.TProgramDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.exeception.DuplicateException;
 import lk.ijse.project.mentalHealthTherapyCenter.service.exeception.NotFoundException;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -86,19 +87,21 @@ public class TProgramDAOImpl implements TProgramDAO {
         }
     }
 
-    @Override
-    public Optional<TPrograms> findByPK(String pk) {
+    public Optional<TPrograms> findByPK(String therapyID) {
         Session session = factoryConfiguration.getSession();
-        TPrograms tPrograms = session.get(TPrograms.class, pk);
-        session.close();
-        if (tPrograms == null) {
-            System.out.println("null no program found");
-            return Optional.empty();
+        try {
+            /*TPrograms tPrograms = session.get(TPrograms.class, therapyID);*/
+            TPrograms tPrograms = session.createQuery("FROM TPrograms WHERE id = :id", TPrograms.class)
+                    .setParameter("id", therapyID)
+                    .uniqueResult();
+            return Optional.ofNullable(tPrograms);
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            return Optional.empty();  // Return empty if not found or any error occurs
+        } finally {
+            session.close();
         }
-        return Optional.of(tPrograms);
     }
-
-
     @Override
     public Optional<String> getLastPK() {
         Session session = factoryConfiguration.getSession();
@@ -109,16 +112,6 @@ public class TProgramDAOImpl implements TProgramDAO {
                 .uniqueResult();
 
         return Optional.ofNullable(lastPk);
-    }
-
-    @Override
-    public Optional<String> findByiD(String pk) {
-        Session session = factoryConfiguration.getSession();
-
-        String myPK = session.createQuery("SELECT t.id FROM TPrograms t WHERE t.id ='pk' ",String.class)
-                .setMaxResults(1).uniqueResult();
-
-        return Optional.ofNullable(myPK);
     }
 
 }

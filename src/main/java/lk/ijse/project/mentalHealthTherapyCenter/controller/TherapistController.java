@@ -207,7 +207,6 @@ public class TherapistController  implements Initializable {
             boolean isSaved = therapistBO.saveTherapist(doctorDTO);
             if (isSaved) {
                 refreshPage();
-                System.out.println("Saved Successfully");
                 new Alert(Alert.AlertType.INFORMATION,"Therapist Saved",ButtonType.OK).show();
             }else{
                 new Alert(Alert.AlertType.ERROR,"Saving Failed",ButtonType.OK).show();

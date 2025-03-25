@@ -101,7 +101,6 @@ public class TherapyProgramsController implements Initializable {
     void resetBtnAction(ActionEvent event) throws Exception {
         refreshPage();
     }
-
     @FXML
     void saveBtnAction(ActionEvent event) throws Exception {
         String therapyPID = labelLoadID.getText();
@@ -158,6 +157,7 @@ public class TherapyProgramsController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Therapy Programs updating Failed").show();
         }
     }
+
     private void loadTable() throws Exception {
         List<TherapyProgramDTO> therapyProgramDTOS =  tProgramBO.getALLTPrograms();
         ObservableList<TProgramTM> tProgramTMS = FXCollections.observableArrayList();
@@ -172,6 +172,7 @@ public class TherapyProgramsController implements Initializable {
         }
         Table.setItems(tProgramTMS);
     }
+
     private void refreshPage() throws Exception {
         loadTable();
         labelLoadID.setText(tProgramBO.getNextProgramID());

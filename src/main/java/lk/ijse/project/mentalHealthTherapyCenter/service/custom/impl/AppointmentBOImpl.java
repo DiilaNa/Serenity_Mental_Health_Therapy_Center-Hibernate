@@ -38,16 +38,15 @@ public class AppointmentBOImpl implements AppointmentBO {
             patient.setPatientPhone(patientDTO.getPatientPhone());
             patient.setPatientEmail(patientDTO.getPatientEmail());
 
-            try {
+
                 boolean isPatientSaved = patientDAO.save(patient);
 
                 if (!isPatientSaved) {
+                    System.out.println("Patient not saved");
                     transaction.rollback();
                     return false;
                 }
-            } catch (SQLException e) {
-               e.printStackTrace();
-            }
+
 
             Appointments appointments = new Appointments();
             appointments.setSessionId(sessionDTO.getSessionId());
@@ -58,6 +57,7 @@ public class AppointmentBOImpl implements AppointmentBO {
 
             boolean isAppointmentSaved = appointmentDAO.save(appointments);
             if (!isAppointmentSaved) {
+                System.out.println("Appointment not saved");
                 transaction.rollback();
                 return false;
             }
@@ -72,12 +72,10 @@ public class AppointmentBOImpl implements AppointmentBO {
 
             boolean isPaymentSaved = paymentDAO.save(payment);
             if (!isPaymentSaved) {
+                System.out.println("Payment not saved");
                 transaction.rollback();
                 return false;
             }
-
-            TPrograms tPrograms = new TPrograms();
-            tPrograms.setTherapyID(programDetailsDTO.getProgramId());
             transaction.commit();
             return true;
 
