@@ -14,11 +14,9 @@ import java.util.Optional;
 
 public class PatientDAOImpl implements PatientDAO {
 
-    FactoryConfiguration factoryConfiguration = FactoryConfiguration.getInstance();
-
     @Override
     public boolean save(Patient patient) throws SQLException {
-       Session session = factoryConfiguration.getSession();
+       Session session = FactoryConfiguration.getInstance().getSession();
        Transaction transaction = session.beginTransaction();
        try {
            session.persist(patient);
@@ -36,7 +34,7 @@ public class PatientDAOImpl implements PatientDAO {
 
     @Override
     public boolean update(Patient patient) throws SQLException, ClassNotFoundException {
-        Session session = factoryConfiguration.getSession();
+        Session session =FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         try {
             session.merge(patient);
@@ -54,14 +52,14 @@ public class PatientDAOImpl implements PatientDAO {
 
     @Override
     public List<Patient> getAll() throws Exception {
-        Session session = factoryConfiguration.getSession();
+        Session session =FactoryConfiguration.getInstance().getSession();
         Query<Patient> query = session.createQuery("from Patient ", Patient.class);
         return query.list();
     }
 
     @Override
     public boolean deleteByPk(String pk) throws SQLException, ClassNotFoundException {
-        Session session = factoryConfiguration.getSession();
+        Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         try{
             Patient patient = session.get(Patient.class,pk);
@@ -83,7 +81,7 @@ public class PatientDAOImpl implements PatientDAO {
 
     @Override
     public Optional<Patient> findByPK(String pk) {
-        Session session = factoryConfiguration.getSession();
+        Session session = FactoryConfiguration.getInstance().getSession();
         Patient patient = session.get(Patient.class, pk);
         session.close();
         if (patient == null) {
@@ -94,8 +92,7 @@ public class PatientDAOImpl implements PatientDAO {
 
     @Override
     public Optional<String> getLastPK() {
-        Session session = factoryConfiguration.getSession();
-
+        Session session = FactoryConfiguration.getInstance().getSession();
         String lastPk = session
                 .createQuery("SELECT t.id FROM Patient t ORDER BY t.id DESC", String.class)
                 .setMaxResults(1)

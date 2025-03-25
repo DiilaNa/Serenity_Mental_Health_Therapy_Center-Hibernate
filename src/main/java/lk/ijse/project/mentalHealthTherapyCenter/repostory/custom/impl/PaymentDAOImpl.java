@@ -14,10 +14,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class PaymentDAOImpl implements PaymentDAO {
-    FactoryConfiguration factoryConfiguration = FactoryConfiguration.getInstance();
     @Override
     public boolean save(Payment payment) throws SQLException {
-       Session session = factoryConfiguration.getSession();
+       Session session = FactoryConfiguration.getInstance().getSession();
        Transaction transaction = session.beginTransaction();
        try{
            session.persist(payment);
@@ -40,7 +39,7 @@ public class PaymentDAOImpl implements PaymentDAO {
 
     @Override
     public List<Payment> getAll() throws Exception {
-        Session session = factoryConfiguration.getSession();
+        Session session = FactoryConfiguration.getInstance().getSession();
         Query<Payment> query = session.createQuery("from Payment ", Payment.class);
         return query.list();
     }
@@ -57,7 +56,7 @@ public class PaymentDAOImpl implements PaymentDAO {
 
     @Override
     public Optional<String> getLastPK() {
-        Session session = factoryConfiguration.getSession();
+        Session session = FactoryConfiguration.getInstance().getSession();
 
         String lastPk = session
                 .createQuery("SELECT p.id FROM Payment p ORDER BY p.id DESC", String.class)

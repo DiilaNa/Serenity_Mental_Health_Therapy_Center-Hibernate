@@ -10,10 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QueryDAOImpl implements QueryDAO {
-    FactoryConfiguration factoryConfiguration = FactoryConfiguration.getInstance();
     @Override
     public List<Therapist> getALLTherapists() {
-        Session session = factoryConfiguration.getSession();
+        Session session = FactoryConfiguration.getInstance().getSession();
         if (session == null) {
             return new ArrayList<>();  // Return an empty list if session is null
         }

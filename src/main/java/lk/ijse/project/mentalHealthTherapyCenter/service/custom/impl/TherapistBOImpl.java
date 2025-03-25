@@ -56,17 +56,19 @@ public class TherapistBOImpl implements TherapistBO {
             therapist.setDoctorPhone(doctorDTO.getDoctorPhone());
             therapist.setDoctorEmail(doctorDTO.getDoctorEmail());
 
-           String tPrograms = doctorDTO.getTherapyID();
-            System.out.println(tPrograms + "therapy id from controller through doctor Dto");
-           Optional<TPrograms> optional = programDAO.findByPK(tPrograms);
-           TPrograms y = optional.get();
-            System.out.println(y.getTherapyID()+ "therapy id from y");
-           if (optional.isPresent()) {
-               System.out.println("Therapist already exists");
-               therapist.setTPrograms(y);
-           }else {
-               throw new SQLException("Therapist not exists");
-           }
+            String tPrograms = doctorDTO.getTherapyID();
+            System.out.println("Therapy ID received from DTO: " + tPrograms);
+
+            Optional<TPrograms> optional = programDAO.findByPK(tPrograms);
+
+            if (optional.isPresent()) {
+                TPrograms y = optional.get();
+                System.out.println("Therapy ID found: " + y.getTherapyID());
+                therapist.setTPrograms(y);
+            } else {
+                throw new SQLException("Therapy Program not found! ID: " + tPrograms);
+            }
+
             return therapistDAO.save(therapist);
         } catch (HibernateException | SQLException e) {
             e.printStackTrace();

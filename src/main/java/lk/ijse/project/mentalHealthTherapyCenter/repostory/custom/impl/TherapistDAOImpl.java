@@ -14,10 +14,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class TherapistDAOImpl implements TherapistDAO {
-    FactoryConfiguration factoryConfiguration = FactoryConfiguration.getInstance();
     @Override
     public boolean save(Therapist therapist) throws SQLException {
-        Session session = factoryConfiguration.getSession();
+        Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         try {
             session.persist(therapist);
@@ -36,7 +35,7 @@ public class TherapistDAOImpl implements TherapistDAO {
 
     @Override
     public boolean update(Therapist therapist)  {
-        Session session = factoryConfiguration.getSession();
+        Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         try {
             session.merge(therapist);
@@ -54,7 +53,7 @@ public class TherapistDAOImpl implements TherapistDAO {
 
     @Override
     public List<Therapist> getAll() throws Exception {
-        Session session = factoryConfiguration.getSession();
+        Session session = FactoryConfiguration.getInstance().getSession();
         Query<Therapist> query = session.createQuery("from Therapist ", Therapist.class);
         List<Therapist> therapists = query.list();
         return therapists;
@@ -62,7 +61,7 @@ public class TherapistDAOImpl implements TherapistDAO {
 
     @Override
     public boolean deleteByPk(String pk)  {
-        Session session = factoryConfiguration.getSession();
+        Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         try{
             Therapist therapist = session.get(Therapist.class,pk);
@@ -83,7 +82,7 @@ public class TherapistDAOImpl implements TherapistDAO {
     }
     @Override
     public List<Therapist> findByDocID(List<String> docIDs)  {
-        Session session = factoryConfiguration.getSession();
+        Session session = FactoryConfiguration.getInstance().getSession();
         List<Therapist> therapists = session.createQuery("FROM Therapist WHERE doctorID IN:ids", Therapist.class)
                 .setParameter("ids",docIDs)
                 .getResultList();
@@ -106,7 +105,7 @@ public class TherapistDAOImpl implements TherapistDAO {
 
     @Override
     public Optional<String> getLastPK() {
-        Session session = factoryConfiguration.getSession();
+        Session session = FactoryConfiguration.getInstance().getSession();
 
         String lastPk = session
                 .createQuery("SELECT t.id FROM Therapist t ORDER BY t.id DESC", String.class)

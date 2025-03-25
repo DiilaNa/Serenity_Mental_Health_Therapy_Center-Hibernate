@@ -8,20 +8,18 @@ import org.hibernate.cfg.Configuration;
 
 public class FactoryConfiguration {
     private static FactoryConfiguration factoryConfiguration;
-    private SessionFactory sessionFactory;
+    private final  SessionFactory sessionFactory;
 
     private FactoryConfiguration() {
-        Configuration configuration = new Configuration();
-        configuration.configure();
-        configuration.addAnnotatedClass(Appointments.class)
-                .addAnnotatedClass(Patient.class)
-                .addAnnotatedClass(Payment.class)
-                .addAnnotatedClass(Therapist.class)
-                .addAnnotatedClass(TPrograms.class)
-                .addAnnotatedClass(User.class)
-                .addAnnotatedClass(AppointmentDetails.class)
-                .addAnnotatedClass(ProgramDetails.class);
-
+        Configuration configuration = new Configuration().configure();
+        configuration.addAnnotatedClass(Appointments.class);
+        configuration.addAnnotatedClass(Patient.class);
+        configuration.addAnnotatedClass(Payment.class);
+        configuration.addAnnotatedClass(Therapist.class);
+        configuration.addAnnotatedClass(TPrograms.class);
+        configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(AppointmentDetails.class);
+        configuration.addAnnotatedClass(ProgramDetails.class);
         sessionFactory = configuration.buildSessionFactory();
     }
     public static FactoryConfiguration getInstance() {

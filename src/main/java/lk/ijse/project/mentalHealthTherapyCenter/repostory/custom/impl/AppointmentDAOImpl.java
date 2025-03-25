@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class AppointmentDAOImpl implements AppointmentDAO {
-    FactoryConfiguration factoryConfiguration = FactoryConfiguration.getInstance();
+    private final  FactoryConfiguration factoryConfiguration = FactoryConfiguration.getInstance();
     @Override
     public boolean save(Appointments appointments) throws SQLException {
         Session session = factoryConfiguration.getSession();

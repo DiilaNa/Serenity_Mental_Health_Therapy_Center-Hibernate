@@ -16,19 +16,15 @@ import java.util.Optional;
 
 public class TProgramDAOImpl implements TProgramDAO {
 
-    FactoryConfiguration factoryConfiguration = FactoryConfiguration.getInstance();
-
     @Override
     public boolean save(TPrograms tPrograms) throws SQLException {
-        Session session = factoryConfiguration.getSession();
+        Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         try {
-            TPrograms programs = session.get(TPrograms.class,tPrograms.getTherapyID());
-            if (programs !=null) {
-                throw new DuplicateException("Therapy program id already exists");
-            }
             session.persist(tPrograms);
+            session.flush();
             transaction.commit();
+            System.out.println("save successful therapy Programs");
             return true;
         } catch (Exception e) {
             transaction.rollback();
@@ -42,7 +38,7 @@ public class TProgramDAOImpl implements TProgramDAO {
 
     @Override
     public boolean update(TPrograms tPrograms) throws SQLException, ClassNotFoundException {
-        Session session = factoryConfiguration.getSession();
+        Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         try {
             session.merge(tPrograms);
@@ -60,14 +56,14 @@ public class TProgramDAOImpl implements TProgramDAO {
 
     @Override
     public List<TPrograms> getAll() throws Exception {
-        Session session = factoryConfiguration.getSession();
+        Session session = FactoryConfiguration.getInstance().getSession();
         Query<TPrograms> query = session.createQuery("from TPrograms ", TPrograms.class);
         return query.list();
     }
 
     @Override
     public boolean deleteByPk(String pk) throws SQLException, ClassNotFoundException {
-        Session session = factoryConfiguration.getSession();
+        Session session =FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         try {
             TPrograms tPrograms = session.get(TPrograms.class, pk);
@@ -89,16 +85,23 @@ public class TProgramDAOImpl implements TProgramDAO {
 
     @Override
     public Optional<TPrograms> findByPK(String pk) {
-        System.out.println(pk+ "therapy id from dao");
-        Session session = factoryConfiguration.getSession();
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        System.out.println("Searching for Therapy Program with ID: " + pk);
+
         TPrograms tPrograms = session.get(TPrograms.class, pk);
-        session.close();
 
         if (tPrograms == null) {
-            System.out.println("therapy p id not found inside dao");
-            return Optional.empty();
+            System.out.println("Therapy Program not found!");
+        } else {
+            System.out.println("Therapy Program found: " + tPrograms.getTherapyID());
         }
-        return Optional.of(tPrograms);
+
+        transaction.commit();
+        session.close();
+
+        return Optional.ofNullable(tPrograms);
 
     }
 
@@ -109,7 +112,7 @@ public class TProgramDAOImpl implements TProgramDAO {
             return Collections.emptyList();
         }
 
-        Session session = factoryConfiguration.getSession();
+        Session session = FactoryConfiguration.getInstance().getSession();
         List<TPrograms> therapyPrograms = session.createQuery(
                         "FROM TPrograms WHERE therapyID IN :ids", TPrograms.class)
                 .setParameter("ids", therapyProgramIDs)
@@ -119,7 +122,7 @@ public class TProgramDAOImpl implements TProgramDAO {
     }
     @Override
     public Optional<String> getLastPK() {
-        Session session = factoryConfiguration.getSession();
+        Session session = FactoryConfiguration.getInstance().getSession();
 
         String lastPk = session
                 .createQuery("SELECT t.id FROM TPrograms t ORDER BY t.id DESC", String.class)
