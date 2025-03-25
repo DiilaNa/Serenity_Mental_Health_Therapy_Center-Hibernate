@@ -29,12 +29,12 @@ public class PayementController implements Initializable {
         Image image1 = new Image(getClass().getResourceAsStream("/images/Paymentmoney.png"));
         image.setImage(image1);
 
-        tablePayID.setCellValueFactory(new PropertyValueFactory<>("patientID"));
+        tablePayID.setCellValueFactory(new PropertyValueFactory<>("paymentID"));
         tablePayerName.setCellValueFactory(new PropertyValueFactory<>("patientName"));
-        tablePayAmount.setCellValueFactory(new PropertyValueFactory<>("patientName"));
-        tablePayMethod.setCellValueFactory(new PropertyValueFactory<>("patientBirthDate"));
-        tablePayDate.setCellValueFactory(new PropertyValueFactory<>("patientNIC"));
-        tablePayTime.setCellValueFactory(new PropertyValueFactory<>("patientGender"));
+        tablePayAmount.setCellValueFactory(new PropertyValueFactory<>("paymentAmount"));
+        tablePayMethod.setCellValueFactory(new PropertyValueFactory<>("paymentMethod"));
+        tablePayDate.setCellValueFactory(new PropertyValueFactory<>("paymentDate"));
+        tablePayTime.setCellValueFactory(new PropertyValueFactory<>("paymentTime"));
 
         try{
             loadTable();
