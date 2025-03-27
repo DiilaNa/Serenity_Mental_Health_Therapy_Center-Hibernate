@@ -19,6 +19,7 @@ public class Appointments implements SuperEntity{
     private String time;
     private String notes;
     private String date;
+
     @ManyToOne
     @JoinColumn(name = "patient_Id")
     private Patient patient;
@@ -26,7 +27,9 @@ public class Appointments implements SuperEntity{
     @OneToMany(mappedBy = "appointment",cascade = CascadeType.ALL)
     private List<Appointments> appointments;
 
-
+    @OneToOne
+    @JoinColumn(name = "payment_ID")
+    private Payment payment;
 
 }
 

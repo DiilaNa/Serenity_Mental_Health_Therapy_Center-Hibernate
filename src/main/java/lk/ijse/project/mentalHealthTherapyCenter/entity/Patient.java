@@ -22,10 +22,6 @@ public class Patient implements SuperEntity {
     private String patientPhone;
     private String patientEmail;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "payment_ID")
-    private Payment payment;
-
     @OneToMany(mappedBy = "patient" ,cascade = CascadeType.ALL)
     private List<Appointments> appointments;
 

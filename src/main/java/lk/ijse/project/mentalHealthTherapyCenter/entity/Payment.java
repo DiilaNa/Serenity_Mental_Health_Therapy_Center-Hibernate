@@ -1,9 +1,6 @@
 package lk.ijse.project.mentalHealthTherapyCenter.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -19,7 +16,8 @@ public class Payment implements SuperEntity {
     private  String paymentMethod;
     private  String paymentDate;
     private  String paymentTime;
-    @OneToOne(mappedBy = "payment")
-    private Patient patient;
+
+    @OneToOne(mappedBy = "payment",cascade = CascadeType.ALL)
+    private Appointments appointments;
 
 }
