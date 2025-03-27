@@ -6,11 +6,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-public class TProgramTM {
+@AllArgsConstructor /*pop up window tm*/
+public class ProgramTM {
     private String therapyID;
     private String therapyName;
     private String therapyDescription;
     private Double therapyFee;
-    private String doctorID;
 }

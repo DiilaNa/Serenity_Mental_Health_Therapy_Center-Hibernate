@@ -29,8 +29,6 @@ public class Patient implements SuperEntity {
     @OneToMany(mappedBy = "patient" ,cascade = CascadeType.ALL)
     private List<Appointments> appointments;
 
-   /* @ManyToMany(mappedBy = "patient" ,cascade = CascadeType.ALL)
-    private List<TPrograms> tPrograms;*/
 
     @OneToMany(mappedBy = "patient",cascade = CascadeType.ALL)
     private List<ProgramDetails> programDetails;

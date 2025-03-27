@@ -16,12 +16,12 @@ public class AppointmentDetails implements SuperEntity{
 
     @ManyToOne
     @MapsId("appointmentId")
-    @JoinColumn(name = "session_id")
+    @JoinColumn(name = "appointmentId")
     Appointments appointment;
 
 
     @ManyToOne
     @MapsId("therapistId")
-    @JoinColumn(name = "therapist_id")
+    @JoinColumn(name = "therapistId")
     Therapist therapist;
 }

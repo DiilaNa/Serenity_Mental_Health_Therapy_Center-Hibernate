@@ -14,13 +14,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserDAOImpl implements UserDAO {
-    @Override
-    public boolean save(User user) throws SQLException {
-       return true;
-    }
+
 
     @Override
-    public boolean update(User user) throws SQLException, ClassNotFoundException {
+    public boolean update(User user,Session session) throws SQLException, ClassNotFoundException {
         return false;
     }
 
@@ -54,7 +51,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public Optional<User> findByPK(String pk) {
+    public Optional<User> findByPK(String pk,Session session) {
         return Optional.of(null);
     }
 
@@ -70,7 +67,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public boolean saveUser(User user, Session session)  {
+    public boolean save(User user, Session session)  {
         try{
             session.persist(user);
             return true;

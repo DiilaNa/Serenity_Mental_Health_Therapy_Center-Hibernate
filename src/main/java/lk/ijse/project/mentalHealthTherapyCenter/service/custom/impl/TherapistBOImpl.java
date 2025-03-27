@@ -1,8 +1,8 @@
 package lk.ijse.project.mentalHealthTherapyCenter.service.custom.impl;
 
+import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.DoctorDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.ProgramNDocDTO;
-import lk.ijse.project.mentalHealthTherapyCenter.entity.TPrograms;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.Therapist;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOType;
@@ -11,6 +11,8 @@ import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.TProgramDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.TherapistDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TherapistBO;
 import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,34 +21,30 @@ import java.util.Optional;
 
 public class TherapistBOImpl implements TherapistBO {
     TherapistDAO therapistDAO = DAOFactory.getInstance().getDAO(DAOType.THERAPIST);
-    TProgramDAO programDAO = DAOFactory.getInstance().getDAO(DAOType.THERAPY_PROGRAMS);
-    QueryDAO queryDAO = DAOFactory.getInstance().getDAO(DAOType.QUERY);
 
     @Override
-    public List<ProgramNDocDTO> getALLTherapist() {
-        List<Therapist> therapists = queryDAO.getALLTherapists();
-        List<ProgramNDocDTO> dtos = new ArrayList<>();
+    public List<DoctorDTO> getALLDoctors() throws Exception {
+        List<Therapist> therapists = therapistDAO.getAll();
+        List<DoctorDTO> doctorDTOS = new ArrayList<>();
 
         for (Therapist therapist : therapists) {
-            String therapyPID = therapist.getTPrograms().getTherapyID();
-            String therapyPName = therapist.getTPrograms().getTherapyName();
-            ProgramNDocDTO dto = new ProgramNDocDTO(
+            DoctorDTO dto = new DoctorDTO(
                     therapist.getDoctorID(),
                     therapist.getDoctorName(),
-                    therapyPID,
-                    therapyPName,
                     therapist.getDoctorQualifications(),
                     therapist.getDoctorAvailability(),
                     therapist.getDoctorPhone(),
                     therapist.getDoctorEmail()
             );
-            dtos.add(dto);
+            doctorDTOS.add(dto);
         }
-        return dtos;
+        return doctorDTOS;
     }
 
     @Override
     public boolean saveTherapist(DoctorDTO doctorDTO) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
         try {
             Therapist therapist = new Therapist();
             therapist.setDoctorID(doctorDTO.getDoctorID());
@@ -56,29 +54,28 @@ public class TherapistBOImpl implements TherapistBO {
             therapist.setDoctorPhone(doctorDTO.getDoctorPhone());
             therapist.setDoctorEmail(doctorDTO.getDoctorEmail());
 
-            String tPrograms = doctorDTO.getTherapyID();
-            System.out.println("Therapy ID received from DTO: " + tPrograms);
-
-            Optional<TPrograms> optional = programDAO.findByPK(tPrograms);
-
-            if (optional.isPresent()) {
-                TPrograms y = optional.get();
-                System.out.println("Therapy ID found: " + y.getTherapyID());
-                therapist.setTPrograms(y);
-            } else {
-                throw new SQLException("Therapy Program not found! ID: " + tPrograms);
+            boolean isSaved =  therapistDAO.save(therapist,session);
+            if (isSaved) {
+                transaction.commit();
+                return true;
+            }else{
+                transaction.rollback();
+                return false;
             }
 
-            return therapistDAO.save(therapist);
         } catch (HibernateException | SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("SQL error while saving therapist: " + e.getMessage());
+        }finally {
+            session.close();
         }
     }
 
     @Override
     public boolean updateTherapist(DoctorDTO doctorDTO) {
-        try {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        try{
             Therapist therapist = new Therapist();
             therapist.setDoctorID(doctorDTO.getDoctorID());
             therapist.setDoctorName(doctorDTO.getDoctorName());
@@ -87,11 +84,20 @@ public class TherapistBOImpl implements TherapistBO {
             therapist.setDoctorPhone(doctorDTO.getDoctorPhone());
             therapist.setDoctorEmail(doctorDTO.getDoctorEmail());
 
-            return therapistDAO.update(therapist);
+            boolean isUpdated = therapistDAO.update(therapist,session);
+            if (isUpdated) {
+                transaction.commit();
+                return true;
+            }else {
+                transaction.rollback();
+                return false;
+            }
         } catch (SQLException e) {
             throw new RuntimeException("SQL error while saving therapist");
         }catch (ClassNotFoundException e){
             throw new RuntimeException("Class not found Error");
+        }finally {
+            session.close();
         }
     }
 
@@ -123,12 +129,9 @@ public class TherapistBOImpl implements TherapistBO {
         List<Therapist> therapists = therapistDAO.getAll();
         List<DoctorDTO> docNames = new ArrayList<>();
         for (Therapist therapist : therapists) {
-            String therapyPID = (therapist.getTPrograms() != null) ? therapist.getTPrograms().getTherapyID() : null;
-
             DoctorDTO doctorDTO = new DoctorDTO(
                     therapist.getDoctorID(),
                     therapist.getDoctorName(),
-                    therapyPID,
                     therapist.getDoctorQualifications(),
                     therapist.getDoctorAvailability(),
                     therapist.getDoctorPhone(),

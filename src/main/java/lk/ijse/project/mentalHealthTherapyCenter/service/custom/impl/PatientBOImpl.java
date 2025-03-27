@@ -1,11 +1,14 @@
 package lk.ijse.project.mentalHealthTherapyCenter.service.custom.impl;
 
+import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.PatientDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.Patient;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOType;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.PatientDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.PatientBO;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,6 +18,8 @@ public class PatientBOImpl implements PatientBO {
     PatientDAO patientDAO = DAOFactory.getInstance().getDAO(DAOType.PATIENT);
     @Override
     public boolean updatePatient(PatientDTO patientDTO) throws SQLException, ClassNotFoundException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
         try {
             Patient patient = new Patient();
             patient.setPatientID(patientDTO.getPatientID());
@@ -26,10 +31,19 @@ public class PatientBOImpl implements PatientBO {
             patient.setPatientPhone(patientDTO.getPatientPhone());
             patient.setPatientEmail(patientDTO.getPatientEmail());
 
-           return patientDAO.update(patient);
+           boolean isUpdated = patientDAO.update(patient,session);
+           if (isUpdated) {
+               transaction.commit();
+               return true;
+           }else {
+               transaction.rollback();
+               return false;
+           }
         }catch (Exception e){
             e.printStackTrace();
             throw new RuntimeException("Update failed");
+        }finally {
+            session.close();
         }
     }
     @Override

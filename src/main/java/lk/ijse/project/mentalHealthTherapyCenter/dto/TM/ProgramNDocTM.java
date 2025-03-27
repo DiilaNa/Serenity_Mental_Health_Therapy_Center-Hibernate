@@ -7,14 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProgramNDocTM {
+public class ProgramNDocTM { /*join query - loads data to therapy programs*/
+    private String programID;
+    private String programName;
+    private String programDetails;
+    private Double programFee;
     private String doctorID;
     private String doctorName;
-    private String therapyID;
-    private String therapyName;
-    private String doctorQualifications;
     private String doctorAvailability;
-    private String doctorPhone;
-    private String doctorEmail;
 
 }

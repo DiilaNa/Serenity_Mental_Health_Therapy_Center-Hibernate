@@ -9,18 +9,19 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "therapy_Programs")
+@Table(name = "therapy_programs")
 public class TPrograms implements SuperEntity {
     @Id
-    private String therapyID;
-    private String therapyName;
+    private String programID;
+    private String programName;
     @Column(length = 100)
-    private String therapyDescription;
-    private Double therapyFee;
-
-    @OneToMany(mappedBy = "tPrograms" ,cascade = CascadeType.ALL)
-    private List<Therapist> therapists;
+    private String programDescription;
+    private Double programFee;
 
     @OneToMany(mappedBy = "tPrograms",cascade = CascadeType.ALL)
     private List<ProgramDetails> programDetails;
+
+    @ManyToOne
+    @JoinColumn(name = "doctorID")
+    Therapist therapist;
 }

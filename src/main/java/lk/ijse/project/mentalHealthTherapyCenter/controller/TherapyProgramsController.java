@@ -4,20 +4,24 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.TProgramTM;
+import javafx.stage.Stage;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.ProgramNDocDTO;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.ProgramNDocTM;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TherapyProgramDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TProgramBO;
 
+import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -27,10 +31,13 @@ public class TherapyProgramsController implements Initializable {
         Image adminIMage = new Image(getClass().getResourceAsStream("/images/TherapyPrograms.png"));
         image.setImage(adminIMage);
 
-        tableIID.setCellValueFactory(new PropertyValueFactory<>("therapyID"));
-        tableName.setCellValueFactory(new PropertyValueFactory<>("therapyName"));
-        tableProgramDetails.setCellValueFactory(new PropertyValueFactory<>("therapyDescription"));
-        tableFee.setCellValueFactory(new PropertyValueFactory<>("therapyFee"));
+        tableIID.setCellValueFactory(new PropertyValueFactory<>("programID"));
+        tableName.setCellValueFactory(new PropertyValueFactory<>("programName"));
+        tableProgramDetails.setCellValueFactory(new PropertyValueFactory<>("programDetails"));
+        tableFee.setCellValueFactory(new PropertyValueFactory<>("programFee"));
+        tableDoc.setCellValueFactory(new PropertyValueFactory<>("doctorID"));
+        tableDocName.setCellValueFactory(new PropertyValueFactory<>("doctorName"));
+        tableDocAvailability.setCellValueFactory(new PropertyValueFactory<>("doctorAvailability"));
 
         try{
             refreshPage();
@@ -50,7 +57,7 @@ public class TherapyProgramsController implements Initializable {
     private TextField ProgramName;
 
     @FXML
-    private TableView<TProgramTM> Table;
+    private TableView<ProgramNDocTM> Table;
 
     @FXML
     private Button delete;
@@ -68,21 +75,58 @@ public class TherapyProgramsController implements Initializable {
     private Button save;
 
     @FXML
-    private TableColumn<TProgramTM, Double> tableFee;
+    private TableColumn<ProgramNDocTM, Double> tableFee;
 
     @FXML
-    private TableColumn<TProgramTM, String> tableIID;
+    private TableColumn<ProgramNDocTM, String> tableIID;
 
     @FXML
-    private TableColumn<TProgramTM, String> tableName;
+    private TableColumn<ProgramNDocTM, String> tableName;
 
     @FXML
-    private TableColumn<TProgramTM, String> tableProgramDetails;
+    private TableColumn<ProgramNDocTM, String> tableProgramDetails;
+
+    @FXML
+    private TableColumn<ProgramNDocTM, String> tableDoc;
+
+    @FXML
+    private TableColumn<ProgramNDocTM, String> tableDocAvailability;
+
+    @FXML
+    private TableColumn<ProgramNDocTM, String> tableDocName;
 
     TProgramBO tProgramBO = BOFactory.getInstance().getBO(BOType.THERAPY_PROGRAMS);
 
     @FXML
     private Button update;
+
+    @FXML
+    private ListView<String> doctorsListView;
+
+
+    private static String DoctorID;
+
+    public void setAddDoctors(String docID, String docName,String availability) {
+        System.out.println("awaa");
+        DoctorID = docID;
+        if (docID != null && docName != null && availability != null) {
+            doctorsListView.getItems().add(docID + " - " + docName + " - " + availability);
+        }
+    }
+
+
+    @FXML
+    void addDoctorsAction(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/assignDocs.fxml"));
+        Scene scene = new Scene(loader.load());
+        AssignDoctorsController assignDoctorsController = loader.getController();
+        assignDoctorsController.setTherapyProgramsController(this);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle("Therapy Programs - Serenity Mental Health Therapy Center");
+        stage.show();
+    }
 
     @FXML
     void deleteBtnAction(ActionEvent event) throws Exception {
@@ -108,11 +152,28 @@ public class TherapyProgramsController implements Initializable {
         String therapyProgramDetails = ProgramDetails.getText();
         Double therapyProgramFee = Double.parseDouble(ProgramFee.getText());
 
+        String listPrograms = doctorsListView.getSelectionModel().getSelectedItem();
+
+        if (listPrograms == null || listPrograms.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Please select a program from the list.", ButtonType.OK).show();
+            return; // Return early if no program is selected
+        }
+
+        if (listPrograms.contains("-")) {
+            DoctorID = listPrograms.split("-")[0];
+            System.out.println("Extracted Program ID: " + DoctorID);
+        } else {
+            System.out.println("Invalid program format: " + listPrograms);
+            new Alert(Alert.AlertType.ERROR, "Invalid program format.", ButtonType.OK).show();
+            return;
+        }
+
         TherapyProgramDTO therapyProgramDTO = new TherapyProgramDTO(
             therapyPID,
             therapyProgramName,
             therapyProgramDetails,
-            therapyProgramFee
+            therapyProgramFee,
+                DoctorID
         );
         boolean isSaved = tProgramBO.saveTPrograms(therapyProgramDTO);
 
@@ -126,12 +187,15 @@ public class TherapyProgramsController implements Initializable {
 
     @FXML
     void tableAction(MouseEvent event) {
-        TProgramTM selectedPatient = Table.getSelectionModel().getSelectedItem();
+        ProgramNDocTM selectedPatient = Table.getSelectionModel().getSelectedItem();
         if (selectedPatient != null) {
-            labelLoadID.setText(selectedPatient.getTherapyID());
-            ProgramName.setText(selectedPatient.getTherapyName());
-            ProgramDetails.setText(selectedPatient.getTherapyDescription());
-            ProgramFee.setText(String.valueOf(selectedPatient.getTherapyFee()));
+            labelLoadID.setText(selectedPatient.getProgramID());
+            ProgramName.setText(selectedPatient.getProgramName());
+            ProgramDetails.setText(selectedPatient.getProgramDetails());
+            ProgramFee.setText(String.valueOf(selectedPatient.getProgramFee()));
+            ObservableList<String> programDetails = FXCollections.observableArrayList();
+            programDetails.add(selectedPatient.getDoctorID() + " - " + selectedPatient.getDoctorName() + " - " + selectedPatient.getDoctorAvailability());
+            doctorsListView.setItems(programDetails); // Correct way to load ListView
         }
     }
 
@@ -142,11 +206,22 @@ public class TherapyProgramsController implements Initializable {
         String therapyProgramDetails = ProgramDetails.getText();
         Double therapyProgramFee = Double.parseDouble(ProgramFee.getText());
 
+        String listPrograms = doctorsListView.getSelectionModel().getSelectedItem();
+
+        if (listPrograms == null || listPrograms.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Please select a program from the list.", ButtonType.OK).show();
+            return; // Return early if no program is selected
+        }
+
+        DoctorID = listPrograms.split("-")[0];  // Program ID from selected item
+        String ProgramName = listPrograms.split("-")[1]; // Program Name from selected item
+
         TherapyProgramDTO therapyProgramDTO = new TherapyProgramDTO(
                 therapyPID,
                 therapyProgramName,
                 therapyProgramDetails,
-                therapyProgramFee
+                therapyProgramFee,
+                DoctorID
         );
         boolean isUpdated = tProgramBO.updateTPrograms(therapyProgramDTO);
 
@@ -159,18 +234,22 @@ public class TherapyProgramsController implements Initializable {
     }
 
     private void loadTable() throws Exception {
-        List<TherapyProgramDTO> therapyProgramDTOS =  tProgramBO.getALLTPrograms();
-        ObservableList<TProgramTM> tProgramTMS = FXCollections.observableArrayList();
-        for (TherapyProgramDTO therapyProgramDTO : therapyProgramDTOS) {
-            TProgramTM tProgramTM = new TProgramTM(
-                    therapyProgramDTO.getTherapyID(),
-                    therapyProgramDTO.getTherapyName(),
-                    therapyProgramDTO.getTherapyDescription(),
-                    therapyProgramDTO.getTherapyFee()
+        List<ProgramNDocDTO> programsAndDocs =  tProgramBO.getALL();
+        ObservableList<ProgramNDocTM> programNDocTMS = FXCollections.observableArrayList();
+        for (ProgramNDocDTO programNDocDTO : programsAndDocs) {
+
+            ProgramNDocTM programNDocTM = new ProgramNDocTM(
+                    programNDocDTO.getProgramID(),
+                    programNDocDTO.getProgramName(),
+                    programNDocDTO.getProgramDetails(),
+                    programNDocDTO.getProgramFee(),
+                    programNDocDTO.getDoctorID(),
+                    programNDocDTO.getProgramName(),
+                    programNDocDTO.getDoctorAvailability()
             );
-            tProgramTMS.add(tProgramTM);
+            programNDocTMS.add(programNDocTM);
         }
-        Table.setItems(tProgramTMS);
+        Table.setItems(programNDocTMS);
     }
 
     private void refreshPage() throws Exception {

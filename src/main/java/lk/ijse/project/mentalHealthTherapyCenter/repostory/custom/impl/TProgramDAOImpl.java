@@ -15,50 +15,39 @@ import java.util.List;
 import java.util.Optional;
 
 public class TProgramDAOImpl implements TProgramDAO {
-
     @Override
-    public boolean save(TPrograms tPrograms) throws SQLException {
-        Session session = FactoryConfiguration.getInstance().getSession();
-        Transaction transaction = session.beginTransaction();
-        try {
+    public boolean save(TPrograms tPrograms, Session session) throws SQLException {
+        try{
             session.persist(tPrograms);
-            session.flush();
-            transaction.commit();
-            System.out.println("save successful therapy Programs");
             return true;
-        } catch (Exception e) {
-            transaction.rollback();
-            return false;
-        }finally {
-            if (session != null) {
-                session.close();
-            }
+        }catch (DuplicateException e){
+            throw new DuplicateException("Therapy already exists in therapistDAOImpl" + e.getMessage());
+        }catch (Exception e){
+            throw new SQLException("Therapy save failed in programDAOImpl" + e.getMessage());
         }
     }
 
     @Override
-    public boolean update(TPrograms tPrograms) throws SQLException, ClassNotFoundException {
-        Session session = FactoryConfiguration.getInstance().getSession();
-        Transaction transaction = session.beginTransaction();
+    public boolean update(TPrograms tPrograms, Session session) {
         try {
             session.merge(tPrograms);
-            transaction.commit();
             return true;
-        }catch (Exception e) {
-            transaction.rollback();
-            return false;
-        }finally {
-            if (session != null) {
-                session.close();
-            }
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public List<TPrograms> getAll() throws Exception {
         Session session = FactoryConfiguration.getInstance().getSession();
-        Query<TPrograms> query = session.createQuery("from TPrograms ", TPrograms.class);
-        return query.list();
+        try{
+            Query<TPrograms> query = session.createQuery("from TPrograms ", TPrograms.class);
+            return query.list();
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }finally{
+            session.close();
+        }
     }
 
     @Override
@@ -84,53 +73,32 @@ public class TProgramDAOImpl implements TProgramDAO {
     }
 
     @Override
-    public Optional<TPrograms> findByPK(String pk) {
-        Session session = FactoryConfiguration.getInstance().getSession();
-        Transaction transaction = session.beginTransaction();
-
-        System.out.println("Searching for Therapy Program with ID: " + pk);
-
-        TPrograms tPrograms = session.get(TPrograms.class, pk);
-
-        if (tPrograms == null) {
-            System.out.println("Therapy Program not found!");
-        } else {
-            System.out.println("Therapy Program found: " + tPrograms.getTherapyID());
+    public Optional<TPrograms> findByPK(String pk, Session session) {
+        try {
+            TPrograms tPrograms = session.createQuery("FROM TPrograms WHERE therapist = :therapyID", TPrograms.class)
+                    .setParameter("therapyID", pk)
+                    .uniqueResult(); // Returns a single result or null
+            return Optional.ofNullable(tPrograms);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Optional.empty();
         }
-
-        transaction.commit();
-        session.close();
-
-        return Optional.ofNullable(tPrograms);
-
     }
 
-    @Override
-    public List<TPrograms> findByIds(List<String> therapyProgramIDs) {
-        if (therapyProgramIDs == null || therapyProgramIDs.isEmpty()) {
-            System.out.println("therapyProgramIDs is null or empty inside findByIds dao");
-            return Collections.emptyList();
-        }
-
-        Session session = FactoryConfiguration.getInstance().getSession();
-        List<TPrograms> therapyPrograms = session.createQuery(
-                        "FROM TPrograms WHERE therapyID IN :ids", TPrograms.class)
-                .setParameter("ids", therapyProgramIDs)
-                .getResultList();
-        session.close();
-        return therapyPrograms;
-    }
     @Override
     public Optional<String> getLastPK() {
         Session session = FactoryConfiguration.getInstance().getSession();
-
-        String lastPk = session
-                .createQuery("SELECT t.id FROM TPrograms t ORDER BY t.id DESC", String.class)
-                .setMaxResults(1)
-                .uniqueResult();
-
-        return Optional.ofNullable(lastPk);
+        try{
+            String lastPk = session
+                    .createQuery("SELECT t.id FROM TPrograms t ORDER BY t.id DESC", String.class)
+                    .setMaxResults(1)
+                    .uniqueResult();
+            return Optional.ofNullable(lastPk);
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }finally {
+            session.close();
+        }
     }
-
 }
 

@@ -2,6 +2,7 @@ package lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.impl;
 
 import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.Therapist;
+import lk.ijse.project.mentalHealthTherapyCenter.entity.User;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.TherapistDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.exeception.NotFoundException;
 
@@ -14,49 +15,40 @@ import java.util.List;
 import java.util.Optional;
 
 public class TherapistDAOImpl implements TherapistDAO {
+
     @Override
-    public boolean save(Therapist therapist) throws SQLException {
-        Session session = FactoryConfiguration.getInstance().getSession();
-        Transaction transaction = session.beginTransaction();
+    public boolean save(Therapist therapist, Session session){
         try {
             session.persist(therapist);
-            transaction.commit();
+            session.flush();
             return true;
-        } catch (Exception e) {
-            transaction.rollback();
-            e.printStackTrace();
-            return false;
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+        }catch (Exception e) {
+            throw new RuntimeException("Therapist saving failed in therapistDAOImpl" + e.getMessage());
         }
     }
 
     @Override
-    public boolean update(Therapist therapist)  {
-        Session session = FactoryConfiguration.getInstance().getSession();
-        Transaction transaction = session.beginTransaction();
+    public boolean update(Therapist therapist, Session session) throws SQLException, ClassNotFoundException {
         try {
             session.merge(therapist);
-            transaction.commit();
             return true;
         }catch (Exception e){
-            transaction.rollback();
-            return false;
-        }finally {
-            if (session != null) {
-                session.close();
-            }
+            throw new RuntimeException("Therapist update failed"+e.getMessage());
         }
     }
-
     @Override
     public List<Therapist> getAll() throws Exception {
         Session session = FactoryConfiguration.getInstance().getSession();
-        Query<Therapist> query = session.createQuery("from Therapist ", Therapist.class);
-        List<Therapist> therapists = query.list();
-        return therapists;
+        try{
+            Query<Therapist> query = session.createQuery("from Therapist ", Therapist.class);
+            List<Therapist> therapists = query.list();
+            return therapists;
+
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }finally {
+            session.close();
+        }
     }
 
     @Override
@@ -75,43 +67,42 @@ public class TherapistDAOImpl implements TherapistDAO {
             transaction.rollback();
             return false;
         }finally {
-            if (session != null) {
-                session.close();
-            }
+            session.close();
         }
     }
-    @Override
-    public List<Therapist> findByDocID(List<String> docIDs)  {
-        Session session = FactoryConfiguration.getInstance().getSession();
-        List<Therapist> therapists = session.createQuery("FROM Therapist WHERE doctorID IN:ids", Therapist.class)
+    @Override /*search in appointments*/
+    public List<Therapist> findByDocID(List<String> docIDs,Session session)  {
+        List<Therapist> therapists = session.createQuery("FROM Therapist WHERE doctorID IN (:ids)", Therapist.class)
                 .setParameter("ids",docIDs)
                 .getResultList();
-        session.close();
         return therapists;
     }
 
 
-    @Override
-    public Optional<Therapist> findByPK(String pk) {
-        Session session = FactoryConfiguration.getInstance().getSession();
-        Therapist therapist = session.get(Therapist.class, pk);
-        session.close();
-        if (therapist == null) {
-            return Optional.empty();
-        }
-        return Optional.of(therapist);
-
+    @Override /* search in  therapy programs bo*/
+    public Optional<Therapist> findByPK(String pk,Session session) {
+        Therapist therapist = (Therapist) session.createQuery("FROM Therapist WHERE doctorID = :doctorID")
+                .setParameter("doctorID", pk)
+                .uniqueResult();
+        System.out.println(therapist+"inside therapist dao");
+      return Optional.ofNullable(therapist);
     }
 
     @Override
     public Optional<String> getLastPK() {
         Session session = FactoryConfiguration.getInstance().getSession();
-
-        String lastPk = session
-                .createQuery("SELECT t.id FROM Therapist t ORDER BY t.id DESC", String.class)
-                .setMaxResults(1)
-                .uniqueResult();
-
-        return Optional.ofNullable(lastPk);
+        try{
+            String lastPk = session
+                    .createQuery("SELECT t.id FROM Therapist t ORDER BY t.id DESC", String.class)
+                    .setMaxResults(1)
+                    .uniqueResult();
+            return Optional.ofNullable(lastPk);
+        }catch (Exception e) {
+            throw new RuntimeException("Therapist lastPK not found"+e.getMessage());
+        }finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
 }

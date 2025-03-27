@@ -15,41 +15,25 @@ import java.util.Optional;
 public class PatientDAOImpl implements PatientDAO {
 
     @Override
-    public boolean save(Patient patient) throws SQLException {
-       Session session = FactoryConfiguration.getInstance().getSession();
-       Transaction transaction = session.beginTransaction();
-       try {
-           session.persist(patient);
-           transaction.commit();
-           return true;
-       }catch (Exception e) {
-           transaction.rollback();
-           return false;
-       }finally {
-           if (session != null) {
-               session.close();
-           }
-       }
-    }
-
-    @Override
-    public boolean update(Patient patient) throws SQLException, ClassNotFoundException {
-        Session session =FactoryConfiguration.getInstance().getSession();
-        Transaction transaction = session.beginTransaction();
+    public boolean save(Patient patient, Session session) throws SQLException {
         try {
-            session.merge(patient);
-            transaction.commit();
+            session.persist(patient);
+            session.flush();
             return true;
         }catch (Exception e) {
-            transaction.rollback();
-            return false;
-        }finally {
-            if (session != null) {
-                session.close();
-            }
+            throw new RuntimeException("save failed in PatientDAOImpl" + e.getMessage());
         }
     }
 
+    @Override
+    public boolean update(Patient patient, Session session) throws SQLException, ClassNotFoundException {
+        try {
+            session.merge(patient);
+            return true;
+        }catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
     @Override
     public List<Patient> getAll() throws Exception {
         Session session =FactoryConfiguration.getInstance().getSession();
@@ -80,8 +64,7 @@ public class PatientDAOImpl implements PatientDAO {
     }
 
     @Override
-    public Optional<Patient> findByPK(String pk) {
-        Session session = FactoryConfiguration.getInstance().getSession();
+    public Optional<Patient> findByPK(String pk,Session session) {
         Patient patient = session.get(Patient.class, pk);
         session.close();
         if (patient == null) {

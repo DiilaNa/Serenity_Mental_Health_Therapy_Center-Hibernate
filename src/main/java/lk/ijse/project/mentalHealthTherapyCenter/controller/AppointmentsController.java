@@ -129,16 +129,18 @@ public class AppointmentsController implements Initializable {
 
     private  String DocID;
 
+    private String availability;
+
     public void setDetails(String programID, String programName) {
          ProgramID = programID;
         if (programID != null && programName != null) {
             programmsListView.getItems().add(programID + " - " + programName);
         }
     }
-    public void setAddDoctors(String docID, String docName) {
+    public void setAddDoctors(String docID, String docName,String availability) {
         DocID = docID;
         if (docID != null && docName != null) {
-            doctorListView.getItems().add(docID + " - " + docName);
+            doctorListView.getItems().add(docID + " - " + docName + " - " + availability);
         }
     }
 

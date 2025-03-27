@@ -5,23 +5,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.DoctorDTO;
-import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.ProgramNDocTM;
-import lk.ijse.project.mentalHealthTherapyCenter.dto.ProgramNDocDTO;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.TherapistTM;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TherapistBO;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
@@ -29,8 +24,7 @@ import java.util.ResourceBundle;
 
 public class TherapistController  implements Initializable {
 
-    @FXML
-    private Button addPrograms;
+
 
     @FXML
     private Button delete;
@@ -56,8 +50,7 @@ public class TherapistController  implements Initializable {
     @FXML
     private ImageView image;
 
-    @FXML
-    private ListView<String> programmsListView;
+
 
     @FXML
     private Button reset;
@@ -66,56 +59,41 @@ public class TherapistController  implements Initializable {
     private Button save;
 
     @FXML
-    private TableView<ProgramNDocTM> table;
+    private TableView<TherapistTM> table;
 
     @FXML
-    private TableColumn<ProgramNDocTM, String> tableAvailable;
+    private TableColumn<TherapistTM, String> tableAvailable;
 
     @FXML
-    private TableColumn<ProgramNDocTM, String> tableContact;
+    private TableColumn<TherapistTM, String> tableContact;
 
     @FXML
-    private TableColumn<ProgramNDocTM, String> tableId;
+    private TableColumn<TherapistTM, String> tableId;
 
     @FXML
-    private TableColumn<ProgramNDocTM, String> tableMail;
+    private TableColumn<TherapistTM, String> tableMail;
 
     @FXML
-    private TableColumn<ProgramNDocTM, String> tableName;
+    private TableColumn<TherapistTM, String> tableName;
 
     @FXML
-    private TableColumn<ProgramNDocTM, String> tableProgramID;
-
-    @FXML
-    private TableColumn<ProgramNDocTM, String> tableProgramName;
-
-    @FXML
-    private TableColumn<ProgramNDocTM, String> tableQualifications;
+    private TableColumn<TherapistTM, String> tableQualifications;
 
     @FXML
     private Button update;
 
-    private static String ProgramID;
 
-    public void setDetails(String programID, String programName) {
-        ProgramID = programID;
-        if (programID != null && programName != null) {
-            programmsListView.getItems().add(programID + " - " + programName);
-        }
-    }
 
     TherapistBO therapistBO = BOFactory.getInstance().getBO(BOType.THERAPIST);
 
     @FXML
     void TableAction(MouseEvent event) {
-        ProgramNDocTM selectedPatient = table.getSelectionModel().getSelectedItem();
+        TherapistTM selectedPatient = table.getSelectionModel().getSelectedItem();
         if (selectedPatient != null) {
             docIDlabel.setText(selectedPatient.getDoctorID());
             docName.setText(selectedPatient.getDoctorName());
             // Load data into ListView
-            ObservableList<String> programDetails = FXCollections.observableArrayList();
-            programDetails.add(selectedPatient.getTherapyID() + " - " + selectedPatient.getTherapyName());
-            programmsListView.setItems(programDetails); // Correct way to load ListView
+
             docQualificationsCombo.setValue(selectedPatient.getDoctorQualifications());
             docAvailableCombo.setValue(selectedPatient.getDoctorAvailability());
             docContact.setText(selectedPatient.getDoctorPhone());
@@ -123,18 +101,6 @@ public class TherapistController  implements Initializable {
         }
     }
 
-    @FXML
-    void addProgramsAction(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SelectPrograms.fxml"));
-        Scene scene = new Scene(loader.load());
-        SelectProgramsController selectProgramsController = loader.getController();
-        selectProgramsController.setTherapistController(this);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.setTitle("Therapy Programs - Serenity Mental Health Therapy Center");
-        stage.show();
-    }
 
     @FXML
     void deleteBtnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
@@ -153,30 +119,13 @@ public class TherapistController  implements Initializable {
     }
 
     @FXML
-    void saveBtnAction(ActionEvent event) {
+    void saveBtnAction(ActionEvent event) throws Exception {
         String DoctorID = docIDlabel.getText();
         String DocName = docName.getText();
         String DocQualifications = docQualificationsCombo.getSelectionModel().getSelectedItem();
         String DocAvailability = docAvailableCombo.getSelectionModel().getSelectedItem();
         String DocPhone = docContact.getText();
         String DocMail = docMail.getText();
-
-        String listPrograms = programmsListView.getSelectionModel().getSelectedItem();
-
-        if (listPrograms == null || listPrograms.isEmpty()) {
-            new Alert(Alert.AlertType.ERROR, "Please select a program from the list.", ButtonType.OK).show();
-            return; // Return early if no program is selected
-        }
-
-        if (listPrograms.contains("-")) {
-            ProgramID = listPrograms.split("-")[0];
-            System.out.println("Extracted Program ID: " + ProgramID);
-        } else {
-            System.out.println("Invalid program format: " + listPrograms);
-            new Alert(Alert.AlertType.ERROR, "Invalid program format.", ButtonType.OK).show();
-            return;
-        }
-
 
     /*    String namePattern = "^[a-zA-Z ]+$";
         String mailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
@@ -198,7 +147,6 @@ public class TherapistController  implements Initializable {
             DoctorDTO doctorDTO = new DoctorDTO(
                     DoctorID,
                     DocName,
-                    ProgramID,
                     DocQualifications,
                     DocAvailability,
                     DocPhone,
@@ -222,15 +170,7 @@ public class TherapistController  implements Initializable {
         String DocPhone = docContact.getText();
         String DocMail = docMail.getText();
 
-        String listPrograms = programmsListView.getSelectionModel().getSelectedItem();
 
-        if (listPrograms == null || listPrograms.isEmpty()) {
-            new Alert(Alert.AlertType.ERROR, "Please select a program from the list.", ButtonType.OK).show();
-            return; // Return early if no program is selected
-        }
-
-        ProgramID = listPrograms.split("-")[0];  // Program ID from selected item
-        String ProgramName = listPrograms.split("-")[1]; // Program Name from selected item
 
         String namePattern = "^[a-zA-Z ]+$";
         String mailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
@@ -253,7 +193,6 @@ public class TherapistController  implements Initializable {
             DoctorDTO doctorDTO = new DoctorDTO(
                     DoctorID,
                     DocName,
-                    ProgramID,
                     DocQualifications,
                     DocAvailability,
                     DocPhone,
@@ -275,8 +214,6 @@ public class TherapistController  implements Initializable {
 
         tableId.setCellValueFactory(new PropertyValueFactory<>("doctorID"));
         tableName.setCellValueFactory(new PropertyValueFactory<>("doctorName"));
-        tableProgramID.setCellValueFactory(new PropertyValueFactory<>("therapyID"));
-        tableProgramName.setCellValueFactory(new PropertyValueFactory<>("therapyName"));
         tableQualifications.setCellValueFactory(new PropertyValueFactory<>("doctorQualifications"));
         tableAvailable.setCellValueFactory(new PropertyValueFactory<>("doctorAvailability"));
         tableContact.setCellValueFactory(new PropertyValueFactory<>("doctorPhone"));
@@ -289,28 +226,26 @@ public class TherapistController  implements Initializable {
         }
     }
 
-    private void loadTable(){
-        List<ProgramNDocDTO> programNDocDTOS =  therapistBO.getALLTherapist();
-        if (programNDocDTOS == null || programNDocDTOS.isEmpty()) {
+    private void loadTable() throws Exception {
+        List<DoctorDTO> doctorDTOS =  therapistBO.getALLDoctors();
+        if (doctorDTOS == null || doctorDTOS.isEmpty()) {
             System.out.println("No data available");
         }
-        ObservableList<ProgramNDocTM> programNDocTMS = FXCollections.observableArrayList();
-        for (ProgramNDocDTO programNDocDTO : programNDocDTOS) {
-            ProgramNDocTM programNDocTM = new ProgramNDocTM(
-                    programNDocDTO.getDoctorID(),
-                    programNDocDTO.getDoctorName(),
-                    programNDocDTO.getTherapyID(),
-                    programNDocDTO.getTherapyName(),
-                    programNDocDTO.getDoctorQualifications(),
-                    programNDocDTO.getDoctorAvailability(),
-                    programNDocDTO.getDoctorPhone(),
-                    programNDocDTO.getDoctorEmail()
+        ObservableList<TherapistTM> therapistTMS = FXCollections.observableArrayList();
+        for (DoctorDTO doctorDTO : doctorDTOS) {
+            TherapistTM therapistTM = new TherapistTM(
+                    doctorDTO.getDoctorID(),
+                    doctorDTO.getDoctorName(),
+                    doctorDTO.getDoctorQualifications(),
+                    doctorDTO.getDoctorAvailability(),
+                    doctorDTO.getDoctorPhone(),
+                    doctorDTO.getDoctorEmail()
             );
-            programNDocTMS.add(programNDocTM);
+            therapistTMS.add(therapistTM);
         }
-        table.setItems(programNDocTMS);
+        table.setItems(therapistTMS);
     }
-    private void refreshPage(){
+    private void refreshPage() throws Exception {
         docIDlabel.setText(therapistBO.getNextTherapyID());
 
         docAvailableCombo.setItems(FXCollections.observableArrayList("Available","Not Available"));

@@ -13,7 +13,6 @@ import lombok.*;
 public class User implements SuperEntity {
     @Id
     private String userID;
-
     private String userFullName;
     private String userEmail;
     private String userRole;

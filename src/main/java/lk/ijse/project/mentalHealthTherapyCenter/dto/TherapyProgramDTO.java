@@ -12,4 +12,5 @@ public class TherapyProgramDTO {
     private String therapyName;
     private String therapyDescription;
     private Double therapyFee;
+    private String doctorID;
 }

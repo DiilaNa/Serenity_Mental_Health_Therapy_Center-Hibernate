@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface TherapistBO extends SuperBO {
-    List<ProgramNDocDTO> getALLTherapist();
+    List<DoctorDTO> getALLDoctors() throws Exception;
     boolean saveTherapist(DoctorDTO doctorDTO);
     boolean updateTherapist(DoctorDTO doctorDTO);
     boolean deleteTherapist(String DoctorID) throws SQLException, ClassNotFoundException;

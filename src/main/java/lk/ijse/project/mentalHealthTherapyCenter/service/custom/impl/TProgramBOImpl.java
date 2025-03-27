@@ -1,12 +1,19 @@
 package lk.ijse.project.mentalHealthTherapyCenter.service.custom.impl;
 
+import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.ProgramDto;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.ProgramNDocDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TherapyProgramDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.TPrograms;
+import lk.ijse.project.mentalHealthTherapyCenter.entity.Therapist;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOType;
+import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.QueryDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.TProgramDAO;
+import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.TherapistDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TProgramBO;
-import lk.ijse.project.mentalHealthTherapyCenter.service.exeception.DuplicateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,39 +22,96 @@ import java.util.Optional;
 
 public class TProgramBOImpl implements TProgramBO {
     TProgramDAO tProgramDAO = DAOFactory.getInstance().getDAO(DAOType.THERAPY_PROGRAMS);
+    TherapistDAO therapistDAO = DAOFactory.getInstance().getDAO(DAOType.THERAPIST);
+    QueryDAO queryDAO = DAOFactory.getInstance().getDAO(DAOType.QUERY);
+
     @Override
     public boolean saveTPrograms(TherapyProgramDTO therapyProgramDTO) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
         try {
             TPrograms tPrograms = new TPrograms();
-            tPrograms.setTherapyID(therapyProgramDTO.getTherapyID());
-            tPrograms.setTherapyName(therapyProgramDTO.getTherapyName());
-            tPrograms.setTherapyDescription(therapyProgramDTO.getTherapyDescription());
-            tPrograms.setTherapyFee(therapyProgramDTO.getTherapyFee());
+            tPrograms.setProgramID(therapyProgramDTO.getTherapyID());
+            tPrograms.setProgramName(therapyProgramDTO.getTherapyName());
+            tPrograms.setProgramDescription(therapyProgramDTO.getTherapyDescription());
+            tPrograms.setProgramFee(therapyProgramDTO.getTherapyFee());
 
-            return tProgramDAO.save(tPrograms);
+
+            String id = therapyProgramDTO.getDoctorID();
+            System.out.println("id getting from therapy programDTO: " + id);
+
+//          method - 01 = .get
+
+          /*  Therapist therapist =  session.get(Therapist.class, id);
+            if (therapist == null) {
+                System.out.println("Therapy Program Not Found");
+                transaction.rollback();
+                return false;
+            }else {
+                System.out.println("Therapy Program Saved");
+                tPrograms.setTherapist(therapist);
+            }*/
+
+//           method - 02 = .find  (to string ain krnn ooni use krnw nm)
+
+            /* Therapist therapist1 = session.find(Therapist.class, id);
+            System.out.println("therapist1: " + therapist1);  */
+
+
+
+//            method-04 = .findBYPK(HQL)
+
+          /*  Optional<Therapist> isExist = therapistDAO.findByPK(therapyProgramDTO.getDoctorID(),session);
+
+            if (isExist.isPresent()) {
+                System.out.println("therapist exist");
+            }
+
+            tPrograms.setTherapist(isExist.get());*/
+
+            boolean isSaved = tProgramDAO.save(tPrograms,session);
+            if (isSaved) {
+                transaction.commit();
+                return true;
+            }else {
+                transaction.rollback();
+                return false;
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException("Error saving therapy programs", e);
-        } catch (DuplicateException e) {
-            throw new RuntimeException("Therapy program already exists");
+        }finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
     @Override
     public boolean updateTPrograms(TherapyProgramDTO therapyProgramDTO) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
         try {
             TPrograms tPrograms = new TPrograms();
-            tPrograms.setTherapyID(therapyProgramDTO.getTherapyID());
-            tPrograms.setTherapyName(therapyProgramDTO.getTherapyName());
-            tPrograms.setTherapyDescription(therapyProgramDTO.getTherapyDescription());
-            tPrograms.setTherapyFee(therapyProgramDTO.getTherapyFee());
+            tPrograms.setProgramID(therapyProgramDTO.getTherapyID());
+            tPrograms.setProgramName(therapyProgramDTO.getTherapyName());
+            tPrograms.setProgramDescription(therapyProgramDTO.getTherapyDescription());
+            tPrograms.setProgramFee(therapyProgramDTO.getTherapyFee());
 
-            return tProgramDAO.update(tPrograms);
-
+            boolean isUpdated =  tProgramDAO.update(tPrograms,session);
+            if (isUpdated) {
+                transaction.commit();
+                return true;
+            }else{
+                transaction.rollback();
+                return false;
+            }
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Class not found Error while saving therapy programs", e);
         } catch (SQLException e) {
             throw new RuntimeException("SQL Error while saving therapy programs");
+        }finally {
+            session.close();
         }
     }
 
@@ -62,19 +126,19 @@ public class TProgramBOImpl implements TProgramBO {
         }
     }
 
-    @Override
-    public List<TherapyProgramDTO> getALLTPrograms() throws Exception {
+    @Override /*this method retrives data for the popup in appointments*/
+    public List<ProgramDto> getALLTPrograms() throws Exception {
         List<TPrograms> programList = tProgramDAO.getAll();
-        List<TherapyProgramDTO> therapyProgramDTOS = new ArrayList<>();
+        List<ProgramDto> programDtos = new ArrayList<>();
         for (TPrograms tPrograms : programList) {
-            therapyProgramDTOS.add(new TherapyProgramDTO(
-                    tPrograms.getTherapyID(),
-                    tPrograms.getTherapyName(),
-                    tPrograms.getTherapyDescription(),
-                    tPrograms.getTherapyFee()
+            programDtos.add(new ProgramDto(
+                    tPrograms.getProgramID(),
+                    tPrograms.getProgramName(),
+                    tPrograms.getProgramDescription(),
+                    tPrograms.getProgramFee()
             ));
         }
-        return therapyProgramDTOS;
+        return programDtos;
 
     }
 
@@ -88,5 +152,28 @@ public class TProgramBOImpl implements TProgramBO {
         } else {
             return "P001";  // Default if no records exist
         }
+    }
+
+    @Override /*this is the join query to load the table in therapy programs*/
+    public List<ProgramNDocDTO> getALL() {
+        List<TPrograms> tPrograms = queryDAO.getALLTherapists();
+        List<ProgramNDocDTO> dtos = new ArrayList<>();
+
+        for (TPrograms programs : tPrograms) {
+            String docID = programs.getTherapist().getDoctorID();
+            String docName = programs.getTherapist().getDoctorName();
+            String docAvailability = programs.getTherapist().getDoctorAvailability();
+            ProgramNDocDTO dto = new ProgramNDocDTO(
+                    programs.getProgramID(),
+                    programs.getProgramName(),
+                    programs.getProgramDescription(),
+                    programs.getProgramFee(),
+                    docID,
+                    docName,
+                    docAvailability
+            );
+            dtos.add(dto);
+        }
+        return dtos;
     }
 }

@@ -12,17 +12,18 @@ import java.util.Optional;
 
 public class AppointmentDAOImpl implements AppointmentDAO {
     private final  FactoryConfiguration factoryConfiguration = FactoryConfiguration.getInstance();
-    @Override
+
     public boolean save(Appointments appointments) throws SQLException {
         Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();
         try {
             session.persist(appointments);
+            session.flush();
             transaction.commit();
             return true;
         } catch (Exception e) {
             transaction.rollback();
-            return false;
+            throw new RuntimeException("save failed in AppointmentDAOImpl" + e.getMessage());
         }finally {
             if (session != null) {
                 session.close();
@@ -31,8 +32,23 @@ public class AppointmentDAOImpl implements AppointmentDAO {
     }
 
     @Override
-    public boolean update(Appointments appointments) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean save(Appointments appointments, Session session) throws SQLException {
+        try{
+            session.persist(appointments);
+            return true;
+        }catch(Exception e){
+            throw new SQLException(e.getMessage());
+        }
+    }
+
+    @Override
+    public boolean update(Appointments appointments, Session session) throws SQLException, ClassNotFoundException {
+        try{
+            session.merge(appointments);
+            return true;
+        }catch(Exception e){
+            throw new SQLException(e.getMessage());
+        }
     }
 
     @Override
@@ -46,7 +62,7 @@ public class AppointmentDAOImpl implements AppointmentDAO {
     }
 
     @Override
-    public Optional<Appointments> findByPK(String pk) {
+    public Optional<Appointments> findByPK(String pk,Session session) {
         return Optional.empty();
     }
 

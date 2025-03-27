@@ -29,7 +29,7 @@ public class UserBOImpl implements UserBO {
             user.setUserName(userDTO.getUserName());
             user.setUserPassword(userDTO.getUserPassword());
 
-            boolean isSaved= userDAO.saveUser(user,session);
+            boolean isSaved= userDAO.save(user,session);
             if (isSaved) {
                 transaction.commit();
                 return true;

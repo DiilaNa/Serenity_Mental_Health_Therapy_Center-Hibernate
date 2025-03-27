@@ -8,8 +8,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.ProgramDto;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.ProgramTM;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.TProgramTM;
-import lk.ijse.project.mentalHealthTherapyCenter.dto.TherapyProgramDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TProgramBO;
@@ -37,7 +38,7 @@ public class SelectProgramsController implements Initializable {
     }
 
     @FXML
-    private TableView<TProgramTM> Table;
+    private TableView<ProgramTM> Table;
 
     @FXML
     private Label idLabel;
@@ -63,18 +64,13 @@ public class SelectProgramsController implements Initializable {
     TProgramBO tProgramBO = BOFactory.getInstance().getBO(BOType.THERAPY_PROGRAMS);
 
     @Setter
-    private TherapistController therapistController;
+    private TherapyProgramsController therapyProgramsController;
 
     @Setter
     private AppointmentsController appointmentsController;
 
     @FXML
     void selectBtnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
-        if (therapistController != null) {
-            String ID = idLabel.getText();
-            String Name = nameLabel.getText();
-            therapistController.setDetails(ID, Name); // Pass data to TherapistController
-        }
         if (appointmentsController != null) {
             String ID = idLabel.getText();
             String Name = nameLabel.getText();
@@ -84,7 +80,7 @@ public class SelectProgramsController implements Initializable {
 
     @FXML
     void tableAction(MouseEvent event) {
-        TProgramTM selectedPatient = Table.getSelectionModel().getSelectedItem();
+        ProgramTM selectedPatient = Table.getSelectionModel().getSelectedItem();
 
         if (selectedPatient != null) {
             idLabel.setText(selectedPatient.getTherapyID());
@@ -93,16 +89,16 @@ public class SelectProgramsController implements Initializable {
 
     }
     private void loadTable() throws Exception {
-        List<TherapyProgramDTO> therapyProgramDTOS =  tProgramBO.getALLTPrograms();
-        ObservableList<TProgramTM> tProgramTMS = FXCollections.observableArrayList();
-        for (TherapyProgramDTO therapyProgramDTO : therapyProgramDTOS) {
-            TProgramTM tProgramTM = new TProgramTM(
-                    therapyProgramDTO.getTherapyID(),
-                    therapyProgramDTO.getTherapyName(),
-                    therapyProgramDTO.getTherapyDescription(),
-                    therapyProgramDTO.getTherapyFee()
+        List<ProgramDto> therapyProgramDTOS =  tProgramBO.getALLTPrograms();
+        ObservableList<ProgramTM> tProgramTMS = FXCollections.observableArrayList();
+        for (ProgramDto programDto : therapyProgramDTOS) {
+            ProgramTM programTM = new ProgramTM(
+                    programDto.getTherapyID(),
+                    programDto.getTherapyName(),
+                    programDto.getTherapyDescription(),
+                    programDto.getTherapyFee()
             );
-            tProgramTMS.add(tProgramTM);
+            tProgramTMS.add(programTM);
         }
         Table.setItems(tProgramTMS);
     }

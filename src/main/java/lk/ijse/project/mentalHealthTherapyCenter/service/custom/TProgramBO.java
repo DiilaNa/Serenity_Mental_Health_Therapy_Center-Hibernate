@@ -1,5 +1,7 @@
 package lk.ijse.project.mentalHealthTherapyCenter.service.custom;
 
+import lk.ijse.project.mentalHealthTherapyCenter.dto.ProgramDto;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.ProgramNDocDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TherapyProgramDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.SuperBO;
 
@@ -9,6 +11,7 @@ public interface TProgramBO extends SuperBO {
     boolean saveTPrograms(TherapyProgramDTO therapyProgramDTO);
     boolean updateTPrograms(TherapyProgramDTO therapyProgramDTO);
     boolean deleteTProgram(String therapyProgramID);
-    List<TherapyProgramDTO> getALLTPrograms() throws Exception;
+    List<ProgramDto> getALLTPrograms() throws Exception;
     String getNextProgramID();
+    List<ProgramNDocDTO> getALL ();
 }

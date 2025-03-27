@@ -2,38 +2,30 @@ package lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.impl;
 
 import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.Payment;
-import lk.ijse.project.mentalHealthTherapyCenter.entity.TPrograms;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.PaymentDAO;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class PaymentDAOImpl implements PaymentDAO {
+
     @Override
-    public boolean save(Payment payment) throws SQLException {
-       Session session = FactoryConfiguration.getInstance().getSession();
-       Transaction transaction = session.beginTransaction();
-       try{
-           session.persist(payment);
-           transaction.commit();
-           return true;
-       } catch (Exception e) {
-           transaction.rollback();
-           return false;
-       }finally{
-           if(session != null){
-               session.close();
-           }
-       }
+    public boolean save(Payment payment, Session session) throws SQLException {
+        try{
+            session.persist(payment);
+            session.flush();
+            return true;
+        } catch (Exception e) {
+            throw new HibernateException("save failed in PaymentDAOImpl" + e.getMessage());
+        }
     }
 
     @Override
-    public boolean update(Payment payment) throws SQLException, ClassNotFoundException {
+    public boolean update(Payment payment,Session session) throws SQLException, ClassNotFoundException {
         return false;
     }
 
@@ -50,7 +42,7 @@ public class PaymentDAOImpl implements PaymentDAO {
     }
 
     @Override
-    public Optional<Payment> findByPK(String pk) {
+    public Optional<Payment> findByPK(String pk,Session session) {
         return Optional.empty();
     }
 
