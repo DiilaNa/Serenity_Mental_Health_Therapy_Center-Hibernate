@@ -19,6 +19,7 @@ public class Therapist implements SuperEntity {
         private String doctorPhone;
         private String doctorEmail;
 
-        @OneToMany(mappedBy = "therapist",cascade = CascadeType.ALL)
-        private List<AppointmentDetails> appointmentDetails;
+        @ManyToOne
+        @JoinColumn(name = "doctor_id")
+        private Appointments appointments;
 }
