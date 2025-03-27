@@ -11,6 +11,7 @@ public class SessionDTO {
     private String sessionId;
     private String patient_ID;
     private String pay_ID;
+    private String therapist_ID;
     private String time;
     private String notes;
     private String date;

@@ -7,6 +7,7 @@ import lk.ijse.project.mentalHealthTherapyCenter.service.exeception.NotFoundExce
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 import java.sql.SQLException;
@@ -29,9 +30,7 @@ public class TherapistDAOImpl implements TherapistDAO {
     @Override
     public boolean update(Therapist therapist, Session session) throws SQLException, ClassNotFoundException {
         try {
-            System.out.println(therapist+"in daaaaaaaooooooooooooooooooooooooooooo");
             session.merge(therapist);
-            System.out.println("therapist updated");
             return true;
         }catch (Exception e){
             throw new RuntimeException("Therapist update failed"+e.getMessage());
@@ -71,19 +70,22 @@ public class TherapistDAOImpl implements TherapistDAO {
             session.close();
         }
     }
-    @Override /*search in appointments*/
-    public List<Therapist> findByDocID(List<String> docIDs,Session session)  {
-        List<Therapist> therapists = session.createQuery("FROM Therapist WHERE doctorID IN (:ids)", Therapist.class)
-                .setParameter("ids",docIDs)
-                .getResultList();
-        return therapists;
-    }
-
 
     @Override /* search in  therapy programs bo*/
-    public Optional<Therapist> findByPK(String pk,Session session) {
-      return Optional.empty();
+    public Optional<Therapist> findByPK(String pk, Session session) {
+        Therapist therapist = null;
+        try {
+            String sql = "SELECT * FROM therapist WHERE doctorID = :id";
+            NativeQuery<Therapist> query = session.createNativeQuery(sql, Therapist.class);
+            query.setParameter("id", pk);
+
+            therapist = query.uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.ofNullable(therapist);
     }
+
 
     @Override
     public Optional<String> getLastPK() {

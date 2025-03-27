@@ -125,6 +125,9 @@ public class AppointmentsController implements Initializable {
     @FXML
     private Label time;
 
+    @FXML
+    private Label docLoadLabel;
+
     private String ProgramID;
 
     private  String DocID;
@@ -140,7 +143,7 @@ public class AppointmentsController implements Initializable {
     public void setAddDoctors(String docID, String docName,String availability) {
         DocID = docID;
         if (docID != null && docName != null) {
-            doctorListView.getItems().add(docID + " - " + docName + " - " + availability);
+            docLoadLabel.setText(docID + " - " + docName + " - " + availability);
         }
     }
 
@@ -164,6 +167,14 @@ public class AppointmentsController implements Initializable {
         String sessionTIME =  sessionTime.getText();
         String sessionNOTES = sessionNotes.getText();
         String sessionDATE = sessionDate.getEditor().getText();
+        String doctorIDFromLabel = docLoadLabel.getText(); /*get the full text in to a label called doctorIDFromLabel */
+        String docID = null; /*this id is pass through sessionDTO*/
+
+        String[] parts = doctorIDFromLabel.split(" - ");
+        if (parts.length > 0) {
+            docID = parts[0];  // First part is docID , get id from the full label
+            System.out.println("Extracted Doc ID: " + docID);
+        }
 
         String paymentId = paymentID.getText();
         Double payAmount = Double.valueOf(payAMOUNT.getText());
@@ -171,16 +182,6 @@ public class AppointmentsController implements Initializable {
         String paymentDate = LocalDate.now().format(formatter);
         String paymentTime = LocalTime.now().format(timeFormatter);
 
-        ObservableList<String> selectedDoctors = doctorListView.getSelectionModel().getSelectedItems();
-        List<String> doctorIDs = new ArrayList<>();
-        for (String doctor : selectedDoctors) {
-            if (doctor.contains(" - ")){
-                String docID = doctor.split("-")[0];
-                doctorIDs.add(docID);
-            }else{
-                System.out.println("Error: Invalid doctor selected");
-            }
-        }
 
         ObservableList<String> selectedPrograms = programmsListView.getSelectionModel().getSelectedItems();  // Get selected items
 
@@ -241,20 +242,17 @@ public class AppointmentsController implements Initializable {
             );
             ProgramDetailsDTO programDetailsDTO = new ProgramDetailsDTO(
                 patientId,
-                programIDs
+                programIDs  /*List required as one patient can choose more than one programs*/
 
             );
             SessionDTO sessionDTO = new SessionDTO(
                     sessionId,
                     patientId,
                     paymentId,
+                    docID, /*don't need a list here,took from label splitting the first part*/
                     sessionTIME,
                     sessionNOTES,
                     sessionDATE
-            );
-            TherapistDetailsDTO therapistDetailsDTO = new TherapistDetailsDTO(
-                    sessionId,
-                    doctorIDs
             );
             PaymentDTO paymentDTO = new PaymentDTO(
                     paymentId,
@@ -264,7 +262,7 @@ public class AppointmentsController implements Initializable {
                     paymentDate,
                     paymentTime
             );
-            boolean isSaved = appointmentBO.addAppointment(patientDTO, programDetailsDTO,sessionDTO,therapistDetailsDTO,paymentDTO);
+            boolean isSaved = appointmentBO.addAppointment(patientDTO, programDetailsDTO,sessionDTO,paymentDTO);
             if (isSaved) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Appointment added", ButtonType.OK).show();
@@ -342,7 +340,7 @@ public class AppointmentsController implements Initializable {
         sessionTime.clear();
         sessionNotes.clear();
         payAMOUNT.clear();
-        doctorListView.refresh();
+        docLoadLabel.setDisable(true);
         programmsListView.refresh();
 
     }

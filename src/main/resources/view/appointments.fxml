@@ -316,8 +316,7 @@
             <Image url="@../../../../../../../Pictures/Mental%20Hospital/apt.png" />
          </image>
       </ImageView>
-      <ListView fx:id="doctorListView" layoutX="604.0" layoutY="293.0" prefHeight="95.0" prefWidth="238.0" />
-      <Button fx:id="addDoctors" layoutX="442.0" layoutY="316.0" mnemonicParsing="false" onMouseClicked="#addDoctorsAction" prefHeight="27.0" prefWidth="107.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;" text="Assign Doctors" textFill="WHITE">
+      <Button fx:id="addDoctors" layoutX="442.0" layoutY="306.0" mnemonicParsing="false" onMouseClicked="#addDoctorsAction" prefHeight="27.0" prefWidth="107.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;" text="Assign Doctors" textFill="WHITE">
          <font>
             <Font name="Impact" size="14.0" />
          </font>
@@ -328,5 +327,10 @@
          </font>
       </Button>
       <ListView fx:id="programmsListView" layoutX="604.0" layoutY="395.0" prefHeight="111.0" prefWidth="238.0" />
+      <Label fx:id="docLoadLabel" alignment="TOP_LEFT" layoutX="604.0" layoutY="311.0" prefHeight="70.0" prefWidth="238.0" text="Session ID" wrapText="true">
+         <font>
+            <Font name="Georgia" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

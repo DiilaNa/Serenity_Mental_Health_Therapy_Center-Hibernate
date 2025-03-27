@@ -61,7 +61,6 @@ public class TherapistBOImpl implements TherapistBO {
             }
 
         } catch (HibernateException | SQLException e) {
-            e.printStackTrace();
             throw new RuntimeException("SQL error while saving therapist: " + e.getMessage());
         }finally {
             session.close();
@@ -81,13 +80,11 @@ public class TherapistBOImpl implements TherapistBO {
             therapist.setDoctorAvailability(doctorDTO.getDoctorAvailability());
             therapist.setDoctorPhone(doctorDTO.getDoctorPhone());
             therapist.setDoctorEmail(doctorDTO.getDoctorEmail());
-            System.out.println("BO........."+therapist);
             boolean isUpdated = therapistDAO.update(therapist,session);
             if (isUpdated) {
                 transaction.commit();
                 return true;
             }else {
-                System.out.println("not updatd therapist");
                 transaction.rollback();
                 return false;
             }

@@ -1,5 +1,7 @@
 package lk.ijse.project.mentalHealthTherapyCenter.service.custom.impl;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.*;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.*;
@@ -10,7 +12,6 @@ import lk.ijse.project.mentalHealthTherapyCenter.service.custom.AppointmentBO;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.List;
 import java.util.Optional;
 
 public class AppointmentBOImpl implements AppointmentBO {
@@ -21,7 +22,7 @@ public class AppointmentBOImpl implements AppointmentBO {
     ProgramDetailsDAO programDetailsDAO = DAOFactory.getInstance().getDAO(DAOType.PROGRAM_DETAILS);
 
     @Override
-    public boolean addAppointment(PatientDTO patientDTO, ProgramDetailsDTO programDetailsDTO, SessionDTO sessionDTO, TherapistDetailsDTO therapistDetailsDTO, PaymentDTO paymentDTO) {
+    public boolean addAppointment(PatientDTO patientDTO, ProgramDetailsDTO programDetailsDTO, SessionDTO sessionDTO, PaymentDTO paymentDTO) {
        Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         try {
@@ -66,6 +67,9 @@ public class AppointmentBOImpl implements AppointmentBO {
             // Save Program Details
             for (String pid : programDetailsDTO.getProgramId()) {
                 TPrograms tPrograms = session.get(TPrograms.class, pid);
+                if (tPrograms != null) {
+                    System.out.println("program saved " + tPrograms.getProgramName());
+                }
                 if (tPrograms == null) {
                     transaction.rollback();
                     throw new RuntimeException("Error: Program ID " + pid + " not found in database.");
@@ -85,8 +89,20 @@ public class AppointmentBOImpl implements AppointmentBO {
                     return false;
                 }
             }
+            session.flush();
+            session.clear();
 
-            // Save Appointment
+            String tid  = sessionDTO.getTherapist_ID();
+            System.out.println("therapist id from dto " + tid);
+            Optional<Therapist> optional = therapistDAO.findByPK(tid,session);
+            optional.ifPresent(therapist -> System.out.println("therapist found whotto " + therapist.getDoctorName()));
+         /*  Therapist therapist = session.get(Therapist.class, tid);
+            if (therapist == null) {
+                new Alert(Alert.AlertType.INFORMATION, "Therapist ID " + tid + " not found in database.", ButtonType.CANCEL);
+                transaction.rollback();
+                return false;
+            }*/
+                // Save Appointment
             Appointments appointments = new Appointments();
             appointments.setSessionId(sessionDTO.getSessionId());
             appointments.setPay_ID(sessionDTO.getPay_ID());
@@ -94,6 +110,8 @@ public class AppointmentBOImpl implements AppointmentBO {
             appointments.setNotes(sessionDTO.getNotes());
             appointments.setDate(sessionDTO.getDate());
             appointments.setPatient(patient);
+            appointments.setTherapist(optional.get());
+            appointments.setPayment(payment);
 
             boolean isAppointmentSaved = appointmentDAO.save(appointments, session);
             System.out.println("appointment saved " + isAppointmentSaved);
@@ -103,8 +121,10 @@ public class AppointmentBOImpl implements AppointmentBO {
                 return false;
             }
             session.flush(); // Ensure Appointment is saved
+
             transaction.commit();
             return true;
+
         } catch (Exception e) {
             e.printStackTrace();
             transaction.rollback();
