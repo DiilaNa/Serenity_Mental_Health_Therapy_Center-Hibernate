@@ -53,7 +53,6 @@ public class AppointmentBOImpl implements AppointmentBO {
             patient.setPatientAddress(patientDTO.getPatientAddress());
             patient.setPatientPhone(patientDTO.getPatientPhone());
             patient.setPatientEmail(patientDTO.getPatientEmail());
-            patient.setPayment(payment); // Directly assign instead of fetching
 
             boolean isPatientSaved = patientDAO.save(patient, session);
             System.out.println(" patient saved " + isPatientSaved);

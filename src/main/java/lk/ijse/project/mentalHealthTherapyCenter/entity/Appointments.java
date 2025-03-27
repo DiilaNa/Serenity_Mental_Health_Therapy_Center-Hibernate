@@ -24,8 +24,9 @@ public class Appointments implements SuperEntity{
     @JoinColumn(name = "patient_Id")
     private Patient patient;
 
-    @OneToMany(mappedBy = "appointment",cascade = CascadeType.ALL)
-    private List<Appointments> appointments;
+    @ManyToOne
+    @JoinColumn(name = "doctor_id")
+    private Therapist therapist;
 
     @OneToOne
     @JoinColumn(name = "payment_ID")
