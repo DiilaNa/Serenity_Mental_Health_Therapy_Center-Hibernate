@@ -10,7 +10,6 @@ import java.io.Serializable;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Embeddable
 public class AppointmentDetailsID implements Serializable {
     private String appointmentId;

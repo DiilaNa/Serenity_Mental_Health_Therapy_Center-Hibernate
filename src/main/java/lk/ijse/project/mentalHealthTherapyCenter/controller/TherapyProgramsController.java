@@ -13,8 +13,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import lk.ijse.project.mentalHealthTherapyCenter.dto.ProgramNDocDTO;
-import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.ProgramNDocTM;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.ProgramDto;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.ProgramTM;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TherapyProgramDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
@@ -31,13 +31,10 @@ public class TherapyProgramsController implements Initializable {
         Image adminIMage = new Image(getClass().getResourceAsStream("/images/TherapyPrograms.png"));
         image.setImage(adminIMage);
 
-        tableIID.setCellValueFactory(new PropertyValueFactory<>("programID"));
-        tableName.setCellValueFactory(new PropertyValueFactory<>("programName"));
-        tableProgramDetails.setCellValueFactory(new PropertyValueFactory<>("programDetails"));
-        tableFee.setCellValueFactory(new PropertyValueFactory<>("programFee"));
-        tableDoc.setCellValueFactory(new PropertyValueFactory<>("doctorID"));
-        tableDocName.setCellValueFactory(new PropertyValueFactory<>("doctorName"));
-        tableDocAvailability.setCellValueFactory(new PropertyValueFactory<>("doctorAvailability"));
+        tableIID.setCellValueFactory(new PropertyValueFactory<>("therapyID"));
+        tableName.setCellValueFactory(new PropertyValueFactory<>("therapyName"));
+        tableProgramDetails.setCellValueFactory(new PropertyValueFactory<>("therapyDescription"));
+        tableFee.setCellValueFactory(new PropertyValueFactory<>("therapyFee"));
 
         try{
             refreshPage();
@@ -57,7 +54,7 @@ public class TherapyProgramsController implements Initializable {
     private TextField ProgramName;
 
     @FXML
-    private TableView<ProgramNDocTM> Table;
+    private TableView<ProgramTM> Table;
 
     @FXML
     private Button delete;
@@ -75,58 +72,23 @@ public class TherapyProgramsController implements Initializable {
     private Button save;
 
     @FXML
-    private TableColumn<ProgramNDocTM, Double> tableFee;
+    private TableColumn<ProgramTM, Double> tableFee;
 
     @FXML
-    private TableColumn<ProgramNDocTM, String> tableIID;
+    private TableColumn<ProgramTM, String> tableIID;
 
     @FXML
-    private TableColumn<ProgramNDocTM, String> tableName;
+    private TableColumn<ProgramTM, String> tableName;
 
     @FXML
-    private TableColumn<ProgramNDocTM, String> tableProgramDetails;
+    private TableColumn<ProgramTM, String> tableProgramDetails;
 
-    @FXML
-    private TableColumn<ProgramNDocTM, String> tableDoc;
-
-    @FXML
-    private TableColumn<ProgramNDocTM, String> tableDocAvailability;
-
-    @FXML
-    private TableColumn<ProgramNDocTM, String> tableDocName;
 
     TProgramBO tProgramBO = BOFactory.getInstance().getBO(BOType.THERAPY_PROGRAMS);
 
     @FXML
     private Button update;
 
-    @FXML
-    private ListView<String> doctorsListView;
-
-
-    private static String DoctorID;
-
-    public void setAddDoctors(String docID, String docName,String availability) {
-        System.out.println("awaa");
-        DoctorID = docID;
-        if (docID != null && docName != null && availability != null) {
-            doctorsListView.getItems().add(docID + " - " + docName + " - " + availability);
-        }
-    }
-
-
-    @FXML
-    void addDoctorsAction(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/assignDocs.fxml"));
-        Scene scene = new Scene(loader.load());
-        AssignDoctorsController assignDoctorsController = loader.getController();
-        assignDoctorsController.setTherapyProgramsController(this);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.setTitle("Therapy Programs - Serenity Mental Health Therapy Center");
-        stage.show();
-    }
 
     @FXML
     void deleteBtnAction(ActionEvent event) throws Exception {
@@ -152,28 +114,12 @@ public class TherapyProgramsController implements Initializable {
         String therapyProgramDetails = ProgramDetails.getText();
         Double therapyProgramFee = Double.parseDouble(ProgramFee.getText());
 
-        String listPrograms = doctorsListView.getSelectionModel().getSelectedItem();
-
-        if (listPrograms == null || listPrograms.isEmpty()) {
-            new Alert(Alert.AlertType.ERROR, "Please select a program from the list.", ButtonType.OK).show();
-            return; // Return early if no program is selected
-        }
-
-        if (listPrograms.contains("-")) {
-            DoctorID = listPrograms.split("-")[0];
-            System.out.println("Extracted Program ID: " + DoctorID);
-        } else {
-            System.out.println("Invalid program format: " + listPrograms);
-            new Alert(Alert.AlertType.ERROR, "Invalid program format.", ButtonType.OK).show();
-            return;
-        }
 
         TherapyProgramDTO therapyProgramDTO = new TherapyProgramDTO(
             therapyPID,
             therapyProgramName,
             therapyProgramDetails,
-            therapyProgramFee,
-                DoctorID
+            therapyProgramFee
         );
         boolean isSaved = tProgramBO.saveTPrograms(therapyProgramDTO);
 
@@ -187,15 +133,12 @@ public class TherapyProgramsController implements Initializable {
 
     @FXML
     void tableAction(MouseEvent event) {
-        ProgramNDocTM selectedPatient = Table.getSelectionModel().getSelectedItem();
+        ProgramTM selectedPatient = Table.getSelectionModel().getSelectedItem();
         if (selectedPatient != null) {
-            labelLoadID.setText(selectedPatient.getProgramID());
-            ProgramName.setText(selectedPatient.getProgramName());
-            ProgramDetails.setText(selectedPatient.getProgramDetails());
-            ProgramFee.setText(String.valueOf(selectedPatient.getProgramFee()));
-            ObservableList<String> programDetails = FXCollections.observableArrayList();
-            programDetails.add(selectedPatient.getDoctorID() + " - " + selectedPatient.getDoctorName() + " - " + selectedPatient.getDoctorAvailability());
-            doctorsListView.setItems(programDetails); // Correct way to load ListView
+            labelLoadID.setText(selectedPatient.getTherapyID());
+            ProgramName.setText(selectedPatient.getTherapyName());
+            ProgramDetails.setText(selectedPatient.getTherapyDescription());
+            ProgramFee.setText(String.valueOf(selectedPatient.getTherapyFee()));
         }
     }
 
@@ -206,22 +149,11 @@ public class TherapyProgramsController implements Initializable {
         String therapyProgramDetails = ProgramDetails.getText();
         Double therapyProgramFee = Double.parseDouble(ProgramFee.getText());
 
-        String listPrograms = doctorsListView.getSelectionModel().getSelectedItem();
-
-        if (listPrograms == null || listPrograms.isEmpty()) {
-            new Alert(Alert.AlertType.ERROR, "Please select a program from the list.", ButtonType.OK).show();
-            return; // Return early if no program is selected
-        }
-
-        DoctorID = listPrograms.split("-")[0];  // Program ID from selected item
-        String ProgramName = listPrograms.split("-")[1]; // Program Name from selected item
-
         TherapyProgramDTO therapyProgramDTO = new TherapyProgramDTO(
                 therapyPID,
                 therapyProgramName,
                 therapyProgramDetails,
-                therapyProgramFee,
-                DoctorID
+                therapyProgramFee
         );
         boolean isUpdated = tProgramBO.updateTPrograms(therapyProgramDTO);
 
@@ -234,22 +166,19 @@ public class TherapyProgramsController implements Initializable {
     }
 
     private void loadTable() throws Exception {
-        List<ProgramNDocDTO> programsAndDocs =  tProgramBO.getALL();
-        ObservableList<ProgramNDocTM> programNDocTMS = FXCollections.observableArrayList();
-        for (ProgramNDocDTO programNDocDTO : programsAndDocs) {
+        List<ProgramDto> programDtos =  tProgramBO.getALL();
+        ObservableList<ProgramTM> programTMS = FXCollections.observableArrayList();
+        for (ProgramDto programDto : programDtos) {
 
-            ProgramNDocTM programNDocTM = new ProgramNDocTM(
-                    programNDocDTO.getProgramID(),
-                    programNDocDTO.getProgramName(),
-                    programNDocDTO.getProgramDetails(),
-                    programNDocDTO.getProgramFee(),
-                    programNDocDTO.getDoctorID(),
-                    programNDocDTO.getProgramName(),
-                    programNDocDTO.getDoctorAvailability()
+            ProgramTM programTM = new ProgramTM(
+                    programDto.getTherapyID(),
+                    programDto.getTherapyName(),
+                    programDto.getTherapyDescription(),
+                    programDto.getTherapyFee()
             );
-            programNDocTMS.add(programNDocTM);
+            programTMS.add(programTM);
         }
-        Table.setItems(programNDocTMS);
+        Table.setItems(programTMS);
     }
 
     private void refreshPage() throws Exception {
@@ -258,7 +187,6 @@ public class TherapyProgramsController implements Initializable {
         ProgramName.clear();
         ProgramDetails.clear();
         ProgramFee.clear();
-
     }
 }
 

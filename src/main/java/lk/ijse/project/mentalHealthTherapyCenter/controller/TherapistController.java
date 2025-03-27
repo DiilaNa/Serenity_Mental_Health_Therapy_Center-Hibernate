@@ -92,8 +92,6 @@ public class TherapistController  implements Initializable {
         if (selectedPatient != null) {
             docIDlabel.setText(selectedPatient.getDoctorID());
             docName.setText(selectedPatient.getDoctorName());
-            // Load data into ListView
-
             docQualificationsCombo.setValue(selectedPatient.getDoctorQualifications());
             docAvailableCombo.setValue(selectedPatient.getDoctorAvailability());
             docContact.setText(selectedPatient.getDoctorPhone());
@@ -103,19 +101,20 @@ public class TherapistController  implements Initializable {
 
 
     @FXML
-    void deleteBtnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+    void deleteBtnAction(ActionEvent event) throws Exception {
         String patientID = docIDlabel.getText();
         boolean isDeleted = therapistBO.deleteTherapist(patientID);
         if (isDeleted) {
             new Alert(Alert.AlertType.INFORMATION, "Deleted Successfully").show();
+            refreshPage();
         }else {
             new Alert(Alert.AlertType.ERROR, "Deletion Failed").show();
         }
     }
 
     @FXML
-    void resetBtnAction(ActionEvent event) {
-
+    void resetBtnAction(ActionEvent event) throws Exception {
+        refreshPage();
     }
 
     @FXML
@@ -126,51 +125,6 @@ public class TherapistController  implements Initializable {
         String DocAvailability = docAvailableCombo.getSelectionModel().getSelectedItem();
         String DocPhone = docContact.getText();
         String DocMail = docMail.getText();
-
-    /*    String namePattern = "^[a-zA-Z ]+$";
-        String mailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-        String PhoneNoPattern = "^\\+?[1-9]\\d{0,2}[-.\\s]?\\d{1,4}[-.\\s]?\\d{3,4}[-.\\s]?\\d{3,4}$";
-
-        boolean isValidName = DocName.matches(namePattern);
-        boolean isValidMail = DocMail.matches(mailPattern);
-        boolean isValidPhoneNO = DocPhone.matches(PhoneNoPattern);
-
-        if (!isValidName) {
-            docName.setStyle(docName.getStyle() + ";-fx-border-color: red;");
-        }
-        if (!isValidMail) {
-            docMail.setStyle(docMail.getStyle() + ";-fx-border-color: red;");
-        }
-        if (!isValidPhoneNO) {
-            docContact.setStyle(docContact.getStyle() + ";-fx-border-color: red;");
-        }*/
-            DoctorDTO doctorDTO = new DoctorDTO(
-                    DoctorID,
-                    DocName,
-                    DocQualifications,
-                    DocAvailability,
-                    DocPhone,
-                    DocMail
-            );
-            boolean isSaved = therapistBO.saveTherapist(doctorDTO);
-            if (isSaved) {
-                refreshPage();
-                new Alert(Alert.AlertType.INFORMATION,"Therapist Saved",ButtonType.OK).show();
-            }else{
-                new Alert(Alert.AlertType.ERROR,"Saving Failed",ButtonType.OK).show();
-            }
-    }
-
-    @FXML
-    void updateBtnAction(ActionEvent event) {
-        String DoctorID = docIDlabel.getText();
-        String DocName = docName.getText();
-        String DocQualifications = docQualificationsCombo.getSelectionModel().getSelectedItem();
-        String DocAvailability = docAvailableCombo.getSelectionModel().getSelectedItem();
-        String DocPhone = docContact.getText();
-        String DocMail = docMail.getText();
-
-
 
         String namePattern = "^[a-zA-Z ]+$";
         String mailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
@@ -189,7 +143,6 @@ public class TherapistController  implements Initializable {
         if (!isValidPhoneNO) {
             docContact.setStyle(docContact.getStyle() + ";-fx-border-color: red;");
         }
-        if (!isValidName && !isValidMail && !isValidPhoneNO) {
             DoctorDTO doctorDTO = new DoctorDTO(
                     DoctorID,
                     DocName,
@@ -198,14 +151,58 @@ public class TherapistController  implements Initializable {
                     DocPhone,
                     DocMail
             );
-            boolean isSaved = therapistBO.updateTherapist(doctorDTO);
+            boolean isSaved = therapistBO.saveTherapist(doctorDTO);
             if (isSaved) {
-                new Alert(Alert.AlertType.INFORMATION,"Therapist Updated",ButtonType.OK).show();
+                refreshPage();
+                new Alert(Alert.AlertType.INFORMATION,"Therapist Saved",ButtonType.OK).show();
             }else{
-                new Alert(Alert.AlertType.ERROR,"Updating Failed",ButtonType.OK).show();
+                new Alert(Alert.AlertType.ERROR,"Saving Failed",ButtonType.OK).show();
             }
+    }
+
+    @FXML
+    void updateBtnAction(ActionEvent event) throws Exception {
+        String DoctorID = docIDlabel.getText();
+        String DocName = docName.getText();
+        String DocQualifications = docQualificationsCombo.getSelectionModel().getSelectedItem();
+        String DocAvailability = docAvailableCombo.getSelectionModel().getSelectedItem();
+        String DocPhone = docContact.getText();
+        String DocMail = docMail.getText();
+
+        String namePattern = "^[a-zA-Z ]+$";
+        String mailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        String PhoneNoPattern = "^\\+?[1-9]\\d{0,2}[-.\\s]?\\d{1,4}[-.\\s]?\\d{3,4}[-.\\s]?\\d{3,4}$";
+
+        boolean isValidName = DocName.matches(namePattern);
+        boolean isValidMail = DocMail.matches(mailPattern);
+        boolean isValidPhoneNO = DocPhone.matches(PhoneNoPattern);
+
+        if (!isValidName) {
+            docName.setStyle(docName.getStyle() + ";-fx-border-color: red;");
+        }
+        if (!isValidMail) {
+            docMail.setStyle(docMail.getStyle() + ";-fx-border-color: red;");
+        }
+        if (!isValidPhoneNO) {
+            docContact.setStyle(docContact.getStyle() + ";-fx-border-color: red;");
+        }
+        DoctorDTO doctorDTO = new DoctorDTO(
+                DoctorID,
+                DocName,
+                DocQualifications,
+                DocAvailability,
+                DocPhone,
+                DocMail
+        );
+        boolean isSaved = therapistBO.updateTherapist(doctorDTO);
+        if (isSaved) {
+            refreshPage();
+            new Alert(Alert.AlertType.INFORMATION,"Therapist Saved",ButtonType.OK).show();
+        }else{
+            new Alert(Alert.AlertType.ERROR,"Saving Failed",ButtonType.OK).show();
         }
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -246,11 +243,12 @@ public class TherapistController  implements Initializable {
         table.setItems(therapistTMS);
     }
     private void refreshPage() throws Exception {
+        loadTable();
         docIDlabel.setText(therapistBO.getNextTherapyID());
-
+        docAvailableCombo.getItems().clear();
+        docQualificationsCombo.getItems().clear();
         docAvailableCombo.setItems(FXCollections.observableArrayList("Available","Not Available"));
         docQualificationsCombo.setItems(FXCollections.observableArrayList("Bsc","Msc","Phd"));
-        loadTable();
         docName.clear();
         docContact.clear();
         docMail.clear();

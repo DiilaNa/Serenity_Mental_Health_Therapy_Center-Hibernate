@@ -61,9 +61,6 @@ public class AssignDoctorsController implements Initializable {
     @Setter
     private AppointmentsController appointmentsController;
 
-    @Setter
-    private TherapyProgramsController therapyProgramsController;
-
     TherapistBO therapistBO = BOFactory.getInstance().getBO(BOType.THERAPIST);
 
     private void refreshPage() throws Exception {
@@ -92,10 +89,10 @@ public class AssignDoctorsController implements Initializable {
                     DoctorDTO selectedDoctor = findDoctorByName(doctors, newValue);
 
                     // Update the labels with the doctor information
-                    docIdFromCombo.setText("Doctor ID: " + selectedDoctor.getDoctorID());
-                    docNameFromCombo.setText("Doctor Name: " + selectedDoctor.getDoctorName());
-                    docQualificationsFromCombo.setText("Qualifications: " + selectedDoctor.getDoctorQualifications());
-                    docAvailable.setText("Doctor Available: " + selectedDoctor.getDoctorAvailability());
+                    docIdFromCombo.setText(selectedDoctor.getDoctorID());
+                    docNameFromCombo.setText(selectedDoctor.getDoctorName());
+                    docQualificationsFromCombo.setText(selectedDoctor.getDoctorQualifications());
+                    docAvailable.setText(selectedDoctor.getDoctorAvailability());
                 }
             });
         } catch (Exception e) {
@@ -119,12 +116,6 @@ public class AssignDoctorsController implements Initializable {
             String Name = docNameFromCombo.getText();
             String Availability = docAvailable.getText();
             appointmentsController.setAddDoctors(ID, Name,Availability);
-        }
-        if (therapyProgramsController != null) {
-            String ID = docIdFromCombo.getText();
-            String Name = docNameFromCombo.getText();
-            String Availability = docAvailable.getText();
-            therapyProgramsController.setAddDoctors(ID,Name,Availability);
         }
     }
 

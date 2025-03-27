@@ -3,7 +3,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -18,9 +17,9 @@
 
 <AnchorPane prefHeight="703.0" prefWidth="1290.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalHealthTherapyCenter.controller.TherapyProgramsController">
    <children>
-      <Pane layoutX="1000.0" layoutY="112.0" prefHeight="570.0" prefWidth="234.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;">
+      <Pane layoutX="1000.0" layoutY="112.0" prefHeight="440.0" prefWidth="234.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;">
          <children>
-            <Button fx:id="update" layoutX="27.0" layoutY="211.0" mnemonicParsing="false" onAction="#updateBtnAction" prefHeight="42.0" prefWidth="186.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Update Programs" textFill="WHITE">
+            <Button fx:id="update" layoutX="27.0" layoutY="153.0" mnemonicParsing="false" onAction="#updateBtnAction" prefHeight="42.0" prefWidth="186.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Update Programs" textFill="WHITE">
                <font>
                   <Font name="Impact" size="20.0" />
                </font>
@@ -35,7 +34,7 @@
                   </DropShadow>
                </effect>
             </Button>
-            <Button fx:id="delete" layoutX="27.0" layoutY="300.0" mnemonicParsing="false" onAction="#deleteBtnAction" prefHeight="42.0" prefWidth="186.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Delete Programs" textFill="WHITE">
+            <Button fx:id="delete" layoutX="27.0" layoutY="250.0" mnemonicParsing="false" onAction="#deleteBtnAction" prefHeight="42.0" prefWidth="185.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Delete Programs" textFill="WHITE">
                <font>
                   <Font name="Impact" size="20.0" />
                </font>
@@ -50,7 +49,7 @@
                   </DropShadow>
                </effect>
             </Button>
-            <Button fx:id="reset" layoutX="27.0" layoutY="408.0" mnemonicParsing="false" onAction="#resetBtnAction" prefHeight="42.0" prefWidth="186.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Reset Details" textFill="WHITE">
+            <Button fx:id="reset" layoutX="27.0" layoutY="339.0" mnemonicParsing="false" onAction="#resetBtnAction" prefHeight="42.0" prefWidth="186.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Reset Details" textFill="WHITE">
                <font>
                   <Font name="Impact" size="20.0" />
                </font>
@@ -65,7 +64,7 @@
                   </DropShadow>
                </effect>
             </Button>
-            <Button fx:id="save" layoutX="27.0" layoutY="103.0" mnemonicParsing="false" onAction="#saveBtnAction" prefHeight="42.0" prefWidth="186.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="ADD PROGRAMS" textFill="WHITE">
+            <Button fx:id="save" layoutX="25.0" layoutY="58.0" mnemonicParsing="false" onAction="#saveBtnAction" prefHeight="42.0" prefWidth="186.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="ADD PROGRAMS" textFill="WHITE">
                <font>
                   <Font name="Impact" size="20.0" />
                </font>
@@ -80,24 +79,21 @@
                   </DropShadow>
                </effect>
             </Button>
-            <Line endX="100.0" layoutX="120.0" layoutY="535.0" startX="-100.0" />
+            <Line endX="100.0" layoutX="122.0" layoutY="424.0" startX="-100.0" />
          </children>
       </Pane>
       <TableView fx:id="Table" layoutX="40.0" layoutY="95.0" onMouseClicked="#tableAction" prefHeight="446.0" prefWidth="925.0">
         <columns>
           <TableColumn fx:id="tableIID" prefWidth="113.59999656677246" text="ID" />
-          <TableColumn fx:id="tableName" prefWidth="150.39999389648438" text="Name" />
-            <TableColumn fx:id="tableProgramDetails" prefWidth="145.60003662109375" text="Program Details" />
-            <TableColumn fx:id="tableFee" prefWidth="114.39999389648438" text="Fee" />
-            <TableColumn fx:id="tableDoc" prefWidth="99.20001220703125" text="Doctor ID" />
-            <TableColumn fx:id="tableDocName" prefWidth="172.0" text="Doctor Name" />
-            <TableColumn fx:id="tableDocAvailability" prefWidth="128.0" text="Availability" />
+          <TableColumn fx:id="tableName" prefWidth="256.8000030517578" text="Name" />
+            <TableColumn fx:id="tableProgramDetails" prefWidth="292.79998779296875" text="Program Details" />
+            <TableColumn fx:id="tableFee" prefWidth="262.3999938964844" text="Fee" />
         </columns>
       </TableView>
-      <TextField fx:id="ProgramName" layoutX="206.0" layoutY="575.0" prefHeight="26.0" prefWidth="186.0" promptText="Enter Program Name" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <TextField fx:id="ProgramDetails" layoutX="444.0" layoutY="575.0" prefHeight="26.0" prefWidth="180.0" promptText="Program Details" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <TextField fx:id="ProgramFee" layoutX="206.0" layoutY="629.0" prefHeight="26.0" prefWidth="186.0" promptText="Enter the Fee" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <Label fx:id="labelLoadID" layoutX="40.0" layoutY="609.0" text="Load ID">
+      <TextField fx:id="ProgramName" layoutX="325.0" layoutY="577.0" prefHeight="26.0" prefWidth="186.0" promptText="Enter Program Name" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="ProgramDetails" layoutX="563.0" layoutY="577.0" prefHeight="26.0" prefWidth="180.0" promptText="Program Details" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="ProgramFee" layoutX="325.0" layoutY="631.0" prefHeight="26.0" prefWidth="186.0" promptText="Enter the Fee" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <Label fx:id="labelLoadID" layoutX="159.0" layoutY="611.0" text="Load ID">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -115,11 +111,5 @@
             <Image url="@../../../../../../../Pictures/Mental%20Hospital/icons8-program-50.png" />
          </image>
       </ImageView>
-      <Button fx:id="addDoctors" layoutX="458.0" layoutY="628.0" mnemonicParsing="false" onMouseClicked="#addDoctorsAction" prefHeight="27.0" prefWidth="152.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;" text="Choose  Doctor" textFill="WHITE">
-         <font>
-            <Font name="Impact" size="14.0" />
-         </font>
-      </Button>
-      <ListView fx:id="doctorsListView" layoutX="655.0" layoutY="556.0" prefHeight="130.0" prefWidth="313.0" />
    </children>
 </AnchorPane>

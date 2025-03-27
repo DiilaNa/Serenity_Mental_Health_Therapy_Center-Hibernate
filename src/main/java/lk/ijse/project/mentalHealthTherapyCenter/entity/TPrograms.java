@@ -18,10 +18,6 @@ public class TPrograms implements SuperEntity {
     private String programDescription;
     private Double programFee;
 
-    @OneToMany(mappedBy = "tPrograms",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "tPrograms",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<ProgramDetails> programDetails;
-
-    @ManyToOne
-    @JoinColumn(name = "doctorID")
-    Therapist therapist;
 }

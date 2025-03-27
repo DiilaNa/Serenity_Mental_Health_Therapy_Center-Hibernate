@@ -21,7 +21,4 @@ public class Therapist implements SuperEntity {
 
         @OneToMany(mappedBy = "therapist",cascade = CascadeType.ALL)
         private List<AppointmentDetails> appointmentDetails;
-
-       @OneToMany(mappedBy = "therapist",cascade = CascadeType.ALL)
-        private List<TPrograms> tPrograms;
 }

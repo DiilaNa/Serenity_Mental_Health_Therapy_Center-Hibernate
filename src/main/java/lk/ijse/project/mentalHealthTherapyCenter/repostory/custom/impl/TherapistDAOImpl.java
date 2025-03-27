@@ -2,7 +2,6 @@ package lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.impl;
 
 import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.Therapist;
-import lk.ijse.project.mentalHealthTherapyCenter.entity.User;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.TherapistDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.exeception.NotFoundException;
 
@@ -30,7 +29,9 @@ public class TherapistDAOImpl implements TherapistDAO {
     @Override
     public boolean update(Therapist therapist, Session session) throws SQLException, ClassNotFoundException {
         try {
+            System.out.println(therapist+"in daaaaaaaooooooooooooooooooooooooooooo");
             session.merge(therapist);
+            System.out.println("therapist updated");
             return true;
         }catch (Exception e){
             throw new RuntimeException("Therapist update failed"+e.getMessage());
@@ -81,11 +82,7 @@ public class TherapistDAOImpl implements TherapistDAO {
 
     @Override /* search in  therapy programs bo*/
     public Optional<Therapist> findByPK(String pk,Session session) {
-        Therapist therapist = (Therapist) session.createQuery("FROM Therapist WHERE doctorID = :doctorID")
-                .setParameter("doctorID", pk)
-                .uniqueResult();
-        System.out.println(therapist+"inside therapist dao");
-      return Optional.ofNullable(therapist);
+      return Optional.empty();
     }
 
     @Override

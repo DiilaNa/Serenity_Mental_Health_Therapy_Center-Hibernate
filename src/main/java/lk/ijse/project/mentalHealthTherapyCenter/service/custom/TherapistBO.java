@@ -1,7 +1,6 @@
 package lk.ijse.project.mentalHealthTherapyCenter.service.custom;
 
 import lk.ijse.project.mentalHealthTherapyCenter.dto.DoctorDTO;
-import lk.ijse.project.mentalHealthTherapyCenter.dto.ProgramNDocDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.SuperBO;
 
 import java.sql.SQLException;

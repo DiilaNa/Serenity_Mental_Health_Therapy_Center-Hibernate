@@ -136,8 +136,8 @@
             <Font name="Georgia Bold" size="16.0" />
          </font>
       </Label>
-      <ComboBox fx:id="docQualificationsCombo" layoutX="969.0" layoutY="411.0" prefHeight="26.0" prefWidth="243.0" promptText="bachelores/masters/doctoral degree" style="-fx-background-color: trasnsparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <ComboBox fx:id="docAvailableCombo" layoutX="1004.0" layoutY="448.0" prefHeight="26.0" prefWidth="207.0" style="-fx-background-color: trasnsparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <ComboBox fx:id="docQualificationsCombo" layoutX="969.0" layoutY="411.0" prefHeight="26.0" prefWidth="243.0" promptText="bachelores/masters/doctoral degree" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <ComboBox fx:id="docAvailableCombo" layoutX="1004.0" layoutY="448.0" prefHeight="26.0" prefWidth="207.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
       <Label layoutX="835.0" layoutY="451.0" text="Availability">
          <font>
             <Font name="Georgia Bold" size="16.0" />

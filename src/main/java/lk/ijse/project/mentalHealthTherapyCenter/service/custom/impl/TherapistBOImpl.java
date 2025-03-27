@@ -2,12 +2,9 @@ package lk.ijse.project.mentalHealthTherapyCenter.service.custom.impl;
 
 import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.DoctorDTO;
-import lk.ijse.project.mentalHealthTherapyCenter.dto.ProgramNDocDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.Therapist;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOType;
-import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.QueryDAO;
-import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.TProgramDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.TherapistDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TherapistBO;
 import org.hibernate.HibernateException;
@@ -73,6 +70,7 @@ public class TherapistBOImpl implements TherapistBO {
 
     @Override
     public boolean updateTherapist(DoctorDTO doctorDTO) {
+        System.out.println(doctorDTO.getDoctorID());
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         try{
@@ -83,12 +81,13 @@ public class TherapistBOImpl implements TherapistBO {
             therapist.setDoctorAvailability(doctorDTO.getDoctorAvailability());
             therapist.setDoctorPhone(doctorDTO.getDoctorPhone());
             therapist.setDoctorEmail(doctorDTO.getDoctorEmail());
-
+            System.out.println("BO........."+therapist);
             boolean isUpdated = therapistDAO.update(therapist,session);
             if (isUpdated) {
                 transaction.commit();
                 return true;
             }else {
+                System.out.println("not updatd therapist");
                 transaction.rollback();
                 return false;
             }

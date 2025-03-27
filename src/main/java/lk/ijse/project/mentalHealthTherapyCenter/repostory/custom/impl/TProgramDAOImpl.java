@@ -10,7 +10,6 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.sql.SQLException;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,15 +73,7 @@ public class TProgramDAOImpl implements TProgramDAO {
 
     @Override
     public Optional<TPrograms> findByPK(String pk, Session session) {
-        try {
-            TPrograms tPrograms = session.createQuery("FROM TPrograms WHERE therapist = :therapyID", TPrograms.class)
-                    .setParameter("therapyID", pk)
-                    .uniqueResult(); // Returns a single result or null
-            return Optional.ofNullable(tPrograms);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Optional.empty();
-        }
+       return Optional.empty();
     }
 
     @Override
