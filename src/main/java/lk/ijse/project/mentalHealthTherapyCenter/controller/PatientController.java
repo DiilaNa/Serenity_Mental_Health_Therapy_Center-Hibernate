@@ -45,6 +45,10 @@ public class PatientController implements Initializable {
     }
 
     @FXML
+    private ComboBox<String> PatientGender;
+
+
+    @FXML
     private Button delete;
 
     @FXML
@@ -93,9 +97,6 @@ public class PatientController implements Initializable {
     private TextField PatientEmail;
 
     @FXML
-    private TextField PatientGender;
-
-    @FXML
     private TextField PatientNic;
 
     @FXML
@@ -104,7 +105,47 @@ public class PatientController implements Initializable {
     @FXML
     private Label loadPatientID;
 
+    @FXML
+    private Button save;
+
     PatientBO patientBO = BOFactory.getInstance().getBO(BOType.PATIENT);
+
+    @FXML
+    void saveAction(ActionEvent event) throws Exception {
+        String patientID = loadPatientID.getText();
+        String patientName = PName.getText();
+        String patientBirthDate = PDateOfBirth.getText();
+        String patientNIC = PatientNic.getText();
+        String patientGender = PatientGender.getValue();
+        String patientAddress = PatientAddress.getText();
+        String patientPhone = PatientContactNO.getText();
+        String patientEmail = PatientEmail.getText();
+
+        if (patientID.isEmpty() || patientName.trim().isEmpty() || patientBirthDate.isEmpty() || patientNIC.isEmpty() || patientGender.trim().isEmpty() || patientAddress.trim().isEmpty()) {
+            new Alert(Alert.AlertType.INFORMATION, "Please select data from table",ButtonType.CLOSE).show();
+            return;
+        }
+
+        PatientDTO patientDTO = new PatientDTO(
+                patientID,
+                patientName,
+                patientBirthDate,
+                patientNIC,
+                patientGender,
+                patientAddress,
+                patientPhone,
+                patientEmail
+        );
+
+        boolean isUpdated = patientBO.savePatient(patientDTO);
+        if (isUpdated) {
+            refreshPage();
+            new Alert(Alert.AlertType.INFORMATION, "PatientDAOImpl updated successfully", ButtonType.OK).show();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "PatientDAOImpl updated Failed",ButtonType.OK).show();
+        }
+
+    }
 
     @FXML
     void deleteAction(ActionEvent event) throws Exception {
@@ -132,7 +173,7 @@ public class PatientController implements Initializable {
             PName.setText(selectedPatient.getPatientName());
             PDateOfBirth.setText(selectedPatient.getPatientBirthDate());
             PatientNic.setText(selectedPatient.getPatientNIC());
-            PatientGender.setText(selectedPatient.getPatientGender());
+            PatientGender.setValue(selectedPatient.getPatientGender());
             PatientAddress.setText(selectedPatient.getPatientAddress());
             PatientContactNO.setText(selectedPatient.getPatientPhone());
             PatientEmail.setText(selectedPatient.getPatientEmail());
@@ -147,7 +188,7 @@ public class PatientController implements Initializable {
         String patientName = PName.getText();
         String patientBirthDate = PDateOfBirth.getText();
         String patientNIC = PatientNic.getText();
-        String patientGender = PatientGender.getText();
+        String patientGender = PatientGender.getValue();
         String patientAddress = PatientAddress.getText();
         String patientPhone = PatientContactNO.getText();
         String patientEmail = PatientEmail.getText();
@@ -200,11 +241,11 @@ public class PatientController implements Initializable {
     }
     private void refreshPage() throws Exception {
         loadTableData();
-        loadPatientID.setText("");
+        loadPatientID.setText(patientBO.getNextPatientID());
         PName.clear();
         PDateOfBirth.clear();
         PatientNic.clear();
-        PatientGender.clear();
+        PatientGender.setItems(FXCollections.observableArrayList("Male", "Female"));
         PatientAddress.clear();
         PatientContactNO.clear();
         PatientEmail.clear();

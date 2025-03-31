@@ -28,9 +28,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class AppointmentsController implements Initializable {
     @Override
@@ -67,9 +65,6 @@ public class AppointmentsController implements Initializable {
 
     @FXML
     private Label date;
-
-    @FXML
-    private ListView<String> doctorListView;
 
     @FXML
     private ImageView image;
@@ -182,18 +177,24 @@ public class AppointmentsController implements Initializable {
         String paymentDate = LocalDate.now().format(formatter);
         String paymentTime = LocalTime.now().format(timeFormatter);
 
+        // Enable multiple selection
+        programmsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        ObservableList<String> selectedPrograms = programmsListView.getSelectionModel().getSelectedItems();  // Get selected items
-
-        List<String> programIDs = new ArrayList<>();
-        for (String program : selectedPrograms) {
-            if (program.contains(" - ")) {
-                String programID = program.split(" - ")[0];  // Extract programID from the format "ID - ProgramName"
-                programIDs.add(programID);  // Add to the list of program IDs
-            } else {
-                System.out.println("Error: Invalid format for program item!");
+        // Handle mouse click event to print selected items
+        ObservableList<String> selectedPrograms = programmsListView.getSelectionModel().getSelectedItems();
+        System.out.println("Selected Programs: " + selectedPrograms);  // Print selected items
+        Set<String> programIDs = new HashSet<>();
+            // Now handle the program IDs extraction
+            for (String program : selectedPrograms) {
+                if (program.contains(" - ")) {
+                    String programID = program.split(" - ")[0];  // Extract programID
+                    programIDs.add(programID);  // Add to the list of program IDs
+                } else {
+                    System.out.println("Error: Invalid format for program item! " + program);
+                }
             }
-        }
+
+        System.out.println("Extracted Programs: " + programIDs);
 
      /*   String namePattern = "^[a-zA-Z ]+$";
         String addressPattern = "^[a-zA-Z0-9, -]+$";
@@ -242,9 +243,10 @@ public class AppointmentsController implements Initializable {
             );
             ProgramDetailsDTO programDetailsDTO = new ProgramDetailsDTO(
                 patientId,
-                programIDs  /*List required as one patient can choose more than one programs*/
+                new ArrayList<>(programIDs)  /*List required as one patient can choose more than one programs*/
 
             );
+        System.out.println(programDetailsDTO.getProgramId());
             SessionDTO sessionDTO = new SessionDTO(
                     sessionId,
                     patientId,

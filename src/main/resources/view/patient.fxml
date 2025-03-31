@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -27,9 +28,9 @@
             <TableColumn fx:id="tablePEmail" prefWidth="186.400146484375" text="E-mail" />
         </columns>
       </TableView>
-      <Button fx:id="update" layoutX="31.0" layoutY="490.0" mnemonicParsing="false" onAction="#updateAction" prefHeight="42.0" prefWidth="187.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="Update Patient" textFill="WHITE">
+      <Button fx:id="update" layoutX="27.0" layoutY="564.0" mnemonicParsing="false" onAction="#updateAction" prefHeight="26.0" prefWidth="161.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="Update Patient" textFill="WHITE">
          <font>
-            <Font name="Impact" size="22.0" />
+            <Font name="Impact" size="18.0" />
          </font>
          <effect>
             <Glow>
@@ -42,9 +43,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="delete" layoutX="31.0" layoutY="569.0" mnemonicParsing="false" onAction="#deleteAction" prefHeight="38.0" prefWidth="187.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="Delete Patient" textFill="WHITE">
+      <Button fx:id="delete" layoutX="25.0" layoutY="626.0" mnemonicParsing="false" onAction="#deleteAction" prefHeight="35.0" prefWidth="162.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="Delete Patient" textFill="WHITE">
          <font>
-            <Font name="Impact" size="22.0" />
+            <Font name="Impact" size="18.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -67,17 +68,50 @@
             <Image url="@../../../../../../../Pictures/Mental%20Hospital/icons8-patient-50.png" />
          </image>
       </ImageView>
-      <Label fx:id="loadPatientID" layoutX="296.0" layoutY="502.0" text="Patient ID">
+      <Label fx:id="loadPatientID" layoutX="289.0" layoutY="501.0" text="Patient ID">
          <font>
             <Font name="Georgia Bold" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="PName" layoutX="296.0" layoutY="556.0" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <TextField fx:id="PDateOfBirth" layoutX="499.0" layoutY="498.0" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <TextField fx:id="PatientNic" layoutX="499.0" layoutY="556.0" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <TextField fx:id="PatientGender" layoutX="710.0" layoutY="498.0" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <TextField fx:id="PatientAddress" layoutX="717.0" layoutY="556.0" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <TextField fx:id="PatientContactNO" layoutX="947.0" layoutY="498.0" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <TextField fx:id="PatientEmail" layoutX="947.0" layoutY="556.0" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="PName" layoutX="246.0" layoutY="556.0" prefHeight="26.0" prefWidth="217.0" promptText="Enter  Petient Name" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <font>
+            <Font name="Consolas Bold" size="16.0" />
+         </font></TextField>
+      <TextField fx:id="PDateOfBirth" layoutX="499.0" layoutY="498.0" prefHeight="26.0" prefWidth="166.0" promptText="Date of Birth" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <font>
+            <Font name="Consolas" size="16.0" />
+         </font></TextField>
+      <TextField fx:id="PatientNic" layoutX="499.0" layoutY="556.0" prefHeight="26.0" prefWidth="166.0" promptText="NIC Number" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <font>
+            <Font name="Consolas Bold" size="16.0" />
+         </font></TextField>
+      <TextField fx:id="PatientAddress" layoutX="717.0" layoutY="556.0" prefHeight="26.0" prefWidth="166.0" promptText="Address" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <font>
+            <Font name="Consolas Bold" size="16.0" />
+         </font></TextField>
+      <TextField fx:id="PatientContactNO" layoutX="947.0" layoutY="498.0" prefHeight="30.0" prefWidth="182.0" promptText="Contact No" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <font>
+            <Font name="Consolas Bold" size="16.0" />
+         </font></TextField>
+      <TextField fx:id="PatientEmail" layoutX="947.0" layoutY="556.0" prefHeight="26.0" prefWidth="182.0" promptText="E-MAIL" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <font>
+            <Font name="Consolas Bold" size="16.0" />
+         </font></TextField>
+      <Button fx:id="save" layoutX="27.0" layoutY="503.0" mnemonicParsing="false" onAction="#saveAction" prefHeight="35.0" prefWidth="162.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="Register Patient" textFill="WHITE">
+         <font>
+            <Font name="Impact" size="18.0" />
+         </font>
+         <effect>
+            <Glow>
+               <input>
+                  <DropShadow />
+               </input>
+            </Glow>
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ComboBox fx:id="PatientGender" layoutX="707.0" layoutY="500.0" opacity="0.5" prefHeight="26.0" prefWidth="175.0" promptText="Gender" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
    </children>
 </AnchorPane>

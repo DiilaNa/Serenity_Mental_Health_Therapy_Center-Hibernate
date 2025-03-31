@@ -12,7 +12,7 @@ import lk.ijse.project.mentalHealthTherapyCenter.service.custom.AppointmentBO;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.Optional;
+import java.util.*;
 
 public class AppointmentBOImpl implements AppointmentBO {
     PatientDAO patientDAO = DAOFactory.getInstance().getDAO(DAOType.PATIENT);
@@ -64,44 +64,53 @@ public class AppointmentBOImpl implements AppointmentBO {
             }
             session.flush(); // Ensure Patient is saved
 
-            // Save Program Details
-            for (String pid : programDetailsDTO.getProgramId()) {
+            Set<String> uniqueProgramIDs = new HashSet<>(programDetailsDTO.getProgramId()); // Ensure uniqueness
+            System.out.println("Unique Program IDs: " + uniqueProgramIDs);
+
+            if (uniqueProgramIDs.isEmpty() && uniqueProgramIDs==null){
+                transaction.rollback();
+                System.out.println("Unique Program IDs null");
+                return false;
+            }
+
+// Validate all program IDs exist before processing
+            List<TPrograms> validPrograms = new ArrayList<>();
+            for (String pid : uniqueProgramIDs) {
                 TPrograms tPrograms = session.get(TPrograms.class, pid);
-                if (tPrograms != null) {
-                    System.out.println("program saved " + tPrograms.getProgramName());
-                }
                 if (tPrograms == null) {
                     transaction.rollback();
                     throw new RuntimeException("Error: Program ID " + pid + " not found in database.");
                 }
-                ProgramDetails programDetails = new ProgramDetails();
-                ProgramDetailsID programDetailsID = new ProgramDetailsID(patient.getPatientID(), tPrograms.getProgramID());
-                programDetails.setID(programDetailsID);
-                programDetails.setPatient(patient);
-                programDetails.setTPrograms(tPrograms);
+                validPrograms.add(tPrograms);
+            }
 
+// Save Program Details for each valid program
+            for (TPrograms tPrograms : validPrograms) {
+                System.out.println("Saving program: " + tPrograms.getProgramName());
+
+                ProgramDetailsID programDetailsID = new ProgramDetailsID(
+                        patient.getPatientID(),
+                        tPrograms.getProgramID()
+                );
+                ProgramDetails programDetails = new ProgramDetails(programDetailsID, patient, tPrograms);
 
                 boolean isSaved = programDetailsDAO.save(programDetails, session);
-                System.out.println(" program details saved " + isSaved);
+                System.out.println("Program details saved: " + isSaved);
+
                 if (!isSaved) {
-                    System.out.println("program details save failed");
+                    System.out.println("Program details save failed");
                     transaction.rollback();
                     return false;
                 }
             }
+
             session.flush();
-            session.clear();
 
             String tid  = sessionDTO.getTherapist_ID();
             System.out.println("therapist id from dto " + tid);
             Optional<Therapist> optional = therapistDAO.findByPK(tid,session);
             optional.ifPresent(therapist -> System.out.println("therapist found whotto " + therapist.getDoctorName()));
-         /*  Therapist therapist = session.get(Therapist.class, tid);
-            if (therapist == null) {
-                new Alert(Alert.AlertType.INFORMATION, "Therapist ID " + tid + " not found in database.", ButtonType.CANCEL);
-                transaction.rollback();
-                return false;
-            }*/
+
                 // Save Appointment
             Appointments appointments = new Appointments();
             appointments.setSessionId(sessionDTO.getSessionId());
