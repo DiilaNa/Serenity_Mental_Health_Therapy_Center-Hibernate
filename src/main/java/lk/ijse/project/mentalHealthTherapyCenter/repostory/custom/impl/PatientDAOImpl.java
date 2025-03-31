@@ -83,4 +83,13 @@ public class PatientDAOImpl implements PatientDAO {
 
         return Optional.ofNullable(lastPk);
     }
+
+    @Override
+    public List<Patient> searchPatientName(String searchByName) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Query<Patient> query = session.createQuery("from Patient p where p.patientName like :name", Patient.class);
+        query.setParameter("name", "%" + searchByName + "%");  // Use LIKE with wildcards for partial matching
+
+        return query.list();
+    }
 }

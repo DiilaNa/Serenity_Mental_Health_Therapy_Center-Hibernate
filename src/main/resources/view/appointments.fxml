@@ -26,105 +26,6 @@
       </Label>
       <Line endX="744.7999877929688" endY="3.814697265625E-6" layoutX="128.0" layoutY="54.0" startX="-100.0" />
       <Line endX="-93.4000015258789" endY="233.39999389648438" layoutX="115.0" layoutY="54.0" startX="756.199951171875" startY="233.39999389648438" />
-      <VBox layoutX="27.0" layoutY="58.0" prefHeight="163.0" prefWidth="128.0">
-         <children>
-            <Label prefHeight="28.0" prefWidth="130.0" text="Patient ID">
-               <font>
-                  <Font name="Georgia" size="20.0" />
-               </font>
-               <padding>
-                  <Insets top="12.0" />
-               </padding>
-            </Label>
-            <Label layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="130.0" text="Name">
-               <font>
-                  <Font name="Georgia" size="20.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <padding>
-                  <Insets bottom="12.0" top="12.0" />
-               </padding>
-            </Label>
-            <Label prefHeight="30.0" prefWidth="129.0" text="Date of Birth">
-               <font>
-                  <Font name="Georgia" size="20.0" />
-               </font>
-               <padding>
-                  <Insets bottom="12.0" top="12.0" />
-               </padding>
-            </Label>
-            <Label layoutX="10.0" layoutY="68.0" prefHeight="30.0" prefWidth="129.0" text="Nic NO">
-               <font>
-                  <Font name="Georgia" size="20.0" />
-               </font>
-               <padding>
-                  <Insets bottom="12.0" top="12.0" />
-               </padding>
-            </Label>
-         </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </VBox>
-      <VBox layoutX="410.0" layoutY="62.0" prefHeight="157.0" prefWidth="128.0">
-         <children>
-            <Label prefHeight="28.0" prefWidth="130.0" text="Gender">
-               <font>
-                  <Font name="Georgia" size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <padding>
-                  <Insets top="12.0" />
-               </padding>
-            </Label>
-            <Label layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="130.0" text="Address">
-               <font>
-                  <Font name="Georgia" size="20.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <padding>
-                  <Insets bottom="12.0" top="12.0" />
-               </padding>
-            </Label>
-            <Label prefHeight="30.0" prefWidth="129.0" text="Tel No">
-               <font>
-                  <Font name="Georgia" size="20.0" />
-               </font>
-               <padding>
-                  <Insets bottom="12.0" top="12.0" />
-               </padding>
-            </Label>
-            <Label layoutX="10.0" layoutY="68.0" prefHeight="30.0" prefWidth="129.0" text="E-mail">
-               <font>
-                  <Font name="Georgia" size="20.0" />
-               </font>
-               <padding>
-                  <Insets bottom="12.0" top="12.0" />
-               </padding>
-            </Label>
-         </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </VBox>
-      <Label fx:id="patientID" layoutX="211.0" layoutY="67.0" prefHeight="28.0" prefWidth="130.0" text="Patient ID">
-         <font>
-            <Font name="Georgia" size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="patientName" layoutX="185.0" layoutY="107.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <TextField fx:id="patientDOB" layoutX="185.0" layoutY="152.0" prefHeight="26.0" prefWidth="182.0" promptText="dd/mm/yyyy" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <TextField fx:id="patientNIC" layoutX="186.0" layoutY="203.0" prefHeight="26.0" prefWidth="182.0" promptText="199921131232" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <TextField fx:id="patientAddress" layoutX="549.0" layoutY="114.0" prefHeight="26.0" prefWidth="206.0" promptText="Home Town" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <TextField fx:id="patientTelNO" layoutX="549.0" layoutY="159.0" prefHeight="26.0" prefWidth="206.0" promptText="077-0000000" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <TextField fx:id="patientEMAIL" layoutX="549.0" layoutY="203.0" prefHeight="26.0" prefWidth="206.0" promptText="example@gmail.com" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <ComboBox fx:id="patientGender" layoutX="549.0" layoutY="68.0" opacity="0.69" prefHeight="26.0" prefWidth="206.0" promptText="select your Gender" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
       <Label layoutX="21.0" layoutY="260.0" text="Session Details">
          <font>
             <Font name="Impact" size="15.0" />
@@ -332,20 +233,92 @@
             <Font name="Georgia" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="registerPatient" layoutX="131.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#registerPatientAction" prefHeight="27.0" prefWidth="130.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;" text="Register Patient" textFill="WHITE">
+      <Button fx:id="registerPatient" layoutX="20.0" layoutY="179.0" mnemonicParsing="false" onMouseClicked="#registerPatientAction" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;" text="Register " textFill="WHITE">
          <font>
             <Font name="Impact" size="14.0" />
          </font>
       </Button>
-      <TextField fx:id="search" layoutX="456.0" layoutY="21.0" prefHeight="26.0" prefWidth="293.0" promptText="Search Patient" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+      <TextField fx:id="search" layoutX="138.0" layoutY="95.0" prefHeight="30.0" prefWidth="319.0" promptText="Search Patient" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
          <font>
             <Font name="Consolas Bold" size="16.0" />
          </font>
       </TextField>
-      <Button fx:id="searchPatient" layoutX="751.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#searchPatientAction" prefHeight="27.0" prefWidth="130.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;" text="Search Patient" textFill="WHITE">
+      <Button fx:id="searchPatient" layoutX="22.0" layoutY="93.0" mnemonicParsing="false" onMouseClicked="#searchPatientAction" prefHeight="18.0" prefWidth="100.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;" text="Search " textFill="WHITE">
          <font>
             <Font name="Impact" size="14.0" />
          </font>
       </Button>
+      <VBox fx:id="vbox1" layoutX="502.0" layoutY="66.0" prefHeight="200.0" prefWidth="174.0">
+         <children>
+            <Label fx:id="patientID" prefHeight="28.0" prefWidth="181.0" text="Patient ID">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+            </Label>
+            <Label fx:id="patientName" prefHeight="28.0" prefWidth="178.0" text="Patient Name">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+            </Label>
+            <Label fx:id="patientDOB" prefHeight="28.0" prefWidth="178.0" text="DOB">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+            </Label>
+            <Label fx:id="patientNIC" prefHeight="30.0" prefWidth="182.0" text="NIC">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+            </Label>
+         </children>
+      </VBox>
+      <VBox fx:id="vbox2" layoutX="711.0" layoutY="66.0" prefHeight="200.0" prefWidth="162.0">
+         <children>
+            <Label fx:id="patientGender" prefHeight="28.0" prefWidth="166.0" text="Gender">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+            </Label>
+            <Label fx:id="patientAddress" prefHeight="28.0" prefWidth="166.0" text="Address">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+            </Label>
+            <Label fx:id="patientTelNO" prefHeight="28.0" prefWidth="174.0" text="TEl">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+            </Label>
+            <Label fx:id="patientEMAIL" prefHeight="28.0" prefWidth="167.0" text="Mail">
+               <font>
+                  <Font name="Georgia" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+            </Label>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

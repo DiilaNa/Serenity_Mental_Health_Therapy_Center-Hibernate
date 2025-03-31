@@ -1,7 +1,5 @@
 package lk.ijse.project.mentalHealthTherapyCenter.service.custom.impl;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.*;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.*;
@@ -177,5 +175,28 @@ public class AppointmentBOImpl implements AppointmentBO {
         } else {
             return "PAY001";
         }
+    }
+
+    @Override
+    public List<PatientDTO> searchPatientBYName(String searchBYName) {
+        List<Patient> patients = patientDAO.searchPatientName(searchBYName);
+        List<PatientDTO> patientDTOList = new ArrayList<>();
+
+        // Convert each Patient entity to PatientDTO
+        for (Patient patient : patients) {
+            PatientDTO patientDTO = new PatientDTO(
+                    patient.getPatientID(),
+                    patient.getPatientName(),
+                    patient.getPatientBirthDate(),
+                    patient.getPatientNIC(),
+                    patient.getPatientGender(),
+                    patient.getPatientAddress(),
+                    patient.getPatientPhone(),
+                    patient.getPatientEmail()
+            );
+            patientDTOList.add(patientDTO);
+        }
+
+        return patientDTOList;
     }
 }

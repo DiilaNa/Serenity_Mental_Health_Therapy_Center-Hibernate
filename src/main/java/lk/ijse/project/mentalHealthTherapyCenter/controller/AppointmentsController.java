@@ -15,9 +15,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.*;
+import lk.ijse.project.mentalHealthTherapyCenter.entity.Patient;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.AppointmentBO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
@@ -43,7 +45,44 @@ public class AppointmentsController implements Initializable {
             new Alert(Alert.AlertType.ERROR,"Failed to load the Page",ButtonType.CLOSE).show();
         }
     }
+    @FXML
+    private Label patientAddress;
 
+    @FXML
+    private Label patientDOB;
+
+    @FXML
+    private Label patientEMAIL;
+
+    @FXML
+    private Label patientGender;
+
+    @FXML
+    private Label patientID;
+
+    @FXML
+    private Label patientNIC;
+
+    @FXML
+    private Label patientName;
+
+    @FXML
+    private Label patientTelNO;
+
+    @FXML
+    private Label paymentID;
+
+    @FXML
+    private Button registerPatient;
+
+    @FXML
+    private Button reset;
+
+    @FXML
+    private TextField search;
+
+    @FXML
+    private ListView<String> searchListView;
 
     @FXML
     private Button addPrograms;
@@ -69,41 +108,11 @@ public class AppointmentsController implements Initializable {
     @FXML
     private ImageView image;
 
-    @FXML
-    private TextField patientAddress;
-
-    @FXML
-    private TextField patientDOB;
-
-    @FXML
-    private TextField patientEMAIL;
-
-    @FXML
-    private ComboBox<String> patientGender;
-
-    @FXML
-    private Label patientID;
-
-    @FXML
-    private TextField patientNIC;
-
-    @FXML
-    private TextField patientName;
-
-    @FXML
-    private TextField patientTelNO;
 
     @FXML
     private TextField payAMOUNT;
-
-    @FXML
-    private Label paymentID;
-
     @FXML
     private ComboBox<String> paymentMethod;
-
-    @FXML
-    private Button reset;
 
     @FXML
     private DatePicker sessionDate;
@@ -130,13 +139,13 @@ public class AppointmentsController implements Initializable {
     private String availability;
 
     @FXML
-    private Button registerPatient;
-
-    @FXML
-    private TextField search;
-
-    @FXML
     private Button searchPatient;
+
+    @FXML
+    private VBox vbox1;
+
+    @FXML
+    private VBox vbox2;
 
     public void setDetails(String programID, String programName) {
          ProgramID = programID;
@@ -162,7 +171,7 @@ public class AppointmentsController implements Initializable {
         String patientNAME = patientName.getText();
         String birthDate = patientDOB.getText();
         String patientNic = patientNIC.getText();
-        String patientGENDER = patientGender.getSelectionModel().getSelectedItem();
+        String patientGENDER = patientGender.getText();
         String patientADDRESS = patientAddress.getText();
         String patientPHONE = patientTelNO.getText();
         String patientEmail = patientEMAIL.getText();
@@ -300,7 +309,29 @@ public class AppointmentsController implements Initializable {
 
     @FXML
     void searchPatientAction(MouseEvent event) {
+        String searchBYName = search.getText();
+        if (searchBYName.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Enter a Name to Search", ButtonType.OK,ButtonType.CANCEL);
+            return;
+        }
+        List<PatientDTO> isSearching = appointmentBO.searchPatientBYName(searchBYName);
 
+        if (isSearching.isEmpty()) {
+           Alert alert = new Alert(Alert.AlertType.ERROR, "No Name Found as " + searchBYName, ButtonType.OK,ButtonType.CANCEL);
+           alert.showAndWait().orElse(ButtonType.CANCEL);
+           return;
+        }
+        for (PatientDTO patientDTO : isSearching) {
+            patientID.setText(patientDTO.getPatientID());
+            patientName.setText(patientDTO.getPatientName());
+            patientDOB.setText(patientDTO.getPatientBirthDate());
+            patientNIC.setText(patientDTO.getPatientNIC());
+            patientGender.setText(patientDTO.getPatientGender());
+            patientAddress.setText(patientDTO.getPatientAddress());
+            patientEMAIL.setText(patientDTO.getPatientEmail());
+        }
+        vbox1.setVisible(true);
+        vbox2.setVisible(true);
     }
 
     @FXML
@@ -361,18 +392,15 @@ public class AppointmentsController implements Initializable {
         generateNextAppointmentID();
         generateNextPatientID();
         generateNextPaymentID();
-        patientGender.setItems(FXCollections.observableArrayList("Male", "Female"));
         paymentMethod.setItems(FXCollections.observableArrayList("Card Payment", "Cash Payment"));
-        patientName.clear();
-        patientAddress.clear();
-        patientEMAIL.clear();
-        patientTelNO.clear();
-        patientDOB.clear();
         sessionTime.clear();
         sessionNotes.clear();
         payAMOUNT.clear();
         docLoadLabel.setDisable(true);
         programmsListView.refresh();
+        vbox1.setVisible(false);
+        vbox2.setVisible(false);
+
 
     }
     private void generateNextAppointmentID() {
@@ -399,16 +427,5 @@ public class AppointmentsController implements Initializable {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Fail to load page!").show();
         }
-    }
-    private void loadPage(String fxmlPath) throws IOException {
-        Stage currentStage = (Stage) image.getScene().getWindow(); // Get current stage
-        currentStage.close();
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
-        Stage stage = new Stage();
-        scene.getStylesheets().add(getClass().getResource("/css/h.css").toExternalForm());
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.setTitle("The Serenity Mental Health Therapy Center");
-        stage.show();
     }
 }
