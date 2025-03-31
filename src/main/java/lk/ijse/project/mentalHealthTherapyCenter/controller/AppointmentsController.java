@@ -129,6 +129,15 @@ public class AppointmentsController implements Initializable {
 
     private String availability;
 
+    @FXML
+    private Button registerPatient;
+
+    @FXML
+    private TextField search;
+
+    @FXML
+    private Button searchPatient;
+
     public void setDetails(String programID, String programName) {
          ProgramID = programID;
         if (programID != null && programName != null) {
@@ -275,6 +284,26 @@ public class AppointmentsController implements Initializable {
     }
 
     @FXML
+    void registerPatientAction(MouseEvent event) throws IOException {
+        // Display the alert dialog with OK and CANCEL buttons
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Do you want to Register a Patient", ButtonType.OK, ButtonType.CANCEL);
+
+        // Show the alert and wait for the user to respond
+        ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);  // Default to CANCEL if no selection is made
+
+        // Check the result of the dialog
+        if (result == ButtonType.OK) {
+            // If the user clicks OK, navigate to the registration screen
+            navigateTo("/view/patient.fxml");
+        }
+    }
+
+    @FXML
+    void searchPatientAction(MouseEvent event) {
+
+    }
+
+    @FXML
     void addDoctorsAction(MouseEvent event) throws IOException {
         loadNewPage("/view/assignDocs.fxml");
     }
@@ -357,5 +386,29 @@ public class AppointmentsController implements Initializable {
     private void generateNextPaymentID() {
         String nextPaymentID = appointmentBO.getNextPaymentID();
         paymentID.setText(nextPaymentID);
+    }
+    public void navigateTo(String fxmlPath) {
+        try {
+            appointmentPage.getChildren().clear();
+            AnchorPane load = FXMLLoader.load(getClass().getResource(fxmlPath));
+            load.getStylesheets().add(getClass().getResource("/css/h.css").toExternalForm());
+            load.prefWidthProperty().bind(appointmentPage.widthProperty());
+            load.prefHeightProperty().bind(appointmentPage.heightProperty());
+            appointmentPage.getChildren().add(load);
+        } catch (IOException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Fail to load page!").show();
+        }
+    }
+    private void loadPage(String fxmlPath) throws IOException {
+        Stage currentStage = (Stage) image.getScene().getWindow(); // Get current stage
+        currentStage.close();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
+        Stage stage = new Stage();
+        scene.getStylesheets().add(getClass().getResource("/css/h.css").toExternalForm());
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle("The Serenity Mental Health Therapy Center");
+        stage.show();
     }
 }

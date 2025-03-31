@@ -332,5 +332,20 @@
             <Font name="Georgia" size="18.0" />
          </font>
       </Label>
+      <Button fx:id="registerPatient" layoutX="131.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#registerPatientAction" prefHeight="27.0" prefWidth="130.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;" text="Register Patient" textFill="WHITE">
+         <font>
+            <Font name="Impact" size="14.0" />
+         </font>
+      </Button>
+      <TextField fx:id="search" layoutX="456.0" layoutY="21.0" prefHeight="26.0" prefWidth="293.0" promptText="Search Patient" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <font>
+            <Font name="Consolas Bold" size="16.0" />
+         </font>
+      </TextField>
+      <Button fx:id="searchPatient" layoutX="751.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#searchPatientAction" prefHeight="27.0" prefWidth="130.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;" text="Search Patient" textFill="WHITE">
+         <font>
+            <Font name="Impact" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
