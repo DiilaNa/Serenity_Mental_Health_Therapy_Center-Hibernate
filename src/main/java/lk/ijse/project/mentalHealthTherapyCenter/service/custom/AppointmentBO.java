@@ -6,7 +6,7 @@ import lk.ijse.project.mentalHealthTherapyCenter.service.SuperBO;
 import java.util.List;
 
 public interface AppointmentBO extends SuperBO {
-    boolean addAppointment(PatientDTO patientDTO, ProgramDetailsDTO programDetailsDTO , SessionDTO sessionDTO, PaymentDTO paymentDTO);
+    boolean addAppointment(ProgramDetailsDTO programDetailsDTO , SessionDTO sessionDTO, PaymentDTO paymentDTO);
     String getNextPatientID();
     String getNextSessionID();
     String getNextPaymentID();

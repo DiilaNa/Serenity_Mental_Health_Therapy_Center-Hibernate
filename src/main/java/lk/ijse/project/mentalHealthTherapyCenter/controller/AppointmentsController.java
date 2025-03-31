@@ -169,13 +169,6 @@ public class AppointmentsController implements Initializable {
     void addAppointmentBTNAction(ActionEvent event) {
         String patientId = patientID.getText();
         String patientNAME = patientName.getText();
-        String birthDate = patientDOB.getText();
-        String patientNic = patientNIC.getText();
-        String patientGENDER = patientGender.getText();
-        String patientADDRESS = patientAddress.getText();
-        String patientPHONE = patientTelNO.getText();
-        String patientEmail = patientEMAIL.getText();
-
         String sessionId = sessionID.getText();
         String sessionTIME =  sessionTime.getText();
         String sessionNOTES = sessionNotes.getText();
@@ -249,16 +242,7 @@ public class AppointmentsController implements Initializable {
         }
 */
         /*if (*//*isValidName && isValidAddress && isValidMail && isValidPhoneNO && isValidDate && isValidTime*//*) {*/
-            PatientDTO patientDTO = new PatientDTO(
-                patientId,
-                patientNAME,
-                birthDate,
-                patientNic,
-                patientGENDER,
-                patientADDRESS,
-                patientPHONE,
-                patientEmail
-            );
+
             ProgramDetailsDTO programDetailsDTO = new ProgramDetailsDTO(
                 patientId,
                 new ArrayList<>(programIDs)  /*List required as one patient can choose more than one programs*/
@@ -268,7 +252,6 @@ public class AppointmentsController implements Initializable {
             SessionDTO sessionDTO = new SessionDTO(
                     sessionId,
                     patientId,
-                    paymentId,
                     docID, /*don't need a list here,took from label splitting the first part*/
                     sessionTIME,
                     sessionNOTES,
@@ -282,7 +265,7 @@ public class AppointmentsController implements Initializable {
                     paymentDate,
                     paymentTime
             );
-            boolean isSaved = appointmentBO.addAppointment(patientDTO, programDetailsDTO,sessionDTO,paymentDTO);
+            boolean isSaved = appointmentBO.addAppointment(programDetailsDTO,sessionDTO,paymentDTO);
             if (isSaved) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Appointment added", ButtonType.OK).show();

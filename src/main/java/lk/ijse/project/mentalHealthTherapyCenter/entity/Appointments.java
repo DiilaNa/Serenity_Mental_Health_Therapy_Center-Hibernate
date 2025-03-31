@@ -15,7 +15,6 @@ import java.util.List;
 public class Appointments implements SuperEntity{
     @Id
     private String sessionId;
-    private String pay_ID;
     private String time;
     private String notes;
     private String date;
