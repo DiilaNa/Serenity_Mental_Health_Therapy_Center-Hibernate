@@ -93,6 +93,9 @@
                </effect>
             </Button>
          </children>
+         <effect>
+            <DropShadow />
+         </effect>
       </Pane>
       <ImageView fx:id="image" fitHeight="62.0" fitWidth="82.0" layoutX="224.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
          <image>

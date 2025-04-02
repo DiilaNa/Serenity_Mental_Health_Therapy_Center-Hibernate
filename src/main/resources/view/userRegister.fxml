@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -45,6 +46,9 @@
          <font>
             <Font name="Georgia Bold" size="21.0" />
          </font>
+         <effect>
+            <DropShadow />
+         </effect>
       </Button>
       <Label layoutX="139.0" layoutY="196.0" text="FULL NAME">
          <font>
@@ -75,7 +79,10 @@
             <Image url="@../../../../../../../Pictures/Mental%20Hospital/addUser.png" />
          </image>
       </ImageView>
-      <Pane prefHeight="600.0" prefWidth="102.0" style="-fx-background-color: #4C8C8C;" />
+      <Pane prefHeight="600.0" prefWidth="106.0" style="-fx-background-color: #4C8C8C;">
+         <effect>
+            <DropShadow />
+         </effect></Pane>
       <Line endX="448.0" layoutX="128.0" layoutY="516.0" startX="-16.79998779296875" />
       <Label layoutX="139.0" layoutY="310.0" text="USER NAME">
          <font>

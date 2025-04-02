@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -128,6 +129,9 @@
             </Button>
             <ImageView fitHeight="119.0" fitWidth="233.0" pickOnBounds="true" preserveRatio="true" />
          </children>
+         <effect>
+            <DropShadow />
+         </effect>
       </VBox>
       <AnchorPane fx:id="header" layoutX="235.0" prefHeight="74.0" prefWidth="1291.0" style="-fx-background-color: black;">
          <children>
@@ -159,7 +163,11 @@
          </children>
       </AnchorPane>
       <Line endX="1182.13330078125" endY="7.62939453125E-6" layoutX="336.0" layoutY="74.0" startX="-100.0" />
-      <Line endX="-28.800003051757812" endY="-294.0" layoutX="264.0" layoutY="294.0" startX="-28.800003051757812" startY="484.10003662109375" strokeWidth="3.0" />
+      <Line endX="-28.800003051757812" endY="-294.0" layoutX="264.0" layoutY="294.0" startX="-28.800003051757812" startY="484.10003662109375" strokeWidth="3.0">
+         <effect>
+            <Shadow />
+         </effect>
+      </Line>
       <AnchorPane fx:id="loadAnchor" layoutX="236.0" layoutY="75.0" prefHeight="703.0" prefWidth="1290.0" style="-fx-background-color: #D3D3D3;" />
    </children>
 </AnchorPane>

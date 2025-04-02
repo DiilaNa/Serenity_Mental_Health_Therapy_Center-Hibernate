@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,38 +11,49 @@
 
 <AnchorPane prefHeight="550.0" prefWidth="600.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalHealthTherapyCenter.controller.Login">
    <children>
-      <Label fx:id="text" layoutX="205.0" layoutY="80.0" prefHeight="66.0" prefWidth="378.0" text="Serenity Mental Health Therapy Center" textFill="#184646" wrapText="true">
+      <Label fx:id="text" layoutX="156.0" layoutY="94.0" prefHeight="40.0" prefWidth="437.0" text="Serenity Mental Health Therapy Center" textFill="#184646" wrapText="true">
          <font>
-            <Font name="Georgia Bold" size="25.0" />
+            <Font name="Georgia Bold" size="21.0" />
          </font>
       </Label>
-      <Pane layoutY="-1.0" prefHeight="550.0" prefWidth="102.0" style="-fx-background-color: #4C8C8C;" />
-      <Label layoutX="127.0" layoutY="40.0" prefHeight="40.0" prefWidth="198.0" text="WELCOME TO" textFill="#080808">
+      <Pane layoutY="-1.0" prefHeight="550.0" prefWidth="103.0" style="-fx-background-color: #4C8C8C;">
+         <effect>
+            <DropShadow radius="15.265" width="42.06" />
+         </effect></Pane>
+      <Label layoutX="129.0" layoutY="54.0" prefHeight="40.0" prefWidth="198.0" text="WELCOME TO" textFill="#080808">
          <font>
-            <Font name="Impact" size="32.0" />
+            <Font name="Gabriola" size="26.0" />
          </font>
       </Label>
-      <ImageView fx:id="admin" fitHeight="150.0" fitWidth="200.0" layoutX="375.0" layoutY="226.0" onMouseClicked="#adminAction" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="admin" fitHeight="140.0" fitWidth="140.0" layoutX="363.0" layoutY="222.0" onMouseClicked="#adminAction" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../Pictures/Mental%20Hospital/admin.png" />
+            <Image url="@../../../../../../../Pictures/Mental%20Hospital/Admin_Panel_free_icons_designed_by_vectaicon-removebg-preview.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="user" fitHeight="150.0" fitWidth="200.0" layoutX="136.0" layoutY="217.0" onMouseClicked="#userAction" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="user" fitHeight="140.0" fitWidth="150.0" layoutX="156.0" layoutY="222.0" onMouseClicked="#userAction" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../Pictures/Mental%20Hospital/receptionist.png" />
+            <Image url="@../../../../../../../Pictures/Mental%20Hospital/ead81d17-bb77-462b-89f1-325a0b6b8ecb-removebg-preview.png" />
          </image>
       </ImageView>
-      <Label layoutX="166.0" layoutY="384.0" prefHeight="40.0" prefWidth="90.0" text="USER" wrapText="true">
+      <Label layoutX="193.0" layoutY="378.0" prefHeight="40.0" prefWidth="90.0" text="USER" wrapText="true">
          <font>
             <Font name="Georgia Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="394.0" layoutY="384.0" prefHeight="40.0" prefWidth="110.0" text="ADMIN" wrapText="true">
+      <Label layoutX="392.0" layoutY="378.0" prefHeight="40.0" prefWidth="110.0" text="ADMIN" wrapText="true">
          <font>
             <Font name="Georgia Bold" size="18.0" />
          </font>
       </Label>
-      <Line endX="371.4000244140625" endY="-1.52587890625E-5" layoutX="211.0" layoutY="160.0" startX="-100.0" />
+      <Line endX="376.800048828125" layoutX="212.0" layoutY="148.0" startX="-100.0">
+         <effect>
+            <DropShadow />
+         </effect></Line>
       <Line endX="371.4000244140625" endY="-1.52587890625E-5" layoutX="213.0" layoutY="507.0" startX="-100.0" />
+      <Label fx:id="text1" layoutX="193.0" layoutY="508.0" prefHeight="16.0" prefWidth="310.0" text="2025 All right reserved Serenity Mental Health Therapy Center" textFill="#184646" wrapText="true">
+         <font>
+            <Font name="Yu Gothic Regular" size="10.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

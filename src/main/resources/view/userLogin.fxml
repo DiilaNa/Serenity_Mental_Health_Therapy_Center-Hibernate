@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,7 +15,10 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalHealthTherapyCenter.controller.UserLogin">
-   <Pane prefHeight="600.0" prefWidth="112.0" style="-fx-background-color: #4C8C8C;" />
+   <Pane prefHeight="600.0" prefWidth="112.0" style="-fx-background-color: #4C8C8C;">
+      <effect>
+         <DropShadow />
+      </effect></Pane>
 
       <Label layoutX="283.0" layoutY="74.0" prefHeight="39.0" prefWidth="145.0" text="USER LOGIN" textFill="#4c8c8c">
          <font>
@@ -48,6 +52,9 @@
          <font>
             <Font name="Georgia Bold" size="21.0" />
          </font>
+      <effect>
+         <DropShadow />
+      </effect>
       </Button>
    <Line endX="387.4000244140625" layoutX="174.0" layoutY="501.0" startX="-50.0" />
    <ImageView fx:id="image" fitHeight="92.0" fitWidth="95.0" layoutX="177.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">

@@ -17,9 +17,9 @@ import java.util.ResourceBundle;
 public class Login implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Image adminIMage = new Image(getClass().getResourceAsStream("/images/admin.png"));
+        Image adminIMage = new Image(getClass().getResourceAsStream("/images/LoginAdminPic.png"));
         admin.setImage(adminIMage);
-        Image userImage = new Image(getClass().getResourceAsStream("/images/receptionist.png"));
+        Image userImage = new Image(getClass().getResourceAsStream("/images/LoginUserPic.png"));
         user.setImage(userImage);
     }
 
