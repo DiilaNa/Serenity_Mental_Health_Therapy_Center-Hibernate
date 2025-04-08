@@ -65,13 +65,10 @@ public class MyProfile implements Initializable {
     }
 
     private void loadText(){
-
     }
 
     @FXML
     void setPicAction(ActionEvent event) {
 
     }
-
-
 }
