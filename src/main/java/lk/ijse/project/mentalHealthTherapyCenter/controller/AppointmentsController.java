@@ -180,8 +180,8 @@ public class AppointmentsController implements Initializable {
     }
 
     @FXML
-    void viewAppointmentsBTNAction(ActionEvent event) {
-
+    void viewAppointmentsBTNAction(ActionEvent event) throws IOException {
+        loadNewPage("/view/viewAppointments.fxml");
     }
 
     @FXML
@@ -192,7 +192,7 @@ public class AppointmentsController implements Initializable {
         String sessionTIME =  sessionTime.getText();
         String sessionNOTES = sessionNotes.getText();
         String sessionDATE = sessionDate.getEditor().getText();
-        String doctorIDFromLabel = docLoadLabel.getText(); /*get the full text in to a label called doctorIDFromLabel */
+        String doctorIDFromLabel = docLoadLabel.getText();
         String docID = null; /*this id is pass through sessionDTO*/
 
         String[] parts = doctorIDFromLabel.split(" - ");
