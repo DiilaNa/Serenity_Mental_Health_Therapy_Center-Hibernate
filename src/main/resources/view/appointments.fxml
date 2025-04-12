@@ -167,7 +167,7 @@
             <Font name="Impact" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="addAppointmentBTN" layoutX="1008.0" layoutY="83.0" mnemonicParsing="false" onAction="#addAppointmentBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 11; -fx-background-color: #4C8C8C;" text="Add Appointments" textFill="WHITE">
+      <Button fx:id="addAppointmentBTN" layoutX="1008.0" layoutY="80.0" mnemonicParsing="false" onAction="#addAppointmentBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 11; -fx-background-color: #4C8C8C;" text="Add Appointments" textFill="WHITE">
          <font>
             <Font name="Georgia Bold" size="15.0" />
          </font>
@@ -182,7 +182,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="cancelAppointmentBTN" layoutX="1008.0" layoutY="179.0" mnemonicParsing="false" onAction="#cancelAppointmentBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 11; -fx-background-color: #4C8C8C;" text="Cancel Appointments" textFill="WHITE">
+      <Button fx:id="reset" layoutX="1008.0" layoutY="160.0" mnemonicParsing="false" onAction="#resetAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 11; -fx-background-color: #4C8C8C;" text="Reset Details" textFill="WHITE">
          <font>
             <Font name="Georgia Bold" size="15.0" />
          </font>
@@ -197,22 +197,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="reset" layoutX="1008.0" layoutY="282.0" mnemonicParsing="false" onAction="#resetAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 11; -fx-background-color: #4C8C8C;" text="Reset Details" textFill="WHITE">
-         <font>
-            <Font name="Georgia Bold" size="15.0" />
-         </font>
-         <effect>
-            <DropShadow>
-               <input>
-                  <Glow />
-               </input>
-            </DropShadow>
-         </effect>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <ImageView fx:id="image" fitHeight="138.0" fitWidth="130.0" layoutX="1038.0" layoutY="531.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="image" fitHeight="138.0" fitWidth="130.0" layoutX="1056.0" layoutY="531.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../Pictures/Mental%20Hospital/apt.png" />
          </image>
@@ -227,7 +212,7 @@
             <Font name="Impact" size="14.0" />
          </font>
       </Button>
-      <ListView fx:id="programmsListView" layoutX="604.0" layoutY="395.0" onMouseClicked="#ProgramsListViewAction" prefHeight="111.0" prefWidth="238.0" />
+      <ListView fx:id="programmsListView" layoutX="604.0" layoutY="395.0" prefHeight="111.0" prefWidth="238.0" />
       <Label fx:id="docLoadLabel" alignment="TOP_LEFT" layoutX="604.0" layoutY="311.0" prefHeight="70.0" prefWidth="238.0" text="Session ID" wrapText="true">
          <font>
             <Font name="Georgia" size="18.0" />
@@ -320,5 +305,35 @@
             </Label>
          </children>
       </VBox>
+      <Button fx:id="viewAppointmentsBTN" layoutX="1008.0" layoutY="240.0" mnemonicParsing="false" onAction="#viewAppointmentsBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 11; -fx-background-color: #4C8C8C;" text="View Appointments" textFill="WHITE">
+         <font>
+            <Font name="Georgia Bold" size="15.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <input>
+                  <Glow />
+               </input>
+            </DropShadow>
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="printBillBTN" layoutX="1008.0" layoutY="320.0" mnemonicParsing="false" onAction="#printBillBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 11; -fx-background-color: #4C8C8C;" text="Print the Bill" textFill="WHITE">
+         <font>
+            <Font name="Georgia Bold" size="15.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <input>
+                  <Glow />
+               </input>
+            </DropShadow>
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

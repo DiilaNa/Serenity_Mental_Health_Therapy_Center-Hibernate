@@ -38,9 +38,6 @@ public class AppointmentsController implements Initializable {
         Image image1 = new Image(getClass().getResourceAsStream("/images/appointmentIcon.png"));
         image.setImage(image1);
         updateDateTime();
-
-
-
         try{
             refreshPage();
         }catch(Exception e){
@@ -145,6 +142,12 @@ public class AppointmentsController implements Initializable {
     private Button searchPatient;
 
     @FXML
+    private Button printBillBTN;
+
+    @FXML
+    private Button viewAppointmentsBTN;
+
+    @FXML
     private VBox vbox1;
 
     @FXML
@@ -171,7 +174,12 @@ public class AppointmentsController implements Initializable {
     AppointmentBO appointmentBO = BOFactory.getInstance().getBO(BOType.APPOINTMENT);
 
     @FXML
-    void ProgramsListViewAction(MouseEvent event) {
+    void printBillBTNAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void viewAppointmentsBTNAction(ActionEvent event) {
 
     }
 
@@ -199,8 +207,6 @@ public class AppointmentsController implements Initializable {
 
         programmsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         ObservableList<String> selectedPrograms = programmsListView.getItems();
-
-
         programIDs.clear();
 
         for (String program : selectedPrograms) {
@@ -284,17 +290,9 @@ public class AppointmentsController implements Initializable {
 
     @FXML
     void registerPatientAction(MouseEvent event) throws IOException {
-        // Display the alert dialog with OK and CANCEL buttons
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Do you want to Register a Patient", ButtonType.OK, ButtonType.CANCEL);
-
-        // Show the alert and wait for the user to respond
         ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);  // Default to CANCEL if no selection is made
-
-        // Check the result of the dialog
-        if (result == ButtonType.OK) {
-            // If the user clicks OK, navigate to the registration screen
-            navigateTo("/view/patient.fxml");
-        }
+        if (result == ButtonType.OK) {navigateTo("/view/patient.fxml");}
     }
 
     @FXML
@@ -390,7 +388,6 @@ public class AppointmentsController implements Initializable {
         programmsListView.refresh();
         vbox1.setVisible(false);
         vbox2.setVisible(false);
-
 
     }
     private void generateNextAppointmentID() {

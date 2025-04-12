@@ -155,7 +155,6 @@ public class AppointmentBOImpl implements AppointmentBO {
         List<Patient> patients = patientDAO.searchPatientName(searchBYName);
         List<PatientDTO> patientDTOList = new ArrayList<>();
 
-        // Convert each Patient entity to PatientDTO
         for (Patient patient : patients) {
             PatientDTO patientDTO = new PatientDTO(
                     patient.getPatientID(),
@@ -169,7 +168,6 @@ public class AppointmentBOImpl implements AppointmentBO {
             );
             patientDTOList.add(patientDTO);
         }
-
         return patientDTOList;
     }
 }
