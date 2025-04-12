@@ -15,6 +15,7 @@ import lk.ijse.project.mentalHealthTherapyCenter.dto.UserDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.UserBO;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 import java.net.URL;
@@ -132,6 +133,8 @@ public class UserRegister implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Passwords do not match", ButtonType.OK).show();
             return;
         }
+        /*Encrypt Password*/
+        String hashPassword = BCrypt.hashpw(passwordText, BCrypt.gensalt(12));
 
 
         if (isValidMailPattern && isValidPasswordPattern) {
@@ -141,7 +144,7 @@ public class UserRegister implements Initializable {
                     email,
                     role,
                     userNAME,
-                    passwordText
+                    hashPassword
             );
 
             boolean isSaved = userBO.saveUser(userDTO);

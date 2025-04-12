@@ -9,6 +9,7 @@ module lk.ijse.project.mentalHealthTherapyCenter {
     requires jakarta.persistence;
     requires java.naming;
     requires org.hibernate.orm.core;
+    requires jbcrypt;
 
     opens lk.ijse.project.mentalHealthTherapyCenter.config to jakarta.persistence;
     opens lk.ijse.project.mentalHealthTherapyCenter.entity to org.hibernate.orm.core;
