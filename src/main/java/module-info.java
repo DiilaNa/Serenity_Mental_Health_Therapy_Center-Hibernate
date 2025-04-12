@@ -26,4 +26,6 @@ module lk.ijse.project.mentalHealthTherapyCenter {
     exports lk.ijse.project.mentalHealthTherapyCenter.controller.Login;
     opens lk.ijse.project.mentalHealthTherapyCenter.controller.Login to javafx.fxml;
 
+    exports lk.ijse.project.mentalHealthTherapyCenter.dto to org.hibernate.orm.core;
+
 }

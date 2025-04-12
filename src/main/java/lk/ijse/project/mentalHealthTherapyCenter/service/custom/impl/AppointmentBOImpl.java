@@ -2,6 +2,7 @@ package lk.ijse.project.mentalHealthTherapyCenter.service.custom.impl;
 
 import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.*;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.ViewSessionTM;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.*;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOType;
@@ -10,6 +11,7 @@ import lk.ijse.project.mentalHealthTherapyCenter.service.custom.AppointmentBO;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.sql.SQLException;
 import java.util.*;
 
 public class AppointmentBOImpl implements AppointmentBO {
@@ -18,6 +20,7 @@ public class AppointmentBOImpl implements AppointmentBO {
     PaymentDAO paymentDAO = DAOFactory.getInstance().getDAO(DAOType.PAYMENT);
     TherapistDAO therapistDAO = DAOFactory.getInstance().getDAO(DAOType.THERAPIST);
     ProgramDetailsDAO programDetailsDAO = DAOFactory.getInstance().getDAO(DAOType.PROGRAM_DETAILS);
+    QueryDAO queryDAO = DAOFactory.getInstance().getDAO(DAOType.QUERY);
 
     @Override
     public boolean addAppointment( ProgramDetailsDTO programDetailsDTO, SessionDTO sessionDTO, PaymentDTO paymentDTO) {
@@ -169,5 +172,11 @@ public class AppointmentBOImpl implements AppointmentBO {
             patientDTOList.add(patientDTO);
         }
         return patientDTOList;
+    }
+
+    @Override
+    public List<ViewSessionDTO> getAllAppointments() {
+        List<ViewSessionDTO> appointments = queryDAO.getAllAppointments();
+        return appointments;
     }
 }
