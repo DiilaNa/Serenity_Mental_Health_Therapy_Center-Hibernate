@@ -58,35 +58,33 @@ public class AppointmentBOImpl implements AppointmentBO {
 
             String patientID = programDetailsDTO.getPatientId();
             Patient patient = session.get(Patient.class,patientID);
-            System.out.println(patient+" found in DB "+patientID+" is from programDetailsDTO");
+
             if (patient == null) {
                 transaction.rollback();
                 throw new RuntimeException("Error: Patient ID " + patientID + " not found in database.");
             }
 
-
-            for (TPrograms tPrograms : validPrograms) {
-
-                ProgramDetailsID programDetailsID = new ProgramDetailsID(
-                        patient.getPatientID(),
-                        tPrograms.getProgramID()
+            for (TPrograms selectedProgram : validPrograms) {
+                ProgramDetailsID compositeKey = new ProgramDetailsID(
+                        selectedProgram.getProgramID(),
+                        patient.getPatientID()
                 );
-                ProgramDetails programDetails = new ProgramDetails(programDetailsID, patient, tPrograms);
+                ProgramDetails programDetails = new ProgramDetails();
+                programDetails.setID(compositeKey);
+                programDetails.setPatient(patient);
+                programDetails.setTPrograms(selectedProgram);
 
-                boolean isSaved = programDetailsDAO.save(programDetails, session);
-
-                if (!isSaved) {
-                    transaction.rollback();
-                    return false;
-                }
+               boolean isSaved = programDetailsDAO.save(programDetails, session);
+               if (!isSaved) {
+                   transaction.rollback();
+                   return false;
+               }
             }
-
             session.flush();
+            session.clear();
 
             String tid  = sessionDTO.getTherapist_ID();
             Optional<Therapist> optional = therapistDAO.findByPK(tid,session);
-            optional.ifPresent(therapist -> System.out.println("therapist found " + therapist.getDoctorName()));
-
 
             Appointments appointments = new Appointments();
             appointments.setSessionId(sessionDTO.getSessionId());

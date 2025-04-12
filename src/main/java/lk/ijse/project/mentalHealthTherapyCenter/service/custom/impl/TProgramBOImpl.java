@@ -107,10 +107,10 @@ public class TProgramBOImpl implements TProgramBO {
         Optional<String> lastPkOptional = tProgramDAO.getLastPK();
         if (lastPkOptional.isPresent()) {
             String lastPk = lastPkOptional.get();
-            int nextId = Integer.parseInt(lastPk.replace("P", "")) + 1;  // Extract number and increment
-            return String.format("P%03d", nextId);  // Format as "P001", "P002", etc.
+            int nextId = Integer.parseInt(lastPk.replace("PR", "")) + 1;  // Extract number and increment
+            return String.format("PR%03d", nextId);
         } else {
-            return "P001";  // Default if no records exist
+            return "PR001";  // Default if no records exist
         }
     }
 

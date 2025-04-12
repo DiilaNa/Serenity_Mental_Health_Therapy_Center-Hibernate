@@ -227,7 +227,7 @@
             <Font name="Impact" size="14.0" />
          </font>
       </Button>
-      <ListView fx:id="programmsListView" layoutX="604.0" layoutY="395.0" prefHeight="111.0" prefWidth="238.0" />
+      <ListView fx:id="programmsListView" layoutX="604.0" layoutY="395.0" onMouseClicked="#ProgramsListViewAction" prefHeight="111.0" prefWidth="238.0" />
       <Label fx:id="docLoadLabel" alignment="TOP_LEFT" layoutX="604.0" layoutY="311.0" prefHeight="70.0" prefWidth="238.0" text="Session ID" wrapText="true">
          <font>
             <Font name="Georgia" size="18.0" />

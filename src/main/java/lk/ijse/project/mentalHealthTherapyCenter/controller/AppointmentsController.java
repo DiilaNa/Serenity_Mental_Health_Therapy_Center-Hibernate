@@ -38,6 +38,9 @@ public class AppointmentsController implements Initializable {
         Image image1 = new Image(getClass().getResourceAsStream("/images/appointmentIcon.png"));
         image.setImage(image1);
         updateDateTime();
+
+
+
         try{
             refreshPage();
         }catch(Exception e){
@@ -81,8 +84,7 @@ public class AppointmentsController implements Initializable {
     @FXML
     private TextField search;
 
-    @FXML
-    private ListView<String> searchListView;
+
 
     @FXML
     private Button addPrograms;
@@ -111,6 +113,7 @@ public class AppointmentsController implements Initializable {
 
     @FXML
     private TextField payAMOUNT;
+
     @FXML
     private ComboBox<String> paymentMethod;
 
@@ -147,6 +150,8 @@ public class AppointmentsController implements Initializable {
     @FXML
     private VBox vbox2;
 
+    private Set<String> programIDs = new HashSet<>();
+
     public void setDetails(String programID, String programName) {
          ProgramID = programID;
         if (programID != null && programName != null) {
@@ -166,6 +171,11 @@ public class AppointmentsController implements Initializable {
     AppointmentBO appointmentBO = BOFactory.getInstance().getBO(BOType.APPOINTMENT);
 
     @FXML
+    void ProgramsListViewAction(MouseEvent event) {
+
+    }
+
+    @FXML
     void addAppointmentBTNAction(ActionEvent event) {
         String patientId = patientID.getText();
         String patientNAME = patientName.getText();
@@ -179,7 +189,6 @@ public class AppointmentsController implements Initializable {
         String[] parts = doctorIDFromLabel.split(" - ");
         if (parts.length > 0) {
             docID = parts[0];  // First part is docID , get id from the full label
-            System.out.println("Extracted Doc ID: " + docID);
         }
 
         String paymentId = paymentID.getText();
@@ -188,24 +197,21 @@ public class AppointmentsController implements Initializable {
         String paymentDate = LocalDate.now().format(formatter);
         String paymentTime = LocalTime.now().format(timeFormatter);
 
-        // Enable multiple selection
         programmsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        ObservableList<String> selectedPrograms = programmsListView.getItems();
 
-        // Handle mouse click event to print selected items
-        ObservableList<String> selectedPrograms = programmsListView.getSelectionModel().getSelectedItems();
-        System.out.println("Selected Programs: " + selectedPrograms);  // Print selected items
-        Set<String> programIDs = new HashSet<>();
-            // Now handle the program IDs extraction
-            for (String program : selectedPrograms) {
-                if (program.contains(" - ")) {
-                    String programID = program.split(" - ")[0];  // Extract programID
-                    programIDs.add(programID);  // Add to the list of program IDs
-                } else {
-                    System.out.println("Error: Invalid format for program item! " + program);
-                }
+
+        programIDs.clear();
+
+        for (String program : selectedPrograms) {
+            if (program.contains(" - ")) {
+                String programID = program.split(" - ")[0];
+                programIDs.add(programID);
+            } else {
+                System.out.println("Error: Invalid format for program item! " + program);
             }
+        }
 
-        System.out.println("Extracted Programs: " + programIDs);
 
      /*   String namePattern = "^[a-zA-Z ]+$";
         String addressPattern = "^[a-zA-Z0-9, -]+$";
@@ -248,7 +254,6 @@ public class AppointmentsController implements Initializable {
                 new ArrayList<>(programIDs)  /*List required as one patient can choose more than one programs*/
 
             );
-        System.out.println(programDetailsDTO.getProgramId());
             SessionDTO sessionDTO = new SessionDTO(
                     sessionId,
                     patientId,
@@ -265,6 +270,7 @@ public class AppointmentsController implements Initializable {
                     paymentDate,
                     paymentTime
             );
+
             boolean isSaved = appointmentBO.addAppointment(programDetailsDTO,sessionDTO,paymentDTO);
             if (isSaved) {
                 refreshPage();
@@ -274,6 +280,7 @@ public class AppointmentsController implements Initializable {
             }
       /*  }*/
     }
+
 
     @FXML
     void registerPatientAction(MouseEvent event) throws IOException {
