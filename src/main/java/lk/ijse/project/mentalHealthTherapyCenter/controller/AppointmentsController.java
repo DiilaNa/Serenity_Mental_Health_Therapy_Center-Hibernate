@@ -324,10 +324,7 @@ public class AppointmentsController implements Initializable {
     }
 
     @FXML
-    void addDoctorsAction(MouseEvent event) throws IOException {
-        loadNewPage("/view/assignDocs.fxml");
-    }
-
+    void addDoctorsAction(MouseEvent event) throws IOException {loadNewPage("/view/assignDocs.fxml");}
 
     @FXML
     void resetAction(ActionEvent event) {
@@ -335,14 +332,11 @@ public class AppointmentsController implements Initializable {
     }
 
     @FXML
-    void addProgramsAction(MouseEvent event) throws IOException {
-       loadNewPage("/view/SelectPrograms.fxml");
-    }
+    void addProgramsAction(MouseEvent event) throws IOException {loadNewPage("/view/SelectPrograms.fxml");}
 
     private  void  loadNewPage(String fxmlPath) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Parent root = loader.load(); // Load the FXML
-
         // Now get the controller from the FXMLLoader
         if (fxmlPath.equals("/view/assignDocs.fxml")) {
             AssignDoctorsController assignDoctorsController = loader.getController();

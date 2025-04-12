@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="703.0" prefWidth="1200.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalHealthTherapyCenter.controller.ViewAppointments">
+   <children>
+      <Label layoutX="277.0" layoutY="28.0" text=" Appointments of Serinity Mental Health Therapy Center " textFill="#408181">
+         <font>
+            <Font name="Georgia Bold" size="20.0" />
+         </font>
+         <effect>
+            <Glow level="0.17" />
+         </effect>
+      </Label>
+      <ImageView fx:id="image" fitHeight="51.0" fitWidth="48.0" layoutX="219.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Pictures/Mental%20Hospital/icons8-program-50.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="textSessionDate" layoutX="108.0" layoutY="580.0" prefHeight="28.0" prefWidth="194.0" promptText="update session Date" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <font>
+            <Font name="Consolas Bold" size="14.0" />
+         </font>
+      </TextField>
+      <Button fx:id="cancelBTN" layoutX="1035.0" layoutY="660.0" mnemonicParsing="false" onAction="#cancelBTNAction" prefHeight="28.0" prefWidth="148.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Cancel Appointment" textFill="WHITE">
+         <font>
+            <Font name="Impact" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow>
+               <input>
+                  <Glow />
+               </input>
+            </DropShadow>
+         </effect>
+      </Button>
+      <TableView fx:id="Table" layoutX="22.0" layoutY="105.0" onMouseClicked="#tableAction" prefHeight="437.0" prefWidth="1158.0">
+         <columns>
+            <TableColumn fx:id="tableSessionID" prefWidth="92.80000305175781" text="SessionID" />
+            <TableColumn fx:id="tableSessionDate" prefWidth="110.39999389648438" text="Date" />
+            <TableColumn fx:id="tableSessionTime" prefWidth="107.20001220703125" text="Time" />
+            <TableColumn fx:id="tableSessionNotes" prefWidth="103.20001220703125" text="Notes" />
+            <TableColumn fx:id="tableDocID" prefWidth="116.0" text="Doctor ID" />
+            <TableColumn fx:id="tableProgramID" prefWidth="112.800048828125" text="Program ID" />
+            <TableColumn fx:id="tablePatientName" prefWidth="104.7999267578125" text="Patient Name" />
+            <TableColumn fx:id="tablePaymentID" prefWidth="84.7999267578125" text="Payment ID" />
+            <TableColumn fx:id="tablePaymentAmount" prefWidth="96.800048828125" text="Amount" />
+            <TableColumn fx:id="tablePaymentMethod" prefWidth="104.800048828125" text="Method" />
+            <TableColumn fx:id="tableSessionStatus" prefWidth="126.4000244140625" text="isCancel" />
+         </columns>
+      </TableView>
+      <Button fx:id="rescheduleBTN" layoutX="1054.0" layoutY="560.0" mnemonicParsing="false" onAction="#rescheduleBTNAction" prefHeight="28.0" prefWidth="110.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Reschedule" textFill="WHITE">
+         <font>
+            <Font name="Impact" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow>
+               <input>
+                  <Glow />
+               </input>
+            </DropShadow>
+         </effect>
+      </Button>
+      <TextField fx:id="textSessionTime" layoutX="106.0" layoutY="633.0" prefHeight="28.0" prefWidth="194.0" promptText="update session Time" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <font>
+            <Font name="Consolas Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtSessionNotes" layoutX="314.0" layoutY="580.0" prefHeight="28.0" prefWidth="194.0" promptText="update session Notes" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <font>
+            <Font name="Consolas Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtPaymentAmount" layoutX="704.0" layoutY="580.0" prefHeight="28.0" prefWidth="148.0" promptText="update Paymet Amount" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <font>
+            <Font name="Consolas Bold" size="14.0" />
+         </font>
+      </TextField>
+      <ComboBox fx:id="ComboDocId" layoutX="317.0" layoutY="634.0" opacity="0.58" prefHeight="26.0" prefWidth="194.0" promptText="update Doctor ID" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <ComboBox fx:id="ComboProgramID" layoutX="524.0" layoutY="581.0" opacity="0.58" prefHeight="26.0" prefWidth="162.0" promptText="update Program ID" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <ComboBox fx:id="comboPatientName" layoutX="524.0" layoutY="634.0" opacity="0.58" prefHeight="26.0" prefWidth="162.0" promptText="update Patient Name" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="txtAppointmentStatus" layoutX="864.0" layoutY="633.0" prefHeight="28.0" prefWidth="148.0" promptText="Appoinmentstatus" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <font>
+            <Font name="Consolas Bold" size="14.0" />
+         </font>
+      </TextField>
+      <ComboBox fx:id="comboPaymentMethod" layoutX="697.0" layoutY="634.0" opacity="0.58" prefHeight="26.0" prefWidth="162.0" promptText="update Paymet Method" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <Label fx:id="labelSessionID" layoutX="14.0" layoutY="576.0" prefHeight="36.0" prefWidth="87.0" text="Session ID">
+         <font>
+            <Font name="Impact" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelPaymentID" layoutX="14.0" layoutY="629.0" prefHeight="36.0" prefWidth="87.0" text="Payment ID">
+         <font>
+            <Font name="Impact" size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="resetBTN" layoutX="1054.0" layoutY="610.0" mnemonicParsing="false" onAction="#resetBTNAction" prefHeight="28.0" prefWidth="110.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Reset" textFill="WHITE">
+         <font>
+            <Font name="Impact" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow>
+               <input>
+                  <Glow />
+               </input>
+            </DropShadow>
+         </effect>
+      </Button>
+   </children>
+</AnchorPane>
