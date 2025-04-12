@@ -31,6 +31,14 @@ public class Appointments implements SuperEntity{
     @JoinColumn(name = "payment_ID")
     private Payment payment;
 
+    private String status;
+    @PrePersist
+    public void prePersist() {
+        if (status == null) {
+            status = "NO";
+        }
+    }
+
 }
 
 
