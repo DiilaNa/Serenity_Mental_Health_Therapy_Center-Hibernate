@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="322.0" prefWidth="560.0" style="-fx-background-color: #DCDCDC;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalHealthTherapyCenter.controller.AssignDoctorsController">
+<AnchorPane prefHeight="322.0" prefWidth="560.0" style="-fx-background-color: #DCDCDC;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalHealthTherapyCenter.controller.popups.AssignDoctorsController">
    <children>
       <ComboBox fx:id="docComboBox" layoutX="280.0" layoutY="58.0" onAction="#loadComboBoxAction" onMouseClicked="#setDetailsCBoxAction" opacity="0.67" prefHeight="34.0" prefWidth="191.0" promptText="choose therapist" />
       <ImageView fx:id="image" fitHeight="148.0" fitWidth="150.0" layoutX="62.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">

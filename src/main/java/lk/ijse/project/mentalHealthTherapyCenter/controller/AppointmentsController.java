@@ -18,8 +18,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.ijse.project.mentalHealthTherapyCenter.controller.popups.AssignDoctorsController;
+import lk.ijse.project.mentalHealthTherapyCenter.controller.popups.SelectProgramsController;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.*;
-import lk.ijse.project.mentalHealthTherapyCenter.entity.Patient;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.AppointmentBO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
@@ -327,10 +328,6 @@ public class AppointmentsController implements Initializable {
         loadNewPage("/view/assignDocs.fxml");
     }
 
-    @FXML
-    void cancelAppointmentBTNAction(ActionEvent event) {
-
-    }
 
     @FXML
     void resetAction(ActionEvent event) {

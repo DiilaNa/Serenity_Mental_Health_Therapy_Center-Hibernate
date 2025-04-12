@@ -1,4 +1,4 @@
-package lk.ijse.project.mentalHealthTherapyCenter.controller;
+package lk.ijse.project.mentalHealthTherapyCenter.controller.Login;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.impl.UserDAOImpl;
+import lk.ijse.project.mentalHealthTherapyCenter.controller.MainController;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.UserBO;

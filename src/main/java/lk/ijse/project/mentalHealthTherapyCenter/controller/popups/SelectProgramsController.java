@@ -1,4 +1,4 @@
-package lk.ijse.project.mentalHealthTherapyCenter.controller;
+package lk.ijse.project.mentalHealthTherapyCenter.controller.popups;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,6 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.project.mentalHealthTherapyCenter.controller.AppointmentsController;
+import lk.ijse.project.mentalHealthTherapyCenter.controller.TherapyProgramsController;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.ProgramDto;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.ProgramTM;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.TProgramTM;
