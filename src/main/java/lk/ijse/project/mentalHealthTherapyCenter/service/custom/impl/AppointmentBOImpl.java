@@ -9,6 +9,7 @@ import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.*;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.AppointmentBO;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -116,13 +117,122 @@ public class AppointmentBOImpl implements AppointmentBO {
             session.close();
         }
     }
+   @Override
+   public boolean updateAppointments( ProgramDetailsDTO programDetailsDTO, SessionDTO sessionDTO, PaymentDTO paymentDTO) {
+       Session session = FactoryConfiguration.getInstance().getSession();
+       Transaction transaction = session.beginTransaction();
+       try {
+           Payment payment = session.get(Payment.class, paymentDTO.getPaymentID());
+           if (payment == null) {
+               transaction.rollback();
+               throw new RuntimeException("Payment not found for ID: " + paymentDTO.getPaymentID());
+           }
+           payment.setPaymentID(paymentDTO.getPaymentID());
+           payment.setPatientName(paymentDTO.getPatientName());
+           payment.setPaymentAmount(paymentDTO.getPaymentAmount());
+           payment.setPaymentMethod(paymentDTO.getPaymentMethod());
+
+           boolean isPaymentSaved = paymentDAO.update(payment, session);
+           if (!isPaymentSaved) {
+               transaction.rollback();
+               return false;
+           }
+           session.flush();
+
+           Set<String> uniqueProgramIDs = new HashSet<>(programDetailsDTO.getProgramId());
+
+           if (uniqueProgramIDs.isEmpty() && uniqueProgramIDs==null){
+               transaction.rollback();
+               return false;
+           }
+
+           List<TPrograms> validPrograms = new ArrayList<>();
+           for (String pid : uniqueProgramIDs) {
+               TPrograms tPrograms = session.get(TPrograms.class, pid);
+               if (tPrograms == null) {
+                   transaction.rollback();
+                   throw new RuntimeException("Error: Program ID " + pid + " not found in database.");
+               }
+               validPrograms.add(tPrograms);
+           }
+
+           String patientID = programDetailsDTO.getPatientId();
+           Patient patient = session.get(Patient.class,patientID);
+
+           if (patient == null) {
+               transaction.rollback();
+               throw new RuntimeException("Error: Patient ID " + patientID + " not found in database.");
+           }
+
+           for (TPrograms selectedProgram : validPrograms) {
+               ProgramDetailsID compositeKey = new ProgramDetailsID(
+                       selectedProgram.getProgramID(),
+                       patient.getPatientID()
+               );
+
+               ProgramDetails programDetails = session.get(ProgramDetails.class, compositeKey);
+               if (programDetails == null) {
+                   // Insert if not exists
+                   programDetails = new ProgramDetails();
+                   programDetails.setID(compositeKey);
+                   programDetails.setPatient(patient);
+                   programDetails.setTPrograms(selectedProgram);
+               } else {
+                   // Optional: update fields if you have any
+                   programDetails.setTPrograms(selectedProgram); // might not be necessary if not changed
+               }
+
+               boolean isSaved = programDetailsDAO.update(programDetails, session);
+               if (!isSaved) {
+                   transaction.rollback();
+                   return false;
+               }
+           }
+           session.flush();
+           session.clear();
+
+
+           String tid  = sessionDTO.getTherapist_ID();
+           Optional<Therapist> optional = therapistDAO.findByPK(tid,session);
+
+           Appointments appointments = session.get(Appointments.class, sessionDTO.getSessionId());
+           if (appointments == null) {
+               transaction.rollback();
+               throw new RuntimeException("Appointment not found for ID: " + sessionDTO.getSessionId());
+           }
+
+           appointments.setTime(sessionDTO.getTime());
+           appointments.setNotes(sessionDTO.getNotes());
+           appointments.setDate(sessionDTO.getDate());
+           appointments.setTherapist(optional.get());
+           appointments.setPayment(payment);
+           appointments.setPatient(patient);
+           boolean isAppointmentSaved = appointmentDAO.update(appointments, session);
+           if (!isAppointmentSaved) {
+               transaction.rollback();
+               return false;
+           }
+           session.flush();
+
+           transaction.commit();
+           return true;
+
+       } catch (Exception e) {
+           e.printStackTrace();
+           transaction.rollback();
+           return false;
+       } finally {
+           session.close();
+       }
+   }
+
 
     @Override
     public String getNextPatientID() {
         Optional<String> lastPkOptional = patientDAO.getLastPK();
         if (lastPkOptional.isPresent()) {
             String lastPk = lastPkOptional.get();
-            int nextId = Integer.parseInt(lastPk.replace("P", "")) + 1;  // Extract number and increment
+            int nextId = Integer.parseInt(lastPk.replace("P", "")) + 1;
             return String.format("P%03d", nextId);
         } else {
             return "P001";
@@ -134,7 +244,7 @@ public class AppointmentBOImpl implements AppointmentBO {
         Optional<String> lastPkOptional = appointmentDAO.getLastPK();
         if (lastPkOptional.isPresent()) {
             String lastPk = lastPkOptional.get();
-            int nextId = Integer.parseInt(lastPk.replace("APT", "")) + 1;  // Extract number and increment
+            int nextId = Integer.parseInt(lastPk.replace("APT", "")) + 1;
             return String.format("APT%03d", nextId);
         } else {
             return "APT001";
@@ -188,7 +298,6 @@ public class AppointmentBOImpl implements AppointmentBO {
         for (Patient dto : patientDTOS) {
             patientIds.add(dto.getPatientName());
         }
-
         return patientIds;
     }
 
@@ -200,18 +309,11 @@ public class AppointmentBOImpl implements AppointmentBO {
         for (Therapist dto : therapists) {
             therapistIDS.add(dto.getDoctorID());
         }
-
         return therapistIDS;
     }
 
     @Override
-    public boolean deletePrograms(String selectedId) {
-        try {
-            return tProgramDAO.deleteByPk(selectedId);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException("Class not found Error while saving therapy programs", e);
-        } catch (SQLException e) {
-            throw new RuntimeException("SQL Error while saving therapy programs");
-        }
+    public String searchPatientID(String patientName) {
+        return patientDAO.search(patientName);
     }
 }

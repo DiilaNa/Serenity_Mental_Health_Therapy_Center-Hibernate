@@ -15,4 +15,13 @@ public class PaymentDTO {
     private  String paymentDate;
     private  String paymentTime;
 
+    public PaymentDTO(String paymentID, String patientName, Double paymentAmount, String paymentMethod) {
+        this.paymentID = paymentID;
+        this.patientName = patientName;
+        this.paymentAmount = paymentAmount;
+        this.paymentMethod = paymentMethod;
+    }
+
+
+
 }

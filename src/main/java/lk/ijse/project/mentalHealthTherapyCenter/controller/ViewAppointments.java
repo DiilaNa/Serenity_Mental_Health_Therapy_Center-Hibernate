@@ -14,6 +14,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import lk.ijse.project.mentalHealthTherapyCenter.controller.popups.SelectProgramsController;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.PaymentDTO;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.ProgramDetailsDTO;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.SessionDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.ViewSessionTM;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.ViewSessionDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
@@ -24,10 +27,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 
 public class ViewAppointments implements Initializable {
     @Override
@@ -134,23 +134,7 @@ public class ViewAppointments implements Initializable {
     @FXML
     private TextField txtSessionNotes;
 
-    @FXML
-    private Button addProgramsBTN;
-
-    @FXML
-    private Button deleteProgramsBTN;
-
-    @FXML
-    private ListView<String> listView;
-
     private Set<String> programIDs = new HashSet<>();
-
-    public void setDetails(String programID, String programName) {
-        programID = programID;
-        if (programID != null && programName != null) {
-            listView.getItems().add(programID);
-        }
-    }
 
     AppointmentBO appointmentBO =  BOFactory.getInstance().getBO(BOType.APPOINTMENT);
 
@@ -160,9 +144,46 @@ public class ViewAppointments implements Initializable {
     }
 
     @FXML
-    void rescheduleBTNAction(ActionEvent event) {
+    void rescheduleBTNAction(ActionEvent event) throws Exception {
+        String appointmentID = labelSessionID.getText();
+        String appointmentDate = textSessionDate.getText();
+        String appointmentNotes = txtSessionNotes.getText();
+        String appointmentTime = textSessionTime.getText();
+        String doctorID = ComboDocId.getValue();
         String patientName = comboPatientName.getValue();
+        String paymentID = labelPaymentID.getText();
+        Double paymentAmount = Double.valueOf(txtPaymentAmount.getText());
         String paymentMethod = comboPaymentMethod.getValue();
+        String patientId = appointmentBO.searchPatientID(patientName);
+
+        ProgramDetailsDTO programDetailsDTO = new ProgramDetailsDTO(
+                patientId,
+                new ArrayList<>(programIDs)  /*List required as one patient can choose more than one programs*/
+
+        );
+        SessionDTO sessionDTO = new SessionDTO(
+                appointmentID,
+                patientId,
+                doctorID,
+                appointmentTime,
+                appointmentNotes,
+                appointmentDate
+        );
+        PaymentDTO paymentDTO = new PaymentDTO(
+                paymentID,
+                patientName,
+                paymentAmount,
+                paymentMethod
+
+        );
+
+        boolean isSaved = appointmentBO.updateAppointments(programDetailsDTO,sessionDTO,paymentDTO);
+        if (isSaved) {
+            refreshPage();
+            new Alert(Alert.AlertType.INFORMATION, "Appointment added", ButtonType.OK).show();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Failed! Appointment not added", ButtonType.OK).show();
+        }
 
     }
 
@@ -177,7 +198,7 @@ public class ViewAppointments implements Initializable {
         comboPatientName.getItems().clear();
         comboPaymentMethod.setItems(FXCollections.observableArrayList("Card Payment","Cash Payment"));
         ComboDocId.getItems().clear();
-        listView.getItems().clear();
+
     }
 
     @FXML
@@ -191,17 +212,12 @@ public class ViewAppointments implements Initializable {
             txtSessionNotes.setText(selectedItem.getSessionNotes());
             textSessionTime.setText(selectedItem.getSessionTime());
             ComboDocId.setValue(selectedItem.getDoctorID());
-            listView.setItems( FXCollections.observableArrayList(selectedItem.getProgramID()));
             comboPatientName.setValue(selectedItem.getPatientName());
             labelPaymentID.setText(String.valueOf(selectedItem.getPaymentID()));
             txtPaymentAmount.setText(String.valueOf(selectedItem.getPaymentAmount()));
             comboPaymentMethod.setValue(selectedItem.getPaymentMethod());
         }
     }
-
-    @FXML
-    void addProgramsAction(MouseEvent event) throws IOException { loadNewPage("/view/SelectPrograms.fxml");}
-
     private void loadTable(){
         List<ViewSessionDTO> viewSessionDTOS =  appointmentBO.getAllAppointments();
         ObservableList<ViewSessionTM> viewSessionTMS = FXCollections.observableArrayList();
@@ -233,40 +249,8 @@ public class ViewAppointments implements Initializable {
         textSessionTime.clear();
         txtPaymentAmount.clear();
         txtSessionNotes.clear();
-        listView.getItems().clear();
         comboPatientName.setItems(FXCollections.observableArrayList(appointmentBO.loadPatientNames()));
         comboPaymentMethod.setItems(FXCollections.observableArrayList("Card Payment","Cash Payment"));
         ComboDocId.setItems(FXCollections.observableArrayList(appointmentBO.loadDoctorIds()));
-    }
-
-    private void loadNewPage(String fxmlPath) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-        Parent root = loader.load();
-        if (fxmlPath.equals("/view/SelectPrograms.fxml")) {
-            SelectProgramsController selectProgramsController = loader.getController();
-            selectProgramsController.setViewAppointments(this);
-        }
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.setTitle("Program Details - Serenity Mental Health Therapy Center");
-        stage.show();
-    }
-
-    @FXML
-    void deleteProgramsBTNAction(MouseEvent event) throws Exception {
-        String id = listView.getSelectionModel().getSelectedItem();
-        if (id != null) {
-            boolean isDeleted = appointmentBO.deletePrograms(id);
-            if (isDeleted) {
-                refreshPage();
-                new Alert(Alert.AlertType.CONFIRMATION, "Program Deleted Successfully").show();
-            }else {
-                new Alert(Alert.AlertType.ERROR, "Program Deletion Failed").show();
-            }
-        }else {
-            new Alert(Alert.AlertType.ERROR, "Select and ID").show();
-        }
     }
 }

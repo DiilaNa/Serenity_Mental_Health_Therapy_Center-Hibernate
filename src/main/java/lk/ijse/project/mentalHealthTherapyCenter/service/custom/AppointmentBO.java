@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface AppointmentBO extends SuperBO {
     boolean addAppointment(ProgramDetailsDTO programDetailsDTO , SessionDTO sessionDTO, PaymentDTO paymentDTO);
+    boolean updateAppointments(ProgramDetailsDTO programDetailsDTO,SessionDTO sessionDTO,PaymentDTO paymentDTO);
     String getNextPatientID();
     String getNextSessionID();
     String getNextPaymentID();
@@ -14,5 +15,5 @@ public interface AppointmentBO extends SuperBO {
     List<ViewSessionDTO>getAllAppointments();
     List<String> loadPatientNames() throws Exception;
     List<String> loadDoctorIds() throws Exception;
-    boolean deletePrograms(String selectedId);
+    String searchPatientID(String patientName);
 }

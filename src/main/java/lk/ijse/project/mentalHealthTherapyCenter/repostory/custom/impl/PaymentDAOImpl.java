@@ -26,7 +26,13 @@ public class PaymentDAOImpl implements PaymentDAO {
 
     @Override
     public boolean update(Payment payment,Session session) throws SQLException, ClassNotFoundException {
-        return false;
+        try{
+            session.merge(payment);
+            session.flush();
+            return true;
+        } catch (Exception e) {
+            throw new HibernateException("save failed in PaymentDAOImpl" + e.getMessage());
+        }
     }
 
     @Override

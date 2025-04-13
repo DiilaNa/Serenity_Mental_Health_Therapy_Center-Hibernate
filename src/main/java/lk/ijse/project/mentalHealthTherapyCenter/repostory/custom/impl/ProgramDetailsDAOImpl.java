@@ -24,6 +24,7 @@ public class ProgramDetailsDAOImpl implements ProgramDetailsDAO {
     public boolean update(ProgramDetails programDetails, Session session) {
         try{
             session.merge(programDetails);
+            session.flush();
             return true;
         }catch(Exception e){
            throw new RuntimeException();

@@ -92,4 +92,27 @@ public class PatientDAOImpl implements PatientDAO {
 
         return query.list();
     }
+
+    @Override
+    public String search(String patientName) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            Query<String> query = session.createQuery(
+                    "SELECT p.patientID FROM Patient p WHERE p.patientName = :name", String.class);
+            query.setParameter("name", patientName);
+
+            String patientID = query.uniqueResult(); // returns single result or null
+            transaction.commit();
+            return patientID;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
 }

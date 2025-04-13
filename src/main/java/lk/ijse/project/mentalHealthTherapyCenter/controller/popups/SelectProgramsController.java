@@ -67,22 +67,16 @@ public class SelectProgramsController implements Initializable {
     TProgramBO tProgramBO = BOFactory.getInstance().getBO(BOType.THERAPY_PROGRAMS);
 
     @Setter
-    private ViewAppointments viewAppointments;
-
-    @Setter
     private AppointmentsController appointmentsController;
 
     @FXML
-    void selectBtnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+    void selectBtnAction(ActionEvent event) {
         String ID = idLabel.getText();
         String Name = nameLabel.getText();
         if (appointmentsController != null) {
             appointmentsController.setDetails(ID, Name);
-        }else if(viewAppointments != null) {
-            viewAppointments.setDetails(ID, Name);
         }
     }
-
     @FXML
     void tableAction(MouseEvent event) {
         ProgramTM selectedPatient = Table.getSelectionModel().getSelectedItem();
