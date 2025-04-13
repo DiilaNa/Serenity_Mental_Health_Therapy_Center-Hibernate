@@ -57,9 +57,6 @@ public class ViewAppointments implements Initializable {
     private ComboBox<String> ComboDocId;
 
     @FXML
-    private ComboBox<String> ComboProgramID;
-
-    @FXML
     private TableView<ViewSessionTM> Table;
 
     @FXML
@@ -126,13 +123,16 @@ public class ViewAppointments implements Initializable {
     private TextField textSessionTime;
 
     @FXML
-    private TextField txtAppointmentStatus;
-
-    @FXML
     private TextField txtPaymentAmount;
 
     @FXML
     private TextField txtSessionNotes;
+
+    @FXML
+    private Button addProgramsBTN;
+
+    @FXML
+    private ListView<String> listView;
 
     AppointmentBO appointmentBO =  BOFactory.getInstance().getBO(BOType.APPOINTMENT);
 
@@ -143,18 +143,51 @@ public class ViewAppointments implements Initializable {
 
     @FXML
     void rescheduleBTNAction(ActionEvent event) {
+        String patientName = comboPatientName.getValue();
+        String paymentMethod = comboPaymentMethod.getValue();
 
     }
 
     @FXML
-    void resetBTNAction(ActionEvent event) {
-
+    void resetBTNAction(ActionEvent event) throws Exception {
+        labelPaymentID.setVisible(false);
+        labelSessionID.setVisible(false);
+        textSessionDate.clear();
+        textSessionTime.clear();
+        txtPaymentAmount.clear();
+        txtSessionNotes.clear();
+        comboPatientName.getItems().clear();
+        comboPaymentMethod.setItems(FXCollections.observableArrayList("Card Payment","Cash Payment"));
+        ComboDocId.getItems().clear();
+        listView.getItems().clear();
     }
 
     @FXML
     void tableAction(MouseEvent event) {
+        ViewSessionTM selectedItem = Table.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            labelPaymentID.setVisible(true);
+            labelSessionID.setVisible(true);
+            labelSessionID.setText(selectedItem.getSessionID());
+            textSessionDate.setText(selectedItem.getSessionDate());
+            txtSessionNotes.setText(selectedItem.getSessionNotes());
+            textSessionTime.setText(selectedItem.getSessionTime());
+            ComboDocId.setValue(selectedItem.getDoctorID());
+            listView.setItems( FXCollections.observableArrayList(selectedItem.getProgramID()));
+            comboPatientName.setValue(selectedItem.getPatientName());
+            labelPaymentID.setText(String.valueOf(selectedItem.getPaymentID()));
+            txtPaymentAmount.setText(String.valueOf(selectedItem.getPaymentAmount()));
+            comboPaymentMethod.setValue(selectedItem.getPaymentMethod());
+        }
 
     }
+
+
+    @FXML
+    void addProgramsAction(MouseEvent event) {
+
+    }
+
     private void loadTable() throws Exception {
         List<ViewSessionDTO> viewSessionDTOS =  appointmentBO.getAllAppointments();
         ObservableList<ViewSessionTM> viewSessionTMS = FXCollections.observableArrayList();
@@ -180,7 +213,14 @@ public class ViewAppointments implements Initializable {
 
     private void refreshPage() throws Exception {
         loadTable();
-
+        labelPaymentID.setVisible(false);
+        labelSessionID.setVisible(false);
+        textSessionDate.clear();
+        textSessionTime.clear();
+        txtPaymentAmount.clear();
+        txtSessionNotes.clear();
+        comboPatientName.getItems().clear();
+        comboPaymentMethod.setItems(FXCollections.observableArrayList("Card Payment","Cash Payment"));
+        ComboDocId.getItems().clear();
     }
-
 }

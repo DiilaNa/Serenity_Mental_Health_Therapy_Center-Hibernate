@@ -10,23 +10,23 @@ import java.util.Optional;
 
 public class ProgramDetailsDAOImpl implements ProgramDetailsDAO {
     @Override
-    public boolean save(ProgramDetails programDetails, Session session) throws SQLException {
+    public boolean save(ProgramDetails programDetails, Session session)  {
         try{
             session.persist(programDetails);
             session.flush();
             return true;
         }catch(Exception e){
-            throw new SQLException("save failed in ProgramDetailsDAOImpl" + e.getMessage());
+          throw new RuntimeException();
         }
     }
 
     @Override
-    public boolean update(ProgramDetails programDetails, Session session) throws SQLException, ClassNotFoundException {
+    public boolean update(ProgramDetails programDetails, Session session) {
         try{
             session.merge(programDetails);
             return true;
         }catch(Exception e){
-            throw new SQLException(e.getMessage());
+           throw new RuntimeException();
         }
     }
 
@@ -41,7 +41,7 @@ public class ProgramDetailsDAOImpl implements ProgramDetailsDAO {
     }
 
     @Override
-    public Optional<ProgramDetails> findByPK(String pk, Session session) throws SQLException {
+    public Optional<ProgramDetails> findByPK(String pk, Session session)  {
         ProgramDetails programDetails = session.get(ProgramDetails.class, pk);
         session.close();
         if (programDetails == null) {

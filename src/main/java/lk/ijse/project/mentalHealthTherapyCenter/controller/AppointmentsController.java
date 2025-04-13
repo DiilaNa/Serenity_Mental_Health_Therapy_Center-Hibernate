@@ -100,14 +100,10 @@ public class AppointmentsController implements Initializable {
     private AnchorPane appointmentPage;
 
     @FXML
-    private Button cancelAppointmentBTN;
-
-    @FXML
     private Label date;
 
     @FXML
     private ImageView image;
-
 
     @FXML
     private TextField payAMOUNT;
@@ -180,9 +176,7 @@ public class AppointmentsController implements Initializable {
     }
 
     @FXML
-    void viewAppointmentsBTNAction(ActionEvent event) throws IOException {
-        loadNewPage("/view/viewAppointments.fxml");
-    }
+    void viewAppointmentsBTNAction(ActionEvent event) throws IOException {loadNewPage("/view/viewAppointments.fxml");}
 
     @FXML
     void addAppointmentBTNAction(ActionEvent event) {
@@ -218,8 +212,6 @@ public class AppointmentsController implements Initializable {
                 System.out.println("Error: Invalid format for program item! " + program);
             }
         }
-
-
      /*   String namePattern = "^[a-zA-Z ]+$";
         String addressPattern = "^[a-zA-Z0-9, -]+$";
         String mailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
@@ -337,14 +329,12 @@ public class AppointmentsController implements Initializable {
     private  void  loadNewPage(String fxmlPath) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Parent root = loader.load(); // Load the FXML
-        // Now get the controller from the FXMLLoader
+
         if (fxmlPath.equals("/view/assignDocs.fxml")) {
             AssignDoctorsController assignDoctorsController = loader.getController();
-            // Inject data or set additional properties for AssignDoctorsController
             assignDoctorsController.setAppointmentsController(this);
         } else if (fxmlPath.equals("/view/SelectPrograms.fxml")) {
             SelectProgramsController selectProgramsController = loader.getController();
-            // Inject data or set additional properties for SelectProgramsController
             selectProgramsController.setAppointmentsController(this);
         }
 
