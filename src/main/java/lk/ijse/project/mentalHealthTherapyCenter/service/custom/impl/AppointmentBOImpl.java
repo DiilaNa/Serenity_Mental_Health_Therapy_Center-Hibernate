@@ -10,6 +10,7 @@ import lk.ijse.project.mentalHealthTherapyCenter.service.custom.AppointmentBO;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.sql.SQLException;
 import java.util.*;
 
 public class AppointmentBOImpl implements AppointmentBO {
@@ -18,6 +19,7 @@ public class AppointmentBOImpl implements AppointmentBO {
     PaymentDAO paymentDAO = DAOFactory.getInstance().getDAO(DAOType.PAYMENT);
     TherapistDAO therapistDAO = DAOFactory.getInstance().getDAO(DAOType.THERAPIST);
     ProgramDetailsDAO programDetailsDAO = DAOFactory.getInstance().getDAO(DAOType.PROGRAM_DETAILS);
+    TProgramDAO tProgramDAO = DAOFactory.getInstance().getDAO(DAOType.THERAPY_PROGRAMS);
     QueryDAO queryDAO = DAOFactory.getInstance().getDAO(DAOType.QUERY);
 
     @Override
@@ -200,5 +202,16 @@ public class AppointmentBOImpl implements AppointmentBO {
         }
 
         return therapistIDS;
+    }
+
+    @Override
+    public boolean deletePrograms(String selectedId) {
+        try {
+            return tProgramDAO.deleteByPk(selectedId);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Class not found Error while saving therapy programs", e);
+        } catch (SQLException e) {
+            throw new RuntimeException("SQL Error while saving therapy programs");
+        }
     }
 }

@@ -57,8 +57,6 @@ public class ViewAppointments implements Initializable {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
     @FXML
@@ -138,6 +136,9 @@ public class ViewAppointments implements Initializable {
 
     @FXML
     private Button addProgramsBTN;
+
+    @FXML
+    private Button deleteProgramsBTN;
 
     @FXML
     private ListView<String> listView;
@@ -232,10 +233,12 @@ public class ViewAppointments implements Initializable {
         textSessionTime.clear();
         txtPaymentAmount.clear();
         txtSessionNotes.clear();
+        listView.getItems().clear();
         comboPatientName.setItems(FXCollections.observableArrayList(appointmentBO.loadPatientNames()));
         comboPaymentMethod.setItems(FXCollections.observableArrayList("Card Payment","Cash Payment"));
         ComboDocId.setItems(FXCollections.observableArrayList(appointmentBO.loadDoctorIds()));
     }
+
     private void loadNewPage(String fxmlPath) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Parent root = loader.load();
@@ -249,5 +252,21 @@ public class ViewAppointments implements Initializable {
         stage.setResizable(false);
         stage.setTitle("Program Details - Serenity Mental Health Therapy Center");
         stage.show();
+    }
+
+    @FXML
+    void deleteProgramsBTNAction(MouseEvent event) throws Exception {
+        String id = listView.getSelectionModel().getSelectedItem();
+        if (id != null) {
+            boolean isDeleted = appointmentBO.deletePrograms(id);
+            if (isDeleted) {
+                refreshPage();
+                new Alert(Alert.AlertType.CONFIRMATION, "Program Deleted Successfully").show();
+            }else {
+                new Alert(Alert.AlertType.ERROR, "Program Deletion Failed").show();
+            }
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Select and ID").show();
+        }
     }
 }

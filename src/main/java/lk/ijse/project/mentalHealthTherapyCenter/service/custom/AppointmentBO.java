@@ -14,4 +14,5 @@ public interface AppointmentBO extends SuperBO {
     List<ViewSessionDTO>getAllAppointments();
     List<String> loadPatientNames() throws Exception;
     List<String> loadDoctorIds() throws Exception;
+    boolean deletePrograms(String selectedId);
 }
