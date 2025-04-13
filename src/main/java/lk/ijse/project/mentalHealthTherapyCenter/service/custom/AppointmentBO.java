@@ -1,10 +1,8 @@
 package lk.ijse.project.mentalHealthTherapyCenter.service.custom;
 
 import lk.ijse.project.mentalHealthTherapyCenter.dto.*;
-import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.ViewSessionTM;
 import lk.ijse.project.mentalHealthTherapyCenter.service.SuperBO;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface AppointmentBO extends SuperBO {
@@ -14,4 +12,6 @@ public interface AppointmentBO extends SuperBO {
     String getNextPaymentID();
     List<PatientDTO> searchPatientBYName(String searchBYName);
     List<ViewSessionDTO>getAllAppointments();
+    List<String> loadPatientNames() throws Exception;
+    List<String> loadDoctorIds() throws Exception;
 }

@@ -2,7 +2,6 @@ package lk.ijse.project.mentalHealthTherapyCenter.service.custom.impl;
 
 import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.*;
-import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.ViewSessionTM;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.*;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOType;
@@ -11,7 +10,6 @@ import lk.ijse.project.mentalHealthTherapyCenter.service.custom.AppointmentBO;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.sql.SQLException;
 import java.util.*;
 
 public class AppointmentBOImpl implements AppointmentBO {
@@ -178,5 +176,29 @@ public class AppointmentBOImpl implements AppointmentBO {
     public List<ViewSessionDTO> getAllAppointments() {
         List<ViewSessionDTO> appointments = queryDAO.getAllAppointments();
         return appointments;
+    }
+
+    @Override
+    public List<String> loadPatientNames() throws Exception {
+        List<Patient> patientDTOS = patientDAO.getAll();
+        List<String> patientIds = new ArrayList<>();
+
+        for (Patient dto : patientDTOS) {
+            patientIds.add(dto.getPatientName());
+        }
+
+        return patientIds;
+    }
+
+    @Override
+    public List<String> loadDoctorIds() throws Exception {
+        List<Therapist> therapists = therapistDAO.getAll();
+        List<String> therapistIDS = new ArrayList<>();
+
+        for (Therapist dto : therapists) {
+            therapistIDS.add(dto.getDoctorID());
+        }
+
+        return therapistIDS;
     }
 }

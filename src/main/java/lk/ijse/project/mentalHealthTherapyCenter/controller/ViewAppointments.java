@@ -179,16 +179,14 @@ public class ViewAppointments implements Initializable {
             txtPaymentAmount.setText(String.valueOf(selectedItem.getPaymentAmount()));
             comboPaymentMethod.setValue(selectedItem.getPaymentMethod());
         }
-
     }
-
 
     @FXML
     void addProgramsAction(MouseEvent event) {
 
     }
 
-    private void loadTable() throws Exception {
+    private void loadTable(){
         List<ViewSessionDTO> viewSessionDTOS =  appointmentBO.getAllAppointments();
         ObservableList<ViewSessionTM> viewSessionTMS = FXCollections.observableArrayList();
         for (ViewSessionDTO viewSessionDTO : viewSessionDTOS) {
@@ -219,8 +217,8 @@ public class ViewAppointments implements Initializable {
         textSessionTime.clear();
         txtPaymentAmount.clear();
         txtSessionNotes.clear();
-        comboPatientName.getItems().clear();
+        comboPatientName.setItems(FXCollections.observableArrayList(appointmentBO.loadPatientNames()));
         comboPaymentMethod.setItems(FXCollections.observableArrayList("Card Payment","Cash Payment"));
-        ComboDocId.getItems().clear();
+        ComboDocId.setItems(FXCollections.observableArrayList(appointmentBO.loadDoctorIds()));
     }
 }
