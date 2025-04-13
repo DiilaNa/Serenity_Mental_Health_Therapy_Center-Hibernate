@@ -326,10 +326,9 @@ public class AppointmentsController implements Initializable {
     @FXML
     void addProgramsAction(MouseEvent event) throws IOException {loadNewPage("/view/SelectPrograms.fxml");}
 
-    private  void  loadNewPage(String fxmlPath) throws IOException {
+    private void loadNewPage(String fxmlPath) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-        Parent root = loader.load(); // Load the FXML
-
+        Parent root = loader.load();
         if (fxmlPath.equals("/view/assignDocs.fxml")) {
             AssignDoctorsController assignDoctorsController = loader.getController();
             assignDoctorsController.setAppointmentsController(this);
@@ -337,7 +336,6 @@ public class AppointmentsController implements Initializable {
             SelectProgramsController selectProgramsController = loader.getController();
             selectProgramsController.setAppointmentsController(this);
         }
-
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);

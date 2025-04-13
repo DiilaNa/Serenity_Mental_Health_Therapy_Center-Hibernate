@@ -10,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import lk.ijse.project.mentalHealthTherapyCenter.controller.AppointmentsController;
 import lk.ijse.project.mentalHealthTherapyCenter.controller.TherapyProgramsController;
+import lk.ijse.project.mentalHealthTherapyCenter.controller.ViewAppointments;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.ProgramDto;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.ProgramTM;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.TProgramTM;
@@ -66,17 +67,19 @@ public class SelectProgramsController implements Initializable {
     TProgramBO tProgramBO = BOFactory.getInstance().getBO(BOType.THERAPY_PROGRAMS);
 
     @Setter
-    private TherapyProgramsController therapyProgramsController;
+    private ViewAppointments viewAppointments;
 
     @Setter
     private AppointmentsController appointmentsController;
 
     @FXML
     void selectBtnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+        String ID = idLabel.getText();
+        String Name = nameLabel.getText();
         if (appointmentsController != null) {
-            String ID = idLabel.getText();
-            String Name = nameLabel.getText();
             appointmentsController.setDetails(ID, Name);
+        }else if(viewAppointments != null) {
+            viewAppointments.setDetails(ID, Name);
         }
     }
 

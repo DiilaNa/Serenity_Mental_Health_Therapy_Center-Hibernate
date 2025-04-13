@@ -4,22 +4,30 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import lk.ijse.project.mentalHealthTherapyCenter.controller.popups.SelectProgramsController;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.ViewSessionTM;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.ViewSessionDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.AppointmentBO;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class ViewAppointments implements Initializable {
     @Override
@@ -134,6 +142,15 @@ public class ViewAppointments implements Initializable {
     @FXML
     private ListView<String> listView;
 
+    private Set<String> programIDs = new HashSet<>();
+
+    public void setDetails(String programID, String programName) {
+        programID = programID;
+        if (programID != null && programName != null) {
+            listView.getItems().add(programID);
+        }
+    }
+
     AppointmentBO appointmentBO =  BOFactory.getInstance().getBO(BOType.APPOINTMENT);
 
     @FXML
@@ -182,9 +199,7 @@ public class ViewAppointments implements Initializable {
     }
 
     @FXML
-    void addProgramsAction(MouseEvent event) {
-
-    }
+    void addProgramsAction(MouseEvent event) throws IOException { loadNewPage("/view/SelectPrograms.fxml");}
 
     private void loadTable(){
         List<ViewSessionDTO> viewSessionDTOS =  appointmentBO.getAllAppointments();
@@ -220,5 +235,19 @@ public class ViewAppointments implements Initializable {
         comboPatientName.setItems(FXCollections.observableArrayList(appointmentBO.loadPatientNames()));
         comboPaymentMethod.setItems(FXCollections.observableArrayList("Card Payment","Cash Payment"));
         ComboDocId.setItems(FXCollections.observableArrayList(appointmentBO.loadDoctorIds()));
+    }
+    private void loadNewPage(String fxmlPath) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        Parent root = loader.load();
+        if (fxmlPath.equals("/view/SelectPrograms.fxml")) {
+            SelectProgramsController selectProgramsController = loader.getController();
+            selectProgramsController.setViewAppointments(this);
+        }
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle("Program Details - Serenity Mental Health Therapy Center");
+        stage.show();
     }
 }
