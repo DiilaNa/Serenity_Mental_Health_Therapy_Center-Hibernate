@@ -18,16 +18,22 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
 import lk.ijse.project.mentalHealthTherapyCenter.controller.popups.AssignDoctorsController;
 import lk.ijse.project.mentalHealthTherapyCenter.controller.popups.SelectProgramsController;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.*;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.AppointmentBO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.view.JasperViewer;
+import org.hibernate.Session;
 
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -172,7 +178,39 @@ public class AppointmentsController implements Initializable {
 
     @FXML
     void printBillBTNAction(ActionEvent event) {
+        Optional<String> sessionId = appointmentBO.getLastAptID();
+        if (sessionId.isPresent()) {
+            System.out.println(sessionId.get() + " is present");
+        } else {
+            new Alert(Alert.AlertType.WARNING, "Appointment ID not found").show();
+            return;
+        }
 
+        Session session = null;
+        try {
+            session = FactoryConfiguration.getInstance().getSession();
+            Connection connection = session.doReturningWork(con -> con);
+
+            JasperReport jasperReport = JasperCompileManager.compileReport(
+                    getClass().getResourceAsStream("/JasperReports/MentalTherapyHibernate.jrxml"));
+
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("sessionId", sessionId.get());
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
+            JasperViewer.viewReport(jasperPrint, false);
+
+        } catch (JRException e) {
+            new Alert(Alert.AlertType.ERROR, "Fail to load Report").show();
+            e.printStackTrace();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "DB Error").show();
+            e.printStackTrace();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 
     @FXML

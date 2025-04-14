@@ -139,8 +139,34 @@ public class ViewAppointments implements Initializable {
     AppointmentBO appointmentBO =  BOFactory.getInstance().getBO(BOType.APPOINTMENT);
 
     @FXML
-    void cancelBTNAction(ActionEvent event) {
+    void cancelBTNAction(ActionEvent event) throws Exception {
+        String id = labelSessionID.getText();
+        ViewSessionTM viewSessionTM = Table.getSelectionModel().getSelectedItem();
 
+        if (viewSessionTM == null) {
+            new Alert(Alert.AlertType.WARNING, "Please select an appointment from the table first.").showAndWait();
+            return;
+        }
+
+        String currentStatus = viewSessionTM.getAppointmentStatus();
+
+        if ("Appointment Cancelled".equalsIgnoreCase(currentStatus)) {
+            new Alert(Alert.AlertType.ERROR, "Appointment has already been cancelled.").showAndWait();
+            return;
+        }
+
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel this appointment?", ButtonType.YES, ButtonType.NO);
+        Optional<ButtonType> result = confirmation.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.YES) {
+            boolean isCancelled = appointmentBO.cancelAppointment(id);
+            if (isCancelled) {
+                refreshPage(); // update table if needed
+                new Alert(Alert.AlertType.INFORMATION, "Appointment cancelled successfully!").showAndWait();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Failed to cancel appointment!").showAndWait();
+            }
+        }
     }
 
     @FXML
@@ -155,6 +181,10 @@ public class ViewAppointments implements Initializable {
         Double paymentAmount = Double.valueOf(txtPaymentAmount.getText());
         String paymentMethod = comboPaymentMethod.getValue();
         String patientId = appointmentBO.searchPatientID(patientName);
+
+        if (appointmentID.isEmpty()||appointmentDate.isEmpty() || doctorID.isEmpty() || patientId.isEmpty() || paymentID.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR,"Please enter appointment details").show();
+        }
 
         ProgramDetailsDTO programDetailsDTO = new ProgramDetailsDTO(
                 patientId,

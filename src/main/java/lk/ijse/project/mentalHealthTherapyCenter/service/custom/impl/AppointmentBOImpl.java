@@ -9,9 +9,7 @@ import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.*;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.AppointmentBO;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
-import java.sql.SQLException;
 import java.util.*;
 
 public class AppointmentBOImpl implements AppointmentBO {
@@ -315,5 +313,36 @@ public class AppointmentBOImpl implements AppointmentBO {
     @Override
     public String searchPatientID(String patientName) {
         return patientDAO.search(patientName);
+    }
+
+    @Override
+    public boolean cancelAppointment(String id) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            Appointments appointment = session.get(Appointments.class, id);
+
+            if (appointment == null) {
+                transaction.rollback();
+                System.out.println("Appointment not found for ID: " + id);
+                return false;
+            }
+            appointment.setStatus("Appointment Cancelled");
+            session.update(appointment);
+            session.flush();
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
+            return false;
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public Optional<String> getLastAptID() {
+        return appointmentDAO.getLastPK();
     }
 }
