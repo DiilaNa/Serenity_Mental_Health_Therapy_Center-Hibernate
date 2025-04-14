@@ -68,32 +68,32 @@
             <Image url="@../../../../../../../Pictures/Mental%20Hospital/icons8-patient-50.png" />
          </image>
       </ImageView>
-      <Label fx:id="loadPatientID" layoutX="289.0" layoutY="501.0" text="Patient ID">
+      <Label fx:id="loadPatientID" layoutX="256.0" layoutY="506.0" text="Patient ID">
          <font>
             <Font name="Georgia Bold" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="PName" layoutX="246.0" layoutY="556.0" prefHeight="26.0" prefWidth="217.0" promptText="Enter  Petient Name" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+      <TextField fx:id="PName" layoutX="213.0" layoutY="561.0" prefHeight="26.0" prefWidth="217.0" promptText="Enter  Petient Name" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
          <font>
             <Font name="Consolas Bold" size="16.0" />
          </font></TextField>
-      <TextField fx:id="PDateOfBirth" layoutX="499.0" layoutY="498.0" prefHeight="26.0" prefWidth="166.0" promptText="Date of Birth" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+      <TextField fx:id="PDateOfBirth" layoutX="451.0" layoutY="503.0" prefHeight="26.0" prefWidth="166.0" promptText="Date of Birth" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
          <font>
             <Font name="Consolas" size="16.0" />
          </font></TextField>
-      <TextField fx:id="PatientNic" layoutX="499.0" layoutY="556.0" prefHeight="26.0" prefWidth="166.0" promptText="NIC Number" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+      <TextField fx:id="PatientNic" layoutX="451.0" layoutY="561.0" prefHeight="26.0" prefWidth="166.0" promptText="NIC Number" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
          <font>
             <Font name="Consolas Bold" size="16.0" />
          </font></TextField>
-      <TextField fx:id="PatientAddress" layoutX="717.0" layoutY="556.0" prefHeight="26.0" prefWidth="166.0" promptText="Address" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+      <TextField fx:id="PatientAddress" layoutX="656.0" layoutY="566.0" prefHeight="26.0" prefWidth="166.0" promptText="Address" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
          <font>
             <Font name="Consolas Bold" size="16.0" />
          </font></TextField>
-      <TextField fx:id="PatientContactNO" layoutX="947.0" layoutY="498.0" prefHeight="30.0" prefWidth="182.0" promptText="Contact No" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+      <TextField fx:id="PatientContactNO" layoutX="877.0" layoutY="503.0" prefHeight="30.0" prefWidth="182.0" promptText="Contact No" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
          <font>
             <Font name="Consolas Bold" size="16.0" />
          </font></TextField>
-      <TextField fx:id="PatientEmail" layoutX="947.0" layoutY="556.0" prefHeight="26.0" prefWidth="182.0" promptText="E-MAIL" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+      <TextField fx:id="PatientEmail" layoutX="877.0" layoutY="561.0" prefHeight="26.0" prefWidth="182.0" promptText="E-MAIL" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
          <font>
             <Font name="Consolas Bold" size="16.0" />
          </font></TextField>
@@ -112,6 +112,21 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ComboBox fx:id="PatientGender" layoutX="707.0" layoutY="500.0" opacity="0.5" prefHeight="26.0" prefWidth="175.0" promptText="Gender" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <ComboBox fx:id="PatientGender" layoutX="656.0" layoutY="505.0" opacity="0.5" prefHeight="26.0" prefWidth="175.0" promptText="Gender" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <Button fx:id="viewMedicalHistoryBTN" layoutX="1087.0" layoutY="503.0" mnemonicParsing="false" onAction="#viewMedicalHistoryBTNAction" prefHeight="35.0" prefWidth="162.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="VIEW HISTORY" textFill="WHITE">
+         <font>
+            <Font name="Impact" size="18.0" />
+         </font>
+         <effect>
+            <Glow>
+               <input>
+                  <DropShadow />
+               </input>
+            </Glow>
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>
