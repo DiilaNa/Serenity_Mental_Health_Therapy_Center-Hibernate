@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="525.0" prefWidth="886.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalHealthTherapyCenter.controller.popups.MedicalHistoryController">
+   <children>
+      <TableView fx:id="Table" layoutY="99.0" prefHeight="366.0" prefWidth="886.0">
+        <columns>
+          <TableColumn fx:id="tablePid" prefWidth="97.59997254610062" text="Patient Id" />
+          <TableColumn fx:id="tablePName" prefWidth="107.99993896484375" text="Patient Name" />
+            <TableColumn fx:id="tableProID" prefWidth="100.80006408691406" text="Program Id" />
+            <TableColumn fx:id="tableProName" prefWidth="112.0" text="Program Name" />
+            <TableColumn fx:id="tableDocName" prefWidth="120.0" text="Doctor Name" />
+            <TableColumn fx:id="tableAptID" prefWidth="116.0" text="Session Id" />
+            <TableColumn fx:id="tableDate" prefWidth="122.40008544921875" text="Date" />
+            <TableColumn fx:id="tableTime" prefWidth="112.800048828125" text="Time" />
+        </columns>
+      </TableView>
+      <Label layoutX="284.0" layoutY="27.0" prefHeight="39.0" prefWidth="370.0" text="PATIENT'S MEDICAL HISTORY" textFill="#4c8c8c">
+         <font>
+            <Font name="Impact" size="31.0" />
+         </font>
+      </Label>
+      <Label layoutX="305.0" layoutY="469.0" prefHeight="39.0" prefWidth="281.0" text="SERINITY MENTAL HEALTH THERAPY CENTRE" textAlignment="JUSTIFY" textFill="#4c8c8c">
+         <font>
+            <Font name="Impact" size="16.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="Image" fitHeight="39.0" fitWidth="54.0" layoutX="265.0" layoutY="465.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Pictures/Mental%20Hospital/apt.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
