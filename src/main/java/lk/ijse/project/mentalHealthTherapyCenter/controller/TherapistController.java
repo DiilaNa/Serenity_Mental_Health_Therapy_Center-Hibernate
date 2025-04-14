@@ -11,15 +11,22 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.DoctorDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.TherapistTM;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TherapistBO;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.view.JasperViewer;
+import org.hibernate.Session;
 
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class TherapistController  implements Initializable {
@@ -82,9 +89,32 @@ public class TherapistController  implements Initializable {
     @FXML
     private Button update;
 
-
+    @FXML
+    private Button viewActivities;
 
     TherapistBO therapistBO = BOFactory.getInstance().getBO(BOType.THERAPIST);
+
+    @FXML
+    void viewActivitiesBtnAction(ActionEvent event) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        try {
+            session = FactoryConfiguration.getInstance().getSession();
+            Connection connection = session.doReturningWork(con -> con);
+
+            JasperReport jasperReport = JasperCompileManager.compileReport(
+                    getClass().getResourceAsStream("/JasperReports/TherapistStatistics.jrxml"));
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, connection);
+            JasperViewer.viewReport(jasperPrint, false);
+
+        } catch (JRException e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
 
     @FXML
     void TableAction(MouseEvent event) {

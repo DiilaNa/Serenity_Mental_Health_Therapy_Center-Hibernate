@@ -1,0 +1,141 @@
+<!-- Created with Jaspersoft Studio version 7.0.0.final using JasperReports Library version 7.0.0-b478feaa9aab4375eba71de77b4ca138ad2f62aa  -->
+<jasperReport name="TherapistStatistics" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c84add36-197a-4a84-9be5-da1de57caf61">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (6)"/>
+	<parameter name="Parameter1" class="java.lang.String"/>
+	<query language="SQL"><![CDATA[select t.doctorID,
+       t.doctorName,
+        a.sessionId,
+        a.date
+from therapist t join appointments a on t.doctorID = a.doctor_id
+]]></query>
+	<field name="doctorID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="doctorID"/>
+		<property name="com.jaspersoft.studio.field.label" value="doctorID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="therapist"/>
+	</field>
+	<field name="doctorName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="doctorName"/>
+		<property name="com.jaspersoft.studio.field.label" value="doctorName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="therapist"/>
+	</field>
+	<field name="sessionId" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="sessionId"/>
+		<property name="com.jaspersoft.studio.field.label" value="sessionId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="appointments"/>
+	</field>
+	<field name="date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="date"/>
+		<property name="com.jaspersoft.studio.field.label" value="date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="appointments"/>
+	</field>
+	<variable name="doctorID1" resetType="Column" calculation="DistinctCount" class="java.lang.Integer">
+		<expression><![CDATA[$F{doctorID}]]></expression>
+	</variable>
+	<variable name="sessionId1" resetType="Column" calculation="DistinctCount" class="java.lang.Integer">
+		<expression><![CDATA[$F{sessionId}]]></expression>
+	</variable>
+	<variable name="date1" resetType="Page" calculation="DistinctCount" class="java.lang.Integer">
+		<expression><![CDATA[$F{date}]]></expression>
+	</variable>
+	<variable name="doctorID2" resetType="Column" calculation="Count" class="java.lang.Integer">
+		<expression><![CDATA[$F{doctorID}]]></expression>
+	</variable>
+	<group name="doctorID">
+		<expression><![CDATA[$F{doctorID}]]></expression>
+	</group>
+	<group name="doctorName">
+		<expression><![CDATA[$F{doctorName}]]></expression>
+	</group>
+	<group name="sessionId">
+		<expression><![CDATA[$F{sessionId}]]></expression>
+	</group>
+	<group name="date">
+		<expression><![CDATA[$F{date}]]></expression>
+	</group>
+	<background splitType="Stretch"/>
+	<title height="79" splitType="Stretch">
+		<element kind="staticText" uuid="8e963e53-64ed-4253-9977-9895477531b9" x="60" y="10" width="430" height="46" fontName="Arial Black" fontSize="18.0" bold="false" italic="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Serinity Mental Health Therapy Centre]]></text>
+		</element>
+	</title>
+	<pageHeader height="47" splitType="Stretch">
+		<element kind="staticText" uuid="405ddf14-d3f1-42ac-9ac1-e95f0a8b2f71" x="0" y="0" width="410" height="39" fontName="Bahnschrift" fontSize="15.0" bold="false" italic="false" hTextAlign="Left" vTextAlign="Middle">
+			<text><![CDATA[THERAPIST ACTIVITIES]]></text>
+		</element>
+	</pageHeader>
+	<columnHeader height="61" splitType="Stretch">
+		<element kind="staticText" uuid="a80b6842-d0bd-4a3d-afc6-f3cc8dc12954" x="0" y="30" width="111" height="31" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[DOCTOR ID]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a18d31fd-332a-4830-9e54-1e333ec2b579"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<box>
+				<pen lineWidth="1.0" lineStyle="Solid"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="443c7757-90b2-4c16-b936-c167113cafbb" x="111" y="30" width="111" height="31" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[NAME]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="51821098-a929-446d-add2-bd7998d9544a"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<box>
+				<pen lineWidth="1.0" lineStyle="Solid"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="a59bb32c-fd06-41ad-9fc1-49d8e059fa76" x="222" y="30" width="111" height="31" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[SESSION COUNT]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e0ae3e8b-a981-463e-a39e-6b1a597cc0a2"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<box>
+				<pen lineWidth="1.0" lineStyle="Solid"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="4a96c8c5-5b45-4b88-a41c-a243c50c6303" x="333" y="30" width="111" height="31" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[NUMBER OF DATES]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c4042882-f30b-43dc-ab2e-b417974748ff"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<box>
+				<pen lineWidth="1.0" lineStyle="Solid"/>
+			</box>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="263" splitType="Stretch">
+			<element kind="textField" uuid="65a92c9b-8dc0-4fda-bee2-4c038cadf19a" x="0" y="0" width="111" height="30" fontName="Consolas" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{doctorID}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a18d31fd-332a-4830-9e54-1e333ec2b579"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="748d76de-1ee6-4f06-bcde-c42a411f0c2e" x="111" y="0" width="111" height="30" fontName="Consolas" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{doctorName}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="51821098-a929-446d-add2-bd7998d9544a"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="4eb40b03-92c3-46cd-9f47-58db0b35f1a0" x="222" y="0" width="111" height="30" fontName="Consolas" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$V{sessionId1}]]></expression>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="7a5045c0-1b27-4035-9091-170e952087f1" x="333" y="0" width="111" height="30" fontName="Consolas" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$V{date1}]]></expression>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="59" splitType="Stretch">
+		<element kind="staticText" uuid="3610d342-c879-492e-8735-6622f846dbd4" x="-11" y="1" width="170" height="47" fontName="Bahnschrift" fontSize="15.0" bold="false" italic="false" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[NUMBER OF DOCTORS :]]></text>
+		</element>
+		<element kind="textField" uuid="f95d1d7f-a515-43b7-a4e7-098df5793da7" x="170" y="5" width="163" height="44" fontName="Consolas" fontSize="15.0" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[$V{doctorID2}]]></expression>
+		</element>
+	</columnFooter>
+	<pageFooter height="54" splitType="Stretch"/>
+	<summary height="42" splitType="Stretch"/>
+</jasperReport>

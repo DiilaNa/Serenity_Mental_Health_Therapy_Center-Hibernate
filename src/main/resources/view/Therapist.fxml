@@ -143,5 +143,20 @@
             <Font name="Georgia Bold" size="16.0" />
          </font>
       </Label>
+      <Button fx:id="viewActivities" layoutX="761.0" layoutY="553.0" mnemonicParsing="false" onAction="#viewActivitiesBtnAction" prefHeight="42.0" prefWidth="152.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="View Activities" textFill="WHITE">
+         <font>
+            <Font name="Impact" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow>
+               <input>
+                  <Glow />
+               </input>
+            </DropShadow>
+         </effect>
+      </Button>
    </children>
 </AnchorPane>
