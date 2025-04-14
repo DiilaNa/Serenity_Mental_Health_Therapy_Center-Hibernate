@@ -2,6 +2,7 @@ package lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.impl;
 
 
 import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.MedicalHistoryDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.ViewSessionDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.Therapist;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.QueryDAO;
@@ -62,6 +63,59 @@ public class QueryDAOImpl implements QueryDAO {
 
             // Return the sessions as a list
             return new ArrayList<>(sessionMap.values());
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public List<MedicalHistoryDTO> getALLMedicalHistory() {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        try {
+            // Native SQL query similar to your working example
+            String sql = "SELECT\n" +
+                    "    p.patientID,\n" +
+                    "    p.patientName,\n" +
+                    "    pd.therapyProgramID,\n" +
+                    "    tp.programName,\n" +
+                    "    t.doctorName,\n" +
+                    "    s.sessionId,\n" +
+                    "    s.date,\n" +
+                    "    s.time\n" +
+                    "FROM patient p\n" +
+                    "         JOIN program_details pd ON p.patientID = pd.patientID\n" +
+                    "         JOIN therapy_programs tp ON pd.therapyProgramID = tp.programID\n" +
+                    "         JOIN appointments s ON p.patientID = s.patient_Id\n" +
+                    "         JOIN therapist t ON s.doctor_id = t.doctorID;";
+
+            // Execute the query as a native SQL query and get the result as Object[]
+            Query<Object[]> query = session.createNativeQuery(sql);
+            List<Object[]> resultList = query.list();
+
+            // Convert the result list into MedicalHistoryDTO
+            List<MedicalHistoryDTO> medicalHistoryList = new ArrayList<>();
+
+            for (Object[] result : resultList) {
+                String patientId = (String) result[0];
+                String patientName = (String) result[1];
+                String therapyProgramID = (String) result[2];
+                String programName = (String) result[3];
+                String doctorName = (String) result[4];
+                String sessionId = (String) result[5];
+                String sessionDate = (String) result[6];
+                String sessionTime = (String) result[7];
+
+                // Create a new DTO object
+                MedicalHistoryDTO dto = new MedicalHistoryDTO(patientId, patientName, therapyProgramID,
+                        programName, doctorName, sessionId, sessionDate, sessionTime);
+
+                // Add the DTO to the list
+                medicalHistoryList.add(dto);
+            }
+
+            return medicalHistoryList;
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         } finally {

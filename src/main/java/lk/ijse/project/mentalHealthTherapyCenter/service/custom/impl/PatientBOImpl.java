@@ -1,11 +1,13 @@
 package lk.ijse.project.mentalHealthTherapyCenter.service.custom.impl;
 
 import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.MedicalHistoryDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.PatientDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.Patient;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOType;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.PatientDAO;
+import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.QueryDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.PatientBO;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -17,6 +19,7 @@ import java.util.Optional;
 
 public class PatientBOImpl implements PatientBO {
     PatientDAO patientDAO = DAOFactory.getInstance().getDAO(DAOType.PATIENT);
+    QueryDAO queryDAO = DAOFactory.getInstance().getDAO(DAOType.QUERY);
     @Override
     public boolean updatePatient(PatientDTO patientDTO) throws SQLException, ClassNotFoundException {
         Session session = FactoryConfiguration.getInstance().getSession();
@@ -115,5 +118,11 @@ public class PatientBOImpl implements PatientBO {
         } else {
             return "P001";
         }
+    }
+
+    @Override
+    public List<MedicalHistoryDTO> getPatientHistory() throws SQLException, ClassNotFoundException {
+        List<MedicalHistoryDTO> medicalHistorydto = queryDAO.getALLMedicalHistory();
+        return medicalHistorydto;
     }
 }
