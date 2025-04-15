@@ -8,21 +8,22 @@ import java.util.Date;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Getter
 @Setter
 @Table(name = "program_details")
 public class ProgramDetails implements SuperEntity {
-    @EmbeddedId
-    private ProgramDetailsID ID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long programDetailsID;
+
 
     @ManyToOne
-    @MapsId("patientID")
+  /*  @MapsId("patientID")*/
     @JoinColumn(name = "patientID")
     private  Patient patient;
 
     @ManyToOne
-    @MapsId("therapyProgramID")
+   /* @MapsId("therapyProgramID")*/
     @JoinColumn(name = "therapyProgramID")
     private TPrograms tPrograms;
 

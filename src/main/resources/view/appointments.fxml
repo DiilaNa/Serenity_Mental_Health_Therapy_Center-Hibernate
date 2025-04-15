@@ -335,5 +335,20 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Button fx:id="PatientsBTN" layoutX="1008.0" layoutY="403.0" mnemonicParsing="false" onAction="#PatientsBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 11; -fx-background-color: #4C8C8C;" text="Patients" textFill="WHITE">
+         <font>
+            <Font name="Georgia Bold" size="15.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <input>
+                  <Glow />
+               </input>
+            </DropShadow>
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

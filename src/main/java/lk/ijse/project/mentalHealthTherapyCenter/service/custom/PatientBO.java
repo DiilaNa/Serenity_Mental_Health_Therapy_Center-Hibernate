@@ -2,6 +2,7 @@ package lk.ijse.project.mentalHealthTherapyCenter.service.custom;
 
 import lk.ijse.project.mentalHealthTherapyCenter.dto.MedicalHistoryDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.PatientDTO;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.PatientsInEveryProgramDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.SuperBO;
 
 import java.sql.SQLException;
@@ -15,4 +16,5 @@ public interface PatientBO extends SuperBO {
     boolean deletePatient(String patientID) throws SQLException, ClassNotFoundException;
     String getNextPatientID();
     List<MedicalHistoryDTO> getPatientHistory() throws SQLException, ClassNotFoundException;
+    List<PatientsInEveryProgramDTO> getPatientsInEveryProgram();
 }

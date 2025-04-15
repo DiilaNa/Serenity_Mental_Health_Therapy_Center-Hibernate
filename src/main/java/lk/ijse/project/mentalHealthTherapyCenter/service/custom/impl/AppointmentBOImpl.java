@@ -67,12 +67,12 @@ public class AppointmentBOImpl implements AppointmentBO {
             }
 
             for (TPrograms selectedProgram : validPrograms) {
-                ProgramDetailsID compositeKey = new ProgramDetailsID(
+               /* ProgramDetailsID compositeKey = new ProgramDetailsID(
                         selectedProgram.getProgramID(),
                         patient.getPatientID()
-                );
+                );*/
                 ProgramDetails programDetails = new ProgramDetails();
-                programDetails.setID(compositeKey);
+               /* programDetails.setID(compositeKey);*/
                 programDetails.setPatient(patient);
                 programDetails.setTPrograms(selectedProgram);
 
@@ -83,7 +83,6 @@ public class AppointmentBOImpl implements AppointmentBO {
                }
             }
             session.flush();
-            session.clear();
 
             String tid  = sessionDTO.getTherapist_ID();
             Optional<Therapist> optional = therapistDAO.findByPK(tid,session);
@@ -139,7 +138,7 @@ public class AppointmentBOImpl implements AppointmentBO {
 
            Set<String> uniqueProgramIDs = new HashSet<>(programDetailsDTO.getProgramId());
 
-           if (uniqueProgramIDs.isEmpty() && uniqueProgramIDs==null){
+           if (uniqueProgramIDs.isEmpty()) {
                transaction.rollback();
                return false;
            }
@@ -163,23 +162,23 @@ public class AppointmentBOImpl implements AppointmentBO {
            }
 
            for (TPrograms selectedProgram : validPrograms) {
-               ProgramDetailsID compositeKey = new ProgramDetailsID(
-                       selectedProgram.getProgramID(),
-                       patient.getPatientID()
-               );
+              /* ProgramDetailsID compositeKey = new ProgramDetailsID(
+                       patient.getPatientID(),
+                       selectedProgram.getProgramID()
+               );*/
 
-               ProgramDetails programDetails = session.get(ProgramDetails.class, compositeKey);
-               if (programDetails == null) {
+             /*  ProgramDetails programDetails = session.get(ProgramDetails.class, compositeKey);*/
+              /* if (programDetails == null) {*/
                    // Insert if not exists
-                   programDetails = new ProgramDetails();
-                   programDetails.setID(compositeKey);
+                  ProgramDetails programDetails = new ProgramDetails();
+                 /*  programDetails.setID(compositeKey);*/
                    programDetails.setPatient(patient);
                    programDetails.setTPrograms(selectedProgram);
-               } else {
+             /*  } *//*else {
                    // Optional: update fields if you have any
                    programDetails.setTPrograms(selectedProgram); // might not be necessary if not changed
                }
-
+*/
                boolean isSaved = programDetailsDAO.update(programDetails, session);
                if (!isSaved) {
                    transaction.rollback();

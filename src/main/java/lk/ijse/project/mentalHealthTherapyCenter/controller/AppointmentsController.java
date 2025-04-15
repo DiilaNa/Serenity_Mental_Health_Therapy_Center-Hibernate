@@ -156,6 +156,9 @@ public class AppointmentsController implements Initializable {
     @FXML
     private VBox vbox2;
 
+    @FXML
+    private Button PatientsBTN;
+
     private Set<String> programIDs = new HashSet<>();
 
     public void setDetails(String programID, String programName) {
@@ -364,6 +367,9 @@ public class AppointmentsController implements Initializable {
 
     @FXML
     void addProgramsAction(MouseEvent event) throws IOException {loadNewPage("/view/SelectPrograms.fxml");}
+
+    @FXML
+    void PatientsBTNAction(ActionEvent event) throws IOException {loadNewPage("/view/PatientsEnrolledInEveryPrograms.fxml");}
 
     private void loadNewPage(String fxmlPath) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));

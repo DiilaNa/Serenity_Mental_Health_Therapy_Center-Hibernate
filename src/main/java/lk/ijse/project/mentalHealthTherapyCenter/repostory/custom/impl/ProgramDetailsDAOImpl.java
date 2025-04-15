@@ -16,7 +16,8 @@ public class ProgramDetailsDAOImpl implements ProgramDetailsDAO {
             session.flush();
             return true;
         }catch(Exception e){
-          throw new RuntimeException();
+            e.printStackTrace();
+          throw new RuntimeException(e.getMessage());
         }
     }
 

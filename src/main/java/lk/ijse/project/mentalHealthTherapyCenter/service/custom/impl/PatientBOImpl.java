@@ -3,6 +3,7 @@ package lk.ijse.project.mentalHealthTherapyCenter.service.custom.impl;
 import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.MedicalHistoryDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.PatientDTO;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.PatientsInEveryProgramDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.Patient;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOType;
@@ -122,7 +123,11 @@ public class PatientBOImpl implements PatientBO {
 
     @Override
     public List<MedicalHistoryDTO> getPatientHistory(){
-        List<MedicalHistoryDTO> medicalHistorydto = queryDAO.getALLMedicalHistory();
-        return medicalHistorydto;
+        return queryDAO.getALLMedicalHistory();
+    }
+
+    @Override
+    public List<PatientsInEveryProgramDTO> getPatientsInEveryProgram() {
+        return queryDAO.getPatientsInEveryProgram();
     }
 }
