@@ -345,6 +345,7 @@ public class AppointmentsController implements Initializable {
             patientName.setText(patientDTO.getPatientName());
             patientDOB.setText(patientDTO.getPatientBirthDate());
             patientNIC.setText(patientDTO.getPatientNIC());
+            patientTelNO.setText(patientDTO.getPatientPhone());
             patientGender.setText(patientDTO.getPatientGender());
             patientAddress.setText(patientDTO.getPatientAddress());
             patientEMAIL.setText(patientDTO.getPatientEmail());

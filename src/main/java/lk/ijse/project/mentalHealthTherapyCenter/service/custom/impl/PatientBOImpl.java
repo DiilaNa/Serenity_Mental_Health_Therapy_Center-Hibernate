@@ -121,7 +121,7 @@ public class PatientBOImpl implements PatientBO {
     }
 
     @Override
-    public List<MedicalHistoryDTO> getPatientHistory() throws SQLException, ClassNotFoundException {
+    public List<MedicalHistoryDTO> getPatientHistory(){
         List<MedicalHistoryDTO> medicalHistorydto = queryDAO.getALLMedicalHistory();
         return medicalHistorydto;
     }

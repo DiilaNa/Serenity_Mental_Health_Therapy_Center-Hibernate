@@ -74,8 +74,7 @@ public class QueryDAOImpl implements QueryDAO {
     public List<MedicalHistoryDTO> getALLMedicalHistory() {
         Session session = FactoryConfiguration.getInstance().getSession();
         try {
-            // Native SQL query similar to your working example
-            String sql = "SELECT\n" +
+            String sql = "SELECT DISTINCT \n" +
                     "    p.patientID,\n" +
                     "    p.patientName,\n" +
                     "    pd.therapyProgramID,\n" +
@@ -106,6 +105,10 @@ public class QueryDAOImpl implements QueryDAO {
                 String sessionId = (String) result[5];
                 String sessionDate = (String) result[6];
                 String sessionTime = (String) result[7];
+
+                if (medicalHistoryList.contains(sessionId)) {
+                    continue; // skip duplicates
+                }
 
                 // Create a new DTO object
                 MedicalHistoryDTO dto = new MedicalHistoryDTO(patientId, patientName, therapyProgramID,
