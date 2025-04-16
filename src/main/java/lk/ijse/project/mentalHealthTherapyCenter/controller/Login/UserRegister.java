@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import lk.ijse.project.mentalHealthTherapyCenter.controller.Login.UtilClasses.PasswordUtil;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.UserDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
@@ -132,7 +133,6 @@ public class UserRegister implements Initializable {
         }
         /*Encrypt Password*/
         String hashPassword = PasswordUtil.hashPassword(passwordText);
-        System.out.println("Password after Hashing :"+hashPassword);
 
 
         if (isValidMailPattern && isValidPasswordPattern) {

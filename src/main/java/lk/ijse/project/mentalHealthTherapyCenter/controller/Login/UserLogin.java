@@ -13,8 +13,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.stage.Stage;
+import lk.ijse.project.mentalHealthTherapyCenter.controller.Login.UtilClasses.PasswordUtil;
+import lk.ijse.project.mentalHealthTherapyCenter.controller.Login.UtilClasses.SessionHolder;
 import lk.ijse.project.mentalHealthTherapyCenter.controller.MainController;
-import lk.ijse.project.mentalHealthTherapyCenter.entity.User;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.UserBO;
@@ -67,6 +68,7 @@ public class UserLogin implements Initializable {
     @FXML
     void clickhereAction(MouseEvent event) throws IOException {
         loadPage("/view/userRegister.fxml");
+        SessionHolder.currentRole = role;
     }
 
     @FXML
@@ -78,8 +80,10 @@ public class UserLogin implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Please enter your username and password", ButtonType.OK).show();
             return;
         }
+
+        String role1 = SessionHolder.currentRole;
         boolean userFromDB = userBO.findUser(username);
-        String passFromDB = userBO.findPassWord(username,role);
+        String passFromDB = userBO.findPassWord(username,role1);
 
         if (userFromDB && PasswordUtil.matches(password, passFromDB)) {
             new Alert(Alert.AlertType.INFORMATION, "Login Success", ButtonType.OK).show();
@@ -104,16 +108,18 @@ public class UserLogin implements Initializable {
 
     @FXML
     void forgetPassAction(MouseEvent event) throws IOException {
-        loadNewPage("/view/forgetPassword.fxml");
+        loadNewPage("/view/forgetPassword.fxml","user");
+        SessionHolder.currentRole = role;
     }
     private void refreshPage(){
         passwordPWField.setVisible(true);
         passwordTextField.setVisible(false);
     }
-    private  void  loadNewPage(String fxmlPath) throws IOException {
+    private  void  loadNewPage(String fxmlPath,String role) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Scene scene = new Scene(loader.load());
-
+        ForgetPassword fg = loader.getController();
+        fg.setRole(role);
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setResizable(false);

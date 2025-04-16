@@ -1,4 +1,4 @@
-package lk.ijse.project.mentalHealthTherapyCenter.controller.Login;
+package lk.ijse.project.mentalHealthTherapyCenter.controller.Login.UtilClasses;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

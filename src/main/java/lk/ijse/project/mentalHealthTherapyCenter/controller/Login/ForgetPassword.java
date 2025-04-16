@@ -7,9 +7,12 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.project.mentalHealthTherapyCenter.controller.Login.UtilClasses.PasswordUtil;
+import lk.ijse.project.mentalHealthTherapyCenter.controller.Login.UtilClasses.SessionHolder;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.UserBO;
+import lombok.Setter;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,12 +22,13 @@ public class ForgetPassword implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Image passwordIcon = new Image(getClass().getResourceAsStream("/images/password.png"));
         image.setImage(passwordIcon);
-
         Image backImage = new Image(getClass().getResourceAsStream("/images/back-arrow.png"));
         back.setImage(backImage);
 
         passwordFieldOne.setVisible(true);
         passwordFieldTwo.setVisible(true);
+
+        SessionHolder.currentRole = role;
     }
 
     @FXML
@@ -56,6 +60,9 @@ public class ForgetPassword implements Initializable {
 
     @FXML
     private TextField userName;
+
+    @Setter
+    private String role;
 
     UserBO userBO = BOFactory.getInstance().getBO(BOType.USER);
 
@@ -99,8 +106,14 @@ public class ForgetPassword implements Initializable {
             return;
         }
 
+        /*Hashed New Password*/
+        String pass = null;
+        if (passwordFieldOne.getText().equals(confirmPassword.getText())) {
+             pass = PasswordUtil.hashPassword(PassWord);
+        }
+
         if (isValidMailPattern && isValidPasswordPattern) {
-            boolean isSaved = userBO.updateUser(UserName, email, PassWord);
+            boolean isSaved = userBO.updateUser(UserName, email, pass);
             if (isSaved) {
                 new Alert(Alert.AlertType.INFORMATION, " Password changed SuccessFully", ButtonType.OK).show();
             }else {

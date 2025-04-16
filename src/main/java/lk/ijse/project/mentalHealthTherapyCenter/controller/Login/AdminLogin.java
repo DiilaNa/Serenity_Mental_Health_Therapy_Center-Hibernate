@@ -10,8 +10,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import lk.ijse.project.mentalHealthTherapyCenter.controller.Login.UtilClasses.PasswordUtil;
+import lk.ijse.project.mentalHealthTherapyCenter.controller.Login.UtilClasses.SessionHolder;
 import lk.ijse.project.mentalHealthTherapyCenter.controller.MainController;
-import lk.ijse.project.mentalHealthTherapyCenter.entity.User;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.UserBO;
@@ -54,7 +55,8 @@ public class AdminLogin implements Initializable {
 
     @FXML
     void forgetPassAction(MouseEvent event) throws IOException {
-        loadNewPage("/view/forgetPassword.fxml");
+        loadNewPage("/view/forgetPassword.fxml" , "admin");
+        SessionHolder.currentRole = role;
     }
 
 
@@ -89,11 +91,11 @@ public class AdminLogin implements Initializable {
             return;
         }
 
+        String role1 = SessionHolder.currentRole;
+
         // Retrieve user from DB
         boolean userFromDB = userBO.findUser(username);
-        String passFromDB = userBO.findPassWord(username,role);
-
-        System.out.println(passFromDB);
+        String passFromDB = userBO.findPassWord(username,role1);
 
         if (userFromDB && PasswordUtil.matches(password,passFromDB)){
             new Alert(Alert.AlertType.INFORMATION, "Login Success", ButtonType.OK).show();
@@ -105,6 +107,7 @@ public class AdminLogin implements Initializable {
     @FXML
     void clickHereAction(MouseEvent event) throws IOException {
         loadPage("/view/userRegister.fxml");
+        SessionHolder.currentRole = role;
     }
 
     private void loadPage(String fxmlPath) throws IOException {
@@ -131,10 +134,14 @@ public class AdminLogin implements Initializable {
             stage.show();
     }
 
-    private  void  loadNewPage(String fxmlPath) throws IOException {
+    private  void  loadNewPage(String fxmlPath ,String role) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
+
+        ForgetPassword fg = loader.getController();
+        fg.setRole(role);
+        SessionHolder.currentRole = role;
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Change Password - Serenity Mental Health Therapy Center");

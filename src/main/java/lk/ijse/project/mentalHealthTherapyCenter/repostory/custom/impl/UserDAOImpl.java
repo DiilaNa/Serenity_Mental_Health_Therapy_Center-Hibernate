@@ -78,9 +78,36 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public boolean updateUser(String UserName, String UserEmail, String UserNewPassword) {
-        return false;
+    public boolean updateUser(String userName, String userEmail, String userNewPassword) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            Query<User> query = session.createQuery("FROM User WHERE userName = :username AND userEmail = :email", User.class);
+            query.setParameter("username", userName);
+            query.setParameter("email", userEmail);
+
+            User user = query.uniqueResult();
+
+            if (user != null) {
+                user.setUserPassword(userNewPassword); // You may want to hash this with BCrypt
+                session.update(user);
+                transaction.commit();
+                return true;
+            } else {
+                transaction.rollback();
+                return false; // No user found with matching username and email
+            }
+
+        } catch (Exception e) {
+            transaction.rollback();
+            e.printStackTrace();
+            return false;
+        } finally {
+            session.close();
+        }
     }
+
 
     @Override
     public boolean findUser(String UserName, Session session) {
@@ -89,7 +116,6 @@ public class UserDAOImpl implements UserDAO {
 
         User user = query.uniqueResult();
         if (user != null) {
-            System.out.println("User found");
             return true;
         }
         return false;
@@ -102,8 +128,6 @@ public class UserDAOImpl implements UserDAO {
         query.setParameter("role", role);
 
         User user = query.uniqueResult();
-        System.out.println("User from DB: " + user);
-
         return user; // User object will contain the hashed password
     }
 }
