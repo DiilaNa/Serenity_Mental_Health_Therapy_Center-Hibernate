@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import lk.ijse.project.mentalHealthTherapyCenter.controller.MainController;
+import lk.ijse.project.mentalHealthTherapyCenter.entity.User;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.UserBO;
@@ -77,21 +78,23 @@ public class AdminLogin implements Initializable {
     @FXML
     void adminLoginAction(ActionEvent event) throws IOException {
         String username = adminUserName.getText();
-        String password = adminPasswordPwField.getText();
-        String passText = adminPasswordTextField.getText();
-        if (username.isEmpty() ||password.isEmpty()) {
+        String password = adminPasswordPwField.getText(); // Get the password from password field
+
+        if (username.isEmpty() || password.isEmpty()) {
             new Alert(Alert.AlertType.ERROR, "Please enter your username and password", ButtonType.OK).show();
             return;
         }
 
+        // Retrieve user from DB
+        boolean userFromDB = userBO.findUser(username);
+        String passFromDB = userBO.findPassWord(username);
 
+        System.out.println(passFromDB);
 
-        boolean isExist =  userBO.findUser(username,password);
-
-        if (isExist) {
+        if (userFromDB && PasswordUtil.matches(password,passFromDB)){
             new Alert(Alert.AlertType.INFORMATION, "Login Success", ButtonType.OK).show();
-            navigateToMainPage("/view/MainLayout.fxml","admin",username);
-        }else {
+            navigateToMainPage("/view/MainLayout.fxml", "admin", username);
+        } else {
             new Alert(Alert.AlertType.ERROR, "Login Failed..", ButtonType.OK).show();
         }
     }

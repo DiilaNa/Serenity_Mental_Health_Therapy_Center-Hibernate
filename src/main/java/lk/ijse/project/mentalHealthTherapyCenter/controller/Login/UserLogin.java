@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 
 import javafx.stage.Stage;
 import lk.ijse.project.mentalHealthTherapyCenter.controller.MainController;
+import lk.ijse.project.mentalHealthTherapyCenter.entity.User;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.UserBO;
@@ -68,18 +69,18 @@ public class UserLogin implements Initializable {
     void loginAction(ActionEvent event) throws IOException {
         String username = userName.getText();
         String password = passwordPWField.getText();
-        String passText = passwordTextField.getText();
 
-        if (username.isEmpty() || password.isEmpty()){
+        if (username.isEmpty() || password.isEmpty()) {
             new Alert(Alert.AlertType.ERROR, "Please enter your username and password", ButtonType.OK).show();
             return;
         }
+        boolean userFromDB = userBO.findUser(username);
+        String passFromDB = userBO.findPassWord(username);
 
-        boolean isExist =  userBO.findUser(username,password);
-        if (isExist) {
+        if (userFromDB && PasswordUtil.matches(password, passFromDB)) {
             new Alert(Alert.AlertType.INFORMATION, "Login Success", ButtonType.OK).show();
-            navigateToMainPage("/view/MainLayout.fxml","user",username);
-        }else {
+            navigateToMainPage("/view/MainLayout.fxml", "user", username);
+        } else {
             new Alert(Alert.AlertType.ERROR, "Login Failed..", ButtonType.OK).show();
         }
     }

@@ -1,6 +1,5 @@
 package lk.ijse.project.mentalHealthTherapyCenter.service.custom.impl;
 
-import javafx.scene.control.Alert;
 import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.UserDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.User;
@@ -10,6 +9,7 @@ import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.UserDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.UserBO;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.util.Optional;
 
@@ -54,28 +54,50 @@ public class UserBOImpl implements UserBO {
             throw new RuntimeException("Error updating user");
         }
     }
-
     @Override
-    public boolean findUser(String UserName, String Password) {
+    public boolean findUser(String username) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        try{
-            boolean i  = userDAO.findUser(UserName,session);
-            if(i){
-                transaction.commit();
-                return true;
-            }else {
-                new Alert(Alert.AlertType.ERROR, "Invalid Credentials").show();
+        try {
+            boolean exists = userDAO.findUser(username,session);
+            if (!exists) {
                 transaction.rollback();
                 return false;
             }
-        }catch (Exception e){
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("Error saving user");
-        }finally {
+            throw new RuntimeException("Error finding user");
+        } finally {
             session.close();
         }
     }
+
+    @Override
+    public String findPassWord(String username) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            // Call the DAO method
+            User user = userDAO.findPassWord(username, session);
+
+            if (user != null) {
+                transaction.commit();
+                return user.getUserPassword();  // Assuming there's a getter for password
+            } else {
+                transaction.rollback();
+                return null;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error finding password");
+        } finally {
+            session.close();
+        }
+    }
+
 
     @Override
     public String getNextID() {

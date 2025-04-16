@@ -84,12 +84,25 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean findUser(String UserName, Session session) {
-        User user = (User) session.createQuery("FROM User WHERE userName = :uname")
-                .setParameter("uname", UserName)
-                .uniqueResult();
-       if (user != null) {
-           return true;
-       }
-       return false;
+        Query<User> query = session.createQuery("FROM User WHERE userName = :username", User.class);
+        query.setParameter("username", UserName);
+
+        User user = query.uniqueResult();
+        if (user != null) {
+            System.out.println("User found");
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public User findPassWord(String UserName, Session session) {
+        Query<User> query = session.createQuery("FROM User WHERE userName = :username", User.class);
+        query.setParameter("username", UserName);
+
+        User user = query.uniqueResult();
+        System.out.println("User from DB: " + user);
+
+        return user; // User object will contain the hashed password
     }
 }

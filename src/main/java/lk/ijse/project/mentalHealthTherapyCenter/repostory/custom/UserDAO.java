@@ -9,4 +9,5 @@ import org.hibernate.Session;
 public interface UserDAO extends CrudDAO<User,String> {
     boolean updateUser(String UserName, String UserEmail, String UserNewPassword);
     boolean findUser(String UserName, Session session);
+    User findPassWord(String password, Session session);
 }
