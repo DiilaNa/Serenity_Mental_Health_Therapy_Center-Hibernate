@@ -3,10 +3,7 @@ package lk.ijse.project.mentalHealthTherapyCenter.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
@@ -38,7 +35,7 @@ public class MyProfile implements Initializable {
     private Label email;
 
     @FXML
-    private Label fulllNane;
+    private Label fullName;
 
     @FXML
     private Label role;
@@ -53,6 +50,57 @@ public class MyProfile implements Initializable {
     private Circle picCircle;
 
     private String UserName;
+
+    @FXML
+    private PasswordField passwordConfirmPWField1;
+
+    @FXML
+    private PasswordField passwordConfirmPWField2;
+
+    @FXML
+    private CheckBox showPasswordCheckBox;
+
+    @FXML
+    private TextField txtPassWord1;
+
+    @FXML
+    private TextField txtPassWord2;
+
+    @FXML
+    private TextField txtUserFUllName;
+
+    @FXML
+    private TextField txtUserMail;
+
+    @FXML
+    private TextField txtUserName;
+
+    @FXML
+    private ComboBox<?> txtUserRole;
+
+    @FXML
+    private Button updatePassword;
+
+    @FXML
+    private Button updateProfile;
+
+    @FXML
+    private Label userName;
+
+    @FXML
+    void showPasswordCheckBox(ActionEvent event) {
+
+    }
+
+    @FXML
+    void updateDetailsAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void updatePassWordAction(ActionEvent event) {
+
+    }
 
     UserBO userBO = BOFactory.getInstance().getBO(BOType.USER);
 
@@ -72,7 +120,7 @@ public class MyProfile implements Initializable {
         System.out.println(searchUserName);
         List<UserDTO> users = userBO.getUserDetails(searchUserName);
         for (UserDTO userDTO : users) {
-            fulllNane.setText(userDTO.getUserFullName());
+            fullName.setText(userDTO.getUserFullName());
             email.setText(userDTO.getUserEmail());
             role.setText(userDTO.getUserRole());
         }
