@@ -1,5 +1,7 @@
 package lk.ijse.project.mentalHealthTherapyCenter.controller;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,10 +15,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import lombok.Setter;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -24,8 +30,13 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Image image1 = new Image(getClass().getResourceAsStream("/images/HospitalIconMain.png"));
         image.setImage(image1);
-        navigateTo("/view/appointments.fxml");
-        dashBoardFrom.setText("Appointment Details Form");
+        updateDateTime();
+        try {
+            navigateTo("/view/appointments.fxml");
+            dashBoardFrom.setText("Appointment Details Form");
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -77,6 +88,8 @@ public class MainController implements Initializable {
 
     @Setter
     private String userName;
+
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy-");
 
     public void setUserRole(String role) {
         this.role = role;
@@ -168,6 +181,16 @@ public class MainController implements Initializable {
         stage.setResizable(false);
         stage.setTitle("The Serenity Mental Health Therapy Center");
         stage.show();
+    }
+    private void updateDateTime() {
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(1), event -> {
+                    String currentDate = LocalDate.now().format(formatter);
+                    dateDashBoard.setText(currentDate);
+                })
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
     }
 
 }
