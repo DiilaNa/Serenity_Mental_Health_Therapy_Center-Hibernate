@@ -133,9 +133,9 @@ public class UserRegister implements Initializable {
             return;
         }
         /*Encrypt Password*/
-/*        String hashPassword = BCrypt.hashpw(passwordText, BCrypt.gensalt(12));
-        BCrypt.checkpw(passwordText, hashPassword);
-        BCrypt.matches*/
+        String hashPassword = PasswordUtil.hashPassword(passwordText);
+        System.out.println("Password after Hashing :"+hashPassword);
+
 
         if (isValidMailPattern && isValidPasswordPattern) {
             UserDTO userDTO = new UserDTO(
@@ -144,7 +144,7 @@ public class UserRegister implements Initializable {
                     email,
                     role,
                     userNAME,
-                    passwordText
+                    hashPassword
             );
 
             boolean isSaved = userBO.saveUser(userDTO);
