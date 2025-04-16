@@ -69,9 +69,7 @@ public class UserRegister implements Initializable {
     UserBO userBO = BOFactory.getInstance().getBO(BOType.USER);
 
     @FXML
-    void clickhereAction(MouseEvent event) throws IOException {
-        loadPage("/view/login.fxml");
-    }
+    void clickhereAction(MouseEvent event) throws IOException {loadPage("/view/login.fxml");}
 
     @FXML
     void showPasswordcheckBox(ActionEvent event) {

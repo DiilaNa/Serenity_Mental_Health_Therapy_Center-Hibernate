@@ -15,6 +15,7 @@ import lk.ijse.project.mentalHealthTherapyCenter.entity.User;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.UserBO;
+import lombok.Setter;
 
 import java.io.IOException;
 import java.net.URL;
@@ -45,6 +46,9 @@ public class AdminLogin implements Initializable {
 
     @FXML
     private Hyperlink forgetPass;
+
+    @Setter
+    private String role;
 
     UserBO userBO = BOFactory.getInstance().getBO(BOType.USER);
 
@@ -87,7 +91,7 @@ public class AdminLogin implements Initializable {
 
         // Retrieve user from DB
         boolean userFromDB = userBO.findUser(username);
-        String passFromDB = userBO.findPassWord(username);
+        String passFromDB = userBO.findPassWord(username,role);
 
         System.out.println(passFromDB);
 
@@ -115,11 +119,9 @@ public class AdminLogin implements Initializable {
     private void navigateToMainPage(String fxmlPath,String role, String userName) throws IOException {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Scene scene = new Scene(loader.load());
-
             MainController controller = loader.getController();
             controller.setUserRole(role);
             controller.setUserName(userName);
-
             Stage currentStage = (Stage) adminClickHere.getScene().getWindow();
             Stage stage = new Stage();
             stage.setScene(scene);

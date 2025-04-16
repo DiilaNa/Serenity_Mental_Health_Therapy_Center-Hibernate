@@ -3,6 +3,7 @@ package lk.ijse.project.mentalHealthTherapyCenter.controller.Login;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -34,17 +35,26 @@ public class Login implements Initializable {
 
     @FXML
     void adminAction(MouseEvent event) throws IOException {
-        loadPage("/view/adminLogin.fxml");
+        loadPage("/view/adminLogin.fxml","admin");
     }
 
     @FXML
     void userAction(MouseEvent event) throws IOException {
-        loadPage("/view/userLogin.fxml");
+        loadPage("/view/userLogin.fxml","user");
     }
 
-    private void loadPage(String fxmlPath) throws IOException {
-        Stage stage = (Stage) admin.getScene().getWindow(); // Get current stage
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
+    private void loadPage(String fxmlPath,String role) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        Parent root = loader.load();
+        if (role.equals("admin")) {
+            AdminLogin controller = loader.getController();
+            controller.setRole(role);
+        } else if (role.equals("user")) {
+            UserLogin controller = loader.getController();
+            controller.setRole(role);
+        }
+        Stage stage = (Stage) admin.getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("The Serenity Mental Health Therapy Center");
         stage.show();

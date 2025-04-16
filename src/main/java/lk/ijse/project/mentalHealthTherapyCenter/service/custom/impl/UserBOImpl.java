@@ -75,12 +75,12 @@ public class UserBOImpl implements UserBO {
     }
 
     @Override
-    public String findPassWord(String username) {
+    public String findPassWord(String username,String role) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         try {
             // Call the DAO method
-            User user = userDAO.findPassWord(username, session);
+            User user = userDAO.findPassWord(username,role, session);
 
             if (user != null) {
                 transaction.commit();

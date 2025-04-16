@@ -13,8 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.MedicalHistoryDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.MedicalHistoryTM;
-import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOFactory;
-import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.PatientBO;

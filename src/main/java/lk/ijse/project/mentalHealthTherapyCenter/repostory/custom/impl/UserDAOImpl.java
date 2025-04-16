@@ -96,9 +96,10 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User findPassWord(String UserName, Session session) {
-        Query<User> query = session.createQuery("FROM User WHERE userName = :username", User.class);
+    public User findPassWord(String UserName,String role, Session session) {
+        Query<User> query = session.createQuery("FROM User WHERE userName = :username AND userRole = :role", User.class);
         query.setParameter("username", UserName);
+        query.setParameter("role", role);
 
         User user = query.uniqueResult();
         System.out.println("User from DB: " + user);

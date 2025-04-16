@@ -8,5 +8,5 @@ public interface UserBO extends SuperBO {
     boolean updateUser(String UserName,String UserEmail, String UserNewPassword);
     boolean findUser(String UserName);
     String getNextID();
-    String findPassWord(String username);
+    String findPassWord(String username, String role);
 }

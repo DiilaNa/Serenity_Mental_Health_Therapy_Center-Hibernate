@@ -18,6 +18,7 @@ import lk.ijse.project.mentalHealthTherapyCenter.entity.User;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.UserBO;
+import lombok.Setter;
 
 
 import java.io.IOException;
@@ -59,6 +60,9 @@ public class UserLogin implements Initializable {
     @FXML
     private Hyperlink forgetPass;
 
+    @Setter
+    private String role;
+
     UserBO userBO = BOFactory.getInstance().getBO(BOType.USER);
     @FXML
     void clickhereAction(MouseEvent event) throws IOException {
@@ -75,7 +79,7 @@ public class UserLogin implements Initializable {
             return;
         }
         boolean userFromDB = userBO.findUser(username);
-        String passFromDB = userBO.findPassWord(username);
+        String passFromDB = userBO.findPassWord(username,role);
 
         if (userFromDB && PasswordUtil.matches(password, passFromDB)) {
             new Alert(Alert.AlertType.INFORMATION, "Login Success", ButtonType.OK).show();
