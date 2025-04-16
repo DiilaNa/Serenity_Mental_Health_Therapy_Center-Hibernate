@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.ijse.project.mentalHealthTherapyCenter.controller.Login.UtilClasses.SessionHolder;
 import lombok.Setter;
 
 import java.io.IOException;
@@ -30,14 +31,15 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Image image1 = new Image(getClass().getResourceAsStream("/images/HospitalIconMain.png"));
         image.setImage(image1);
-        updateDateTime();
+
         try {
-            navigateTo("/view/appointments.fxml");
-            dashBoardFrom.setText("Appointment Details Form");
+           refreshPage();
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }
     }
+    @FXML
+    private Label dashboardTime;
 
     @FXML
     private VBox adminVbox;
@@ -89,11 +91,20 @@ public class MainController implements Initializable {
     @Setter
     private String userName;
 
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy-");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy");
+    private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss  a");
 
     public void setUserRole(String role) {
         this.role = role;
         configureUI();
+    }
+
+    private void refreshPage(){
+        updateDateTime();
+        String s = SessionHolder.userName;
+        dashboardTime.setText(s);
+        navigateTo("/view/appointments.fxml");
+        dashBoardFrom.setText("Appointment Details Form");
     }
 
     private void configureUI() {
@@ -119,7 +130,7 @@ public class MainController implements Initializable {
     @FXML
     void patientsAction(MouseEvent event) {
         navigateTo("/view/patient.fxml");
-        dashBoardFrom.setText("PatientDAOImpl Details Form");
+        dashBoardFrom.setText("Patients Details Form");
 
     }
 
@@ -187,6 +198,8 @@ public class MainController implements Initializable {
                 new KeyFrame(Duration.seconds(1), event -> {
                     String currentDate = LocalDate.now().format(formatter);
                     dateDashBoard.setText(currentDate);
+                    String currentTime = LocalTime.now().format(timeFormatter);
+                    dashboardTime.setText(currentTime);
                 })
         );
         timeline.setCycleCount(Timeline.INDEFINITE);

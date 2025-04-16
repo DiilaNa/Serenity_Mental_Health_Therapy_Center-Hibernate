@@ -32,6 +32,7 @@ public class UserLogin implements Initializable {
         Image adminIMage = new Image(getClass().getResourceAsStream("/images/user.png"));
         image.setImage(adminIMage);
         refreshPage();
+        SessionHolder.currentRole = role;
     }
 
     @FXML
@@ -120,6 +121,7 @@ public class UserLogin implements Initializable {
         Scene scene = new Scene(loader.load());
         ForgetPassword fg = loader.getController();
         fg.setRole(role);
+        SessionHolder.currentRole = role;
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setResizable(false);

@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import lk.ijse.project.mentalHealthTherapyCenter.controller.Login.UtilClasses.SessionHolder;
 
 import java.io.IOException;
 import java.net.URL;
@@ -49,9 +50,11 @@ public class Login implements Initializable {
         if (role.equals("admin")) {
             AdminLogin controller = loader.getController();
             controller.setRole(role);
+            SessionHolder.currentRole = role;
         } else if (role.equals("user")) {
             UserLogin controller = loader.getController();
             controller.setRole(role);
+            SessionHolder.currentRole = role;
         }
         Stage stage = (Stage) admin.getScene().getWindow();
         Scene scene = new Scene(root);

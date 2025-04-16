@@ -66,6 +66,7 @@ public class AdminLogin implements Initializable {
         Image adminIMage = new Image(getClass().getResourceAsStream("/images/user.png"));
         image.setImage(adminIMage);
         refreshPage();
+        SessionHolder.currentRole = role;
     }
 
     @FXML
@@ -84,6 +85,7 @@ public class AdminLogin implements Initializable {
     @FXML
     void adminLoginAction(ActionEvent event) throws IOException {
         String username = adminUserName.getText();
+        SessionHolder.userName = username;
         String password = adminPasswordPwField.getText(); // Get the password from password field
 
         if (username.isEmpty() || password.isEmpty()) {
@@ -142,6 +144,7 @@ public class AdminLogin implements Initializable {
         ForgetPassword fg = loader.getController();
         fg.setRole(role);
         SessionHolder.currentRole = role;
+
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Change Password - Serenity Mental Health Therapy Center");

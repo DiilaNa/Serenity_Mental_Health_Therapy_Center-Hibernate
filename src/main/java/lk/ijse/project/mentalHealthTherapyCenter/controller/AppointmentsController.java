@@ -175,7 +175,7 @@ public class AppointmentsController implements Initializable {
     }
 
     private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy-");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     AppointmentBO appointmentBO = BOFactory.getInstance().getBO(BOType.APPOINTMENT);
 
