@@ -30,7 +30,7 @@
             <Font name="Georgia Bold" size="30.0" />
          </font>
       </Label>
-      <Pane layoutX="331.0" layoutY="173.0" prefHeight="486.0" prefWidth="525.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;">
+      <Pane layoutX="100.0" layoutY="189.0" prefHeight="477.0" prefWidth="473.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;">
          <children>
             <Circle fx:id="picCircle" fill="#e5f2ff" layoutX="215.0" layoutY="124.0" radius="90.0" stroke="BLACK" strokeType="INSIDE" />
             <VBox layoutX="55.0" layoutY="251.0" prefHeight="200.0" prefWidth="402.0">

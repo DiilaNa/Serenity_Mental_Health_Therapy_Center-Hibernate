@@ -15,7 +15,6 @@ import java.util.Optional;
 
 public class UserDAOImpl implements UserDAO {
 
-
     @Override
     public boolean update(User user,Session session) throws SQLException, ClassNotFoundException {
         return false;
@@ -127,7 +126,13 @@ public class UserDAOImpl implements UserDAO {
         query.setParameter("username", UserName);
         query.setParameter("role", role);
 
-        User user = query.uniqueResult();
-        return user; // User object will contain the hashed password
+        return query.uniqueResult(); // User object will contain the hashed password
+    }
+
+    @Override
+    public List<User> getALLByUserName(String UserName,Session session) {
+        return session.createQuery("FROM User WHERE userName = :username", User.class)
+                .setParameter("username", UserName)
+                .list();
     }
 }

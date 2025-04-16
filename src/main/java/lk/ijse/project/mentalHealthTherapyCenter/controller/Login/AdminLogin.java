@@ -59,8 +59,6 @@ public class AdminLogin implements Initializable {
         SessionHolder.currentRole = role;
     }
 
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Image adminIMage = new Image(getClass().getResourceAsStream("/images/user.png"));

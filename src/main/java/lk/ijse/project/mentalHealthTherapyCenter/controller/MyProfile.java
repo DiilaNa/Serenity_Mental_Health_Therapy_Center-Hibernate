@@ -3,18 +3,20 @@ package lk.ijse.project.mentalHealthTherapyCenter.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
-import lombok.Setter;
-
+import lk.ijse.project.mentalHealthTherapyCenter.controller.Login.UtilClasses.SessionHolder;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.UserDTO;
+import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
+import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
+import lk.ijse.project.mentalHealthTherapyCenter.service.custom.UserBO;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MyProfile implements Initializable {
@@ -22,12 +24,11 @@ public class MyProfile implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Image image1 = new Image(getClass().getResourceAsStream("/images/SettingInMyProfile.png"));
         image.setImage(image1);
-
-        loadText();
-        if (UserName != null) { // Check if the username is set before accessing it
-            topicUserNameLabel.setText(UserName);
-        } else {
-            System.out.println("UserName is null in MyProfile");
+        try {
+            loadText();
+        }catch (Exception e){
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Something went wrong", ButtonType.OK).show();
         }
     }
     @FXML
@@ -38,7 +39,6 @@ public class MyProfile implements Initializable {
 
     @FXML
     private Label fulllNane;
-
 
     @FXML
     private Label role;
@@ -54,17 +54,28 @@ public class MyProfile implements Initializable {
 
     private String UserName;
 
+    UserBO userBO = BOFactory.getInstance().getBO(BOType.USER);
+
     public void setUserName(String userName) {
         this.UserName = userName;
 
         if (topicUserNameLabel != null) {
             topicUserNameLabel.setText(userName);
+            SessionHolder.userName = userName;
         }else {
             System.out.println(UserName+" is null");
         }
     }
 
     private void loadText(){
+        String searchUserName = SessionHolder.userName;
+        System.out.println(searchUserName);
+        List<UserDTO> users = userBO.getUserDetails(searchUserName);
+        for (UserDTO userDTO : users) {
+            fulllNane.setText(userDTO.getUserFullName());
+            email.setText(userDTO.getUserEmail());
+            role.setText(userDTO.getUserRole());
+        }
     }
 
     @FXML

@@ -9,8 +9,9 @@ import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.UserDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.UserBO;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class UserBOImpl implements UserBO {
@@ -79,17 +80,14 @@ public class UserBOImpl implements UserBO {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         try {
-            // Call the DAO method
             User user = userDAO.findPassWord(username,role, session);
-
             if (user != null) {
                 transaction.commit();
-                return user.getUserPassword();  // Assuming there's a getter for password
+                return user.getUserPassword();
             } else {
                 transaction.rollback();
                 return null;
             }
-
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Error finding password");
@@ -98,16 +96,38 @@ public class UserBOImpl implements UserBO {
         }
     }
 
+    @Override
+    public List<UserDTO> getUserDetails(String UserName) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        try {
+            List<User> users = userDAO.getALLByUserName(UserName,session);
+            List<UserDTO> userDTOList = new ArrayList<>();
+            for (User user : users) {
+                UserDTO userDTO = new UserDTO(
+                        user.getUserID(),
+                        user.getUserFullName(),
+                        user.getUserEmail(),
+                        user.getUserRole(),
+                        user.getUserName(),
+                        user.getUserPassword()
+                );
+                userDTOList.add(userDTO);
+            }
+            return userDTOList;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Override
     public String getNextID() {
         Optional<String> lastPkOptional = userDAO.getLastPK();
         if (lastPkOptional.isPresent()) {
             String lastPk = lastPkOptional.get();
-            int nextId = Integer.parseInt(lastPk.replace("U", "")) + 1;  // Extract number and increment
-            return String.format("U%03d", nextId);  // Format as "P001", "P002", etc.
+            int nextId = Integer.parseInt(lastPk.replace("U", "")) + 1;
+            return String.format("U%03d", nextId);
         } else {
-            return "U001";  // Default if no records exist
+            return "U001";
         }
     }
 }
