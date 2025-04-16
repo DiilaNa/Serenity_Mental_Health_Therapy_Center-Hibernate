@@ -1,6 +1,5 @@
 package lk.ijse.project.mentalHealthTherapyCenter.controller.Login;
 
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-
 import javafx.stage.Stage;
 import lk.ijse.project.mentalHealthTherapyCenter.controller.Login.UtilClasses.PasswordUtil;
 import lk.ijse.project.mentalHealthTherapyCenter.controller.Login.UtilClasses.SessionHolder;
@@ -20,8 +18,6 @@ import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.UserBO;
 import lombok.Setter;
-
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -87,7 +83,6 @@ public class UserLogin implements Initializable {
         String passFromDB = userBO.findPassWord(username,role1);
 
         if (userFromDB && PasswordUtil.matches(password, passFromDB)) {
-            new Alert(Alert.AlertType.INFORMATION, "Login Success", ButtonType.OK).show();
             navigateToMainPage("/view/MainLayout.fxml", "user", username);
         } else {
             new Alert(Alert.AlertType.ERROR, "Login Failed..", ButtonType.OK).show();
@@ -140,11 +135,9 @@ public class UserLogin implements Initializable {
     private void navigateToMainPage(String fxmlPath,String role,String userName) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Scene scene = new Scene(loader.load());
-
         MainController controller = loader.getController();
         controller.setUserRole(role);
         controller.setUserName(userName);
-
         Stage currentStage = (Stage) clickhere.getScene().getWindow();
         Stage stage = new Stage();
         stage.setScene(scene);
@@ -153,5 +146,4 @@ public class UserLogin implements Initializable {
         currentStage.close();
         stage.show();
     }
-
 }

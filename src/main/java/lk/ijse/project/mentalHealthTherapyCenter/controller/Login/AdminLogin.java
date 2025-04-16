@@ -94,13 +94,11 @@ public class AdminLogin implements Initializable {
         }
 
         String role1 = SessionHolder.currentRole;
-
         // Retrieve user from DB
         boolean userFromDB = userBO.findUser(username);
         String passFromDB = userBO.findPassWord(username,role1);
 
         if (userFromDB && PasswordUtil.matches(password,passFromDB)){
-            new Alert(Alert.AlertType.INFORMATION, "Login Success", ButtonType.OK).show();
             navigateToMainPage("/view/MainLayout.fxml", "admin", username);
         } else {
             new Alert(Alert.AlertType.ERROR, "Login Failed..", ButtonType.OK).show();

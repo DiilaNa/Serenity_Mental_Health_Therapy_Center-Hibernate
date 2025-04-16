@@ -141,17 +141,17 @@
                   <Font name="Impact" size="19.0" />
                </font>
             </Label>
-            <Label fx:id="dateDashBoard" layoutX="763.0" layoutY="22.0" text="dd/mm/yyyy" textFill="WHITE">
+            <Label fx:id="dateDashBoard" layoutX="763.0" layoutY="24.0" prefHeight="30.0" prefWidth="132.0" text="DATE" textFill="WHITE">
                <font>
                   <Font name="Impact" size="19.0" />
                </font>
             </Label>
-            <Label fx:id="dashBoardUserNAME" layoutX="1061.0" layoutY="22.0" prefHeight="23.0" prefWidth="97.0" text="WELCOME" textFill="WHITE">
+            <Label fx:id="dashBoardUserNAME" layoutX="1061.0" layoutY="24.0" prefHeight="30.0" prefWidth="98.0" text="WELCOME" textFill="WHITE">
                <font>
                   <Font name="Impact" size="19.0" />
                </font>
             </Label>
-            <Button fx:id="signOutButton" layoutX="629.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#signOutButtonAction" prefHeight="34.0" prefWidth="106.0" style="-fx-background-color: lightgreen; -fx-background-radius: 12;" text="SIGN OUT">
+            <Button fx:id="signOutButton" layoutX="629.0" layoutY="22.0" mnemonicParsing="false" onMouseClicked="#signOutButtonAction" prefHeight="34.0" prefWidth="106.0" style="-fx-background-color: lightgreen; -fx-background-radius: 12;" text="SIGN OUT">
                <font>
                   <Font name="Impact" size="17.0" />
                </font>
@@ -161,13 +161,13 @@
                <cursor>
                   <Cursor fx:constant="WAIT" />
                </cursor></Button>
-            <Label fx:id="dashboardTime" layoutX="899.0" layoutY="25.0" prefHeight="23.0" prefWidth="116.0" text="TIME" textFill="WHITE">
+            <Label fx:id="dashboardTime" layoutX="899.0" layoutY="24.0" prefHeight="30.0" prefWidth="116.0" text="TIME" textFill="WHITE">
                <font>
                   <Font name="Impact" size="19.0" />
                </font>
             </Label>
-            <Circle fill="#1fff2f" layoutX="1036.0" layoutY="34.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label layoutX="1171.0" layoutY="22.0" prefHeight="23.0" prefWidth="116.0" text="IS ACTIVE NOW" textFill="WHITE">
+            <Circle fill="#1fff2f" layoutX="1036.0" layoutY="39.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1150.0" layoutY="24.0" prefHeight="30.0" prefWidth="116.0" text="IS ACTIVE NOW" textFill="WHITE">
                <font>
                   <Font name="Impact" size="19.0" />
                </font>

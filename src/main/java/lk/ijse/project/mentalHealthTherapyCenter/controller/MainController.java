@@ -38,6 +38,10 @@ public class MainController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
+    @FXML
+    private Label dashBoardUserNAME;
+
     @FXML
     private Label dashboardTime;
 
@@ -102,7 +106,7 @@ public class MainController implements Initializable {
     private void refreshPage(){
         updateDateTime();
         String s = SessionHolder.userName;
-        dashboardTime.setText(s);
+        dashBoardUserNAME.setText(s);
         navigateTo("/view/appointments.fxml");
         dashBoardFrom.setText("Appointment Details Form");
     }
@@ -183,7 +187,7 @@ public class MainController implements Initializable {
         }
     }
     private void loadPage(String fxmlPath) throws IOException {
-        Stage currentStage = (Stage) image.getScene().getWindow(); // Get current stage
+        Stage currentStage = (Stage) image.getScene().getWindow();
         currentStage.close();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
         Stage stage = new Stage();
@@ -205,5 +209,4 @@ public class MainController implements Initializable {
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
-
 }
