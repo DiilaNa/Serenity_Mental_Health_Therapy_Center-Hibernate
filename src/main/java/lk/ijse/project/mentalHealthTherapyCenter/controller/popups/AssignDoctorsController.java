@@ -6,9 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import lk.ijse.project.mentalHealthTherapyCenter.controller.AppointmentsController;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.DoctorDTO;
@@ -16,7 +18,6 @@ import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TherapistBO;
 import lombok.Setter;
-
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -65,14 +66,17 @@ public class AssignDoctorsController implements Initializable {
     TherapistBO therapistBO = BOFactory.getInstance().getBO(BOType.THERAPIST);
 
     private void refreshPage() throws Exception {
-        loadComboBoxAction(null);
+        docIdFromCombo.setText("");
+        docNameFromCombo.setText("");
+        docQualificationsFromCombo.setText("");
+        docAvailable.setText("");
+        circleD.setVisible(false);
+        load();
     }
 
-    @FXML
-    void loadComboBoxAction(ActionEvent event) throws Exception {
+    private void load (){
         try {
             List<DoctorDTO> doctors = therapistBO.getDocNames();
-
             if (doctors == null || doctors.isEmpty()) {
                 return;
             }
@@ -94,6 +98,20 @@ public class AssignDoctorsController implements Initializable {
                     docNameFromCombo.setText(selectedDoctor.getDoctorName());
                     docQualificationsFromCombo.setText(selectedDoctor.getDoctorQualifications());
                     docAvailable.setText(selectedDoctor.getDoctorAvailability());
+                    docAvailable.setText(selectedDoctor.getDoctorAvailability());
+
+                    String availability = selectedDoctor.getDoctorAvailability().trim();
+
+                    if (availability.equalsIgnoreCase("Available")) {
+                        circleD.setFill(Paint.valueOf("#1fff29"));
+                        select.setDisable(false);
+                    } else if (availability.equalsIgnoreCase("Not Available")) {
+                        circleD.setFill(Paint.valueOf("red"));
+                        select.setDisable(true);
+                    }
+
+                    circleD.setVisible(true);
+
                 }
             });
         } catch (Exception e) {
@@ -107,7 +125,7 @@ public class AssignDoctorsController implements Initializable {
                 return doctor;
             }
         }
-        return null; // Return null if doctor is not found
+        return null;
     }
 
     @FXML
@@ -119,10 +137,4 @@ public class AssignDoctorsController implements Initializable {
             appointmentsController.setAddDoctors(ID, Name,Availability);
         }
     }
-
-    @FXML
-    void setDetailsCBoxAction(MouseEvent event) {
-
-    }
-
 }

@@ -11,6 +11,7 @@ module lk.ijse.project.mentalHealthTherapyCenter {
     requires org.hibernate.orm.core;
     requires spring.security.core;
     requires spring.security.crypto;
+    requires java.desktop;
     opens lk.ijse.project.mentalHealthTherapyCenter.config to jakarta.persistence;
     opens lk.ijse.project.mentalHealthTherapyCenter.entity to org.hibernate.orm.core;
 
