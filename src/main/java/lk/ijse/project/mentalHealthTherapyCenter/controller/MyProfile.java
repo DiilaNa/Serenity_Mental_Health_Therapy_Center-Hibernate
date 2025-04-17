@@ -22,7 +22,7 @@ public class MyProfile implements Initializable {
         Image image1 = new Image(getClass().getResourceAsStream("/images/SettingInMyProfile.png"));
         image.setImage(image1);
         try {
-            loadText();
+            refreshPage();
         }catch (Exception e){
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Something went wrong", ButtonType.OK).show();
@@ -89,7 +89,21 @@ public class MyProfile implements Initializable {
 
     @FXML
     void showPasswordCheckBox(ActionEvent event) {
-
+        if (showPasswordCheckBox.isSelected()) {
+            passwordConfirmPWField1.setVisible(false);
+            passwordConfirmPWField2.setVisible(false);
+            txtPassWord1.setVisible(true);
+            txtPassWord2.setVisible(true);
+            txtPassWord1.setText(passwordConfirmPWField1.getText());
+            txtPassWord2.setText(passwordConfirmPWField2.getText());
+        }else {
+            passwordConfirmPWField1.setVisible(true);
+            passwordConfirmPWField2.setVisible(true);
+            txtPassWord1.setVisible(false);
+            txtPassWord2.setVisible(false);
+            passwordConfirmPWField1.setText(txtPassWord1.getText());
+            passwordConfirmPWField2.setText(txtPassWord2.getText());
+        }
     }
 
     @FXML
@@ -129,5 +143,12 @@ public class MyProfile implements Initializable {
     @FXML
     void setPicAction(ActionEvent event) {
 
+    }
+    private void refreshPage(){
+        loadText();
+        txtPassWord1.setVisible(false);
+        txtPassWord2.setVisible(false);
+        passwordConfirmPWField1.setVisible(true);
+        passwordConfirmPWField2.setVisible(true);
     }
 }
