@@ -9,8 +9,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import lk.ijse.project.mentalHealthTherapyCenter.controller.AppointmentsController;
-import lk.ijse.project.mentalHealthTherapyCenter.controller.TherapyProgramsController;
-import lk.ijse.project.mentalHealthTherapyCenter.controller.ViewAppointments;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.ProgramDto;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.ProgramTM;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.TProgramTM;
@@ -20,7 +18,6 @@ import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TProgramBO;
 import lombok.Setter;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 

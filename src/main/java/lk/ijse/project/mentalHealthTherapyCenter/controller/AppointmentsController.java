@@ -366,7 +366,18 @@ public class AppointmentsController implements Initializable {
     }
 
     @FXML
-    void addProgramsAction(MouseEvent event) throws IOException {loadNewPage("/view/SelectPrograms.fxml");}
+    void addProgramsAction(MouseEvent event) throws IOException {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SelectPrograms.fxml"));
+            Parent root = loader.load();
+            SelectProgramsController selectProgramsController = loader.getController();
+            selectProgramsController.setAppointmentsController(this);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.setTitle("Doctor Details - Serenity Mental Health Therapy Center");
+            stage.show();
+    }
 
     @FXML
     void PatientsBTNAction(ActionEvent event) throws IOException {loadNewPage("/view/PatientsEnrolledInEveryPrograms.fxml");}
@@ -386,6 +397,7 @@ public class AppointmentsController implements Initializable {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Doctor Details - Serenity Mental Health Therapy Center");
+        scene.getStylesheets().add(getClass().getResource("/css/h.css").toExternalForm());
         stage.show();
     }
     private void updateDateTime() {

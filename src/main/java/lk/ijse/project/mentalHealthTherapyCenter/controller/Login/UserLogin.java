@@ -83,6 +83,7 @@ public class UserLogin implements Initializable {
         String passFromDB = userBO.findPassWord(username,role1);
 
         if (userFromDB && PasswordUtil.matches(password, passFromDB)) {
+            SessionHolder.userName = username;
             navigateToMainPage("/view/MainLayout.fxml", "user", username);
         } else {
             new Alert(Alert.AlertType.ERROR, "Login Failed..", ButtonType.OK).show();

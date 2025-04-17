@@ -239,6 +239,7 @@ public class PatientController implements Initializable {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Doctor Details - Serenity Mental Health Therapy Center");
+        scene.getStylesheets().add(getClass().getResource("/css/h.css").toExternalForm());
         stage.show();
     }
     private void loadTableData() throws Exception {

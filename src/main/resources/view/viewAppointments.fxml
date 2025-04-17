@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="703.0" prefWidth="1200.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalHealthTherapyCenter.controller.ViewAppointments">
+<AnchorPane prefHeight="703.0" prefWidth="1200.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalHealthTherapyCenter.controller.popups.ViewAppointments">
    <children>
       <Label layoutX="277.0" layoutY="28.0" text=" Appointments of Serinity Mental Health Therapy Center " textFill="#408181">
          <font>

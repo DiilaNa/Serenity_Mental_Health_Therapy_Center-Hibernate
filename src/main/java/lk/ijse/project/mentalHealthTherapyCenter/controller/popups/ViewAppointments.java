@@ -1,4 +1,4 @@
-package lk.ijse.project.mentalHealthTherapyCenter.controller;
+package lk.ijse.project.mentalHealthTherapyCenter.controller.popups;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
