@@ -1,6 +1,4 @@
 package lk.ijse.project.mentalHealthTherapyCenter.controller;
-
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
+import lk.ijse.project.mentalHealthTherapyCenter.controller.Login.UtilClasses.PasswordUtil;
 import lk.ijse.project.mentalHealthTherapyCenter.controller.Login.UtilClasses.SessionHolder;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.UserDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
@@ -77,9 +76,6 @@ public class MyProfile implements Initializable {
     private TextField txtUserName;
 
     @FXML
-    private ComboBox<String> txtUserRole;
-
-    @FXML
     private Button updatePassword;
 
     @FXML
@@ -87,6 +83,15 @@ public class MyProfile implements Initializable {
 
     @FXML
     private Label userName;
+
+    @FXML
+    private Label IDLabel;
+
+    @FXML
+    private Button clear1;
+
+    @FXML
+    private Button clear2;
 
     @FXML
     void showPasswordCheckBox(ActionEvent event) {
@@ -111,16 +116,17 @@ public class MyProfile implements Initializable {
     void updateDetailsAction(ActionEvent event) {
         String UserName = txtUserFUllName.getText();
         String email = txtUserMail.getText();
-        String role = txtUserRole.getValue();
+
+        String id = IDLabel.getText();
 
         UserDTO userDTO = new UserDTO();
-           userDTO.setUserName(UserName);
-           userDTO.setUserEmail(email);
-           userDTO.setUserRole(role);
+            userDTO.setUserID(id);
+            userDTO.setUserFullName(UserName);
+            userDTO.setUserEmail(email);
 
-           boolean isUpdated = userBO.update(userDTO);
-
+            boolean isUpdated = userBO.update(userDTO);
            if (isUpdated) {
+               refreshPage();
                new Alert(Alert.AlertType.INFORMATION, "User updated", ButtonType.OK).show();
            }else {
                new Alert(Alert.AlertType.ERROR, "User not updated", ButtonType.OK).show();
@@ -129,7 +135,29 @@ public class MyProfile implements Initializable {
 
     @FXML
     void updatePassWordAction(ActionEvent event) {
+        String UserName = txtUserName.getText();
+        String id = IDLabel.getText();
 
+        if (!txtPassWord1.getText().equals(txtPassWord2.getText())) {
+            new Alert(Alert.AlertType.ERROR, "Passwords do not match", ButtonType.OK).show();
+        }
+        String pass = txtPassWord1.getText();
+        String passWord = PasswordUtil.hashPassword(pass);
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUserID(id);
+        userDTO.setUserName(UserName);
+        userDTO.setUserPassword(passWord);
+
+        boolean isUpdated = userBO.updatePassWord(userDTO);
+
+        if (isUpdated) {
+            String uName = txtUserName.getText();
+            SessionHolder.userName = uName;
+            refreshPage();
+            new Alert(Alert.AlertType.INFORMATION, "User updated", ButtonType.OK).show();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "User not updated", ButtonType.OK).show();
+        }
     }
 
     UserBO userBO = BOFactory.getInstance().getBO(BOType.USER);
@@ -147,12 +175,14 @@ public class MyProfile implements Initializable {
 
     private void loadText(){
         String searchUserName = SessionHolder.userName;
-        System.out.println(searchUserName);
+        topicUserNameLabel.setText(searchUserName);
         List<UserDTO> users = userBO.getUserDetails(searchUserName);
         for (UserDTO userDTO : users) {
             fullName.setText(userDTO.getUserFullName());
             email.setText(userDTO.getUserEmail());
             role.setText(userDTO.getUserRole());
+            userName.setText(userDTO.getUserName());
+            IDLabel.setText(userDTO.getUserID());
         }
     }
 
@@ -162,10 +192,30 @@ public class MyProfile implements Initializable {
     }
     private void refreshPage(){
         loadText();
-        txtUserRole.setItems(FXCollections.observableArrayList("user,admin"));
         txtPassWord1.setVisible(false);
         txtPassWord2.setVisible(false);
         passwordConfirmPWField1.setVisible(true);
         passwordConfirmPWField2.setVisible(true);
+        txtUserName.clear();
+        txtUserFUllName.clear();
+        txtUserMail.clear();
+        txtPassWord1.clear();
+        txtPassWord2.clear();
+        passwordConfirmPWField1.clear();
+        passwordConfirmPWField2.clear();
+    }
+    @FXML
+    void clearAction1(ActionEvent event) {
+        txtUserFUllName.clear();
+        txtUserMail.clear();
+    }
+
+    @FXML
+    void clearAction2(ActionEvent event) {
+        txtUserName.clear();
+        txtPassWord1.clear();
+        txtPassWord2.clear();
+        passwordConfirmPWField1.clear();
+        passwordConfirmPWField2.clear();
     }
 }

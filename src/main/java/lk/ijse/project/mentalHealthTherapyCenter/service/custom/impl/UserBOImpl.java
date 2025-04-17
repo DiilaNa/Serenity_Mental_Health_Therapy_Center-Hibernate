@@ -124,11 +124,13 @@ public class UserBOImpl implements UserBO {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         try {
-            User user = new User();
-            user.setUserFullName(userDTO.getUserFullName());
-            user.setUserEmail(userDTO.getUserEmail());
-            user.setUserRole(userDTO.getUserRole());
-
+            User user = session.get(User.class,userDTO.getUserID());
+            if (user != null) {
+                user.setUserFullName(userDTO.getUserFullName());
+                user.setUserEmail(userDTO.getUserEmail());
+            }else {
+                System.out.println("user not found");
+            }
             boolean isSaved= userDAO.update(user,session);
             if (isSaved) {
                 transaction.commit();
@@ -139,7 +141,33 @@ public class UserBOImpl implements UserBO {
             }
         }catch(Exception e){
             e.printStackTrace();
-            throw new RuntimeException("Error saving user");
+            throw new RuntimeException("Error Updating user");
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public boolean updatePassWord(UserDTO userDTO) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            User user = session.get(User.class,userDTO.getUserID());
+            if (user != null) {
+                user.setUserName(userDTO.getUserName());
+                user.setUserPassword(userDTO.getUserPassword());
+            }
+            boolean isSaved= userDAO.update(user,session);
+            if (isSaved) {
+                transaction.commit();
+                return true;
+            }else {
+                transaction.rollback();
+                return false;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            throw new RuntimeException("Error Updating user");
         }finally {
             session.close();
         }

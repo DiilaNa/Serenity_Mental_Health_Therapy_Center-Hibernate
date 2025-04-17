@@ -4,7 +4,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -120,13 +119,28 @@
                   <Font name="Consolas" size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="txtUserMail" layoutX="303.0" layoutY="85.0" prefHeight="26.0" prefWidth="215.0" promptText="Update Email" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+            <TextField fx:id="txtUserMail" layoutX="24.0" layoutY="151.0" prefHeight="26.0" prefWidth="215.0" promptText="Update Email" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
                <font>
                   <Font name="Consolas" size="14.0" />
                </font>
             </TextField>
-            <ComboBox fx:id="txtUserRole" layoutX="23.0" layoutY="167.0" prefHeight="26.0" prefWidth="218.0" promptText="Choose role" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
             <Button fx:id="updateProfile" layoutX="317.0" layoutY="165.0" mnemonicParsing="false" onAction="#updateDetailsAction" prefHeight="34.0" prefWidth="113.0" style="-fx-background-color: #4C8C8A;" text="Update" textFill="WHITE">
+               <font>
+                  <Font name="Georgia Bold" size="16.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <Label fx:id="IDLabel" layoutX="294.0" layoutY="82.0" prefHeight="34.0" prefWidth="199.0" text="Full Name" textFill="WHITE">
+               <font>
+                  <Font name="Georgia Bold" size="22.0" />
+               </font>
+               <padding>
+                  <Insets left="23.0" />
+               </padding>
+            </Label>
+            <Button fx:id="clear1" layoutX="450.0" layoutY="165.0" mnemonicParsing="false" onAction="#clearAction1" prefHeight="34.0" prefWidth="113.0" style="-fx-background-color: #4C8C8A;" text="Clear" textFill="WHITE">
                <font>
                   <Font name="Georgia Bold" size="16.0" />
                </font>
@@ -181,6 +195,14 @@
                   <Font name="Consolas" size="14.0" />
                </font>
             </TextField>
+            <Button fx:id="clear2" layoutX="460.0" layoutY="116.0" mnemonicParsing="false" onAction="#clearAction2" prefHeight="34.0" prefWidth="113.0" style="-fx-background-color: #4C8C8A;" text="Clear" textFill="WHITE">
+               <font>
+                  <Font name="Georgia Bold" size="16.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
          </children>
          <effect>
             <DropShadow />
