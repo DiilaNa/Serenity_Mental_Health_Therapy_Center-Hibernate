@@ -120,6 +120,32 @@ public class UserBOImpl implements UserBO {
     }
 
     @Override
+    public boolean update(UserDTO userDTO) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            User user = new User();
+            user.setUserFullName(userDTO.getUserFullName());
+            user.setUserEmail(userDTO.getUserEmail());
+            user.setUserRole(userDTO.getUserRole());
+
+            boolean isSaved= userDAO.update(user,session);
+            if (isSaved) {
+                transaction.commit();
+                return true;
+            }else {
+                transaction.rollback();
+                return false;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            throw new RuntimeException("Error saving user");
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
     public String getNextID() {
         Optional<String> lastPkOptional = userDAO.getLastPK();
         if (lastPkOptional.isPresent()) {

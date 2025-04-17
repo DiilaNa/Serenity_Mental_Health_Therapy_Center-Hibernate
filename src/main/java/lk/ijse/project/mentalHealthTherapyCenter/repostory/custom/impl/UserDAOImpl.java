@@ -17,7 +17,13 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean update(User user,Session session) throws SQLException, ClassNotFoundException {
-        return false;
+        try{
+            session.persist(user);
+            return true;
+        }catch (HibernateException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Updating user failed");
+        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 package lk.ijse.project.mentalHealthTherapyCenter.controller;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -76,7 +77,7 @@ public class MyProfile implements Initializable {
     private TextField txtUserName;
 
     @FXML
-    private ComboBox<?> txtUserRole;
+    private ComboBox<String> txtUserRole;
 
     @FXML
     private Button updatePassword;
@@ -108,7 +109,22 @@ public class MyProfile implements Initializable {
 
     @FXML
     void updateDetailsAction(ActionEvent event) {
+        String UserName = txtUserFUllName.getText();
+        String email = txtUserMail.getText();
+        String role = txtUserRole.getValue();
 
+        UserDTO userDTO = new UserDTO();
+           userDTO.setUserName(UserName);
+           userDTO.setUserEmail(email);
+           userDTO.setUserRole(role);
+
+           boolean isUpdated = userBO.update(userDTO);
+
+           if (isUpdated) {
+               new Alert(Alert.AlertType.INFORMATION, "User updated", ButtonType.OK).show();
+           }else {
+               new Alert(Alert.AlertType.ERROR, "User not updated", ButtonType.OK).show();
+           }
     }
 
     @FXML
@@ -146,6 +162,7 @@ public class MyProfile implements Initializable {
     }
     private void refreshPage(){
         loadText();
+        txtUserRole.setItems(FXCollections.observableArrayList("user,admin"));
         txtPassWord1.setVisible(false);
         txtPassWord2.setVisible(false);
         passwordConfirmPWField1.setVisible(true);
