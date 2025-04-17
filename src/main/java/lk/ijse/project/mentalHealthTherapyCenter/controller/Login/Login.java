@@ -23,6 +23,10 @@ public class Login implements Initializable {
         admin.setImage(adminIMage);
         Image userImage = new Image(getClass().getResourceAsStream("/images/LoginUserPic.png"));
         user.setImage(userImage);
+
+        Image image = new Image(getClass().getResourceAsStream("/images/bgPIc.jpg"));
+        imageBG.setImage(image);
+        imageBG.setId("bgImage");/*Adding an id to Remove css */
     }
 
     @FXML
@@ -33,6 +37,9 @@ public class Login implements Initializable {
 
     @FXML
     private Label text;
+
+    @FXML
+    private ImageView imageBG;
 
     @FXML
     void adminAction(MouseEvent event) throws IOException {

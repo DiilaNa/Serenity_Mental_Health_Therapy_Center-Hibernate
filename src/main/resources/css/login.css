@@ -1,5 +1,5 @@
 .image-view {
-    -fx-effect: dropshadow(gaussian, #13ae8b, 10, 0, 0, 5);
+    -fx-effect: dropshadow(gaussian, #000000, 10, 0, 0, 5);
     -fx-cursor: hand;
     -fx-opacity: 1;
     -fx-transition: all 0.3s ease;
@@ -9,11 +9,27 @@
 }
 
 .image-view:hover {
-    -fx-effect: dropshadow(gaussian, #4C8C8C, 20, 0, 0, 10);
+    -fx-effect: dropshadow(gaussian, #ffffff, 20, 0, 0, 10);
     -fx-opacity: 0.85;
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
     -fx-translate-y: -5;
+}#bgImage {
+     -fx-effect: none;
+     -fx-opacity: 0.65;
+     -fx-scale-x: 1.0;
+     -fx-scale-y: 1.0;
+     -fx-translate-y: 0;
+     -fx-cursor: default;
+ }
+#bgImage:hover {
+    -fx-effect: none;
+    -fx-opacity: 0.65;
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+    -fx-translate-y: 0;
 }
+
+
 
 
