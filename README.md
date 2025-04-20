@@ -33,4 +33,8 @@ This project provides an efficient way for the Serenity Mental Health Therapy Ce
 - JasperReports Library
 - Maven or Gradle (for dependency management)
 
+#login Page
+![Dashboard Screenshot](/src/main/resources/ProjectImages/SerinityPic1.png)
+
+
 
