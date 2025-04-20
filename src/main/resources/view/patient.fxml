@@ -43,7 +43,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="delete" layoutX="25.0" layoutY="626.0" mnemonicParsing="false" onAction="#deleteAction" prefHeight="35.0" prefWidth="162.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="Delete Patient" textFill="WHITE">
+      <Button fx:id="delete" layoutX="27.0" layoutY="626.0" mnemonicParsing="false" onAction="#deleteAction" prefHeight="35.0" prefWidth="162.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="Delete Patient" textFill="WHITE">
          <font>
             <Font name="Impact" size="18.0" />
          </font>
@@ -85,7 +85,7 @@
          <font>
             <Font name="Consolas Bold" size="16.0" />
          </font></TextField>
-      <TextField fx:id="PatientAddress" layoutX="656.0" layoutY="566.0" prefHeight="26.0" prefWidth="166.0" promptText="Address" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+      <TextField fx:id="PatientAddress" layoutX="656.0" layoutY="561.0" prefHeight="26.0" prefWidth="166.0" promptText="Address" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
          <font>
             <Font name="Consolas Bold" size="16.0" />
          </font></TextField>
@@ -112,7 +112,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ComboBox fx:id="PatientGender" layoutX="656.0" layoutY="505.0" opacity="0.5" prefHeight="26.0" prefWidth="175.0" promptText="Gender" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <ComboBox fx:id="PatientGender" layoutX="656.0" layoutY="503.0" opacity="0.5" prefHeight="26.0" prefWidth="175.0" promptText="Gender" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
       <Button fx:id="viewMedicalHistoryBTN" layoutX="1087.0" layoutY="503.0" mnemonicParsing="false" onAction="#viewMedicalHistoryBTNAction" prefHeight="35.0" prefWidth="162.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="VIEW HISTORY" textFill="WHITE">
          <font>
             <Font name="Impact" size="18.0" />

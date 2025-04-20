@@ -109,12 +109,12 @@
                   </Button>
                </children>
             </VBox>
-            <Label prefHeight="30.0" prefWidth="235.0" text="Profile Settings" textFill="WHITE">
+            <Label prefHeight="30.0" prefWidth="235.0" text="SETTINGS" textFill="WHITE">
                <font>
                   <Font name="Georgia" size="17.0" />
                </font>
             </Label>
-            <Button fx:id="user" mnemonicParsing="false" onMouseClicked="#userAction" prefHeight="45.0" prefWidth="237.0" style="-fx-background-radius: 12;" text="My Profile" textAlignment="CENTER">
+            <Button fx:id="user" mnemonicParsing="false" onMouseClicked="#userAction" prefHeight="45.0" prefWidth="237.0" style="-fx-background-radius: 12;" text="MY PROFILE" textAlignment="CENTER">
                <font>
                   <Font name="Georgia Bold" size="19.0" />
                </font>

@@ -20,7 +20,7 @@
             <TableColumn fx:id="tableFee" prefWidth="174.39999999999998" text="Fee" />
          </columns>
       </TableView>
-      <Button fx:id="select" layoutX="546.0" layoutY="462.0" mnemonicParsing="false" onAction="#selectBtnAction" prefHeight="42.0" prefWidth="186.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Select" textFill="WHITE">
+      <Button fx:id="select" layoutX="546.0" layoutY="462.0" mnemonicParsing="false" onAction="#selectBtnAction" prefHeight="40.0" prefWidth="180.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Select" textFill="WHITE">
          <font>
             <Font name="Impact" size="20.0" />
          </font>
@@ -35,12 +35,12 @@
             </DropShadow>
          </effect>
       </Button>
-      <Label fx:id="idLabel" layoutX="191.0" layoutY="475.0" text="Label">
+      <Label fx:id="idLabel" layoutX="191.0" layoutY="470.0" text="Label">
          <font>
             <Font name="Georgia Bold" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="nameLabel" layoutX="316.0" layoutY="473.0" text="Label">
+      <Label fx:id="nameLabel" layoutX="316.0" layoutY="470.0" text="Label">
          <font>
             <Font name="Georgia Bold" size="16.0" />
          </font>

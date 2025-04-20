@@ -58,10 +58,19 @@
             <Font name="Georgia Bold" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="docName" layoutX="151.0" layoutY="448.0" prefHeight="26.0" prefWidth="207.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <TextField fx:id="docMail" layoutX="541.0" layoutY="448.0" prefHeight="26.0" prefWidth="207.0" promptText="example@gmail.com" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <TextField fx:id="docContact" layoutX="541.0" layoutY="409.0" prefHeight="26.0" prefWidth="207.0" promptText="077-xxxxxxx" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <Button fx:id="save" layoutX="34.0" layoutY="553.0" mnemonicParsing="false" onAction="#saveBtnAction" prefHeight="41.0" prefWidth="128.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Save" textFill="WHITE">
+      <TextField fx:id="docName" layoutX="151.0" layoutY="448.0" prefHeight="26.0" prefWidth="207.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <TextField fx:id="docMail" layoutX="541.0" layoutY="448.0" prefHeight="26.0" prefWidth="207.0" promptText="example@gmail.com" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font></TextField>
+      <TextField fx:id="docContact" layoutX="541.0" layoutY="410.0" prefHeight="26.0" prefWidth="207.0" promptText="077-xxxxxxx" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font></TextField>
+      <Button fx:id="save" layoutX="40.0" layoutY="553.0" mnemonicParsing="false" onAction="#saveBtnAction" prefHeight="41.0" prefWidth="128.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Save" textFill="WHITE">
          <font>
             <Font name="Impact" size="20.0" />
          </font>
@@ -76,7 +85,7 @@
             </DropShadow>
          </effect>
       </Button>
-      <Button fx:id="update" layoutX="214.0" layoutY="553.0" mnemonicParsing="false" onAction="#updateBtnAction" prefHeight="41.0" prefWidth="128.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Update" textFill="WHITE">
+      <Button fx:id="update" layoutX="200.0" layoutY="553.0" mnemonicParsing="false" onAction="#updateBtnAction" prefHeight="41.0" prefWidth="128.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Update" textFill="WHITE">
          <font>
             <Font name="Impact" size="20.0" />
          </font>
@@ -91,7 +100,7 @@
             </DropShadow>
          </effect>
       </Button>
-      <Button fx:id="delete" layoutX="397.0" layoutY="553.0" mnemonicParsing="false" onAction="#deleteBtnAction" prefHeight="41.0" prefWidth="128.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Delete" textFill="WHITE">
+      <Button fx:id="delete" layoutX="360.0" layoutY="553.0" mnemonicParsing="false" onAction="#deleteBtnAction" prefHeight="41.0" prefWidth="128.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Delete" textFill="WHITE">
          <font>
             <Font name="Impact" size="20.0" />
          </font>
@@ -106,7 +115,7 @@
             </DropShadow>
          </effect>
       </Button>
-      <Button fx:id="reset" layoutX="581.0" layoutY="553.0" mnemonicParsing="false" onAction="#resetBtnAction" prefHeight="41.0" prefWidth="128.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Reset" textFill="WHITE">
+      <Button fx:id="reset" layoutX="520.0" layoutY="553.0" mnemonicParsing="false" onAction="#resetBtnAction" prefHeight="41.0" prefWidth="128.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Reset" textFill="WHITE">
          <font>
             <Font name="Impact" size="20.0" />
          </font>
@@ -131,19 +140,19 @@
             <Image url="@../../../../../../../Pictures/Mental%20Hospital/icons8-doctor-50.png" />
          </image>
       </ImageView>
-      <Label fx:id="docIDlabel" layoutX="214.0" layoutY="414.0" text="Doctor ID">
+      <Label fx:id="docIDlabel" layoutX="196.0" layoutY="414.0" prefHeight="19.0" prefWidth="106.0" text="Doctor ID">
          <font>
             <Font name="Georgia Bold" size="16.0" />
          </font>
       </Label>
-      <ComboBox fx:id="docQualificationsCombo" layoutX="969.0" layoutY="411.0" prefHeight="26.0" prefWidth="243.0" promptText="bachelores/masters/doctoral degree" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <ComboBox fx:id="docAvailableCombo" layoutX="1004.0" layoutY="448.0" prefHeight="26.0" prefWidth="207.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <ComboBox fx:id="docQualificationsCombo" layoutX="969.0" layoutY="410.0" prefHeight="26.0" prefWidth="243.0" promptText="Bsc/Msc/Phd/Doctoral degree" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <ComboBox fx:id="docAvailableCombo" layoutX="1004.0" layoutY="451.0" prefHeight="26.0" prefWidth="207.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
       <Label layoutX="835.0" layoutY="451.0" text="Availability">
          <font>
             <Font name="Georgia Bold" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="viewActivities" layoutX="761.0" layoutY="553.0" mnemonicParsing="false" onAction="#viewActivitiesBtnAction" prefHeight="42.0" prefWidth="152.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="View Activities" textFill="WHITE">
+      <Button fx:id="viewActivities" layoutX="680.0" layoutY="553.0" mnemonicParsing="false" onAction="#viewActivitiesBtnAction" prefHeight="42.0" prefWidth="152.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="View Activities" textFill="WHITE">
          <font>
             <Font name="Impact" size="20.0" />
          </font>

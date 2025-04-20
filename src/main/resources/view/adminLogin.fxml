@@ -35,15 +35,21 @@
             <Font name="Georgia" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="adminUserName" layoutX="324.0" layoutY="188.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <PasswordField fx:id="adminPasswordPwField" layoutX="324.0" layoutY="248.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <TextField fx:id="adminPasswordTextField" layoutX="324.0" layoutY="248.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <CheckBox fx:id="adminCheckBox" layoutX="167.0" layoutY="318.0" mnemonicParsing="false" onAction="#adminCheckBoxAction" text="SHOW PASSWORD">
+      <TextField fx:id="adminUserName" layoutX="324.0" layoutY="188.0" prefHeight="28.0" prefWidth="194.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <font>
+            <Font name="Consolas Bold" size="14.0" />
+         </font></TextField>
+      <PasswordField fx:id="adminPasswordPwField" layoutX="324.0" layoutY="248.0" prefHeight="26.0" prefWidth="194.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="adminPasswordTextField" layoutX="324.0" layoutY="248.0" prefHeight="26.0" prefWidth="194.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <font>
+            <Font name="Consolas Bold" size="12.0" />
+         </font></TextField>
+      <CheckBox fx:id="adminCheckBox" layoutX="177.0" layoutY="330.0" mnemonicParsing="false" onAction="#adminCheckBoxAction" text="SHOW PASSWORD">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </CheckBox>
-      <Button fx:id="adminLogin" layoutX="187.0" layoutY="395.0" mnemonicParsing="false" onAction="#adminLoginAction" prefHeight="39.0" prefWidth="338.0" style="-fx-background-color: #4C8C8C;" text="LOGIN" textFill="#fffefe">
+      <Button fx:id="adminLogin" layoutX="187.0" layoutY="403.0" mnemonicParsing="false" onAction="#adminLoginAction" prefHeight="39.0" prefWidth="338.0" style="-fx-background-color: #4C8C8C;" text="LOGIN" textFill="#fffefe">
          <font>
             <Font name="Georgia Bold" size="21.0" />
          </font>
@@ -58,7 +64,7 @@
          </image>
       </ImageView>
       <Line endX="399.199951171875" endY="11.599990844726562" layoutX="168.0" layoutY="118.0" startX="89.5999755859375" startY="11.599990844726562" />
-      <Hyperlink fx:id="forgetPass" layoutX="396.0" layoutY="315.0" onMouseClicked="#forgetPassAction" text="Forget Password ? " underline="true" />
+      <Hyperlink fx:id="forgetPass" layoutX="396.0" layoutY="327.0" onMouseClicked="#forgetPassAction" text="Forget Password ? " underline="true" />
       <Label fx:id="text1" layoutX="187.0" layoutY="502.0" opacity="0.71" prefHeight="16.0" prefWidth="310.0" text="2025 All right reserved Serenity Mental Health Therapy Center" wrapText="true">
          <font>
             <Font name="Yu Gothic Bold" size="10.0" />

@@ -35,7 +35,10 @@
             <Font name="Georgia" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="userName" layoutX="324.0" layoutY="188.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="userName" layoutX="324.0" layoutY="188.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+      <font>
+         <Font name="Consolas" size="14.0" />
+      </font></TextField>
       <PasswordField fx:id="passwordPWField" layoutX="324.0" layoutY="248.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
       <TextField fx:id="passwordTextField" layoutX="324.0" layoutY="248.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
       <CheckBox fx:id="showPasswordcheckBox" layoutX="167.0" layoutY="318.0" mnemonicParsing="false" onAction="#showPasswordcheckBox" text="SHOW PASSWORD">
