@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.project.mentalHealthTherapyCenter.controller.Login.UtilClasses.MailUtil;
 import lk.ijse.project.mentalHealthTherapyCenter.controller.Login.UtilClasses.PasswordUtil;
 import lk.ijse.project.mentalHealthTherapyCenter.controller.Login.UtilClasses.SessionHolder;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
@@ -116,6 +117,8 @@ public class ForgetPassword implements Initializable {
             boolean isSaved = userBO.updateUser(UserName, email, pass);
             if (isSaved) {
                 new Alert(Alert.AlertType.INFORMATION, " Password changed SuccessFully", ButtonType.OK).show();
+                SessionHolder.currentRole = role;
+                MailUtil.sendEmailWithGmail(email,UserName);
             }else {
                 new Alert(Alert.AlertType.ERROR, "Operation Failed", ButtonType.OK).show();
             }

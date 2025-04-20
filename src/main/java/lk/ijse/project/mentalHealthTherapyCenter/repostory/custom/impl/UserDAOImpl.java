@@ -95,13 +95,13 @@ public class UserDAOImpl implements UserDAO {
             User user = query.uniqueResult();
 
             if (user != null) {
-                user.setUserPassword(userNewPassword); // You may want to hash this with BCrypt
+                user.setUserPassword(userNewPassword);
                 session.update(user);
                 transaction.commit();
                 return true;
             } else {
                 transaction.rollback();
-                return false; // No user found with matching username and email
+                return false;
             }
 
         } catch (Exception e) {
