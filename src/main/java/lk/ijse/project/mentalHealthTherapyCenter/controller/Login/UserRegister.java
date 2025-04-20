@@ -98,16 +98,20 @@ public class UserRegister implements Initializable {
         String email = userEmail.getText();
         String role = userRole.getValue();
         String userNAME = userName.getText();
-        String passwordText = passwordPWField.getText();
-        String passwordConfirmText = passwordConfirmPWField.getText();
-        String pwText = passwordTextField.getText();
-        String pwConfirmText = passwordConfirmTextField.getText();
+        String password = passwordPWField.isVisible() ? passwordPWField.getText() : passwordTextField.getText();
+        String confirmPassword = passwordConfirmPWField.isVisible() ? passwordConfirmPWField.getText() : passwordConfirmTextField.getText();
+
+        if (!password.equals(confirmPassword)) {
+            new Alert(Alert.AlertType.ERROR, "Passwords do not match", ButtonType.OK).show();
+            return;
+        }
+
 
         String mailPattern =  "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
         boolean isValidMailPattern = email.matches(mailPattern);
 
         String passwordPattern =  "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!])[A-Za-z\\d@#$%^&+=!]{8,}$";
-        boolean isValidPasswordPattern = passwordText.matches(passwordPattern);
+        boolean isValidPasswordPattern = password.matches(passwordPattern);
 
         if (!isValidPasswordPattern){
             new Alert(Alert.AlertType.INFORMATION, "Password Requirements:\n" +
@@ -123,17 +127,13 @@ public class UserRegister implements Initializable {
         if (!isValidMailPattern) {
             userEmail.setStyle(userEmail.getStyle() + "-fx-border-color: red;");
         }
-        if (userID.isEmpty() ||fullName.isEmpty() || email.isEmpty() || role.isEmpty() || userNAME.isEmpty() || passwordText.isEmpty()) {
+        if (userID.isEmpty() ||fullName.isEmpty() || email.isEmpty() || role.isEmpty() || userNAME.isEmpty() || password.isEmpty()) {
             new Alert(Alert.AlertType.ERROR, "All fields are required!", ButtonType.OK).show();
             return;
         }
 
-        if (!passwordText.equals(passwordConfirmText) || !pwText.equals(pwConfirmText)) {
-            new Alert(Alert.AlertType.ERROR, "Passwords do not match", ButtonType.OK).show();
-            return;
-        }
         /*Encrypt Password*/
-        String hashPassword = PasswordUtil.hashPassword(passwordText);
+        String hashPassword = PasswordUtil.hashPassword(password);
 
 
         if (isValidMailPattern && isValidPasswordPattern) {
