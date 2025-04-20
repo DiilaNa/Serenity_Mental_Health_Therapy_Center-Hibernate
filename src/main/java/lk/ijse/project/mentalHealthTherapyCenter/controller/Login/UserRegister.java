@@ -151,8 +151,10 @@ public class UserRegister implements Initializable {
                 new Alert(Alert.AlertType.INFORMATION, " SignUp SuccessFull", ButtonType.OK).show();
                 if (role.equals("USER")) {
                     loadPage("/view/userLogin.fxml");
+                    SessionHolder.currentRole = role;
                 }else{
                     loadPage("/view/adminLogin.fxml");
+                    SessionHolder.currentRole = role;
                 }
             }else {
                 new Alert(Alert.AlertType.ERROR, "SignUp Failed", ButtonType.OK).show();
