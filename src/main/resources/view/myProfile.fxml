@@ -208,5 +208,13 @@
             <DropShadow />
          </effect>
       </Pane>
+      <Button fx:id="addNewUser" layoutX="1046.0" layoutY="94.0" mnemonicParsing="false" onAction="#addNewUserAction" prefHeight="34.0" prefWidth="173.0" style="-fx-background-color: #4C8C8A;" text="ADD NEW USER" textFill="WHITE">
+         <font>
+            <Font name="Georgia Bold" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
    </children>
 </AnchorPane>

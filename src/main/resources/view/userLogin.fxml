@@ -42,13 +42,7 @@
       <font>
          <Font name="System Bold" size="12.0" />
       </font></CheckBox>
-      <Label layoutX="223.0" layoutY="529.0" text="DONT HAVE AN ACCOUNT">
-         <font>
-            <Font name="Gabriola" size="15.0" />
-         </font>
-      </Label>
-      <Hyperlink fx:id="clickhere" layoutX="369.0" layoutY="527.0" onMouseClicked="#clickhereAction" text="Click here" underline="true" />
-      <Button fx:id="login" layoutX="187.0" layoutY="395.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="39.0" prefWidth="338.0" style="-fx-background-color: #4C8C8C;" text="LOGIN" textFill="#fffefe">
+      <Button fx:id="login" layoutX="173.0" layoutY="411.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="39.0" prefWidth="338.0" style="-fx-background-color: #4C8C8C;" text="LOGIN" textFill="#fffefe">
          <font>
             <Font name="Georgia Bold" size="21.0" />
          </font>
@@ -57,11 +51,16 @@
       </effect>
       </Button>
    <Line endX="387.4000244140625" layoutX="174.0" layoutY="501.0" startX="-50.0" />
-   <ImageView fx:id="image" fitHeight="92.0" fitWidth="95.0" layoutX="177.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="image" fitHeight="109.0" fitWidth="105.0" layoutX="180.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@../../../../../../../Pictures/Mental%20Hospital/user.png" />
       </image>
    </ImageView>
-   <Line endX="372.79998779296875" endY="11.599990844726562" layoutX="168.0" layoutY="118.0" startX="89.5999755859375" startY="11.599990844726562" />
+   <Line endX="372.79998779296875" endY="11.599990844726562" layoutX="168.0" layoutY="118.0" startX="108.5999755859375" startY="11.5999755859375" />
    <Hyperlink fx:id="forgetPass" layoutX="401.0" layoutY="315.0" onMouseClicked="#forgetPassAction" text="Forget Password ?" underline="true" />
+   <Label fx:id="text1" layoutX="187.0" layoutY="508.0" opacity="0.78" prefHeight="16.0" prefWidth="310.0" text="2025 All right reserved Serenity Mental Health Therapy Center" wrapText="true">
+      <font>
+         <Font name="Yu Gothic Bold" size="10.0" />
+      </font>
+   </Label>
 </AnchorPane>

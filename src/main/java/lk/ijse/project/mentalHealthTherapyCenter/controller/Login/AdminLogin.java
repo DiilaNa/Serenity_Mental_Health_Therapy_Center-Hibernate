@@ -28,9 +28,6 @@ public class AdminLogin implements Initializable {
     private CheckBox adminCheckBox;
 
     @FXML
-    private Hyperlink adminClickHere;
-
-    @FXML
     private Button adminLogin;
 
     @FXML
@@ -102,28 +99,13 @@ public class AdminLogin implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Login Failed..", ButtonType.OK).show();
         }
     }
-    @FXML
-    void clickHereAction(MouseEvent event) throws IOException {
-        loadPage("/view/userRegister.fxml");
-        SessionHolder.currentRole = role;
-    }
-
-    private void loadPage(String fxmlPath) throws IOException {
-        Stage stage = (Stage) adminClickHere.getScene().getWindow(); // Get current stage
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.setTitle("The Serenity Mental Health Therapy Center");
-        stage.show();
-    }
-
     private void navigateToMainPage(String fxmlPath,String role, String userName) throws IOException {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Scene scene = new Scene(loader.load());
             MainController controller = loader.getController();
             controller.setUserRole(role);
             controller.setUserName(userName);
-            Stage currentStage = (Stage) adminClickHere.getScene().getWindow();
+            Stage currentStage = (Stage) adminUserName.getScene().getWindow();
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setResizable(false);
@@ -136,11 +118,9 @@ public class AdminLogin implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
-
         ForgetPassword fg = loader.getController();
         fg.setRole(role);
         SessionHolder.currentRole = role;
-
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Change Password - Serenity Mental Health Therapy Center");

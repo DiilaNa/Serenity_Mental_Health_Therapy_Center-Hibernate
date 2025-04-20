@@ -118,7 +118,7 @@ public class ForgetPassword implements Initializable {
             if (isSaved) {
                 new Alert(Alert.AlertType.INFORMATION, " Password changed SuccessFully", ButtonType.OK).show();
                 SessionHolder.currentRole = role;
-                MailUtil.sendEmailWithGmail(email,UserName);
+                //MailUtil.sendEmailWithGmail(email,UserName);
             }else {
                 new Alert(Alert.AlertType.ERROR, "Operation Failed", ButtonType.OK).show();
             }

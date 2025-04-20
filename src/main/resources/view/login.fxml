@@ -11,23 +11,23 @@
 
 <AnchorPane prefHeight="550.0" prefWidth="600.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalHealthTherapyCenter.controller.Login.Login">
    <children>
-      <ImageView fx:id="imageBG" id="bgImage" fitHeight="550.0" fitWidth="495.0" layoutX="103.0" layoutY="-3.0" opacity="0.57" pickOnBounds="true">
+      <ImageView id="bgImage" fx:id="imageBG" fitHeight="550.0" fitWidth="495.0" layoutX="103.0" layoutY="-3.0" opacity="0.57" pickOnBounds="true">
          <image>
             <Image url="@../../../../../../../Pictures/Mental%20Hospital/bgPIc.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="text" layoutX="156.0" layoutY="94.0" prefHeight="40.0" prefWidth="437.0" text="Serenity Mental Health Therapy Center" wrapText="true">
+      <Label fx:id="text" layoutX="144.0" layoutY="96.0" prefHeight="40.0" prefWidth="445.0" text="Serenity Mental Health Therapy Center" wrapText="true">
          <font>
-            <Font name="Georgia Bold" size="21.0" />
+            <Font name="Georgia Bold" size="22.0" />
          </font>
       </Label>
       <Pane layoutY="-1.0" prefHeight="550.0" prefWidth="103.0" style="-fx-background-color: #4C8C8C;">
          <effect>
             <DropShadow radius="15.265" width="42.06" />
          </effect></Pane>
-      <Label layoutX="129.0" layoutY="54.0" prefHeight="40.0" prefWidth="198.0" text="WELCOME TO" textFill="#080808">
+      <Label layoutX="129.0" layoutY="54.0" prefHeight="40.0" prefWidth="261.0" text="WELCOME TO" textFill="#080808">
          <font>
-            <Font name="Corbel Bold Italic" size="26.0" />
+            <Font name="Impact" size="33.0" />
          </font>
       </Label>
       <ImageView fx:id="admin" fitHeight="140.0" fitWidth="140.0" layoutX="363.0" layoutY="222.0" onMouseClicked="#adminAction" pickOnBounds="true" preserveRatio="true">

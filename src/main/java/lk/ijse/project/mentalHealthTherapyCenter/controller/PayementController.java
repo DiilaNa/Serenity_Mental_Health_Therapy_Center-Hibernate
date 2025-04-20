@@ -69,10 +69,6 @@ public class PayementController implements Initializable {
 
     PaymentBO paymentBO = BOFactory.getInstance().getBO(BOType.PAYMENT);
 
-    @FXML
-    void tableAction(MouseEvent event) {
-
-    }
     private  void  loadTable() throws Exception {
         List<PaymentDTO> paymentDTOS =  paymentBO.getALL();
         ObservableList<PaymentTM> paymentTMS = FXCollections.observableArrayList();
@@ -90,6 +86,4 @@ public class PayementController implements Initializable {
         }
         table.setItems(paymentTMS);
     }
-
-
 }

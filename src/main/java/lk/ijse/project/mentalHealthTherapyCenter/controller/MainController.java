@@ -163,6 +163,7 @@ public class MainController implements Initializable {
             AnchorPane load = loader.load();
             MyProfile myProfileController = loader.getController();
             myProfileController.setUserName(userName);
+            SessionHolder.currentRole = role;
             load.getStylesheets().add(getClass().getResource("/css/h.css").toExternalForm());
             load.prefWidthProperty().bind(loadAnchor.widthProperty());
             load.prefHeightProperty().bind(loadAnchor.heightProperty());

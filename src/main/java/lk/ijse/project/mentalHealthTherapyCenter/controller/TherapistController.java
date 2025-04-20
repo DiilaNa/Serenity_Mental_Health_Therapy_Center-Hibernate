@@ -31,8 +31,6 @@ import java.util.ResourceBundle;
 
 public class TherapistController  implements Initializable {
 
-
-
     @FXML
     private Button delete;
 
@@ -56,8 +54,6 @@ public class TherapistController  implements Initializable {
 
     @FXML
     private ImageView image;
-
-
 
     @FXML
     private Button reset;

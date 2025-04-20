@@ -16,6 +16,7 @@ This project provides an efficient way for the Serenity Mental Health Therapy Ce
 - JavaFX
 - MySQL Database
 - JasperReports for Reporting
+- Java Mail
 
 ## Features
 - **User Authentication**: Secure login and password reset functionality.
@@ -24,17 +25,15 @@ This project provides an efficient way for the Serenity Mental Health Therapy Ce
 - **Medical History Management**: Track and update patient medical histories.
 - **Therapist Activity Report**: Generate statistical reports on therapist activities using JasperReports.
 
-## Installation Instructions
-
 ### Prerequisites
 - Java 8 or later
 - MySQL Database
 - Hibernate
 - JasperReports Library
-- Maven or Gradle (for dependency management)
+- Maven (for dependency management)
 
-#login Page
-![Dashboard Screenshot](/src/main/resources/ProjectImages/SerinityPic1.png)
+# login Page
+![Dashboard Screenshot](src/main/resources/ProjectImages/SerinityPic1.png)
 
 
 

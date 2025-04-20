@@ -11,7 +11,7 @@
 
 <AnchorPane prefHeight="703.0" prefWidth="1290.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalHealthTherapyCenter.controller.PayementController">
    <children>
-      <TableView fx:id="table" layoutX="38.0" layoutY="68.0" onMouseClicked="#tableAction" prefHeight="522.0" prefWidth="1222.0">
+      <TableView fx:id="table" layoutX="38.0" layoutY="68.0" prefHeight="522.0" prefWidth="1222.0">
         <columns>
           <TableColumn fx:id="tablePayID" prefWidth="135.20000457763672" text="ID" />
           <TableColumn fx:id="tablePayerName" prefWidth="204.8000030517578" text="Payer" />
