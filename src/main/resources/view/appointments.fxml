@@ -24,7 +24,7 @@
             <Font name="Impact" size="15.0" />
          </font>
       </Label>
-      <Line endX="744.7999877929688" endY="3.814697265625E-6" layoutX="128.0" layoutY="54.0" startX="-100.0" />
+      <Line endX="744.7999877929688" endY="3.814697265625E-6" layoutX="115.0" layoutY="54.0" startX="-100.0" />
       <Line endX="-93.4000015258789" endY="233.39999389648438" layoutX="115.0" layoutY="54.0" startX="756.199951171875" startY="233.39999389648438" />
       <Label layoutX="21.0" layoutY="260.0" text="Session Details">
          <font>
@@ -79,13 +79,19 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Label fx:id="sessionID" layoutX="212.0" layoutY="306.0" prefHeight="28.0" prefWidth="130.0" text="Session ID">
+      <Label fx:id="sessionID" layoutX="212.0" layoutY="297.0" prefHeight="28.0" prefWidth="130.0" text="Session ID">
          <font>
-            <Font name="Georgia" size="18.0" />
+            <Font name="Serif Bold" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="sessionTime" layoutX="186.0" layoutY="355.0" prefHeight="26.0" prefWidth="182.0" promptText="00:00:00" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <TextField fx:id="sessionNotes" layoutX="186.0" layoutY="401.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="sessionTime" layoutX="185.0" layoutY="346.0" prefHeight="26.0" prefWidth="182.0" promptText="00:00:00" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <font>
+            <Font name="Consolas Bold" size="14.0" />
+         </font></TextField>
+      <TextField fx:id="sessionNotes" layoutX="186.0" layoutY="389.0" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <font>
+            <Font name="Consolas Bold" size="14.0" />
+         </font></TextField>
       <DatePicker fx:id="sessionDate" layoutX="186.0" layoutY="444.0" prefHeight="26.0" prefWidth="182.0" />
       <Line endX="-93.4000015258789" endY="233.39999389648438" layoutX="115.0" layoutY="288.0" startX="759.3999633789062" startY="233.4000244140625" />
       <Label layoutX="24.0" layoutY="496.0" text="Payment Details">
@@ -139,14 +145,17 @@
       </VBox>
       <Label fx:id="paymentID" layoutX="212.0" layoutY="522.0" prefHeight="28.0" prefWidth="130.0" text="Payment ID">
          <font>
-            <Font name="Georgia" size="20.0" />
+            <Font name="Serif Bold" size="20.0" />
          </font>
          <padding>
             <Insets top="12.0" />
          </padding>
       </Label>
-      <TextField fx:id="payAMOUNT" layoutX="185.0" layoutY="582.0" prefHeight="26.0" prefWidth="182.0" promptText="Rs.0000" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <ComboBox fx:id="paymentMethod" layoutX="589.0" layoutY="540.0" opacity="0.58" prefHeight="26.0" prefWidth="215.0" promptText="select your payment method" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <TextField fx:id="payAMOUNT" layoutX="185.0" layoutY="582.0" prefHeight="26.0" prefWidth="182.0" promptText="Rs.0000" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <font>
+            <Font name="Consolas" size="13.0" />
+         </font></TextField>
+      <ComboBox fx:id="paymentMethod" layoutX="589.0" layoutY="540.0" opacity="0.58" prefHeight="26.0" prefWidth="215.0" promptText="Select your payment method" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
       <Label layoutX="578.0" layoutY="648.0" prefHeight="36.0" prefWidth="50.0" text="Date :">
          <font>
             <Font name="Impact" size="16.0" />
@@ -213,9 +222,9 @@
          </font>
       </Button>
       <ListView fx:id="programmsListView" layoutX="604.0" layoutY="395.0" prefHeight="111.0" prefWidth="238.0" />
-      <Label fx:id="docLoadLabel" alignment="TOP_LEFT" layoutX="604.0" layoutY="311.0" prefHeight="70.0" prefWidth="238.0" text="Session ID" wrapText="true">
+      <Label fx:id="docLoadLabel" alignment="TOP_LEFT" layoutX="603.0" layoutY="309.0" prefHeight="48.0" prefWidth="215.0" text="Session ID" wrapText="true">
          <font>
-            <Font name="Georgia" size="18.0" />
+            <Font name="Serif Bold" size="18.0" />
          </font>
       </Label>
       <Button fx:id="registerPatient" layoutX="20.0" layoutY="179.0" mnemonicParsing="false" onMouseClicked="#registerPatientAction" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;" text="Register " textFill="WHITE">
@@ -237,7 +246,7 @@
          <children>
             <Label fx:id="patientID" prefHeight="28.0" prefWidth="181.0" text="Patient ID">
                <font>
-                  <Font name="Georgia" size="20.0" />
+                  <Font name="Serif Bold" size="20.0" />
                </font>
                <padding>
                   <Insets bottom="12.0" top="12.0" />
@@ -335,7 +344,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="PatientsBTN" layoutX="1008.0" layoutY="403.0" mnemonicParsing="false" onAction="#PatientsBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 11; -fx-background-color: #4C8C8C;" text="Patients" textFill="WHITE">
+      <Button fx:id="PatientsBTN" layoutX="1008.0" layoutY="400.0" mnemonicParsing="false" onAction="#PatientsBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 11; -fx-background-color: #4C8C8C;" text="Patients" textFill="WHITE">
          <font>
             <Font name="Georgia Bold" size="15.0" />
          </font>
