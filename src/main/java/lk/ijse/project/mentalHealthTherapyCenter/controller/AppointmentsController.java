@@ -88,8 +88,6 @@ public class AppointmentsController implements Initializable {
     @FXML
     private TextField search;
 
-
-
     @FXML
     private Button addPrograms;
 
@@ -416,15 +414,19 @@ public class AppointmentsController implements Initializable {
         generateNextAppointmentID();
         generateNextPatientID();
         generateNextPaymentID();
+        search.clear();
+        paymentMethod.getItems().clear();
         paymentMethod.setItems(FXCollections.observableArrayList("Card Payment", "Cash Payment"));
         sessionTime.clear();
         sessionNotes.clear();
+        sessionDate.setValue(null);
         payAMOUNT.clear();
+        docLoadLabel.setText("");
         docLoadLabel.setDisable(true);
         programmsListView.refresh();
+        programmsListView.getItems().clear();
         vbox1.setVisible(false);
         vbox2.setVisible(false);
-
     }
     private void generateNextAppointmentID() {
         String nextAptID =appointmentBO.getNextSessionID();

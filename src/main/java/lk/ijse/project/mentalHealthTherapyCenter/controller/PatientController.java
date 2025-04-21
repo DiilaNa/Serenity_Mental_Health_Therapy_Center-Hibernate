@@ -118,6 +118,12 @@ public class PatientController implements Initializable {
     @FXML
     private Button viewMedicalHistoryBTN;
 
+    @FXML
+    private Button reset;
+
+    @FXML
+    void resetAction(ActionEvent event) throws Exception {refreshPage();}
+
     PatientBO patientBO = BOFactory.getInstance().getBO(BOType.PATIENT);
 
     @FXML
@@ -135,7 +141,6 @@ public class PatientController implements Initializable {
             new Alert(Alert.AlertType.INFORMATION, "Please select data from table",ButtonType.CLOSE).show();
             return;
         }
-
         PatientDTO patientDTO = new PatientDTO(
                 patientID,
                 patientName,
@@ -154,13 +159,11 @@ public class PatientController implements Initializable {
         }else {
             new Alert(Alert.AlertType.ERROR, "PatientDAOImpl updated Failed",ButtonType.OK).show();
         }
-
     }
 
     @FXML
     void deleteAction(ActionEvent event) throws Exception {
         String patientID = loadPatientID.getText();
-
         if (patientID.isEmpty()) {
             new Alert(Alert.AlertType.CONFIRMATION, " Please select data from table",ButtonType.CLOSE).show();
             return;
@@ -177,7 +180,6 @@ public class PatientController implements Initializable {
     @FXML
     void tableAction(MouseEvent event) {
         PatientTM selectedPatient = table.getSelectionModel().getSelectedItem();
-
         if (selectedPatient != null) {
             loadPatientID.setText(selectedPatient.getPatientID());
             PName.setText(selectedPatient.getPatientName());
@@ -187,9 +189,7 @@ public class PatientController implements Initializable {
             PatientAddress.setText(selectedPatient.getPatientAddress());
             PatientContactNO.setText(selectedPatient.getPatientPhone());
             PatientEmail.setText(selectedPatient.getPatientEmail());
-
         }
-
     }
 
     @FXML
@@ -270,6 +270,7 @@ public class PatientController implements Initializable {
         PName.clear();
         PDateOfBirth.clear();
         PatientNic.clear();
+        PatientGender.getItems().clear();
         PatientGender.setItems(FXCollections.observableArrayList("Male", "Female"));
         PatientAddress.clear();
         PatientContactNO.clear();

@@ -219,9 +219,9 @@ public class ViewAppointments implements Initializable {
         txtPaymentAmount.clear();
         txtSessionNotes.clear();
         comboPatientName.getItems().clear();
+        comboPaymentMethod.getItems().clear();
         comboPaymentMethod.setItems(FXCollections.observableArrayList("Card Payment","Cash Payment"));
         ComboDocId.getItems().clear();
-
     }
 
     @FXML

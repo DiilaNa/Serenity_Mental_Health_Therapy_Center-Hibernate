@@ -128,5 +128,20 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Button fx:id="reset" layoutX="1087.0" layoutY="567.0" mnemonicParsing="false" onAction="#resetAction" prefHeight="35.0" prefWidth="162.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="Reset Details" textFill="WHITE">
+         <font>
+            <Font name="Impact" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <Glow>
+               <input>
+                  <DropShadow />
+               </input>
+            </Glow>
+         </effect>
+      </Button>
    </children>
 </AnchorPane>
