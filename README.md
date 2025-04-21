@@ -32,8 +32,22 @@ This project provides an efficient way for the Serenity Mental Health Therapy Ce
 - JasperReports Library
 - Maven (for dependency management)
 
-# login Page
+# Ui & UX 
+
+### login Page
 ![Dashboard Screenshot](src/main/resources/ProjectImages/SerinityPic1.png)
+### Appointments
+![Dashboard Screenshot](src/main/resources/ProjectImages/apt.png)
+### Patients
+![Dashboard Screenshot](src/main/resources/ProjectImages/patients.png)
+### Payments
+![Dashboard Screenshot](src/main/resources/ProjectImages/payments.png)
+### Therapist
+![Dashboard Screenshot](src/main/resources/ProjectImages/therapist.png)
+### Therapy Programs
+![Dashboard Screenshot](src/main/resources/ProjectImages/therapyDetails.png)
+### My Profile
+![Dashboard Screenshot](src/main/resources/ProjectImages/myProfile.png)
 
 
 
