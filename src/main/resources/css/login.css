@@ -9,7 +9,6 @@
 }
 
 .image-view:hover {
-    -fx-effect: dropshadow(gaussian, #ffffff, 20, 0, 0, 10);
     -fx-opacity: 0.85;
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
