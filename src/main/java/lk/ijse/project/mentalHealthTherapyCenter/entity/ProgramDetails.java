@@ -16,14 +16,11 @@ public class ProgramDetails implements SuperEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long programDetailsID;
 
-
     @ManyToOne
-  /*  @MapsId("patientID")*/
     @JoinColumn(name = "patientID")
     private  Patient patient;
 
     @ManyToOne
-   /* @MapsId("therapyProgramID")*/
     @JoinColumn(name = "therapyProgramID")
     private TPrograms tPrograms;
 
