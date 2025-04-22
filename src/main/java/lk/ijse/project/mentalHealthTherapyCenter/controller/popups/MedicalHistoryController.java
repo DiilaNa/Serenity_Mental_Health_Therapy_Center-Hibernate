@@ -30,8 +30,7 @@ public class MedicalHistoryController implements Initializable {
 
         tablePid.setCellValueFactory(new PropertyValueFactory<>("patientID"));
         tablePName.setCellValueFactory(new PropertyValueFactory<>("patientName"));
-        tableProID.setCellValueFactory(new PropertyValueFactory<>("programID"));
-        tableProName.setCellValueFactory(new PropertyValueFactory<>("programName"));
+        tableProID.setCellValueFactory(new PropertyValueFactory<>("programs"));
         tableDocName.setCellValueFactory(new PropertyValueFactory<>("doctorNAME"));
         tableAptID.setCellValueFactory(new PropertyValueFactory<>("sessionID"));
         tableDate.setCellValueFactory(new PropertyValueFactory<>("sessionDATE"));
@@ -70,9 +69,6 @@ public class MedicalHistoryController implements Initializable {
     private TableColumn<String,MedicalHistoryTM> tableProID;
 
     @FXML
-    private TableColumn<String,MedicalHistoryTM> tableProName;
-
-    @FXML
     private TableColumn<String,MedicalHistoryTM> tableTime;
 
     PatientBO patientBO = BOFactory.getInstance().getBO(BOType.PATIENT);
@@ -85,8 +81,7 @@ public class MedicalHistoryController implements Initializable {
             MedicalHistoryTM medicalHistoryTM = new MedicalHistoryTM(
                     medicalHistoryDTO.getPatientID(),
                     medicalHistoryDTO.getPatientName(),
-                    medicalHistoryDTO.getProgramID(),
-                    medicalHistoryDTO.getProgramName(),
+                    medicalHistoryDTO.getPrograms(),
                     medicalHistoryDTO.getDoctorNAME(),
                     medicalHistoryDTO.getSessionID(),
                     medicalHistoryDTO.getSessionDATE(),

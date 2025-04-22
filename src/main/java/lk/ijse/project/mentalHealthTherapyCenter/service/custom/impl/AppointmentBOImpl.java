@@ -67,14 +67,10 @@ public class AppointmentBOImpl implements AppointmentBO {
             }
 
             for (TPrograms selectedProgram : validPrograms) {
-               /* ProgramDetailsID compositeKey = new ProgramDetailsID(
-                        selectedProgram.getProgramID(),
-                        patient.getPatientID()
-                );*/
                 ProgramDetails programDetails = new ProgramDetails();
-               /* programDetails.setID(compositeKey);*/
                 programDetails.setPatient(patient);
                 programDetails.setTPrograms(selectedProgram);
+                programDetails.setSessionID(sessionDTO.getSessionId());
 
                boolean isSaved = programDetailsDAO.save(programDetails, session);
                if (!isSaved) {
@@ -162,23 +158,12 @@ public class AppointmentBOImpl implements AppointmentBO {
            }
 
            for (TPrograms selectedProgram : validPrograms) {
-              /* ProgramDetailsID compositeKey = new ProgramDetailsID(
-                       patient.getPatientID(),
-                       selectedProgram.getProgramID()
-               );*/
-
-             /*  ProgramDetails programDetails = session.get(ProgramDetails.class, compositeKey);*/
-              /* if (programDetails == null) {*/
-                   // Insert if not exists
                   ProgramDetails programDetails = new ProgramDetails();
-                 /*  programDetails.setID(compositeKey);*/
                    programDetails.setPatient(patient);
                    programDetails.setTPrograms(selectedProgram);
-             /*  } *//*else {
-                   // Optional: update fields if you have any
-                   programDetails.setTPrograms(selectedProgram); // might not be necessary if not changed
-               }
-*/
+                   programDetails.setSessionID(sessionDTO.getSessionId());
+
+
                boolean isSaved = programDetailsDAO.update(programDetails, session);
                if (!isSaved) {
                    transaction.rollback();

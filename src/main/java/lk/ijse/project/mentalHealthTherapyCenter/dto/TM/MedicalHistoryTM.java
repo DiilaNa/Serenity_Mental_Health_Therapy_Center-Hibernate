@@ -10,8 +10,7 @@ import lombok.NoArgsConstructor;
 public class MedicalHistoryTM {
     String patientID;
     String patientName;
-    String programID;
-    String programName;
+    String programs;
     String doctorNAME;
     String sessionID;
     String sessionDATE;

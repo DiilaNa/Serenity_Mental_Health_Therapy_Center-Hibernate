@@ -244,7 +244,7 @@ public class MyProfile implements Initializable {
 
     private void loadBTN(){
         String role = SessionHolder.currentRole;
-        if (role != null && role.equalsIgnoreCase("Admin")) {
+        if (role == null || role.equalsIgnoreCase("Admin")) {
             addNewUser.setDisable(false);
         }else {
             addNewUser.setDisable(true);
