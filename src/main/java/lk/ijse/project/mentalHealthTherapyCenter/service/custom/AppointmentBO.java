@@ -14,7 +14,6 @@ public interface AppointmentBO extends SuperBO {
     String getNextPaymentID();
     List<PatientDTO> searchPatientBYName(String searchBYName);
     List<ViewSessionDTO>getAllAppointments();
-    List<String> loadPatientNames() throws Exception;
     List<String> loadDoctorIds() throws Exception;
     String searchPatientID(String patientName);
     boolean cancelAppointment(String id);

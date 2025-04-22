@@ -155,9 +155,9 @@ public class PatientController implements Initializable {
         boolean isUpdated = patientBO.savePatient(patientDTO);
         if (isUpdated) {
             refreshPage();
-            new Alert(Alert.AlertType.INFORMATION, "PatientDAOImpl updated successfully", ButtonType.OK).show();
+            new Alert(Alert.AlertType.INFORMATION, "Patients saved successfully", ButtonType.OK).show();
         }else {
-            new Alert(Alert.AlertType.ERROR, "PatientDAOImpl updated Failed",ButtonType.OK).show();
+            new Alert(Alert.AlertType.ERROR, "Patients saved Failed",ButtonType.OK).show();
         }
     }
 
@@ -222,9 +222,9 @@ public class PatientController implements Initializable {
        boolean isUpdated = patientBO.updatePatient(patientDTO);
             if (isUpdated) {
                 refreshPage();
-                new Alert(Alert.AlertType.INFORMATION, "PatientDAOImpl updated successfully", ButtonType.OK).show();
+                new Alert(Alert.AlertType.INFORMATION, "Patients updated successfully", ButtonType.OK).show();
             }else {
-                new Alert(Alert.AlertType.ERROR, "PatientDAOImpl updated Failed",ButtonType.OK).show();
+                new Alert(Alert.AlertType.ERROR, "Patients updated Failed",ButtonType.OK).show();
             }
     }
 

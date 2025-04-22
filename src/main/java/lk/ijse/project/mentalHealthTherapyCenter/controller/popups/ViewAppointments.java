@@ -61,8 +61,11 @@ public class ViewAppointments implements Initializable {
     @FXML
     private Button cancelBTN;
 
+/*    @FXML
+    private ComboBox<String> comboPatientName;*/
+
     @FXML
-    private ComboBox<String> comboPatientName;
+    private Label labelPatientName;
 
     @FXML
     private ComboBox<String> comboPaymentMethod;
@@ -169,7 +172,7 @@ public class ViewAppointments implements Initializable {
         String appointmentNotes = txtSessionNotes.getText();
         String appointmentTime = textSessionTime.getText();
         String doctorID = ComboDocId.getValue();
-        String patientName = comboPatientName.getValue();
+        String patientName = labelPatientName.getText();
         String paymentID = labelPaymentID.getText();
         Double paymentAmount = Double.valueOf(txtPaymentAmount.getText());
         String paymentMethod = comboPaymentMethod.getValue();
@@ -200,6 +203,8 @@ public class ViewAppointments implements Initializable {
 
         );
 
+        System.out.println("Selected program IDs: " + programDetailsDTO.getProgramId());
+
         boolean isSaved = appointmentBO.updateAppointments(programDetailsDTO,sessionDTO,paymentDTO);
         if (isSaved) {
             refreshPage();
@@ -218,7 +223,7 @@ public class ViewAppointments implements Initializable {
         textSessionTime.clear();
         txtPaymentAmount.clear();
         txtSessionNotes.clear();
-        comboPatientName.getItems().clear();
+        labelPatientName.setText("");
         comboPaymentMethod.getItems().clear();
         comboPaymentMethod.setItems(FXCollections.observableArrayList("Card Payment","Cash Payment"));
         ComboDocId.getItems().clear();
@@ -235,7 +240,7 @@ public class ViewAppointments implements Initializable {
             txtSessionNotes.setText(selectedItem.getSessionNotes());
             textSessionTime.setText(selectedItem.getSessionTime());
             ComboDocId.setValue(selectedItem.getDoctorID());
-            comboPatientName.setValue(selectedItem.getPatientName());
+            labelPatientName.setText(selectedItem.getPatientName());
             labelPaymentID.setText(String.valueOf(selectedItem.getPaymentID()));
             txtPaymentAmount.setText(String.valueOf(selectedItem.getPaymentAmount()));
             comboPaymentMethod.setValue(selectedItem.getPaymentMethod());
@@ -272,7 +277,7 @@ public class ViewAppointments implements Initializable {
         textSessionTime.clear();
         txtPaymentAmount.clear();
         txtSessionNotes.clear();
-        comboPatientName.setItems(FXCollections.observableArrayList(appointmentBO.loadPatientNames()));
+        labelPatientName.setText("");
         comboPaymentMethod.setItems(FXCollections.observableArrayList("Card Payment","Cash Payment"));
         ComboDocId.setItems(FXCollections.observableArrayList(appointmentBO.loadDoctorIds()));
     }

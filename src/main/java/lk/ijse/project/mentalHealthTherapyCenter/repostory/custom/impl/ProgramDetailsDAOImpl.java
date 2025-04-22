@@ -56,4 +56,13 @@ public class ProgramDetailsDAOImpl implements ProgramDetailsDAO {
     public Optional<String> getLastPK() {
         return Optional.empty();
     }
+
+    @Override
+    public List<ProgramDetails> getByPatientAndSession(String patientID, String sessionID, Session session) {
+        String hql = "FROM ProgramDetails pd WHERE pd.patient.patientID = :pid AND pd.sessionID = :sid";
+        return session.createQuery(hql, ProgramDetails.class)
+                .setParameter("pid", patientID)
+                .setParameter("sid", sessionID)
+                .getResultList();
+    }
 }
