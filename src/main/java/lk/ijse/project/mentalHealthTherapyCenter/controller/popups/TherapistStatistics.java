@@ -1,21 +1,28 @@
 package lk.ijse.project.mentalHealthTherapyCenter.controller.popups;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.DoctorStatsDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.TherapistBO;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.view.JasperViewer;
+import org.hibernate.Session;
+
 
 import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.sql.Connection;
+import java.util.*;
 
 public class TherapistStatistics implements Initializable {
     @Override
@@ -48,6 +55,29 @@ public class TherapistStatistics implements Initializable {
 
     TherapistBO therapistBO = BOFactory.getInstance().getBO(BOType.THERAPIST);
 
+    @FXML
+    void printBTNAction(ActionEvent event) {
+        Session session = null;
+        try {
+            session = FactoryConfiguration.getInstance().getSession();
+            Connection connection = session.doReturningWork(con -> con);
+
+            JasperReport jasperReport = JasperCompileManager.compileReport(
+                    getClass().getResourceAsStream("/JasperReports/Stats.jrxml"));
+
+
+
+            Map<String, Object> parameters = new HashMap<>();
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
+            JasperViewer.viewReport(jasperPrint, false);
+
+        } catch (JRException e) {
+            new Alert(Alert.AlertType.ERROR, "Fail to load Report").show();
+            e.printStackTrace();
+        }
+    }
+
     private void loadChart() {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         List<DoctorStatsDTO> statsList = therapistBO.loadDoctorStatistics();
@@ -69,4 +99,5 @@ public class TherapistStatistics implements Initializable {
         }
         doctorBarChart.setBarGap(5);
     }
+
 }

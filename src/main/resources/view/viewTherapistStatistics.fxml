@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,7 +16,7 @@
 
 <AnchorPane prefHeight="425.0" prefWidth="629.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.mentalHealthTherapyCenter.controller.popups.TherapistStatistics">
    <children>
-      <Label layoutX="214.0" layoutY="26.0" text="Therapist Statistics" textFill="#408181">
+      <Label layoutX="228.0" layoutY="14.0" text="Therapist Statistics" textFill="#408181">
          <font>
             <Font name="Georgia Bold" size="20.0" />
          </font>
@@ -21,21 +24,35 @@
             <Glow level="0.17" />
          </effect>
       </Label>
-      <ImageView fx:id="image" fitHeight="51.0" fitWidth="48.0" layoutX="150.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="image" fitHeight="32.0" fitWidth="48.0" layoutX="169.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../Pictures/Mental%20Hospital/icons8-program-50.png" />
          </image>
       </ImageView>
       <Pane prefHeight="426.0" prefWidth="67.0" style="-fx-background-color: lightblue;" />
-       <BarChart fx:id="doctorBarChart" layoutX="87.0" layoutY="86.0" prefHeight="298.0" prefWidth="469.0"
-                 title="Doctor Session Statistics" style="-fx-background-color: #e0f7fa;">
+       <BarChart fx:id="doctorBarChart" layoutX="79.0" layoutY="64.0" prefHeight="298.0" prefWidth="517.0" style="-fx-background-color: #e0f7fa;" title="Doctor Session Statistics">
            <xAxis>
-               <CategoryAxis fx:id="xAxis" label="Doctor Name" />
+               <CategoryAxis label="Doctor Name" fx:id="xAxis" />
            </xAxis>
            <yAxis>
                <NumberAxis fx:id="yAxis" label="Session Count" />
            </yAxis>
        </BarChart>
+      <Button layoutX="473.0" layoutY="380.0" mnemonicParsing="false" onAction="#printBTNAction" prefHeight="32.0" prefWidth="122.0" style="-fx-background-radius: 7; -fx-background-color: #eb2f06;" text="Print" textFill="WHITE">
+         <font>
+            <Font name="Georgia Bold" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow>
+               <input>
+                  <Glow />
+               </input>
+            </DropShadow>
+         </effect>
+      </Button>
 
 
    </children>
