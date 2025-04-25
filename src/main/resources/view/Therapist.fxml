@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -167,5 +170,14 @@
             </DropShadow>
          </effect>
       </Button>
+      <!--<BarChart fx:id="doctorBarChart" layoutX="958.0" layoutY="495.0" prefHeight="190.0" prefWidth="317.0">
+         <xAxis>
+            <CategoryAxis label="Doctor" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis label="Sessions" />
+         </yAxis>
+      </BarChart>-->
+
    </children>
 </AnchorPane>

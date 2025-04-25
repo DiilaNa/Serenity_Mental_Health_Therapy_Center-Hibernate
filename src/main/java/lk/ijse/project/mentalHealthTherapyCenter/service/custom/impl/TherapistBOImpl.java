@@ -1,7 +1,9 @@
 package lk.ijse.project.mentalHealthTherapyCenter.service.custom.impl;
 
+import javafx.fxml.FXML;
 import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.DoctorDTO;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.DoctorStatsDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.Therapist;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOFactory;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.DAOType;
@@ -136,5 +138,9 @@ public class TherapistBOImpl implements TherapistBO {
             docNames.add(doctorDTO);
         }
         return docNames;
+    }
+    @FXML
+    public List<DoctorStatsDTO> loadDoctorStatistics() {
+        return therapistDAO.getDoctorStatistics();
     }
 }

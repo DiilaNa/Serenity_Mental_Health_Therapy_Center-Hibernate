@@ -16,3 +16,9 @@
     -fx-background-color: #00cff3 !important;
     -fx-text-fill: white;
 }
+.chart-bar {
+    -fx-bar-fill: #408181; /* Your preferred color */
+    -fx-background-insets: 0;
+    -fx-background-radius: 5;
+    -fx-padding: 0 10px;
+}

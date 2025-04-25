@@ -1,16 +1,20 @@
 package lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.impl;
 
+import javafx.fxml.FXML;
 import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
+import lk.ijse.project.mentalHealthTherapyCenter.dto.DoctorStatsDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.Therapist;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.TherapistDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.exeception.NotFoundException;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.annotations.Fetch;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -103,5 +107,23 @@ public class TherapistDAOImpl implements TherapistDAO {
                 session.close();
             }
         }
+    }
+    @FXML
+    public List<DoctorStatsDTO> getDoctorStatistics() {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        String sql = "SELECT d.doctorName, COUNT(a.sessionId) AS session_count\n" +
+                "FROM therapist d\n" +
+                "         JOIN appointments a ON d.doctorID = a.doctor_id\n" +
+                "GROUP BY d.doctorName;";
+
+        List<Object[]> resultList = session.createNativeQuery(sql).getResultList();
+        List<DoctorStatsDTO> stats = new ArrayList<>();
+
+        for (Object[] row : resultList) {
+            String doctorName = (String) row[0];
+            long count = ((Number) row[1]).longValue();
+            stats.add(new DoctorStatsDTO(doctorName, count));
+        }
+        return stats;
     }
 }
