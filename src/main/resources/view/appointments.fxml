@@ -79,7 +79,7 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Label fx:id="sessionID" layoutX="212.0" layoutY="297.0" prefHeight="28.0" prefWidth="130.0" text="Session ID">
+      <Label fx:id="sessionID" layoutX="212.0" layoutY="297.0" prefHeight="28.0" prefWidth="130.0" text="Session ID" textFill="#0a614c">
          <font>
             <Font name="Serif Bold" size="18.0" />
          </font>
@@ -143,7 +143,7 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Label fx:id="paymentID" layoutX="212.0" layoutY="522.0" prefHeight="28.0" prefWidth="130.0" text="Payment ID">
+      <Label fx:id="paymentID" layoutX="212.0" layoutY="522.0" prefHeight="28.0" prefWidth="130.0" text="Payment ID" textFill="#008667">
          <font>
             <Font name="Serif Bold" size="20.0" />
          </font>
@@ -176,7 +176,7 @@
             <Font name="Impact" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="addAppointmentBTN" layoutX="1008.0" layoutY="80.0" mnemonicParsing="false" onAction="#addAppointmentBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 11; -fx-background-color: #4C8C8C;" text="Add Appointments" textFill="WHITE">
+      <Button fx:id="addAppointmentBTN" layoutX="1008.0" layoutY="80.0" mnemonicParsing="false" onAction="#addAppointmentBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 7; -fx-background-color: #4C8C8C;" text="Add Appointments" textFill="WHITE">
          <font>
             <Font name="Georgia Bold" size="15.0" />
          </font>
@@ -191,7 +191,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="reset" layoutX="1008.0" layoutY="160.0" mnemonicParsing="false" onAction="#resetAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 11; -fx-background-color: #4C8C8C;" text="Reset Details" textFill="WHITE">
+      <Button fx:id="reset" layoutX="1008.0" layoutY="160.0" mnemonicParsing="false" onAction="#resetAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 7; -fx-background-color: #4C8C8C;" text="Reset Details" textFill="WHITE">
          <font>
             <Font name="Georgia Bold" size="15.0" />
          </font>
@@ -211,12 +211,12 @@
             <Image url="@../../../../../../../Pictures/Mental%20Hospital/apt.png" />
          </image>
       </ImageView>
-      <Button fx:id="addDoctors" layoutX="442.0" layoutY="306.0" mnemonicParsing="false" onMouseClicked="#addDoctorsAction" prefHeight="27.0" prefWidth="107.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;" text="Assign Doctors" textFill="WHITE">
+      <Button fx:id="addDoctors" layoutX="421.0" layoutY="306.0" mnemonicParsing="false" onMouseClicked="#addDoctorsAction" prefHeight="47.0" prefWidth="142.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 7;" text="Assign Doctors" textFill="WHITE">
          <font>
             <Font name="Impact" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="addPrograms" layoutX="432.0" layoutY="427.0" mnemonicParsing="false" onMouseClicked="#addProgramsAction" prefHeight="27.0" prefWidth="128.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;" text="Choose  Programs" textFill="WHITE">
+      <Button fx:id="addPrograms" layoutX="421.0" layoutY="400.0" mnemonicParsing="false" onMouseClicked="#addProgramsAction" prefHeight="47.0" prefWidth="142.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 7;" text="Choose  Programs" textFill="WHITE">
          <font>
             <Font name="Impact" size="14.0" />
          </font>
@@ -227,24 +227,24 @@
             <Font name="Serif Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="registerPatient" layoutX="20.0" layoutY="179.0" mnemonicParsing="false" onMouseClicked="#registerPatientAction" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;" text="Register " textFill="WHITE">
+      <Button fx:id="registerPatient" layoutX="20.0" layoutY="179.0" mnemonicParsing="false" onMouseClicked="#registerPatientAction" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: #264926; -fx-background-radius: 7;" text="Register " textFill="WHITE">
          <font>
-            <Font name="Impact" size="14.0" />
+            <Font name="Impact" size="16.0" />
          </font>
       </Button>
-      <TextField fx:id="search" layoutX="138.0" layoutY="95.0" prefHeight="30.0" prefWidth="319.0" promptText="Search Patient" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+      <TextField fx:id="search" layoutX="161.0" layoutY="82.0" prefHeight="35.0" prefWidth="307.0" promptText="Search Patient">
          <font>
             <Font name="Consolas Bold" size="16.0" />
          </font>
       </TextField>
-      <Button fx:id="searchPatient" layoutX="22.0" layoutY="93.0" mnemonicParsing="false" onMouseClicked="#searchPatientAction" prefHeight="18.0" prefWidth="100.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 12;" text="Search " textFill="WHITE">
+      <Button fx:id="searchPatient" layoutX="22.0" layoutY="84.0" mnemonicParsing="false" onMouseClicked="#searchPatientAction" prefHeight="36.0" prefWidth="114.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 7;" text="Search " textFill="WHITE">
          <font>
             <Font name="Impact" size="14.0" />
          </font>
       </Button>
       <VBox fx:id="vbox1" layoutX="502.0" layoutY="66.0" prefHeight="200.0" prefWidth="174.0">
          <children>
-            <Label fx:id="patientID" prefHeight="28.0" prefWidth="181.0" text="Patient ID">
+            <Label fx:id="patientID" prefHeight="28.0" prefWidth="181.0" text="Patient ID" textFill="#008667">
                <font>
                   <Font name="Serif Bold" size="20.0" />
                </font>
@@ -314,7 +314,7 @@
             </Label>
          </children>
       </VBox>
-      <Button fx:id="viewAppointmentsBTN" layoutX="1008.0" layoutY="240.0" mnemonicParsing="false" onAction="#viewAppointmentsBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 11; -fx-background-color: #4C8C8C;" text="View Appointments" textFill="WHITE">
+      <Button fx:id="viewAppointmentsBTN" layoutX="1008.0" layoutY="240.0" mnemonicParsing="false" onAction="#viewAppointmentsBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 7; -fx-background-color: #4C8C8C;" text="View Appointments" textFill="WHITE">
          <font>
             <Font name="Georgia Bold" size="15.0" />
          </font>
@@ -329,7 +329,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="printBillBTN" layoutX="1008.0" layoutY="320.0" mnemonicParsing="false" onAction="#printBillBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 11; -fx-background-color: #4C8C8C;" text="Print the Bill" textFill="WHITE">
+      <Button fx:id="printBillBTN" layoutX="1008.0" layoutY="320.0" mnemonicParsing="false" onAction="#printBillBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 7; -fx-background-color: #4C8C8C;" text="Print the Bill" textFill="WHITE">
          <font>
             <Font name="Georgia Bold" size="15.0" />
          </font>
@@ -344,7 +344,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="PatientsBTN" layoutX="1008.0" layoutY="400.0" mnemonicParsing="false" onAction="#PatientsBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 11; -fx-background-color: #4C8C8C;" text="Patients" textFill="WHITE">
+      <Button fx:id="PatientsBTN" layoutX="1008.0" layoutY="400.0" mnemonicParsing="false" onAction="#PatientsBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 7; -fx-background-color: #4C8C8C;" text="Patients" textFill="WHITE">
          <font>
             <Font name="Georgia Bold" size="15.0" />
          </font>

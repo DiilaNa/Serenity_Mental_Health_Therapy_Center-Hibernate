@@ -12,6 +12,7 @@
 
 
 .button:hover {
-    -fx-effect: innershadow(gaussian, #015c5c, 10, 0.5, 0, 0);
-
+    -fx-effect: dropshadow(gaussian, #015c5c, 10, 0.5, 0, 0);
+    -fx-background-color: #00cff3 !important;
+    -fx-text-fill: white;
 }

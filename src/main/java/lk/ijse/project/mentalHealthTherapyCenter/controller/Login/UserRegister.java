@@ -167,7 +167,7 @@ public class UserRegister implements Initializable {
         userRole.setItems(FXCollections.observableArrayList("USER", "ADMIN"));
     }
     private void loadPage(String fxmlPath) throws IOException {
-        Stage stage = (Stage) clickhere.getScene().getWindow(); // Get current stage
+        Stage stage = (Stage) userId.getScene().getWindow(); // Get current stage
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
         stage.setScene(scene);
         stage.setResizable(false);

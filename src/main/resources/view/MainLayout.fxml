@@ -151,7 +151,7 @@
                   <Font name="Impact" size="19.0" />
                </font>
             </Label>
-            <Button fx:id="signOutButton" layoutX="629.0" layoutY="22.0" mnemonicParsing="false" onMouseClicked="#signOutButtonAction" prefHeight="34.0" prefWidth="106.0" style="-fx-background-color: lightgreen; -fx-background-radius: 12;" text="SIGN OUT">
+            <Button fx:id="signOutButton" layoutX="610.0" layoutY="22.0" mnemonicParsing="false" onMouseClicked="#signOutButtonAction" prefHeight="34.0" prefWidth="125.0" style="-fx-background-color: lightgreen; -fx-background-radius: 4;" text="SIGN OUT">
                <font>
                   <Font name="Impact" size="17.0" />
                </font>

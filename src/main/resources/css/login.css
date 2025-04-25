@@ -30,5 +30,10 @@
 }
 
 
+.button:hover {
+    -fx-background-color: #32e1b6;
+}
+
+
 
 

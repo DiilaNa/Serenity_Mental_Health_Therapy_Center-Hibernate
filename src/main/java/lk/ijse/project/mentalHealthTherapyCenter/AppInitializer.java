@@ -11,7 +11,7 @@ public class AppInitializer extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/MainLayout.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("The Serenity Mental Health Therapy Center");
-        scene.getStylesheets().add(getClass().getResource("/css/login.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/css/h.css").toExternalForm());
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

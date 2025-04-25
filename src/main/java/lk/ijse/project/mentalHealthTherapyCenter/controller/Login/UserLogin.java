@@ -124,6 +124,7 @@ public class UserLogin implements Initializable {
         controller.setUserName(userName);
         Stage currentStage = (Stage) image.getScene().getWindow();
         Stage stage = new Stage();
+        scene.getStylesheets().add(getClass().getResource("/css/h.css").toExternalForm());
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("The Serenity Mental Health Therapy Center");
