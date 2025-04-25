@@ -101,24 +101,6 @@ public class TherapistController  implements Initializable {
     @FXML
     void viewActivitiesBtnAction(ActionEvent event) throws IOException {
         loadNewPage("/view/viewTherapistStatistics.fxml");
-      /*  Session session = FactoryConfiguration.getInstance().getSession();
-        try {
-            session = FactoryConfiguration.getInstance().getSession();
-            Connection connection = session.doReturningWork(con -> con);
-
-            JasperReport jasperReport = JasperCompileManager.compileReport(
-                    getClass().getResourceAsStream("/JasperReports/TherapistStatistics.jrxml"));
-
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, connection);
-            JasperViewer.viewReport(jasperPrint, false);
-
-        } catch (JRException e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }*/
     }
 
     @FXML
@@ -133,8 +115,6 @@ public class TherapistController  implements Initializable {
             docMail.setText(selectedPatient.getDoctorEmail());
         }
     }
-
-
     @FXML
     void deleteBtnAction(ActionEvent event) throws Exception {
         String patientID = docIDlabel.getText();

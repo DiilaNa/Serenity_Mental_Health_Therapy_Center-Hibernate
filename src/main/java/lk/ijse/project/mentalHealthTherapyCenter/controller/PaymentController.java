@@ -11,7 +11,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.PaymentDTO;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.TM.PaymentTM;
 import lk.ijse.project.mentalHealthTherapyCenter.service.BOFactory;
@@ -19,11 +18,10 @@ import lk.ijse.project.mentalHealthTherapyCenter.service.BOType;
 import lk.ijse.project.mentalHealthTherapyCenter.service.custom.PaymentBO;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class PayementController implements Initializable {
+public class PaymentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Image image1 = new Image(getClass().getResourceAsStream("/images/Paymentmoney.png"));

@@ -251,7 +251,7 @@ public class AppointmentsController implements Initializable {
                 System.out.println("Error: Invalid format for program item! " + program);
             }
         }
-     /*   String namePattern = "^[a-zA-Z ]+$";
+        String namePattern = "^[a-zA-Z ]+$";
         String addressPattern = "^[a-zA-Z0-9, -]+$";
         String mailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
         String PhoneNoPattern = "^\\+?[1-9]\\d{0,2}[-.\\s]?\\d{1,4}[-.\\s]?\\d{3,4}[-.\\s]?\\d{3,4}$";
@@ -259,33 +259,15 @@ public class AppointmentsController implements Initializable {
         String timePattern = "^(?:[01]\\d|2[0-3]):[0-5]\\d(:[0-5]\\d)?$";
 
         boolean isValidName = patientNAME.matches(namePattern);
-        boolean isValidAddress = patientADDRESS.matches(addressPattern);
-        boolean isValidMail = patientEmail.matches(mailPattern);
-        boolean isValidPhoneNO = patientPHONE.matches(PhoneNoPattern);
-        boolean isValidDate = birthDate.matches(datePattern);
         boolean isValidTime = sessionTIME.matches(timePattern);
 
         if (!isValidName) {
             patientName.setStyle(patientName.getStyle() + ";-fx-border-color: red;");
         }
-        if (!isValidAddress) {
-            patientAddress.setStyle(patientAddress.getStyle() + ";-fx-border-color: red;");
-        }
-        if (!isValidMail) {
-            patientEMAIL.setStyle(patientEMAIL.getStyle() + ";-fx-border-color: red;");
-        }
-        if (!isValidPhoneNO) {
-            patientTelNO.setStyle(patientTelNO.getStyle() + ";-fx-border-color: red;");
-            System.out.println("Invalid Phone Number");
-        }
-        if (!isValidDate) {
-            patientDOB.setStyle(patientDOB.getStyle() + ";-fx-border-color: red;");
-        }
         if (!isValidTime) {
             sessionTime.setStyle(sessionTime.getStyle() + ";-fx-border-color: red;");
         }
-*/
-        /*if (*//*isValidName && isValidAddress && isValidMail && isValidPhoneNO && isValidDate && isValidTime*//*) {*/
+        if (isValidName && isValidTime) {
 
             ProgramDetailsDTO programDetailsDTO = new ProgramDetailsDTO(
                 patientId,
@@ -295,7 +277,7 @@ public class AppointmentsController implements Initializable {
             SessionDTO sessionDTO = new SessionDTO(
                     sessionId,
                     patientId,
-                    docID, /*don't need a list here,took from label splitting the first part*/
+                    docID,/* don't need a list here,took from label splitting the first part*/
                     sessionTIME,
                     sessionNOTES,
                     sessionDATE
@@ -316,7 +298,7 @@ public class AppointmentsController implements Initializable {
             }else {
                 new Alert(Alert.AlertType.ERROR, "Failed! Appointment not added", ButtonType.OK).show();
             }
-      /*  }*/
+        }
     }
 
 
@@ -365,16 +347,17 @@ public class AppointmentsController implements Initializable {
 
     @FXML
     void addProgramsAction(MouseEvent event) throws IOException {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SelectPrograms.fxml"));
-            Parent root = loader.load();
-            SelectProgramsController selectProgramsController = loader.getController();
-            selectProgramsController.setAppointmentsController(this);
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.setTitle("Doctor Details - Serenity Mental Health Therapy Center");
-            stage.show();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SelectPrograms.fxml"));
+        Parent root = loader.load();
+        SelectProgramsController selectProgramsController = loader.getController();
+        selectProgramsController.setAppointmentsController(this);
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        scene.getStylesheets().add(getClass().getResource("/css/h.css").toExternalForm());
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle("Doctor Details - Serenity Mental Health Therapy Center");
+        stage.show();
     }
 
     @FXML
