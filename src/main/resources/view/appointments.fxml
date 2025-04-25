@@ -176,7 +176,7 @@
             <Font name="Impact" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="addAppointmentBTN" layoutX="1008.0" layoutY="80.0" mnemonicParsing="false" onAction="#addAppointmentBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 7; -fx-background-color: #4C8C8C;" text="Add Appointments" textFill="WHITE">
+      <Button fx:id="addAppointmentBTN" layoutX="1008.0" layoutY="80.0" mnemonicParsing="false" onAction="#addAppointmentBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 7; -fx-background-color: #009432;" text="Add Appointments" textFill="WHITE">
          <font>
             <Font name="Georgia Bold" size="15.0" />
          </font>
@@ -191,7 +191,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="reset" layoutX="1008.0" layoutY="160.0" mnemonicParsing="false" onAction="#resetAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 7; -fx-background-color: #4C8C8C;" text="Reset Details" textFill="WHITE">
+      <Button fx:id="reset" layoutX="1008.0" layoutY="160.0" mnemonicParsing="false" onAction="#resetAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 7; -fx-background-color: #1289A7;" text="Reset Details" textFill="WHITE">
          <font>
             <Font name="Georgia Bold" size="15.0" />
          </font>
@@ -227,7 +227,7 @@
             <Font name="Serif Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="registerPatient" layoutX="20.0" layoutY="179.0" mnemonicParsing="false" onMouseClicked="#registerPatientAction" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: #264926; -fx-background-radius: 7;" text="Register " textFill="WHITE">
+      <Button fx:id="registerPatient" layoutX="20.0" layoutY="179.0" mnemonicParsing="false" onMouseClicked="#registerPatientAction" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: #27ae60; -fx-background-radius: 7;" text="Register " textFill="WHITE">
          <font>
             <Font name="Impact" size="16.0" />
          </font>
@@ -237,7 +237,7 @@
             <Font name="Consolas Bold" size="16.0" />
          </font>
       </TextField>
-      <Button fx:id="searchPatient" layoutX="22.0" layoutY="84.0" mnemonicParsing="false" onMouseClicked="#searchPatientAction" prefHeight="36.0" prefWidth="114.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 7;" text="Search " textFill="WHITE">
+      <Button fx:id="searchPatient" layoutX="22.0" layoutY="84.0" mnemonicParsing="false" onMouseClicked="#searchPatientAction" prefHeight="36.0" prefWidth="114.0" style="-fx-background-color: #3498db; -fx-background-radius: 7;" text="Search " textFill="WHITE">
          <font>
             <Font name="Impact" size="14.0" />
          </font>
@@ -314,7 +314,7 @@
             </Label>
          </children>
       </VBox>
-      <Button fx:id="viewAppointmentsBTN" layoutX="1008.0" layoutY="240.0" mnemonicParsing="false" onAction="#viewAppointmentsBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 7; -fx-background-color: #4C8C8C;" text="View Appointments" textFill="WHITE">
+      <Button fx:id="viewAppointmentsBTN" layoutX="1008.0" layoutY="240.0" mnemonicParsing="false" onAction="#viewAppointmentsBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 7; -fx-background-color: #5758BB;" text="View Appointments" textFill="WHITE">
          <font>
             <Font name="Georgia Bold" size="15.0" />
          </font>
@@ -329,7 +329,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="printBillBTN" layoutX="1008.0" layoutY="320.0" mnemonicParsing="false" onAction="#printBillBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 7; -fx-background-color: #4C8C8C;" text="Print the Bill" textFill="WHITE">
+      <Button fx:id="printBillBTN" layoutX="1008.0" layoutY="320.0" mnemonicParsing="false" onAction="#printBillBTNAction" prefHeight="48.0" prefWidth="198.0" style="-fx-background-radius: 7; -fx-background-color: #0652DD;" text="Print the Bill" textFill="WHITE">
          <font>
             <Font name="Georgia Bold" size="15.0" />
          </font>

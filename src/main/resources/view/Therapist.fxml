@@ -70,7 +70,7 @@
          <font>
             <Font name="Consolas" size="14.0" />
          </font></TextField>
-      <Button fx:id="save" layoutX="40.0" layoutY="553.0" mnemonicParsing="false" onAction="#saveBtnAction" prefHeight="41.0" prefWidth="128.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Save" textFill="WHITE">
+      <Button fx:id="save" layoutX="40.0" layoutY="553.0" mnemonicParsing="false" onAction="#saveBtnAction" prefHeight="41.0" prefWidth="128.0" style="-fx-background-radius: 12; -fx-background-color: #2ecc71;" text="Save" textFill="WHITE">
          <font>
             <Font name="Impact" size="20.0" />
          </font>
@@ -100,7 +100,7 @@
             </DropShadow>
          </effect>
       </Button>
-      <Button fx:id="delete" layoutX="360.0" layoutY="553.0" mnemonicParsing="false" onAction="#deleteBtnAction" prefHeight="41.0" prefWidth="128.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Delete" textFill="WHITE">
+      <Button fx:id="delete" layoutX="360.0" layoutY="553.0" mnemonicParsing="false" onAction="#deleteBtnAction" prefHeight="41.0" prefWidth="128.0" style="-fx-background-radius: 12; -fx-background-color: #e74c3c;" text="Delete" textFill="WHITE">
          <font>
             <Font name="Impact" size="20.0" />
          </font>
@@ -115,7 +115,7 @@
             </DropShadow>
          </effect>
       </Button>
-      <Button fx:id="reset" layoutX="520.0" layoutY="553.0" mnemonicParsing="false" onAction="#resetBtnAction" prefHeight="41.0" prefWidth="128.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Reset" textFill="WHITE">
+      <Button fx:id="reset" layoutX="520.0" layoutY="553.0" mnemonicParsing="false" onAction="#resetBtnAction" prefHeight="41.0" prefWidth="128.0" style="-fx-background-radius: 12; -fx-background-color: #f39c12;" text="Reset" textFill="WHITE">
          <font>
             <Font name="Impact" size="20.0" />
          </font>
@@ -152,7 +152,7 @@
             <Font name="Georgia Bold" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="viewActivities" layoutX="680.0" layoutY="553.0" mnemonicParsing="false" onAction="#viewActivitiesBtnAction" prefHeight="42.0" prefWidth="152.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="View Activities" textFill="WHITE">
+      <Button fx:id="viewActivities" layoutX="680.0" layoutY="553.0" mnemonicParsing="false" onAction="#viewActivitiesBtnAction" prefHeight="42.0" prefWidth="152.0" style="-fx-background-radius: 12; -fx-background-color: #2c3e50;" text="View Activities" textFill="WHITE">
          <font>
             <Font name="Impact" size="20.0" />
          </font>

@@ -34,9 +34,9 @@
             <Font name="Consolas Bold" size="14.0" />
          </font>
       </TextField>
-      <Button fx:id="cancelBTN" layoutX="715.0" layoutY="632.0" mnemonicParsing="false" onAction="#cancelBTNAction" prefHeight="36.0" prefWidth="162.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Cancel Appointment" textFill="WHITE">
+      <Button fx:id="cancelBTN" layoutX="715.0" layoutY="632.0" mnemonicParsing="false" onAction="#cancelBTNAction" prefHeight="48.0" prefWidth="182.0" style="-fx-background-radius: 7; -fx-background-color: #eb2f06;" text="Cancel Appointment" textFill="WHITE">
          <font>
-            <Font name="Impact" size="15.0" />
+            <Font name="Georgia Bold" size="15.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -64,9 +64,9 @@
             <TableColumn fx:id="tableSessionStatus" prefWidth="126.4000244140625" text="isCancel" />
          </columns>
       </TableView>
-      <Button fx:id="rescheduleBTN" layoutX="715.0" layoutY="562.0" mnemonicParsing="false" onAction="#rescheduleBTNAction" prefHeight="36.0" prefWidth="162.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Reschedule" textFill="WHITE">
+      <Button fx:id="rescheduleBTN" layoutX="715.0" layoutY="562.0" mnemonicParsing="false" onAction="#rescheduleBTNAction" prefHeight="48.0" prefWidth="182.0" style="-fx-background-radius: 7; -fx-background-color: #1e3799;" text="Reschedule" textFill="WHITE">
          <font>
-            <Font name="Impact" size="15.0" />
+            <Font name="Georgia Bold" size="15.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -106,9 +106,9 @@
             <Font name="Impact" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="resetBTN" layoutX="945.0" layoutY="562.0" mnemonicParsing="false" onAction="#resetBTNAction" prefHeight="36.0" prefWidth="162.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Reset Details" textFill="WHITE">
+      <Button fx:id="resetBTN" layoutX="945.0" layoutY="562.0" mnemonicParsing="false" onAction="#resetBTNAction" prefHeight="48.0" prefWidth="182.0" style="-fx-background-radius: 7; -fx-background-color: #3c6382;" text="Reset Details" textFill="WHITE">
          <font>
-            <Font name="Impact" size="15.0" />
+            <Font name="Georgia Bold" size="15.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />

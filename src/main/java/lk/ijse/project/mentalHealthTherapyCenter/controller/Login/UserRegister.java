@@ -169,6 +169,7 @@ public class UserRegister implements Initializable {
     private void loadPage(String fxmlPath) throws IOException {
         Stage stage = (Stage) userId.getScene().getWindow(); // Get current stage
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
+        scene.getStylesheets().add(getClass().getResource("/css/h.css").toExternalForm());
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("The Serenity Mental Health Therapy Center");

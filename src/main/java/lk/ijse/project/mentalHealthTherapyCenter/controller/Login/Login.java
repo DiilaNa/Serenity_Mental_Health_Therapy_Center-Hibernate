@@ -65,6 +65,7 @@ public class Login implements Initializable {
         }
         Stage stage = (Stage) admin.getScene().getWindow();
         Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("/css/h.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("The Serenity Mental Health Therapy Center");
         stage.show();

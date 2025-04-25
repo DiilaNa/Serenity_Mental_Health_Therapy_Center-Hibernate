@@ -28,9 +28,9 @@
             <TableColumn fx:id="tablePEmail" prefWidth="186.400146484375" text="E-mail" />
         </columns>
       </TableView>
-      <Button fx:id="update" layoutX="27.0" layoutY="564.0" mnemonicParsing="false" onAction="#updateAction" prefHeight="26.0" prefWidth="161.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="Update Patient" textFill="WHITE">
+      <Button fx:id="update" layoutX="27.0" layoutY="560.0" mnemonicParsing="false" onAction="#updateAction" prefHeight="35.0" prefWidth="162.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="Update Patient" textFill="WHITE">
          <font>
-            <Font name="Impact" size="18.0" />
+            <Font name="Georgia Bold" size="16.0" />
          </font>
          <effect>
             <Glow>
@@ -43,9 +43,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="delete" layoutX="27.0" layoutY="626.0" mnemonicParsing="false" onAction="#deleteAction" prefHeight="35.0" prefWidth="162.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="Delete Patient" textFill="WHITE">
+      <Button fx:id="delete" layoutX="27.0" layoutY="620.0" mnemonicParsing="false" onAction="#deleteAction" prefHeight="35.0" prefWidth="162.0" style="-fx-background-color: #c0392b; -fx-background-radius: 11;" text="Delete Patient" textFill="WHITE">
          <font>
-            <Font name="Impact" size="18.0" />
+            <Font name="Georgia Bold" size="16.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -97,9 +97,9 @@
          <font>
             <Font name="Consolas Bold" size="16.0" />
          </font></TextField>
-      <Button fx:id="save" layoutX="27.0" layoutY="503.0" mnemonicParsing="false" onAction="#saveAction" prefHeight="35.0" prefWidth="162.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="Register Patient" textFill="WHITE">
+      <Button fx:id="save" layoutX="27.0" layoutY="500.0" mnemonicParsing="false" onAction="#saveAction" prefHeight="35.0" prefWidth="162.0" style="-fx-background-color: #9b59b6; -fx-background-radius: 11;" text="Register Patient" textFill="WHITE">
          <font>
-            <Font name="Impact" size="18.0" />
+            <Font name="Georgia Bold" size="14.0" />
          </font>
          <effect>
             <Glow>
@@ -113,9 +113,9 @@
          </cursor>
       </Button>
       <ComboBox fx:id="PatientGender" layoutX="656.0" layoutY="503.0" opacity="0.5" prefHeight="26.0" prefWidth="175.0" promptText="Gender" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
-      <Button fx:id="viewMedicalHistoryBTN" layoutX="1087.0" layoutY="503.0" mnemonicParsing="false" onAction="#viewMedicalHistoryBTNAction" prefHeight="35.0" prefWidth="162.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="VIEW HISTORY" textFill="WHITE">
+      <Button fx:id="viewMedicalHistoryBTN" layoutX="1087.0" layoutY="500.0" mnemonicParsing="false" onAction="#viewMedicalHistoryBTNAction" prefHeight="35.0" prefWidth="162.0" style="-fx-background-color: #2c3e50; -fx-background-radius: 11;" text="VIEW HISTORY" textFill="WHITE">
          <font>
-            <Font name="Impact" size="18.0" />
+            <Font name="Georgia Bold" size="16.0" />
          </font>
          <effect>
             <Glow>
@@ -128,9 +128,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="reset" layoutX="1087.0" layoutY="567.0" mnemonicParsing="false" onAction="#resetAction" prefHeight="35.0" prefWidth="162.0" style="-fx-background-color: #4C8C8C; -fx-background-radius: 11;" text="Reset Details" textFill="WHITE">
+      <Button fx:id="reset" layoutX="1087.0" layoutY="560.0" mnemonicParsing="false" onAction="#resetAction" prefHeight="35.0" prefWidth="162.0" style="-fx-background-color: #f39c12; -fx-background-radius: 11;" text="Reset Details" textFill="WHITE">
          <font>
-            <Font name="Impact" size="18.0" />
+            <Font name="Georgia Bold" size="16.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />

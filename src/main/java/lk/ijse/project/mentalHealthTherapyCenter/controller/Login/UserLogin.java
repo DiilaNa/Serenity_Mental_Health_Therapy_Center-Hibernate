@@ -111,6 +111,7 @@ public class UserLogin implements Initializable {
         fg.setRole(role);
         SessionHolder.currentRole = role;
         Stage stage = new Stage();
+        scene.getStylesheets().add(getClass().getResource("/css/h.css").toExternalForm());
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Change Password - Serenity Mental Health Therapy Center");

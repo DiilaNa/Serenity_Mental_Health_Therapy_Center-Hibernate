@@ -122,6 +122,7 @@ public class AdminLogin implements Initializable {
         ForgetPassword fg = loader.getController();
         fg.setRole(role);
         SessionHolder.currentRole = role;
+        scene.getStylesheets().add(getClass().getResource("/css/h.css").toExternalForm());
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Change Password - Serenity Mental Health Therapy Center");

@@ -8,7 +8,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Glow?>
-<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -34,7 +33,7 @@
                   </DropShadow>
                </effect>
             </Button>
-            <Button fx:id="delete" layoutX="27.0" layoutY="250.0" mnemonicParsing="false" onAction="#deleteBtnAction" prefHeight="42.0" prefWidth="185.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Delete Programs" textFill="WHITE">
+            <Button fx:id="delete" layoutX="27.0" layoutY="250.0" mnemonicParsing="false" onAction="#deleteBtnAction" prefHeight="42.0" prefWidth="185.0" style="-fx-background-radius: 12; -fx-background-color: #e74c3c;" text="Delete Programs" textFill="WHITE">
                <font>
                   <Font name="Impact" size="20.0" />
                </font>
@@ -49,7 +48,7 @@
                   </DropShadow>
                </effect>
             </Button>
-            <Button fx:id="reset" layoutX="27.0" layoutY="339.0" mnemonicParsing="false" onAction="#resetBtnAction" prefHeight="42.0" prefWidth="186.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="Reset Details" textFill="WHITE">
+            <Button fx:id="reset" layoutX="27.0" layoutY="339.0" mnemonicParsing="false" onAction="#resetBtnAction" prefHeight="42.0" prefWidth="186.0" style="-fx-background-radius: 12; -fx-background-color: #f39c12;" text="Reset Details" textFill="WHITE">
                <font>
                   <Font name="Impact" size="20.0" />
                </font>
@@ -64,7 +63,7 @@
                   </DropShadow>
                </effect>
             </Button>
-            <Button fx:id="save" layoutX="25.0" layoutY="58.0" mnemonicParsing="false" onAction="#saveBtnAction" prefHeight="42.0" prefWidth="186.0" style="-fx-background-radius: 12; -fx-background-color: #4C8C8C;" text="ADD PROGRAMS" textFill="WHITE">
+            <Button fx:id="save" layoutX="25.0" layoutY="58.0" mnemonicParsing="false" onAction="#saveBtnAction" prefHeight="42.0" prefWidth="186.0" style="-fx-background-radius: 12; -fx-background-color: #2ecc71;" text="Add Programs" textFill="WHITE">
                <font>
                   <Font name="Impact" size="20.0" />
                </font>
@@ -81,7 +80,7 @@
             </Button>
          </children>
          <effect>
-            <InnerShadow />
+            <DropShadow height="35.04" radius="14.0925" spread="0.28" width="23.33" />
          </effect>
       </Pane>
       <TableView fx:id="Table" layoutX="40.0" layoutY="95.0" onMouseClicked="#tableAction" prefHeight="446.0" prefWidth="925.0">
