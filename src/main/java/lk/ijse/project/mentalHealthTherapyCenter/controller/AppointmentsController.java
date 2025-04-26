@@ -353,7 +353,6 @@ public class AppointmentsController implements Initializable {
         selectProgramsController.setAppointmentsController(this);
         Scene scene = new Scene(root);
         Stage stage = new Stage();
-        scene.getStylesheets().add(getClass().getResource("/css/h.css").toExternalForm());
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Doctor Details - Serenity Mental Health Therapy Center");
