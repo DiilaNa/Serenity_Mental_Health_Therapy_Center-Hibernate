@@ -17,7 +17,7 @@ public class Payment implements SuperEntity {
     private  String paymentDate;
     private  String paymentTime;
 
-    @OneToOne(mappedBy = "payment",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "payment",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Appointments appointments;
 
 }

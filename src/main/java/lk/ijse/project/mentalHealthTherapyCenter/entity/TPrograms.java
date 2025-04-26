@@ -18,6 +18,6 @@ public class TPrograms implements SuperEntity {
     private String programDescription;
     private Double programFee;
 
-    @OneToMany(mappedBy = "tPrograms",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "tPrograms",cascade = {CascadeType.MERGE, CascadeType.PERSIST},fetch = FetchType.EAGER)
     private List<ProgramDetails> programDetails;
 }

@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 public class AppInitializer extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/viewTherapistStatistics.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/MainLayout.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("The Serenity Mental Health Therapy Center");
         scene.getStylesheets().add(getClass().getResource("/css/h.css").toExternalForm());

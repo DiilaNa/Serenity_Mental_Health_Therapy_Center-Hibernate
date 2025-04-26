@@ -3,6 +3,7 @@ package lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.impl;
 import javafx.fxml.FXML;
 import lk.ijse.project.mentalHealthTherapyCenter.config.FactoryConfiguration;
 import lk.ijse.project.mentalHealthTherapyCenter.dto.DoctorStatsDTO;
+import lk.ijse.project.mentalHealthTherapyCenter.entity.Appointments;
 import lk.ijse.project.mentalHealthTherapyCenter.entity.Therapist;
 import lk.ijse.project.mentalHealthTherapyCenter.repostory.custom.TherapistDAO;
 import lk.ijse.project.mentalHealthTherapyCenter.service.exeception.NotFoundException;
@@ -64,6 +65,15 @@ public class TherapistDAOImpl implements TherapistDAO {
             if(therapist == null){
                 throw new NotFoundException("Therapist not found");
             }
+
+            // Remove associations from the patient side of appointments
+            for (Appointments appointment : therapist.getAppointments()) {
+                appointment.setPatient(null);   // Break the bidirectional relationship
+                session.remove(appointment);    // Explicitly remove the appointment
+            }
+
+            therapist.getAppointments().clear();  // Clear the appointments list on patient side
+            session.remove(therapist);
             session.remove(therapist);
             transaction.commit();
             return true;
