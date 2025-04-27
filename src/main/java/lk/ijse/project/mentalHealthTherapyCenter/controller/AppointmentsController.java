@@ -232,6 +232,10 @@ public class AppointmentsController implements Initializable {
         if (parts.length > 0) {
             docID = parts[0];  // First part is docID , get id from the full label
         }
+        if (patientId.isEmpty() || patientNAME.isEmpty() || sessionTIME.isEmpty() || sessionNOTES.isEmpty() || payAMOUNT.getText().isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Please fill all the fields").show();
+            return;
+        }
 
         String paymentId = paymentID.getText();
         Double payAmount = Double.valueOf(payAMOUNT.getText());
@@ -251,6 +255,7 @@ public class AppointmentsController implements Initializable {
                 System.out.println("Error: Invalid format for program item! " + program);
             }
         }
+
         String namePattern = "^[a-zA-Z ]+$";
         String addressPattern = "^[a-zA-Z0-9, -]+$";
         String mailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
