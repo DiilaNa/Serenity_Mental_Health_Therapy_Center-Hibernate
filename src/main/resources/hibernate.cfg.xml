@@ -11,8 +11,11 @@
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">Ijse@1234</property>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <!--	Hibernate needs to know what kind of database you are using.
+     Here it is MySQL, so you use org.hibernate.dialect.MySQLDialect.-->
     <property name="hibernate.show_sql">false</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
-
+    <!--Tells Hibernate what to do with tables:
+→ update = if tables don’t exist, create them; if they exist, update their structure as needed.-->
   </session-factory>
 </hibernate-configuration>
