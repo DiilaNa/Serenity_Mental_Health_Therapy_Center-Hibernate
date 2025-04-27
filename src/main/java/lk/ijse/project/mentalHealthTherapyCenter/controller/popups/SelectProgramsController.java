@@ -31,7 +31,7 @@ public class SelectProgramsController implements Initializable {
         tableFee.setCellValueFactory(new PropertyValueFactory<>("therapyFee"));
 
         try {
-            loadTable();
+           refreshPage();
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Failed to Load Page", ButtonType.OK).show();
         }
@@ -83,6 +83,11 @@ public class SelectProgramsController implements Initializable {
             nameLabel.setText(selectedPatient.getTherapyName());
         }
 
+    }
+    private void refreshPage() throws Exception {
+        idLabel.setText("");
+        nameLabel.setText("");
+        loadTable();
     }
     private void loadTable() throws Exception {
         List<ProgramDto> therapyProgramDTOS =  tProgramBO.getALLTPrograms();

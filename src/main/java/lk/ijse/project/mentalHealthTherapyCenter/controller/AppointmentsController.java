@@ -133,12 +133,6 @@ public class AppointmentsController implements Initializable {
     @FXML
     private Label docLoadLabel;
 
-    private String ProgramID;
-
-    private  String DocID;
-
-    private String availability;
-
     @FXML
     private Button searchPatient;
 
@@ -160,13 +154,20 @@ public class AppointmentsController implements Initializable {
     private Set<String> programIDs = new HashSet<>();
 
     public void setDetails(String programID, String programName) {
-         ProgramID = programID;
-        if (programID != null && programName != null) {
-            programmsListView.getItems().add(programID + " - " + programName);
+        if (programID == null || programName == null || programID.isEmpty() || programName.isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Please select a Program !").show();
+            return;
         }
+        // Check if the programID is already added
+        for (String item : programmsListView.getItems()) {
+            if (item.startsWith(programID + " -")) {
+                new Alert(Alert.AlertType.WARNING, "Program already selected!").show();
+                return; // Do not add duplicate
+            }
+        }
+        programmsListView.getItems().add(programID + " - " + programName);
     }
     public void setAddDoctors(String docID, String docName,String availability) {
-        DocID = docID;
         if (docID != null && docName != null) {
             docLoadLabel.setText(docID + " - " + docName + " - " + availability);
         }
