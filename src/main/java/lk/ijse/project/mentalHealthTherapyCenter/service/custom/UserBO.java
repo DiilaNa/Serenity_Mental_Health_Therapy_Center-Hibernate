@@ -14,4 +14,5 @@ public interface UserBO extends SuperBO {
     List<UserDTO> getUserDetails(String UserName);
     boolean update(UserDTO userDTO);
     boolean updatePassWord(UserDTO userDTO);
+
 }

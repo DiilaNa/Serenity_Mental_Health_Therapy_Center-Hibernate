@@ -33,9 +33,6 @@ public class UserRegister implements Initializable {
     private Label userId;
 
     @FXML
-    private Hyperlink clickhere;
-
-    @FXML
     private PasswordField passwordConfirmPWField;
 
     @FXML
@@ -98,6 +95,10 @@ public class UserRegister implements Initializable {
         String password = passwordPWField.isVisible() ? passwordPWField.getText() : passwordTextField.getText();
         String confirmPassword = passwordConfirmPWField.isVisible() ? passwordConfirmPWField.getText() : passwordConfirmTextField.getText();
 
+        if (userID.isEmpty() ||fullName.isEmpty() || email.isEmpty() || role.isEmpty() || userNAME.isEmpty() || password.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "All fields are required!", ButtonType.OK).show();
+            return;
+        }
         if (!password.equals(confirmPassword)) {
             new Alert(Alert.AlertType.ERROR, "Passwords do not match", ButtonType.OK).show();
             return;
@@ -119,19 +120,16 @@ public class UserRegister implements Initializable {
                     "✔ At least one special character (@, #, $, %, etc.)",
 
                     ButtonType.OK).show();
+            return;
         }
 
         if (!isValidMailPattern) {
             userEmail.setStyle(userEmail.getStyle() + "-fx-border-color: red;");
-        }
-        if (userID.isEmpty() ||fullName.isEmpty() || email.isEmpty() || role.isEmpty() || userNAME.isEmpty() || password.isEmpty()) {
-            new Alert(Alert.AlertType.ERROR, "All fields are required!", ButtonType.OK).show();
             return;
         }
 
         /*Encrypt Password*/
         String hashPassword = PasswordUtil.hashPassword(password);
-
 
         if (isValidMailPattern && isValidPasswordPattern) {
             UserDTO userDTO = new UserDTO(
@@ -143,15 +141,20 @@ public class UserRegister implements Initializable {
                     hashPassword
             );
 
+            boolean userFromDB = userBO.findUser(userNAME);
+            if (userFromDB) {
+                new Alert(Alert.AlertType.ERROR, "User Name Already Taken", ButtonType.OK).show();
+                return;
+            }
+
             boolean isSaved = userBO.saveUser(userDTO);
             if (isSaved) {
                 new Alert(Alert.AlertType.INFORMATION, " SignUp SuccessFull", ButtonType.OK).show();
+                SessionHolder.currentRole = role;
                 if (role.equals("USER")) {
                     loadPage("/view/userLogin.fxml");
-                    SessionHolder.currentRole = role;
                 }else{
                     loadPage("/view/adminLogin.fxml");
-                    SessionHolder.currentRole = role;
                 }
             }else {
                 new Alert(Alert.AlertType.ERROR, "SignUp Failed", ButtonType.OK).show();
