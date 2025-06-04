@@ -45,7 +45,6 @@ public class AdminLogin implements Initializable {
     @FXML
     private Hyperlink forgetPass;
 
-    @Setter
     private String role;
 
     UserBO userBO = BOFactory.getInstance().getBO(BOType.USER);
@@ -61,7 +60,7 @@ public class AdminLogin implements Initializable {
         Image adminIMage = new Image(getClass().getResourceAsStream("/images/user.png"));
         image.setImage(adminIMage);
         refreshPage();
-        SessionHolder.currentRole = role;
+        role = SessionHolder.currentRole;
     }
 
     @FXML
@@ -115,12 +114,10 @@ public class AdminLogin implements Initializable {
             stage.show();
     }
 
-    private  void  loadNewPage(String fxmlPath ,String role) throws IOException {
+    private void loadNewPage(String fxmlPath ,String role) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
-        ForgetPassword fg = loader.getController();
-        fg.setRole(role);
         SessionHolder.currentRole = role;
         scene.getStylesheets().add(getClass().getResource("/css/h.css").toExternalForm());
         stage.setScene(scene);

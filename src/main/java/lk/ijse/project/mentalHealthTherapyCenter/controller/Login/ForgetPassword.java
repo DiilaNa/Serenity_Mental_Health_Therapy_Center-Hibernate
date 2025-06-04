@@ -29,7 +29,7 @@ public class ForgetPassword implements Initializable {
         passwordFieldOne.setVisible(true);
         passwordFieldTwo.setVisible(true);
 
-        SessionHolder.currentRole = role;
+        role = SessionHolder.currentRole;
     }
 
     @FXML
@@ -62,7 +62,6 @@ public class ForgetPassword implements Initializable {
     @FXML
     private TextField userName;
 
-    @Setter
     private String role;
 
     UserBO userBO = BOFactory.getInstance().getBO(BOType.USER);

@@ -55,12 +55,8 @@ public class Login implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Parent root = loader.load();
         if (role.equals("admin")) {
-            AdminLogin controller = loader.getController();
-            controller.setRole(role);
             SessionHolder.currentRole = role;
         } else if (role.equals("user")) {
-            UserLogin controller = loader.getController();
-            controller.setRole(role);
             SessionHolder.currentRole = role;
         }
         Stage stage = (Stage) admin.getScene().getWindow();
